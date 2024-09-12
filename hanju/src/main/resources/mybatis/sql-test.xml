@@ -3,10 +3,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.hanju.mapper.TestMapper">
-
-	<select id="test" parameterType="hashmap" resultType="String">
-		SELECT	*
-		FROM	TEST_TABLE
+	<select id="getTestList" parameterType="hashmap" resultType="TestModel">
+		SELECT *
+		FROM TEST_TABLE
 	</select>
-
 </mapper>
