@@ -4,10 +4,9 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="css/mainCss.css" />
-    <script src="js/jquery.js"></script>
-    <script src="js/axios.min.js"></script>
-    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="../../css/mainCss.css" />
+    <script src="../../js/jquery.js"></script>
+    <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
   </head>
   <body>
