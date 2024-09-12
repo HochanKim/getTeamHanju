@@ -20,15 +20,15 @@ public class TestController {
 	@Autowired
 	TestService testService;
 	
-	@RequestMapping("/test.do")
+	@RequestMapping("test.do")
 	public String test(Model model) throws Exception{
-        return "/test";
+        return "test";
     }
 	
-	@RequestMapping(value = "/test.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "test.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getBoardList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-		HashMap<String, Object> result = testService.test();
+		HashMap<String, Object> result = testService.searchTestList();
 		return new Gson().toJson(result);
 	}
 	

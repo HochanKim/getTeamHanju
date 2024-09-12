@@ -1,7 +1,10 @@
 package com.example.hanju.service;
 
 import java.util.HashMap;
+import java.util.List;
 
+import com.example.hanju.annotations.DbExceptionHandle;
+import com.example.hanju.model.TestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +15,13 @@ public class TestServiceImpl implements TestService {
 
 	@Autowired
 	TestMapper testMapper;
-	
+
+	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> test() {
-	
+	public HashMap<String, Object> searchTestList() {
 		HashMap<String, Object> resultMap = new HashMap<>();
-		
-		String result = testMapper.test();
-		resultMap.put("result", result);
+		List<TestModel> testList = testMapper.getTestList();
+		resultMap.put("result", testList);
 		return resultMap;
 	}
-
-	
-	
 }

@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 public interface TestService {
 
-	HashMap<String, Object> test();
+	HashMap<String, Object> searchTestList();
 	
 }
