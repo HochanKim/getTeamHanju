@@ -2,9 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.hanju.mapper.TestMapper">
+<mapper namespace="com.example.hanju.test.mapper.TestMapper">
 	<select id="getTestList" parameterType="hashmap" resultType="TestModel">
 		SELECT *
 		FROM TEST_TABLE
+	</select>
+	<select id="getTestListSearch" parameterType="hashmap" resultType="com.example.hanju.test.model.entity.TestModel">
+		SELECT TEST_NO, TEST_TITLE, TEST_NAME, TEST_CONTENTS, TO_CHAR(TEST_DATE, 'YYYY-MM-DD') TEST_DATE
+		FROM TEST_TABLE
+		WHERE TEST_TITLE LIKE '%'||#{title}||'%'
 	</select>
 </mapper>
