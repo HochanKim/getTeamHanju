@@ -18,7 +18,15 @@ pageEncoding="UTF-8"%>
         <div style="color: blue; font-size: 40px">서버 돌아가는 중</div>
         <div>vue.js 확인</div>
         <div style="color: red; font-size: 30px">{{ check }}</div>
-        <button @click="fnGoToTest('list.do')">test/list.do 바로가기</button>
+        <button @click="fnGoToTest('test/list.do')">
+          test/list.do 바로가기
+        </button>
+        <button @click="fnGoToTest('pickup/board.do')">
+          pickup/board.do 바로가기
+        </button>
+        <button @click="fnGoToTest('main/imgUploader.do')">
+          이미지 업로더 바로가기
+        </button>
       </div>
     </div>
   </body>
@@ -32,7 +40,7 @@ pageEncoding="UTF-8"%>
     },
     methods: {
       fnGoToTest(gotoLink) {
-        const url = "test/" + gotoLink;
+        const url = gotoLink;
         location.href = url;
       },
     },

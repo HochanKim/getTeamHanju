@@ -7,7 +7,7 @@
 		SELECT *
 		FROM TEST_TABLE
 	</select>
-	<select id="getTestListSearch" parameterType="hashmap" resultType="com.example.hanju.test.model.entity.TestModel">
+	<select id="getTestListSearch" parameterType="hashmap" resultType="TestModel">
 		SELECT TEST_NO, TEST_TITLE, TEST_NAME, TEST_CONTENTS, TO_CHAR(TEST_DATE, 'YYYY-MM-DD') TEST_DATE
 		FROM TEST_TABLE
 		WHERE TEST_TITLE LIKE '%'||#{title}||'%'
