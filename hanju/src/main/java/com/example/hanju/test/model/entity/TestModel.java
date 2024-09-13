@@ -1,4 +1,4 @@
-package com.example.hanju.model;
+package com.example.hanju.test.model.entity;
 
 import lombok.Data;
 
