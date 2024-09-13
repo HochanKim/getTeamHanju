@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.groupSell.mapper.GroupSellMapper">
+	<select id="getGroupSellList" parameterType="hashmap" resultType="com.example.hanju.groupSell.model.GroupSell">
+		SELECT	G.*, P.PRODUCT_NAME, P.PRICE
+		FROM	TEST_GROUP_SELL G
+		INNER JOIN TEST_PRODUCT P ON G.PRODUCT_ID = P.PRODUCT_ID
+	</select>
+</mapper>
