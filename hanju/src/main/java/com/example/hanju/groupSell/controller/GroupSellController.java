@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.hanju.groupSell.service.GroupSellService;
 import com.google.gson.Gson;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class GroupSellController {
 
@@ -40,5 +42,11 @@ public class GroupSellController {
 		HashMap<String, Object> result = groupSellService.getTotalGroupSell();
 		return new Gson().toJson(result);
 	}
+	
+	@RequestMapping("/groupSell/groupSellView.do")
+    public String groupSellView(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+        request.setAttribute("groupSellId", map.get("groupSellId") );
+		return "/groupSell/groupSellView";
+    }
 	
 }

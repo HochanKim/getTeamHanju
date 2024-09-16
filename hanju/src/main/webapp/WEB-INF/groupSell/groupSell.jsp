@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/groupSell.css" />
+    <link rel="stylesheet" href="../../css/groupSell/groupSell.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div id="cardView">
-                    <div v-for="(item, index) in groupSellList" class="card">
+                    <div v-for="item in groupSellList" class="card" @click="fnClickCard(item.groupSellId)">
                         <div class="area1">
                             <div class="groupSellImage">
                                 image
@@ -123,6 +123,9 @@
                     var percent = Math.round(item.currentAmount / item.targetAmount * 100);
                     item.progress = "width:" + percent + "%";
                 }
+            },
+            fnClickCard(groupSellId) {
+                $.pageChange("groupSellView.do", {groupSellId : groupSellId});
             },
             fnClickPage(index) {
 
