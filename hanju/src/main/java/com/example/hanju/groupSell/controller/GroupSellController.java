@@ -26,7 +26,6 @@ public class GroupSellController {
         return "/groupSell/groupSell";
     }
 	
-	
 	@RequestMapping(value = "/groupSell/getGroupSellList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getGroupSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
