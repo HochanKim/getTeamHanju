@@ -28,7 +28,15 @@ public class GroupSellController {
 	@ResponseBody
 	public String getGroupSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 
-		HashMap<String, Object> result = groupSellService.getGroupSellList();
+		HashMap<String, Object> result = groupSellService.getGroupSellList(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/groupSell/getTotalGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getTotalGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.getTotalGroupSell();
 		return new Gson().toJson(result);
 	}
 	

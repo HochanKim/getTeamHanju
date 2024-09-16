@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div id="cardView">
-                    <div v-for="item in groupSellList" class="card">
+                    <div v-for="(item, index) in groupSellList" class="card">
                         <div class="area1">
                             <div class="groupSellImage">
                                 image
@@ -43,11 +43,13 @@
                                 <hr>
                             </div>
                             <div class="line2">
-                                <div>현재 목표 0 / {{item.targetAmount}}</div>
+                                <div>현재 목표 {{item.currentAmount}} / {{item.targetAmount}}</div>
                                 <div>종료일 {{item.endDate}}</div>
                             </div>
                             <div class="line3">
-                                <div class="progressBar"></div>
+                                <div class="progressBar">
+                                    <div class="progress" :style="item.progress"></div>
+                                </div>
                             </div>
                             <div class="line4">
                                 <div>
@@ -57,13 +59,15 @@
                                     <div>
                                         원가 / 실거래가 <del>{{item.price}}</del> / {{item.price - (item.price / 100 * item.discount)}}
                                     </div>
-                                    <div>
-                                        <button class="joinBtn">참여하기</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div id="pagination">
+                    <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+                    <div v-for="index in totalPages" class="pageBtn" @click="fnClickPage(index)">{{ index }}</div>
+                    <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
                 </div>
             </div>
         </div>
@@ -78,25 +82,63 @@
     const app = Vue.createApp({
         data() {
             return {
-                groupSellList : []
+                groupSellList : [],
+                totalPages : 0,
+                pageSize : 5,
+                currentPage : 1
             };
         },
         methods: {
-            fnGetList() {
+            fnGetTotalGroupSell() {
                 $.ajax({
-					url:"getGroupSellList.dox",
+					url:"getTotalGroupSell.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : {},
 					success : (data) => {
 						console.log(data);
-                        this.groupSellList = data.list;
+                        var totalGroupSell = data.result;
+                        this.totalPages = Math.ceil(totalGroupSell / this.pageSize);
 					}
 				});
+            },
+            fnGetList(start, size) {
+                $.ajax({
+					url:"getGroupSellList.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : {
+                        start : start,
+                        size  : size
+                    },
+					success : (data) => {
+						console.log(data);
+                        this.groupSellList = data.list;
+                        this.fnSetProgressBar();
+					}
+				});
+            },
+            fnSetProgressBar() {
+                for (item of this.groupSellList) {
+                    var percent = Math.round(item.currentAmount / item.targetAmount * 100);
+                    item.progress = "width:" + percent + "%";
+                }
+            },
+            fnClickPage(index) {
+
+                if (index < 0) return;
+                if (index > this.totalPages) return;
+
+                this.currentPage = index;
+
+                var start = (this.currentPage - 1) * this.pageSize;
+                var size  = this.pageSize;
+                this.fnGetList(start, size);
             }
         },
         mounted() {
-            this.fnGetList();
+            this.fnGetTotalGroupSell();
+            this.fnGetList(0, this.pageSize);
         },
     });
     app.mount("#app");
