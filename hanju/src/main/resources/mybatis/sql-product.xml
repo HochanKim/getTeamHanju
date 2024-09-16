@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.salling.mapper.SaleMapper">
+	<select id="getProductList" parameterType="hashmap" resultType="com.example.hanju.salling.model.entity.SaleModel">
+		SELECT *
+		FROM TEST_PRODUCT
+		WHERE TYPE = 'TRADITION'
+	</select>
+</mapper>
