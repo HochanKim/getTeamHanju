@@ -1,0 +1,103 @@
+/* 전역 css 초기화 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전역 css 초기화 끝*/
+
+#header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #aaa;
+}
+#main {
+    width: 100vw;
+    /* height: 80vh; */
+    /* background-color: #bbb; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#footer {
+    width: 100vw;
+    height: 10vh;
+    background-color: #ccc;
+}
+
+/* ========================= */
+
+#groupSellView {
+    width: 60vw;
+    background-color: #ddd;
+}
+
+#summary {
+    width: 100%;
+    height: 50vh;
+    background-color: #ccc;
+    display: flex;
+}
+
+#summary #imageView {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    height: 100%;
+    background-color: #bbc;
+    padding: 16px;
+}
+
+#imageView #imageBox {
+    display: inline-block;
+    width: 70%;
+    height: 70%;
+    background-color: #bcd;
+}
+
+#imageView #imageNav {
+    width: 70%;
+    height: 10%;
+    background-color: #cde;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imageNav .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #aaa;
+    margin: 16px;
+}
+
+#summary #summaryContent {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    background-color: #aab;
+    padding: 16px;
+}
+
+
+#content {
+    width: 100%;
+    height: 100vh;
+    background-color: #bbb;
+}
+
+/* ===========================  */
+
+#review {
+    width: 60vw;
+    height: 100vh;
+    background-color: #eee;
+}
