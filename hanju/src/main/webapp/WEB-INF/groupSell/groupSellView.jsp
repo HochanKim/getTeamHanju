@@ -16,26 +16,75 @@
             header
         </div>
         <div id="main">
-            <div id="groupSellView">
-                <div id="summary">
-                    <div id="imageView">
-                        <div id="imageBox">
-                            image
-                        </div>
-                        <div id="imageNav">
-                            <div class="circle"></div>
-                            <div class="circle"></div>
-                            <div class="circle"></div>
-                        </div>
+            <div id="summary">
+                <div id="imageView">
+                    <div id="imageBox">
+                        image
                     </div>
-                    <div id="summaryContent">
-                        summaryContent
+                    <div id="imageNav">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
                     </div>
                 </div>
-                <div id="content">
-                    content
+                <div id="summaryContent">
+                    <div class="line1">
+                        제품명
+                        <hr>
+                    </div>
+                    <div class="line2">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </div>
+                    <div class="line3">
+                        <div class="info1">
+                            <div>
+                                현재 / 목표 5 / 60
+                            </div>
+                            <div>
+                                종료일 10월 1일
+                            </div>
+                        </div>
+                        <div class="progressBar">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="info2">
+                            <div>
+                                할인율 20%
+                            </div>
+                            <div>
+                                원가 / 실거래가 <del>10000</del> / 8000
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line4">
+                        <div class="joinBtn">
+                            참여하기
+                        </div>
+                    </div>
                 </div>
             </div>
+            <hr>
+            <div id=contentNav>
+                <div>제품 설명</div>
+                <div class="separator"> | </div>
+                <div>제품 리뷰</div>
+            </div>
+            <hr>
+            <div id="content">
+                <div class="testImg">testImg</div>
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                
+                <div class="testImg">testImg</div>
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            
+                <div class="testImg">testImg</div>
+                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            </div>
+            <hr>
+            <div id="reviewTitle">
+                <div>제품 리뷰</div>
+            </div>
+            <hr>
             <div id="review">
                 review
             </div>

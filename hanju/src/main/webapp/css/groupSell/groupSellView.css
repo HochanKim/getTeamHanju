@@ -30,41 +30,39 @@
 
 /* ========================= */
 
-#groupSellView {
+#main > hr {
     width: 60vw;
-    background-color: #ddd;
 }
 
+/* ========================= */
+
 #summary {
-    width: 100%;
+    width: 60vw;
     height: 50vh;
-    background-color: #ccc;
     display: flex;
 }
 
 #summary #imageView {
+    width: 50%;
+    height: 100%;
+    padding: 16px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    width: 50%;
-    height: 100%;
-    background-color: #bbc;
-    padding: 16px;
 }
 
 #imageView #imageBox {
     display: inline-block;
     width: 70%;
     height: 70%;
-    background-color: #bcd;
+    background-color: #bbb;
 }
 
 #imageView #imageNav {
     width: 70%;
     height: 10%;
-    background-color: #cde;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,24 +78,131 @@
 }
 
 #summary #summaryContent {
-    display: inline-block;
     width: 50%;
     height: 100%;
-    background-color: #aab;
-    padding: 16px;
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
+#summaryContent .line1 {
+    width: 100%;
+    font-size: 25px;
+}
+
+#summaryContent .line2 {
+    width: 100%;
+}
+
+#summaryContent .line3 {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .info1 {
+    width: 100%;
+    margin: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .info2 {
+    width: 100%;
+    margin: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .line4 {
+    width: 100%;
+}
+
+#summaryContent .progressBar {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#summaryContent .progress {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+#summaryContent .joinBtn {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 50px;
+}
+
+/* =========================== */
+
+#contentNav {
+    width: 60vw;
+    margin: 16px;
+    font-size: 16px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#contentNav .separator {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* =========================== */
 
 #content {
-    width: 100%;
-    height: 100vh;
-    background-color: #bbb;
+    width: 60vw;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content .testImg {
+    width: 1000px;
+    height: 500px;
+    margin: 100px;
+
+    background-color: #aaa;
 }
 
 /* ===========================  */
 
+#reviewTitle {
+    width: 60vw;
+    margin: 16px;
+}
+
 #review {
     width: 60vw;
     height: 100vh;
-    background-color: #eee;
+    background-color: #ddd;
 }
+
+/* ============================ */
+
+
+
+/* ============================ */
