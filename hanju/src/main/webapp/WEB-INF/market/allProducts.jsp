@@ -9,16 +9,24 @@ pageEncoding="UTF-8"%>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <title>한주</title>
     <style>
+		#app {
+			
+		}
         /* 카테고리 영역 */
         .selected {
             font-weight: bold;
         }
 
         /* 상품 리스트 영역 */
-        .productsPart > div {
-            display: inline-block;
-            width:400px;
-            height:600px;
+		ul {
+			display: inline-block;
+			width:400px;
+			height:600px;
+		}
+		.productList {
+			list-style:none;
+		}
+       	.productList > div { 
             box-sizing: border-box;
         }
 
@@ -61,30 +69,9 @@ pageEncoding="UTF-8"%>
         <!-- 상품 리스트 영역 -->
         <!-- 상품 리스트 : 해당 리스트를 클릭시 '상세페이지'로 이동 -->
         <ul v-for="item in products">
-            <li>
+            <li class="productList">
                 <div style="border:1px solid black;">
-                    <img src="../../image/barrack.png" alt="병영소주">
-                    <p>{{item.productName}}</p>
-                    <p>{{item.price}}</p>
-                    <p>{{item.price}}</p>
-                    <p>{{item.alcohol}}</p>
-                </div>
-                <div style="border:1px solid black;">
-                    <img src="../../image/beobju.jpg" alt="교동법주">
-                    <p>{{item.productName}}</p>
-                    <p>{{item.price}}</p>
-                    <p>{{item.price}}</p>
-                    <p>{{item.alcohol}}</p>
-                </div>
-                <div style="border:1px solid black;">
-                    <img src="../../image/bokbunja.png" alt="복단지">
-                    <p>{{item.productName}}</p>
-                    <p>{{item.price}}</p>
-                    <p>{{item.price}}</p>
-                    <p>{{item.alcohol}}</p>
-                </div>
-                <div style="border:1px solid black;">
-                    <img src="../../image/feel.png" alt="필 40">
+                    <img src="../../image/01_barrack.png" alt="병영소주">
                     <p>{{item.productName}}</p>
                     <p>{{item.price}}</p>
                     <p>{{item.price}}</p>

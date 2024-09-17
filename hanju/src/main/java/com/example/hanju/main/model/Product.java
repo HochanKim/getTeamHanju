@@ -20,4 +20,14 @@ public class Product {
     private int capacity;
     private String color;
     private String material;
+    
+	public Object getColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setColor(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 }
