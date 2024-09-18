@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.main.mapper.MainMapper">
+    <insert id="imageSave" parameterType="hashmap">
+        INSERT
+        INTO HANJU_IMAGE (IMAGE_ID, FK_ID, FILE_NAME, FILE_ORG_NAME, FILE_PATH, FILE_STATUS)
+        VALUES (IMAGE_SEQ.NEXTVAL, #{fkId}, #{fileName}, #{fileOrgName}, #{filePath}, #{fileStatus})
+    </insert>
+</mapper>
