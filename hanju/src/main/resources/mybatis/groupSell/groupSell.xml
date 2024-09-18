@@ -30,4 +30,9 @@
 		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
+	<insert id="joinGroupSell" parameterType="hashmap">
+		INSERT INTO TEST_GROUP_SELL_STAT
+		VALUES (#{groupSellId}, #{userId})
+	</insert>
+	
 </mapper>

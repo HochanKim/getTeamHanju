@@ -26,7 +26,6 @@ public class GroupSellController {
         return "/groupSell/groupSell";
     }
 	
-	
 	@RequestMapping(value = "/groupSell/getGroupSellList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getGroupSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -49,4 +48,11 @@ public class GroupSellController {
 		return "/groupSell/groupSellView";
     }
 	
+	@RequestMapping(value = "/groupSell/joinGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String joinGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.joinGroupSell(map);
+		return new Gson().toJson(result);
+	}
 }

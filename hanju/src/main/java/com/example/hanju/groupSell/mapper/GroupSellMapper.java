@@ -12,5 +12,6 @@ public interface GroupSellMapper {
 
 	List<GroupSell> getGroupSellList(HashMap<String, Object> map);
 	int getTotalGroupSell();
+	void joinGroupSell(HashMap<String, Object> map);
 	
 }

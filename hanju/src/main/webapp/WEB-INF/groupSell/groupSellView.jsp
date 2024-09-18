@@ -57,14 +57,14 @@
                         </div>
                     </div>
                     <div class="line4">
-                        <div class="joinBtn">
+                        <div class="joinBtn" @click="fnJoin">
                             참여하기
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
-            <div id=contentNav>
+            <div id="contentNav">
                 <div>제품 설명</div>
                 <div class="separator"> | </div>
                 <div>제품 리뷰</div>
@@ -86,7 +86,26 @@
             </div>
             <hr>
             <div id="review">
-                review
+                <div v-for="i in 5" class="reviewItem">
+                    <div class="title">
+                        <div>
+                            하*수 님
+                        </div>
+                        <div>
+                            ★★★★★ (5.0) 2024/09/18
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="imageView">
+                            <div class="testImg">
+                                img
+                            </div>
+                        </div>
+                        <div class="reviewContent">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="footer">
@@ -106,6 +125,21 @@
         methods: {
             fnTest() {
                 console.log(this.groupSellId);
+            },
+            fnJoin() {
+                $.ajax({
+					url:"joinGroupSell.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : {
+                        groupSellId : this.groupSellId,
+                        userId : "user1"
+                    },
+					success : (data) => {
+						console.log(data);
+                        location.href = "groupSell.do";
+					}
+				});
             }
         },
         mounted() {
