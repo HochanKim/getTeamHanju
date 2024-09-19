@@ -12,6 +12,6 @@ public class PickupBoardDto {
     private int capacity;
     private String color;
     private String material;
-    private String imgPath;
+    private String filePath;
 
 }
