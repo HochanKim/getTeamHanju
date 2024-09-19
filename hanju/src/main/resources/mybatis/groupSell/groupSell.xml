@@ -30,6 +30,49 @@
 		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
+	<select id="getGroupSellInfo" parameterType="hashmap" resultType="com.example.hanju.groupSell.model.GroupSell">
+		SELECT
+			G.GROUP_SELL_ID,
+		    G.TARGET_AMOUNT,
+		    TO_CHAR(G.END_DATE, '""MM"월 "DD"일"') AS END_DATE,
+		    G.DISCOUNT,
+		    G.PRODUCT_ID,
+		    P.PRODUCT_NAME,
+		    P.PRICE,
+		    NVL(J.CURRENT_AMOUNT, 0) AS CURRENT_AMOUNT,
+		    G.DESCRIPTION
+		FROM	TEST_GROUP_SELL G
+		INNER JOIN TEST_PRODUCT P ON G.PRODUCT_ID = P.PRODUCT_ID
+		LEFT JOIN (
+			SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
+	        FROM    TEST_GROUP_SELL_STAT
+	        GROUP BY GROUP_SELL_ID
+	    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
+		WHERE	G.GROUP_SELL_ID = #{groupSellId}
+	</select>
+	
+	<select id="getReview" parameterType="hashmap" resultType="com.example.hanju.groupSell.model.Review">
+		SELECT
+			C.COMMENT_ID,
+			C.SELL_ID,
+			C.USER_ID,
+			C.CONTENT,
+			C.GRADE,
+			TO_CHAR(C.CDATETIME, 'YY/MM/DD') AS CDATETIME,
+			SUBSTR(U.USER_NAME, 1, 1) || '*' || SUBSTR(U.USER_NAME, 3, 1) AS USER_NAME
+		FROM	TEST_COMMENT C
+		INNER JOIN TEST_USER U ON C.USER_ID = U.USER_ID
+		WHERE	SELL_ID = #{groupSellId}
+		ORDER BY C.CDATETIME DESC
+		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+	
+	<select id="getTotalReviewCount" parameterType="hashmap" resultType="Integer">
+		SELECT	COUNT(*)
+		FROM	TEST_COMMENT
+		WHERE	SELL_ID = #{groupSellId}
+	</select>
+	
 	<insert id="joinGroupSell" parameterType="hashmap">
 		INSERT INTO TEST_GROUP_SELL_STAT
 		VALUES (#{groupSellId}, #{userId})
