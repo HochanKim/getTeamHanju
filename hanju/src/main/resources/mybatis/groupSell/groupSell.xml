@@ -3,9 +3,36 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.hanju.groupSell.mapper.GroupSellMapper">
+
+	<select id="getTotalGroupSell" parameterType="hashmap" resultType="Integer">
+		SELECT	COUNT(*)
+		FROM	TEST_GROUP_SELL
+	</select>
+
 	<select id="getGroupSellList" parameterType="hashmap" resultType="com.example.hanju.groupSell.model.GroupSell">
-		SELECT	G.*, P.PRODUCT_NAME, P.PRICE
+		SELECT
+		    G.GROUP_SELL_ID,
+		    G.TARGET_AMOUNT,
+		    TO_CHAR(G.END_DATE, '""MM"월 "DD"일"') AS END_DATE,
+		    G.DISCOUNT,
+		    G.PRODUCT_ID,
+		    P.PRODUCT_NAME,
+		    P.PRICE,
+		    NVL(J.CURRENT_AMOUNT, 0) AS CURRENT_AMOUNT
 		FROM	TEST_GROUP_SELL G
 		INNER JOIN TEST_PRODUCT P ON G.PRODUCT_ID = P.PRODUCT_ID
+		LEFT JOIN (
+		        SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
+		        FROM    TEST_GROUP_SELL_STAT
+		        GROUP BY GROUP_SELL_ID
+		    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
+		ORDER BY G.START_DATE
+		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
+	
+	<insert id="joinGroupSell" parameterType="hashmap">
+		INSERT INTO TEST_GROUP_SELL_STAT
+		VALUES (#{groupSellId}, #{userId})
+	</insert>
+	
 </mapper>

@@ -4,22 +4,23 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/testCss.css"
-    />
-    <script src="${pageContext.request.contextPath}/js/axios.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <link rel="stylesheet" href="/css/testCss.css" />
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/vue.js"></script>
     <title>document</title>
   </head>
   <body>
     <div id="app">
       <div id="container">
         <div id="card" v-for="(item, index) in boardList" :key="index">
+          <img :src="item.filePath" :alt="item.productName" />
           <div>이름:{{ item.productName }}</div>
+          <div>컬러:{{ item.color }}</div>
+          <div>국가:{{ item.madeBy }}</div>
+          <div>품종:{{ item.material }}</div>
+          <div>가격:{{ item.price }}</div>
         </div>
       </div>
-      <img src="upload/샘플.jpg" />
     </div>
   </body>
 </html>
@@ -38,7 +39,7 @@ pageEncoding="UTF-8"%>
           searchKeyword: this.searchKeyword,
         };
         const { data } = await axios.get(url, { params: submitForm });
-        console.log(data);
+        this.boardList = data.result;
       },
     },
     mounted() {
