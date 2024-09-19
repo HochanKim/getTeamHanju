@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.hanju.groupSell.service.GroupSellService;
 import com.google.gson.Gson;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 public class GroupSellController {
 
@@ -24,12 +26,34 @@ public class GroupSellController {
         return "/groupSell/groupSell";
     }
 	
+	
 	@RequestMapping(value = "/groupSell/getGroupSellList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getGroupSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 
-		HashMap<String, Object> result = groupSellService.getGroupSellList();
+		HashMap<String, Object> result = groupSellService.getGroupSellList(map);
 		return new Gson().toJson(result);
 	}
 	
+	@RequestMapping(value = "/groupSell/getTotalGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getTotalGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.getTotalGroupSell();
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping("/groupSell/groupSellView.do")
+    public String groupSellView(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
+        request.setAttribute("groupSellId", map.get("groupSellId") );
+		return "/groupSell/groupSellView";
+    }
+	
+	@RequestMapping(value = "/groupSell/joinGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String joinGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.joinGroupSell(map);
+		return new Gson().toJson(result);
+	}
 }

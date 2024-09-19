@@ -4,13 +4,10 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/testCss.css"
-    />
-    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/js/axios.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <link rel="stylesheet" href="/css/testCss.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/vue.js"></script>
     <title>document</title>
   </head>
   <body>
@@ -38,6 +35,9 @@ pageEncoding="UTF-8"%>
         이미지 추가. 하나만 됨.
         <input type="file" @change="fnFileChange" />
       </div>
+      <div>
+        <button @click="fnSave">이미지 업로드!</button>
+      </div>
     </div>
   </body>
 </html>
@@ -53,12 +53,23 @@ pageEncoding="UTF-8"%>
     methods: {
       fnFileChange(event) {
         this.file = event.target.files[0];
-        console.log(this.file);
       },
       fnSpaceRemover(item) {
         this[item] = this[item].replace(/[^0-9]/g, "");
       },
       async fnSave() {
+        if (!this.pkNo) {
+          alert("FK_ID 입력!");
+          return;
+        }
+        if (!this.status) {
+          alert("FILE_STATUS 선택 할 것!");
+          return;
+        }
+        if (this.file == null) {
+          alert("이미지 파일 선택 필수.");
+          return;
+        }
         const url = "imgSave.dox";
         const formData = new FormData();
         formData.append("file", this.file);
@@ -66,10 +77,13 @@ pageEncoding="UTF-8"%>
         formData.append("status", this.status);
         try {
           const res = await axios.post(url, formData);
-          console.log(res);
+          console.log(res.data);
           alert("저장 완료.");
+          this.pkNo = "";
+          this.status = "";
+          this.file = null;
         } catch (error) {
-          alert("그냥 뭔가 잘못됨. DB확인해볼것...");
+          alert("그냥 뭔가 잘못됨. 서버 확인 해볼것...");
         }
       },
     },

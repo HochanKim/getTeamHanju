@@ -1,0 +1,251 @@
+/* 전역 css 초기화 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전역 css 초기화 끝*/
+
+#header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #aaa;
+}
+#main {
+    width: 100vw;
+    /* height: 80vh; */
+    /* background-color: #bbb; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#footer {
+    width: 100vw;
+    height: 10vh;
+    background-color: #ccc;
+}
+
+/* ========================= */
+
+#main > hr {
+    width: 60vw;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* ========================= */
+
+#summary {
+    width: 60vw;
+    height: 50vh;
+    display: flex;
+}
+
+#summary #imageView {
+    width: 50%;
+    height: 100%;
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#imageView #imageBox {
+    display: inline-block;
+    width: 70%;
+    height: 70%;
+    background-color: #bbb;
+}
+
+#imageView #imageNav {
+    width: 70%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imageNav .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #aaa;
+    margin: 16px;
+}
+
+#summary #summaryContent {
+    width: 50%;
+    height: 100%;
+    padding: 32px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .line1 {
+    width: 100%;
+    font-size: 25px;
+}
+
+#summaryContent .line2 {
+    width: 100%;
+}
+
+#summaryContent .line3 {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .info1 {
+    width: 100%;
+    margin: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .info2 {
+    width: 100%;
+    margin: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summaryContent .line4 {
+    width: 100%;
+}
+
+#summaryContent .progressBar {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#summaryContent .progress {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+#summaryContent .joinBtn {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: #ddd;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+/* =========================== */
+
+#contentNav {
+    width: 60vw;
+    margin: 16px;
+    font-size: 16px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#contentNav .separator {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+/* =========================== */
+
+#content {
+    width: 60vw;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content .testImg {
+    width: 1000px;
+    height: 500px;
+    margin: 100px;
+
+    background-color: #aaa;
+}
+
+/* ===========================  */
+
+#reviewTitle {
+    width: 60vw;
+    margin: 16px;
+}
+
+#review {
+    width: 60vw;
+}
+
+#review .title {
+    width: 100%;
+    padding: 16px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: #ddd;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#review .content {
+    width: 100%;
+    height: 400px;
+
+    display: flex;
+}
+
+#review .imageView {
+    width: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#review .testImg {
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    margin: 16px;
+    background-color: #bcd;
+}
+
+#review .reviewContent {
+    padding: 16px;
+    width: 70%;
+
+}
+
+/* ============================ */
+
+
+
+/* ============================ */

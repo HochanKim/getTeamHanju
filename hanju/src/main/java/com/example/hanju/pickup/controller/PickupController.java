@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class pickupController {
+public class PickupController {
     @RequestMapping("pickup/board.do")
     public String pickBoardView(Model model) throws Exception{
         return "pickup/board";
