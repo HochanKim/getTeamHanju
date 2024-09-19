@@ -1,0 +1,249 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+.slider {
+    width: 100%;
+    max-width: 1500px;
+    height: 500px;                                 
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+
+}
+.slide {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+                                                   
+.prevSlide, .nextSlide{
+    position: absolute;
+    top: 30%;
+    z-index: 1;
+    padding: 15px;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+.prevSlide {
+    left: 100px; 
+}
+
+.nextSlide {
+    right: 100px; 
+}
+
+.img{
+    width: 150px; 
+}                                                              
+ 
+.main-center {
+    display: flex;              /* Flexbox 활성화 */
+    flex-wrap: wrap;           /* 줄 바꿈 허용 */
+    justify-content: center;    /* 중앙 정렬 */
+    margin: 0 auto;            /* 수평 중앙 정렬 */
+}
+
+.InLine {
+    display: flex;              /* Flexbox 활성화 */
+    flex-direction: column;     /* 세로 정렬 */
+    align-items: center;        /* 수평 중앙 정렬 */
+    margin: 30px;              /* 요소 간 간격 조정 */
+}
+
+/* 푸터 css */
+.content {
+    padding-bottom: 60px; /* 푸터 높이만큼의 여백 추가 */
+}
+.footer {
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    z-index: 1000; /* 푸터가 페이지 내용 위에 오도록 설정 */
+}
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* 펀딩 css */
+.funding-content{
+    width: 80%;
+    }
+/* header css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+a{
+    text-decoration: none; /* #3 */ 
+    color: white /* #3 */
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: rgb(85, 139, 123); /* #1 */
+		padding: 8px 12px; /* #4 */
+}
+.navbar__logo{ /* #1 */
+    font-size: 24px; 
+    color: white; 
+}
+ 
+.navbar__logo i { /* #1 */
+    color: #9dbbbb
+}
+ 
+.navbar__menu {
+    display: flex; /* #2 */
+    list-style: none; /* #3 */
+    padding-left: 0;
+}
+ 
+.navbar__menu li {
+    padding: 8px 12px; /* #4 */
+}
+
+.navbar__icons { 
+    list-style:none; 
+    color:white;
+    display: flex;
+    padding-left: 0;  /* #2   */
+}
+ 
+.navbar__icons li {
+    padding: 8px 12px;
+}
+
+.navbar__toogleBtn {
+    position: absolute; /* #1 */
+    right: 32px;  /* #2 */
+    font-size: 24px; /* #3 */
+    color: rgb(19, 61, 56); /* #3 */
+}
+.navbar__toogleBtn {
+    display: none; /* #1 */
+    position: absolute; 
+    right: 32px;  
+    font-size: 24px; 
+    color: rgb(19, 61, 56); 
+}
+
+@media screen and (max-width: 768px) {
+    .navbar{
+        flex-direction: column;  /* #1 */
+        align-items: flex-start; /* #2 */
+				padding: 8px 24px; /* #6 */
+    }
+    .navbar__menu {
+        display: none; /* #1 */
+        flex-direction: column; 
+        align-items: center; 
+        width: 100%; 
+    }
+    .navbar__menu li { /* #5 */
+        width: 100%;
+        text-align : center;
+    }  
+
+    .navbar__icons { 
+        display: none; /* #1 */
+        justify-content: center; 
+        width: 100%; 
+    }
+    .navbar__toogleBtn {
+        display: block; /* #2 */
+    }
+    .navbar__menu.**active**,
+    .navbar__icons.**active** {
+        display: flex;
+    }
+}
+
+.navbar__menu li:hover {
+    background-color: rgb(19, 61, 56); /* #1 */
+    border-radius: 4px; /* #2 */
+}
+/* 그래프 css */
+.zt-skill-bar {
+    color: #fff;
+    font-size: 11px;
+    line-height: 25px;
+    height: 25px;
+    margin-bottom: 5px;
+  
+    background-color: rgba(0, 0, 0, 0.1);
+  
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+  
+  }
+  
+  .zt-skill-bar * {
+    webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+  
+  .zt-skill-bar div {
+    background-color: #ffc600;
+    position: relative;
+    padding-left: 25px;
+    width: 0;
+  
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms- border-radius: 2px;
+    border-radius: 2px;
+  }
+  
+  .zt-skill-bar span {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 5px 0 10px;
+    background-color: #1a1a1a;
+  
+    -webkit-border-radius: 0 2px 2px 0;
+    -moz-border-radius: 0 2px 2px 0;
+    -ms-border-radius: 0 2px 2px 0;
+    border-radius: 0 2px 2px 0;
+  }
+  
+  .zt-skill-bar span:before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 50%;
+    left: -3px;
+    margin-top: -3px;
+    background-color: #1a1a1a;
+  
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
