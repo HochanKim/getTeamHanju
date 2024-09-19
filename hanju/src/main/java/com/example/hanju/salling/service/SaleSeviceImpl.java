@@ -19,10 +19,18 @@ public class SaleSeviceImpl implements SaleService {
 
 	@DbExceptionHandle
 	@Override	// getProductList
-	public HashMap<String, Object> getProductList(Map<String, Object> map) {
+	public HashMap<String, Object> getProductList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
+		// 판매 물품 리스트
 		List<SaleModel> products = saleMapper.getProductList(map);
+		// 페이징 자동화
+		int page = saleMapper.pageNum(map);	
+		System.out.println("페이지 번호 : "+page);
+		resultMap.put("page", page);
 		resultMap.put("list", products);
+		resultMap.put("result", "success");
+		
 		return resultMap;
 	}
+
 }
