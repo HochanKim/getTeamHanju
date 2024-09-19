@@ -2,8 +2,6 @@ package com.example.hanju.main.controller;
 
 import com.example.hanju.main.service.MainService;
 import com.google.gson.Gson;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-public class MainControllerApi {
+public class MainApiController {
 
     @Autowired
     MainService service;
@@ -66,5 +64,11 @@ public class MainControllerApi {
         fileName += extName;
 
         return fileName;
+    }
+    @GetMapping(value = "pickup/itemDetailView.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String itemDetailView(Model model, @RequestParam Map<String, Object> map) throws Exception {
+        Map<String, Object> result = service.searchItemImage(map);
+        return new Gson().toJson(result);
     }
 }

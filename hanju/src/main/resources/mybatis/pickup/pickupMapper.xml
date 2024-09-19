@@ -9,4 +9,5 @@
 		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		WHERE P.TYPE = 'WINE' AND P.STOCK != 0 AND  P.PRODUCT_NAME LIKE '%'||#{searchKeyword}||'%'
 	</select>
+
 </mapper>

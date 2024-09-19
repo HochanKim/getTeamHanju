@@ -22,4 +22,5 @@ public class PickupApiController {
         Map<String, Object> result = service.getBoardList(map);
         return new Gson().toJson(result);
     }
+
 }

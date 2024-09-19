@@ -8,4 +8,14 @@
         INTO HANJU_IMAGE (IMAGE_ID, FK_ID, FILE_NAME, FILE_ORG_NAME, FILE_PATH, FILE_STATUS)
         VALUES (IMAGE_SEQ.NEXTVAL, #{fkId}, #{fileName}, #{fileOrgName}, #{filePath}, #{fileStatus})
     </insert>
+    <select id="selectProduct" parameterType="hashmap" resultType="Product">
+        SELECT *
+        FROM HANJU_PRODUCT
+        WHERE PRODUCT_ID = #{itemId}
+    </select>
+    <select id="detailImage" parameterType="hashmap" resultType="String">
+        SELECT FILE_PATH
+        FROM HANJU_IMAGE
+        WHERE FK_ID = #{itemId} AND FILE_STATUS = #{status}
+    </select>
 </mapper>
