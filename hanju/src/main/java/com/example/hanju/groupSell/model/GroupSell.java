@@ -16,4 +16,5 @@ public class GroupSell {
 	// join
 	private String productName;
 	private int price;
+	private int currentAmount;
 }
