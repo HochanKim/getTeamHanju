@@ -1,6 +1,7 @@
 package com.example.hanju.main.model;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class Product {
@@ -20,7 +21,7 @@ public class Product {
     private int capacity;
     private String color;
     private String material;
-    
+
     public void setColor(String color) {
     	this.color = color;
     }
