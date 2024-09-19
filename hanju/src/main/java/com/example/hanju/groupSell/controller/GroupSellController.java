@@ -49,6 +49,30 @@ public class GroupSellController {
 		return "/groupSell/groupSellView";
     }
 	
+	@RequestMapping(value = "/groupSell/getGroupSellInfo.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getGroupSellInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.getGroupSellInfo(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/groupSell/getTotalReviewCount.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getTotalReviewCount(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.getTotalReviewCount(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/groupSell/getReview.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getReview(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = groupSellService.getReview(map);
+		return new Gson().toJson(result);
+	}
+	
 	@RequestMapping(value = "/groupSell/joinGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String joinGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {

@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="cell2">
                                     <div>
-                                        원가 / 실거래가 <del>{{item.price}}</del> / {{item.price - (item.price / 100 * item.discount)}}
+                                        원가 / 공구가 <del>{{item.price}}</del> / {{item.price - (item.price / 100 * item.discount)}}
                                     </div>
                                 </div>
                             </div>

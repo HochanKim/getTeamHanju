@@ -214,6 +214,15 @@
     justify-content: space-between;
 }
 
+#review .rightSide {
+    display: flex;
+    justify-content: space-between;
+}
+
+#review .cDateTime {
+    margin-left: 16px;
+}
+
 #review .content {
     width: 100%;
     height: 400px;
@@ -241,8 +250,30 @@
 #review .reviewContent {
     padding: 16px;
     width: 70%;
-
 }
+
+/* 리뷰 페이징 */
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#pagination .pageBtn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #aaa;
+    text-align: center;
+    line-height: 50px;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #999;
+}
+
+/* 페이징 끝 */
 
 /* ============================ */
 

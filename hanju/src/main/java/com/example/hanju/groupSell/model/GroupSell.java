@@ -11,7 +11,7 @@ public class GroupSell {
 	private String startDate;
 	private String endDate;
 	private int discount;
-	
+	private String description;
 	
 	// join
 	private String productName;
