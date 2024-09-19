@@ -13,5 +13,13 @@ public class PickupBoardDto {
     private String color;
     private String material;
     private String filePath;
+    
+    public void setColor(String color) {
+    	this.color = color;
+    }
+    
+    public String getColor() {
+    	return this.color;
+    }
 
 }

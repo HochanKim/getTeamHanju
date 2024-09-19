@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Data
 public class Product {
+	// hanju_product 테이블 컬럼
     private int productId;
     private String type;
     private String productName;
@@ -21,6 +22,11 @@ public class Product {
     private int capacity;
     private String color;
     private String material;
+    
+    // 조인 컬럼
+    private String filePath;		// hanju_imamge 테이블 컬럼
+    private String fileOrgName;		// hanju_imamge 테이블 컬럼
+    
 
     public void setColor(String color) {
     	this.color = color;
