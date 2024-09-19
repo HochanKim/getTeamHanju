@@ -11,6 +11,4 @@ public class MainController {
     public String imgUpload(Model model) throws Exception{
         return "main/imgUploader";
     }
-
-
 }

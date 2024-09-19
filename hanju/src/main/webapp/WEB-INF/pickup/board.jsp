@@ -12,7 +12,12 @@ pageEncoding="UTF-8"%>
   <body>
     <div id="app">
       <div id="container">
-        <div id="card" v-for="(item, index) in boardList" :key="index">
+        <div
+          id="wineCard"
+          v-for="(item, index) in boardList"
+          @click="fnDetailPage(item.productId)"
+          :key="index"
+        >
           <img :src="item.filePath" :alt="item.productName" />
           <div>이름:{{ item.productName }}</div>
           <div>컬러:{{ item.color }}</div>
@@ -40,6 +45,9 @@ pageEncoding="UTF-8"%>
         };
         const { data } = await axios.get(url, { params: submitForm });
         this.boardList = data.result;
+      },
+      fnDetailPage(itemNo) {
+        location.href = `itemDetail.do?itemId=\${itemNo}`;
       },
     },
     mounted() {
