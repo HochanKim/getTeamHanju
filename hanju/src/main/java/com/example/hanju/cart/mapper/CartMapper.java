@@ -10,4 +10,7 @@ import java.util.Map;
 public interface CartMapper {
 
     List<CartModel> viewCart(Map<String,Object> map);
+    int storeStockCheck(Map<String,String> map);
+    int cartStockChange(Map<String,String> map);
+    int cartItemDelete(Map<String,String> map);
 }

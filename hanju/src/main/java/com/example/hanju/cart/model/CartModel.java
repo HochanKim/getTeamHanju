@@ -15,4 +15,6 @@ public class CartModel {
     private String filePath;
     private String productName;
     private String price;
+    private String storeId;
+    private String cartId;
 }
