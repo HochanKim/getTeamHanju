@@ -32,5 +32,33 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping("user/login.do")
+	public String login(Model model) throws Exception{
+		return "user/login";
+		
+	}
+	
+	@RequestMapping("user/juso.do")
+	public String juso(Model model) throws Exception{
+		return "user/juso";
+		
+	}
+	
+	@RequestMapping(value = "user/join.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchTestList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.userList(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "user/login.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.userLogin(map);
+		return new Gson().toJson(result);
+	}
+	
 
 }
