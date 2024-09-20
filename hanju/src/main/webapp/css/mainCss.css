@@ -66,9 +66,8 @@ html, body{
     color: #333;
     text-align: center;
     padding: 20px;
-    position: fixed;
+    /* position: fixed; */
     bottom: 0;
-    width: 100%;
     border-top: 1px solid #ccc;
     z-index: 1000; /* 푸터가 페이지 내용 위에 오도록 설정 */
 }

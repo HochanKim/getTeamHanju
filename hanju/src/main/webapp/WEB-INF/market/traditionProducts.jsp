@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
         <section class="selectSection">
             <!-- 카테고리 버튼 클릭 (1) -->
             <div class="productsListSelect">
-                <a href="javascript:void(0);">
+                <a href="productList.do">
                     <span class="selected">일반구매</span>
                 </a>
                 <a href="javascript:void(0);">
@@ -30,16 +30,23 @@ pageEncoding="UTF-8"%>
                 </a>
             </div>
             <!-- 
-                카테고리 버튼 클릭 (2) 
-                : 클릭시 전통주, 굿즈, 선물용 페이지로 이동 
+              카테고리 버튼 클릭 (2) 
+              : 클릭시 전통주, 굿즈, 선물용 페이지로 이동 
             -->
             <div class="productsPartList">
                 <a href="traditionProducts.do">
-                    <span>전통주</span>
+                    <span class="selected">전통주</span>
                 </a>
                 <a href="giftSets.do">
                     <span>선물세트</span>
                 </a>
+            </div>
+            <!-- 분류 코드 리스트 -->
+            <div>
+              <label v-for="item in codeList">
+                <input type="checkbox" v-model="alcoholKind" :value="item.code" @change="fnTradCode">
+                  {{item.codeName}}
+              </label>
             </div>
         </section>
         <!-- 상품 리스트 영역 -->
@@ -70,26 +77,42 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         products : [],
+        codeList : []
       };
     },
     methods: {
-        fnList() {
-            var self = this;
-            var npramap = {};
-            $.ajax({
-                url: "productList.dox",
-                dataType: "json",
-                type: "POST",
-                data: npramap,
-                success: (data) => {
-                    self.products = data.list;
-                },
-            });
-        },
+      fnTradCode() {
+        var self = this;
+        var npramap = {};
+        $.ajax({
+            url: "code-list.dox",
+            dataType: "json",
+            type: "POST",
+            data: npramap,
+            success: (data) => {
+              console.log(data);
+              self.codeList = data.codeList;
+            },
+        });
+      },
+      fnList() {
+        var self = this;
+        var npramap = {};
+        $.ajax({
+            url: "traditionAlcohol.dox",
+            dataType: "json",
+            type: "POST",
+            data: npramap,
+            success: (data) => {
+                self.products = data.list;
+            },
+        });
+      },
     },
     mounted() {
-        var self = this;
-		self.fnList();
+      var self = this;
+		  self.fnList();
+      self.fnTradCode();
     },
   });
   app.mount("#app");

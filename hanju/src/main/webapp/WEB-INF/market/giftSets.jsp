@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
         <section class="selectSection">
             <!-- 카테고리 버튼 클릭 (1) -->
             <div class="productsListSelect">
-                <a href="javascript:void(0);">
+                <a href="productList.do">
                     <span class="selected">일반구매</span>
                 </a>
                 <a href="javascript:void(0);">
@@ -30,15 +30,15 @@ pageEncoding="UTF-8"%>
                 </a>
             </div>
             <!-- 
-                카테고리 버튼 클릭 (2) 
-                : 클릭시 전통주, 굿즈, 선물용 페이지로 이동 
+              카테고리 버튼 클릭 (2) 
+              : 클릭시 전통주, 굿즈, 선물용 페이지로 이동 
             -->
             <div class="productsPartList">
                 <a href="traditionProducts.do">
                     <span>전통주</span>
                 </a>
-                <a href="giftSets.do">
-                    <span>선물세트</span>
+                <a href="javascript:void(0);">
+                    <span class="selected">선물세트</span>
                 </a>
             </div>
         </section>
@@ -77,7 +77,7 @@ pageEncoding="UTF-8"%>
             var self = this;
             var npramap = {};
             $.ajax({
-                url: "productList.dox",
+                url: "giftSets.dox",
                 dataType: "json",
                 type: "POST",
                 data: npramap,

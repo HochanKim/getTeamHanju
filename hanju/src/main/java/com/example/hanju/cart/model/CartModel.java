@@ -15,4 +15,11 @@ public class CartModel {
     private String filePath;
     private String productName;
     private String price;
+    
+	public String getKind() {
+		return kind;
+	}
+    
+    
+    
 }

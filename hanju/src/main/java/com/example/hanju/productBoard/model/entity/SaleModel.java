@@ -1,4 +1,4 @@
-package com.example.hanju.salling.model.entity;
+package com.example.hanju.productBoard.model.entity;
 
 import lombok.Data;
 
@@ -21,10 +21,9 @@ public class SaleModel {
     private int capacity;		// 용량
     private String color;		// 색
     private String material;	// 재료
-    private String priceComma; // 가격에 ',' 붙이기
+    private String priceComma; 	// 가격에 ',' 붙이기
     
     // 조인 컬럼
     private String filePath;		// hanju_imamge 테이블 컬럼
     private String fileOrgName;		// hanju_imamge 테이블 컬럼
-    
 }

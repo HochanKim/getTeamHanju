@@ -7,10 +7,6 @@
 <title>도서관</title>
 </head>
 <body>
-    <div class="content">
-        <!-- 여기에 페이지 내용이 들어갑니다. -->
-    </div>
-
     <!-- 푸터 -->
     <div class="footer">
         book house <br> 
