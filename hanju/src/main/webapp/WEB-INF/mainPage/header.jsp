@@ -10,16 +10,14 @@
 <body>
     <nav class="navbar">
         <div class="navbar__logo">
-            <i class="fas fa-dog"></i>
-            <a href="">Co-kgyury</a>
-        </div>
+            <img src="/upload/haju_rogo_white.png" height="80" alt="한주 로고" />
+            </div>
         
         <ul class ="navbar__menu">
-            <li><a href="">Home</a></li>
-            <li><a href="">Tistory</a></li>
-            <li><a href="">Github</a></li>
-            <li><a href="">Velog</a></li>
-            <li><a href="">Youtube</a></li>
+            <li><a href="">전통주</a></li>
+            <li><a href="">와인</a></li>
+            <li><a href="">펀딩</a></li>
+            <li><a href="">공동구매</a></li>
         </ul>
  
         <ul class="navbar__icons">
