@@ -5,9 +5,7 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +22,19 @@ public class CartApiController {
         Map<String,Object> tempMap = new HashMap<>();
         tempMap.put("userId","user1");
         Map<String, Object> result = cartService.viewCart(tempMap);
+        return new Gson().toJson(result);
+    }
+
+    @PostMapping(value = "cart/cartCountChange.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String cartCountChange(Model model, @RequestBody Map<String, String> map) throws Exception {
+        Map<String, Object> result = cartService.cartPickupCountChange(map);
+        return new Gson().toJson(result);
+    }
+    @PostMapping(value = "cart/cartItemDelete.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String cartItemDelete(Model model, @RequestBody Map<String, String> map) throws Exception {
+        Map<String, Object> result = cartService.cartItemDelete(map);
         return new Gson().toJson(result);
     }
 }

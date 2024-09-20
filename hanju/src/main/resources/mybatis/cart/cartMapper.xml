@@ -10,4 +10,24 @@
         INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE I.FILE_STATUS = 'T' AND USER_ID = #{userId}
     </select>
+    <select id="storeStockCheck" parameterType="hashmap" resultType="int">
+        SELECT STOCK
+        FROM HANJU_PICKUP_STOCK
+        WHERE PRODUCT_ID = #{productId} AND STORE_ID = #{storeId}
+    </select>
+    <update id="cartStockChange" parameterType="hashmap">
+        UPDATE HANJU_CART
+        <if test="value.equals('plus')">
+            SET PRODUCT_COUNT = PRODUCT_COUNT+1
+        </if>
+        <if test="value.equals('minus')">
+            SET PRODUCT_COUNT = PRODUCT_COUNT-1
+        </if>
+        WHERE PRODUCT_ID = #{productId}
+    </update>
+    <delete id="cartItemDelete" parameterType="hashmap">
+        DELETE
+        FROM HANJU_CART
+        WHERE CART_ID = #{cartId}
+    </delete>
 </mapper>

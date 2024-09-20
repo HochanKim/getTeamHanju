@@ -15,11 +15,10 @@ public class CartModel {
     private String filePath;
     private String productName;
     private String price;
-    
+
 	public String getKind() {
 		return kind;
-	}
-    
-    
-    
+  }
+    private String storeId;
+    private String cartId;
 }
