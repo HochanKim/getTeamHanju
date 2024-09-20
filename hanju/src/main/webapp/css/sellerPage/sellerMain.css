@@ -15,7 +15,7 @@
 }
 #main {
     width: 100vw;
-    height: 80vh;
+    /* height: 80vh; */
     background-color: #bbb;
     display: flex;
 }
@@ -57,6 +57,16 @@
     background-color: #bca;
 }
 
+#container table {
+    margin: 16px;
+}
+
+#container .box {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-color: #aaa;
+}
 
 
 /* ========================= */
