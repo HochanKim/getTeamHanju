@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.details.mapper.DetailsMapper">
+
+	<select id ="selectDetail" parameterType="hashmap" resultType="Details">
+		SELECT *
+		FROM HANJU_PRODUCT
+		WHERE PRODUCT_NAME = '호호'
+	</select>
+	<select id="selectProduct" parameterType="hashmap" resultType="Product">
+		SELECT *
+		FROM HANJU_PRODUCT
+		WHERE PRODUCT_ID = '호호'
+	</select>
+	<select id="detailImage" parameterType="hashmap" resultType="String">
+		SELECT FILE_PATH
+		FROM HANJU_IMAGE
+		WHERE FK_ID = '27' AND FILE_STATUS = #{status}
+	</select>
+	
+</mapper>
