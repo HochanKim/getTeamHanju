@@ -480,7 +480,7 @@
         },
 
         backBtn(){
-          $.pageChange("login.do");
+          $.pageChange("login.do", {});
         },
 
         joinBtn(){
@@ -519,8 +519,10 @@
             data: nparmap,
             success: function (data) {
               console.log(data);
-              self.validate();
-              $.pageChange("login.do");
+              if(self.validate() == false){
+                return;
+              }
+              $.pageChange("login.do", {});
               
               
             }
