@@ -50,24 +50,33 @@
                     <tr>
                         <td>썸네일</td>
                         <td>
-                            <input type="file" @change="fnThumbnailChange">
+                            <div class="box">
+                                <img ref="thumbnail" style="width: 100%; height: 100%; background-size: auto;">
+                            </div>
+                            <label>
+                                <p style="background-color: #aaa;">test</p>
+                                <input type="file" @change="fnThumbnailChange" style="visibility: hidden;">
+                            </label>
                         </td>
                     </tr>
                     <tr>
-                        <td>상세 정보 이미지</td>
+                        <td>제품 이미지</td>
                         <td>
+                            <div class="box"></div>
                             <input type="file" @change="fnImg1Change">
                         </td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>
-                        <td>
+                            <div class="box"></div>
                             <input type="file" @change="fnImg2Change">
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td>
+                            <div class="box"></div>
                             <input type="file" @change="fnImg3Change">
                         </td>
                     </tr>
@@ -169,7 +178,7 @@
                     </tr>
                     <tr>
                         <td>색깔</td>
-                        <td><input type="text" v-model="color"></td>
+                        <td><input type="text" v-model="color" placeholder="none"></td>
                     </tr>
                     <tr>
                         <td>원재료</td>
@@ -177,7 +186,6 @@
                     </tr>
                 </table>
                 <button @click="fnSubmit">제품등록</button>
-                <button @click="fnTest">test</button>
             </div>
         </div>
         <div id="footer">
@@ -208,12 +216,16 @@
                 stock : "",
                 capacity : "",
                 color : "",
-                material : ""
+                material : "",
+
+                testUrl : null
             };
         },
         methods: {
             fnThumbnailChange(event) {
                 this.thumbnail = event.target.files[ 0 ];
+                this.testUrl = URL.createObjectURL(this.thumbnail);
+                console.log(this.testUrl);
             },
             fnImg1Change(event) {
                 this.productImg1 = event.target.files[ 0 ];
@@ -225,6 +237,12 @@
                 this.productImg3 = event.target.files[ 0 ];
             },
             fnSubmit() {
+
+                if (this.fnAllCheck() ) {
+                    alert("전부 채워주세요");
+                    return;
+                }
+
                 $.ajax({
 					url:"registerProduct.dox",
 					dataType:"json",
@@ -268,15 +286,35 @@
                     processData : false,
                     contentType : false,
 					success : () => {
-						console.log("성공");
+						alert("등록되었습니다!");
 					},
                     error : function(jqXHR, textStatus, errorThrown) {
                         console.error('업로드 실패!', textStatus, errorThrown);
                     }
 				});
             },
-            fnTest() {
-                this.fnUploadProductImg(55);
+            fnAllCheck() {
+                var isEmpty = false;
+                if (this.productName == "") isEmpty = true;
+                if (this.thumbnail   == "") isEmpty = true;
+                if (this.productImg1 == "") isEmpty = true;
+                if (this.productImg2 == "") isEmpty = true;
+                if (this.productImg3 == "") isEmpty = true;
+                if (this.type        == "") isEmpty = true;
+                if (this.price       == "") isEmpty = true;
+                if (this.madeBy      == "") isEmpty = true;
+                if (this.alcohol     == "") isEmpty = true;
+                if (this.sparkling   == "") isEmpty = true;
+                if (this.sweet       == "") isEmpty = true;
+                if (this.sour        == "") isEmpty = true;
+                if (this.bitter      == "") isEmpty = true;
+                if (this.body        == "") isEmpty = true;
+                if (this.stock       == "") isEmpty = true;
+                if (this.capacity    == "") isEmpty = true;
+                if (this.color       == "") this.color = "none"
+                if (this.material    == "") isEmpty = true;
+
+                return isEmpty;
             }
         },
         mounted() {

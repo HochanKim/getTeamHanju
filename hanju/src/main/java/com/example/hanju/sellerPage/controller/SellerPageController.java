@@ -40,6 +40,7 @@ public class SellerPageController {
 	}
 	
 	@RequestMapping("/sellerPage/uploadProductImg.dox")
+	@ResponseBody
     public String uploadProductImg(@RequestParam("productId") int productId,
     					 		   @RequestParam("thumbnail")   MultipartFile thumbnail,
     					 		   @RequestParam("productImg1") MultipartFile productImg1,
@@ -58,7 +59,9 @@ public class SellerPageController {
 			System.out.println(e);
 		}
 		
-		return "";
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("result", "성공했습니다.");
+		return new Gson().toJson(resultMap);
     }
 	
 	private void uploadImg(int productId, MultipartFile file, String type) throws IOException {
