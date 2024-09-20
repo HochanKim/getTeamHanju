@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.productBoard.mapper.SaleMapper">
+	<!-- 일반 구매 -->
+	<select id="getProductList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+		FROM HANJU_PRODUCT P
+		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+		WHERE I.FILE_STATUS = 'T' AND (P.TYPE = 'T' OR P.TYPE = 'G')
+	</select>
+	
+	<!-- 일반구매 > 전통주 -->
+	<select id="getTradAlcohol" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+	    FROM HANJU_PRODUCT P
+	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+	    WHERE I.FILE_STATUS = 'T' AND P.TYPE = 'T' 
+	</select>
+	<!-- 전통주 > 코드 리스트-->
+	<select id="selectCodeList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleCode">
+		SELECT C1.KIND, C2.CODE_NAME, C2.CODE
+		FROM HANJU_CODE C1
+		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
+		WHERE C1.KIND = 'IMAGE_STATUS'
+	</select>
+	
+	<!-- 일반구매 > 선물세트 -->
+	<select id="getGiftSet" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+	    FROM HANJU_PRODUCT P
+	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+	    WHERE TYPE = 'G'
+	</select>
+</mapper>
