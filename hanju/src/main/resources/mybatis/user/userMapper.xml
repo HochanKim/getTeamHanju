@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.user.mapper.UserMapper">	
+	<select id="selectUser" parameterType="hashmap" resultType="UserModel">	
+		SELECT * 
+		FROM TEST_USER
+		WHERE USER_ID = #{userId} 
+	</select>
+	<select id="loginUser" parameterType="hashmap" resultType="UserModel">	
+		SELECT * 
+		FROM TEST_USER
+		WHERE USER_ID = #{userId} AND PASSWORD = #{password}
+	</select>
+</mapper>	
