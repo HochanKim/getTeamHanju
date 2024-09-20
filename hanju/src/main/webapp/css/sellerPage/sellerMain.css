@@ -57,6 +57,9 @@
     background-color: #bca;
 }
 
+#container table {
+    margin: 16px;
+}
 
 
 /* ========================= */
