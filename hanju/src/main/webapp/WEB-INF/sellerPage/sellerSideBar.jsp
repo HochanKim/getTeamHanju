@@ -9,41 +9,49 @@
 </head>
 <body>
     <div id="sideBar">
-        <div class="menu">
-            <p>제품 관리</p>
-            <span class="material-symbols-outlined">arrow_drop_down</span>
+        <div id="sideTitle">
+            나의 사업장
         </div>
-        <div class="subMenu">
-            <div> - 제품 등록</div>
-            <div> - 제품 수정</div>
-            <div> - 제품 삭제</div>
-        </div>
-        <div class="menu">
-            <p>일반 판매 관리</p>
-            <span class="material-symbols-outlined">arrow_drop_down</span>
-        </div>
-        <div class="subMenu">
-            <div> - 제품 게시</div>
-            <div> - 게시 수정</div>
-            <div> - 제품 삭제</div>
-        </div>
-        <div class="menu">
-            <p>펀딩 관리</p>
-            <span class="material-symbols-outlined">arrow_drop_down</span>
-        </div>
-        <div class="subMenu">
-            <div> - 제품 게시</div>
-            <div> - 게시 수정</div>
-            <div> - 제품 삭제</div>
-        </div>
-        <div class="menu">
-            <p>공동구매 관리</p>
-            <span class="material-symbols-outlined">arrow_drop_down</span>
-        </div>
-        <div class="subMenu">
-            <div> - 공동구매 게시</div>
-            <div> - 게시 수정</div>
-            <div> - 공동구매 삭제</div>
+        <div id="sideBox">
+            <div class="normalMenu">
+                <a href="sellerMain.do">사업자 홈</a>
+            </div>
+            <div class="menu">
+                <p>제품 관리</p>
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+            <div class="subMenu">
+                <div><a href="registerProduct.do"> - 제품 등록</a></div>
+                <div> - 제품 수정</div>
+                <div> - 제품 삭제</div>
+            </div>
+            <div class="menu">
+                <p>일반 판매 관리</p>
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+            <div class="subMenu">
+                <div> - 제품 게시</div>
+                <div> - 게시물 수정</div>
+                <div> - 게시물 삭제</div>
+            </div>
+            <div class="menu">
+                <p>펀딩 관리</p>
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+            <div class="subMenu">
+                <div> - 펀딩 게시</div>
+                <div> - 펀딩 수정</div>
+                <div> - 펀딩 삭제</div>
+            </div>
+            <div class="menu">
+                <p>공동구매 관리</p>
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+            <div class="subMenu">
+                <div> - 공동구매 게시</div>
+                <div> - 공동구매 수정</div>
+                <div> - 공동구매 삭제</div>
+            </div>
         </div>
     </div>
 </body>
