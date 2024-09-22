@@ -18,4 +18,14 @@
         FROM HANJU_IMAGE
         WHERE FK_ID = #{itemId} AND FILE_STATUS = #{status}
     </select>
+    <select id="getProductList" parameterType="hashmap" resultType="Product">
+        SELECT *
+        FROM HANJU_PRODUCT
+    </select>
+    <select id="getItemStoreList" parameterType="hashmap" resultType="PickupStoreStock">
+        SELECT PS.STORE_ID,PS.PRODUCT_ID,PS.STOCK,ST.STORE_NAME
+        FROM HANJU_PICKUP_STOCK PS
+        INNER JOIN HANJU_PICKUP_STORE ST ON PS.STORE_ID = ST.STORE_ID
+        WHERE PS.PRODUCT_ID = #{productId}
+    </select>
 </mapper>

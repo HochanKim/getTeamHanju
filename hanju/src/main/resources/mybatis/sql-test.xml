@@ -12,4 +12,6 @@
 		FROM TEST_TABLE
 		WHERE TEST_TITLE LIKE '%'||#{title}||'%'
 	</select>
+
+
 </mapper>

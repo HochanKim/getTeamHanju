@@ -4,12 +4,9 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/testCss.css"
-    />
-    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/js/vue.js"></script>
+    <link rel="stylesheet" href="/css/testCss.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/vue.js"></script>
     <title>sample page</title>
   </head>
   <body>
@@ -28,6 +25,7 @@ pageEncoding="UTF-8"%>
           이미지 업로더 바로가기
         </button>
         <button @click="fnGoToTest('cart/viewCart.do')">장바구니</button>
+        <button @click="fnGoToTest('main/addCart.do')">장바구니 담기</button>
       </div>
     </div>
   </body>

@@ -2,6 +2,7 @@ package com.example.hanju.user.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,14 @@ public class UserServiceImpl implements UserService{
 		resultMap.put("result", user);
 		return resultMap;
 	}
-	
-	
+
+	@Override
+	public Map<String, Object> allUserList() {
+		List<UserModel> list = userMapper.allUserList();
+		Map<String,Object> map = new HashMap<>();
+		map.put("list",list);
+		return map;
+	}
+
+
 }

@@ -1,14 +1,12 @@
 package com.example.hanju.user.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.hanju.test.service.TestService;
 import com.example.hanju.user.service.UserService;
@@ -42,6 +40,13 @@ public class UserController {
 	public String juso(Model model) throws Exception{
 		return "user/juso";
 		
+	}
+	//필요에 의해 만들음. 모든 유저 정보 리스트를 불러오는 API
+	@GetMapping(value = "user/allUserList.dox", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String allUserList(Model model) throws Exception {
+		Map<String, Object> result = userService.allUserList();
+		return new Gson().toJson(result);
 	}
 	
 	@RequestMapping(value = "user/join.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

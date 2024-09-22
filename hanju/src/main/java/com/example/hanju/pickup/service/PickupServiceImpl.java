@@ -3,6 +3,7 @@ package com.example.hanju.pickup.service;
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.common.RsMsg;
 import com.example.hanju.main.mapper.MainMapper;
+import com.example.hanju.main.model.PickUpStore;
 import com.example.hanju.pickup.mapper.PickupMapper;
 import com.example.hanju.pickup.model.dto.PickupBoardDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,6 @@ public class PickupServiceImpl implements PickupService {
         result.put("result",mainMapper.selectProduct(map));
         return result;
     }
+
+
 }

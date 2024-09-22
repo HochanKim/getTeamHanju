@@ -11,4 +11,9 @@ public class MainController {
     public String imgUpload(Model model) throws Exception{
         return "main/imgUploader";
     }
+
+    @RequestMapping("main/addCart.do")
+    public String addCart(Model model) throws Exception{
+        return "main/addCart";
+    }
 }

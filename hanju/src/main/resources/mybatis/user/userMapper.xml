@@ -13,4 +13,8 @@
 		FROM TEST_USER
 		WHERE USER_ID = #{userId} AND PASSWORD = #{password}
 	</select>
+	<select id="allUserList" parameterType="hashmap" resultType="UserModel">
+		SELECT *
+		FROM HANJU_USER
+	</select>
 </mapper>	

@@ -18,7 +18,42 @@ pageEncoding="UTF-8"%>
             장바구니에 담긴 상품이 없습니다.
           </div>
           <div class="normal" v-if="normal.length>0">
-            일반구매 있으면 이거 보여야함.
+            <div class="boxHead">
+              <input type="checkbox" v-model="normalAllCheck" /> 일반구매
+              전체선택
+            </div>
+            <div class="itemBox" v-for="(item, index) in normal" :key="index">
+              <button class="x" @click="fnCartDelete(item.cartId)">X</button>
+              <div class="itemCheck">
+                <input
+                  type="checkbox"
+                  :value="item.cartId"
+                  v-model="selectItem"
+                />
+              </div>
+              <div class="ImageBox">
+                <img :src="item.filePath" />
+              </div>
+              <div class="infoBox">
+                <div>{{ item.productName }}</div>
+              </div>
+              <div class="countBox">
+                <div class="itemCount">
+                  <button
+                    @click="fnPickupCountChange('minus',item.cartId,item.productCount)"
+                  >
+                    -
+                  </button>
+                  <div>{{ item.productCount }}</div>
+                  <button
+                    @click="fnPickupCountChange('plus',item.cartId,item.productCount)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="priceBox">{{ item.price }}원</div>
+            </div>
           </div>
           <div class="group" v-if="group.length>0">
             공동구매 있으면 이거 보여야함.
@@ -33,15 +68,13 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="itemBox" v-for="(item, index) in pickup" :key="index">
               <button class="x" @click="fnCartDelete(item.cartId)">X</button>
-
               <div class="itemCheck">
                 <input
                   type="checkbox"
-                  :value="{count:item.productCount,price:item.price}"
+                  :value="item.cartId"
                   v-model="selectItem"
                 />
               </div>
-
               <div class="ImageBox">
                 <img :src="item.filePath" />
               </div>
@@ -51,13 +84,13 @@ pageEncoding="UTF-8"%>
               <div class="countBox">
                 <div class="itemCount">
                   <button
-                    @click="fnPickupCountChange('minus',item.storeId,item.productId,item.productCount)"
+                    @click="fnPickupCountChange('minus',item.cartId,item.productCount)"
                   >
                     -
                   </button>
                   <div>{{ item.productCount }}</div>
                   <button
-                    @click="fnPickupCountChange('plus',item.storeId,item.productId,item.productCount)"
+                    @click="fnPickupCountChange('plus',item.cartId,item.productCount)"
                   >
                     +
                   </button>
@@ -69,7 +102,13 @@ pageEncoding="UTF-8"%>
         </div>
         <div id="priceContainer">
           <div class="priceInfo">{{ sumPrice }} 원</div>
-          <div class="paymentBtn"><button>결제하기</button></div>
+          <div class="paymentBtn">
+            <form action="payment.do" method="post">
+              <input type="hidden" name="price" :value="sumPrice" />
+              <input type="hidden" name="cartItem" :value="selectItem" />
+              <button type="submit">결제하기</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -84,6 +123,7 @@ pageEncoding="UTF-8"%>
         funding: [],
         pickup: [],
         pickupAllCheck: true,
+        normalAllCheck: true,
         selectItem: [],
         sumPrice: 0,
         emptyPage: false,
@@ -104,15 +144,14 @@ pageEncoding="UTF-8"%>
         const res = await axios.post(url, { cartId: id });
         console.log(res.data);
       },
-      async fnPickupCountChange(ha, store, id, cnt) {
+      async fnPickupCountChange(value, id, cnt) {
         const url = "cartCountChange.dox";
         const submitForm = {
-          value: ha,
-          storeId: store,
-          productId: id,
+          value: value,
+          cartId: id,
           count: cnt,
         };
-        if (cnt == 1 && ha == "minus") {
+        if (cnt == 1 && value == "minus") {
           alert("1이하로 줄일수 없습니다.");
           return;
         }
@@ -122,20 +161,19 @@ pageEncoding="UTF-8"%>
           return;
         }
         if (res.data.status == "error") {
-          alert("뭔가 잘못됨 에러처리 할것");
+          alert("뭔가 잘못됨");
           return;
         } else {
           this.fnViewCart();
+          this.fnSumPrice();
         }
       },
-      fnSumPrice() {
-        console.log(this.selectItem);
-        let sum = 0;
-        for (let select of this.selectItem) {
-          console.log(select);
-          sum += select.count * select.price;
-        }
-        this.sumPrice = sum;
+      async fnSumPrice() {
+        const url = "sumPrice.dox";
+        const submitForm = this.selectItem;
+        const { data } = await axios.post(url, submitForm);
+        console.log(data);
+        this.sumPrice = data.sum;
       },
       async fnViewCart() {
         const url = "viewCart.dox";
@@ -150,6 +188,21 @@ pageEncoding="UTF-8"%>
           this.funding = res.data.funding;
           this.pickup = res.data.pickup;
         }
+      },
+      goToPayment() {
+        const url = "payment.do";
+        const submitForm = {
+          price: this.sumPrice,
+          cartItem: this.selectItem,
+        };
+        axios
+          .post(url, submitForm)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((error) => {
+            alert("서버 이상.");
+          });
       },
     },
     mounted() {
