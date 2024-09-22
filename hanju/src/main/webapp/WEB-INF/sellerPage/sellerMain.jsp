@@ -5,8 +5,6 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/sellerPage/sellerMain.css" />
-    
-    <link rel="stylesheet" href="../../upload/202481881811706.png" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
@@ -18,25 +16,7 @@
             header
         </div>
         <div id="main">
-            <div id="sideBar">
-                <table>
-                    <tr>
-                        <td>제품 등록</td>
-                    </tr>
-                    <tr>
-                        <td>제품 제거</td>
-                    </tr>
-                    <tr>
-                        <td>일반 판매 등록</td>
-                    </tr>
-                    <tr>
-                        <td>펀딩 등록</td>
-                    </tr>
-                    <tr>
-                        <td>공동 구매 등록</td>
-                    </tr>
-                </table>
-            </div>
+            <jsp:include page="sellerSideBar.jsp"></jsp:include>
             <div id="container">
                 <h3>제품 등록</h3>
                 <hr>
@@ -195,6 +175,7 @@
 </body>
 
 </html>
+
 <script>
     const app = Vue.createApp({
         data() {
