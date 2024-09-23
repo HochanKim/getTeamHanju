@@ -36,9 +36,15 @@ public class SellerPageController {
         return "/sellerPage/registerProduct";
     }
 	
+	@RequestMapping("/sellerPage/modifyProductList.do")
+    public String modifyProductList(Model model) throws Exception {
+        return "/sellerPage/modifyProductList";
+    }
+	
 	@RequestMapping("/sellerPage/modifyProduct.do")
-    public String modifyProduct(Model model) throws Exception {
-        return "/sellerPage/modifyProduct";
+    public String modifyProduct(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+        request.setAttribute("productId", map.get("productId") );
+		return "/sellerPage/modifyProduct";
     }
 	
 	@RequestMapping(value = "/sellerPage/registerProduct.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -88,6 +94,47 @@ public class SellerPageController {
 		HashMap<String, Object> result = sellerPageService.getProductList(map);
 		return new Gson().toJson(result);
 	}
+	
+	@RequestMapping(value = "/sellerPage/getProductInfo.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getProductInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getProductInfo(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/getProductImages.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getProductImages(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getProductImages(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/modifyProduct.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String modifyProduct(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.modifyProduct(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/deleteBeforeImgs.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteBeforeImgs(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		System.out.println(map);
+		
+		String path = System.getProperty("user.dir");
+		File targetFile = new File(path + "\\src\\main\\webapp\\upload\\프로젝트 셋팅.png");
+		targetFile.delete();
+		
+		//HashMap<String, Object> result = sellerPageService.modifyProduct(map);
+		HashMap<String, Object> result = new HashMap<>();
+		return new Gson().toJson(result);
+	}
+	
+	// =====================================================================================
 	
 	private void uploadImg(int productId, MultipartFile file, String type) throws IOException {
 		

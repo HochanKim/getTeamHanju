@@ -3,6 +3,7 @@ package com.example.hanju.details.controller;
 import com.example.hanju.details.service.DetailsService;
 import com.example.hanju.test.service.TestService;
 import com.google.gson.Gson;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +18,11 @@ public class DetailsController {
 	@Autowired
 	DetailsService detailsService;
 
+	@Autowired
+	HttpSession session;
 	@RequestMapping("details/details.do")
 	public String testPage(Model model) throws Exception{
+		model.addAttribute("userId",session.getAttribute("sessionId"));
 		return "details/details";
 	}
 

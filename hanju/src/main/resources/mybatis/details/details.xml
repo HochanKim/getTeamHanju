@@ -6,13 +6,14 @@
 
 	<select id ="selectDetail" parameterType="hashmap" resultType="Details">
 		SELECT *
-		FROM HANJU_PRODUCT
-		WHERE PRODUCT_NAME = '호호'
+		FROM HANJU_PRODUCT P
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE P.PRODUCT_NAME = '호호'
 	</select>
 	<select id="selectProduct" parameterType="hashmap" resultType="Product">
 		SELECT *
 		FROM HANJU_PRODUCT
-		WHERE PRODUCT_ID = '호호'
+		WHERE PRODUCT_ID = '27'
 	</select>
 	<select id="detailImage" parameterType="hashmap" resultType="String">
 		SELECT FILE_PATH

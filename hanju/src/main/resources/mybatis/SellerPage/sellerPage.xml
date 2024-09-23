@@ -5,13 +5,13 @@
 <mapper namespace="com.example.hanju.sellerPage.mapper.SellerPageMapper">
 
 	<insert id="registerProduct" parameterType="hashmap" useGeneratedKeys="true" keyProperty="PRODUCT_ID" keyColumn="PRODUCT_ID">
-		INSERT INTO TEST_PRODUCT
+		INSERT INTO HANJU_PRODUCT
 		VALUES (
 			test_seq.nextVal,
 			#{type},
 			#{productName},
 			#{price},
-			'ADMIN',
+			#{userId},
 			#{madeBy},
 			#{alcohol},
 			#{sparkling},
@@ -26,7 +26,7 @@
 	</insert>
 	
 	<insert id="uploadProductImg" parameterType="hashmap">
-		INSERT INTO TEST_IMAGE
+		INSERT INTO HANJU_IMAGE
 		VALUES (image_seq.nextVal, #{productId}, #{fileName}, #{fileOrgName}, #{filePath}, #{fileStatus})
 	</insert>
 	
@@ -42,8 +42,40 @@
 		INNER JOIN HANJU_CODE C  ON C.KIND = 'PRODUCT_CODE' AND P.TYPE = C.CODE
 		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
 		WHERE	SELLER_ID = #{userId}
-		ORDER BY P.PRODUCT_ID DESC
+		ORDER BY P.CDATETIME DESC
 		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
+	
+	<select id="getProductInfo" parameterType="hashmap" resultType="com.example.hanju.main.model.Product">
+		SELECT	*
+		FROM	HANJU_PRODUCT
+		WHERE	PRODUCT_ID = #{productId}
+	</select>
+	
+	<select id="getProductImages" parameterType="hashmap" resultType="com.example.hanju.main.model.ProductImage">
+		SELECT	*
+		FROM	HANJU_IMAGE I
+		INNER JOIN HANJU_PRODUCT P ON I.FK_ID = P.PRODUCT_ID
+		WHERE	I.FK_ID = #{productId} AND (I.FILE_STATUS = 'T' OR I.FILE_STATUS = 'P')
+	</select>
+	
+	<update id="modifyProduct" parameterType="hashmap">
+		UPDATE HANJU_PRODUCT
+		SET
+			PRODUCT_NAME = #{productName},
+			TYPE         = #{type},
+			PRICE        = #{price},
+			MADE_BY      = #{madeBy},
+			ALCOHOL      = #{alcohol},
+			SPARKLING    = #{sparkling},
+			SWEET        = #{sweet},
+			SOUR         = #{sour},
+			BITTER       = #{bitter},
+			BODY         = #{body},
+			STOCK        = #{stock},
+			CAPACITY     = #{capacity},
+			MATERIAL     = #{material}
+		WHERE PRODUCT_ID = #{productId}
+	</update>
 	
 </mapper>

@@ -11,6 +11,6 @@ public interface SaleService {
 	// 판매 페이지 (일반구매 > 선물세트)
 	HashMap<String, Object> getGiftSet(HashMap<String, Object> map);
 	
-	// 판매 페이지 (전통주 > 코드리스트)
+	// 코드 리스트 (전통주 > 선택 코드 리스트)
 	HashMap<String, Object> selectCodeList(HashMap<String, Object> map);
 }

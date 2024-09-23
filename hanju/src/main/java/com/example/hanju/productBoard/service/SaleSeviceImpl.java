@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.productBoard.mapper.SaleMapper;
+import com.example.hanju.productBoard.model.entity.SaleCodeModel;
 import com.example.hanju.productBoard.model.entity.SaleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,15 +47,15 @@ public class SaleSeviceImpl implements SaleService {
 		return resultMap;
 	}
 
-	@DbExceptionHandle
-	@Override	// selectCodeList, 코드 리스트
+	@Override	// 코드 리스트 (전통주 > 선택 코드 리스트)
 	public HashMap<String, Object> selectCodeList(HashMap<String, Object> map) {
-		HashMap<String, Object> resultMap = new HashMap<>();
-		List<SaleModel> code = saleMapper.selectCodeList(map);
-		resultMap.put("codeList", code);
-		resultMap.put("result", "success");
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<SaleCodeModel> codeList = saleMapper.selectCodeList(map);
+		resultMap.put("list", codeList);
 		return resultMap;
 	}
+
+
 
 
 }

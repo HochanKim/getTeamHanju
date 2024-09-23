@@ -23,19 +23,47 @@ public class CartEntity {
     private String storeId;
     private String cartId;
 
-	public Object getProductId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public Object getStoreId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getProductId() {
+        return productId;
+    }
 
-	public int getProductCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int getProductCount() {
+        return productCount;
+    }
 
+    public String getcDateTime() {
+        return cDateTime;
+    }
+
+    public String getPickupDate() {
+        return pickupDate;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public String getCartId() {
+        return cartId;
+    }
 }

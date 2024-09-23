@@ -22,11 +22,7 @@ public class SaleModel {
     private String color;		// 색
     private String material;	// 재료
     private String priceComma; 	// 가격에 ',' 붙이기
-    
-	// 테이블 HANJU_CODE 컬럼명
-    private String kind;	
-    private String codeName;
-    private String code;
+
     
     // 조인 컬럼
     private String filePath;		// hanju_imamge 테이블 컬럼

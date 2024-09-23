@@ -5,8 +5,8 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/css/userCss/login.css" />
-<script src="/js/jquery.js"></script>
-<script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/vue.js"></script>
     <title>document</title>
   </head>
   <body>
@@ -36,6 +36,7 @@ pageEncoding="UTF-8"%>
               </div>
             </div>
         </div>
+      </div>
     </div>
   </body>
 </html>
@@ -43,8 +44,8 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
-        userId:"",
-        password:""
+        userId: "",
+        password: "",
       };
     },
     methods: {
@@ -72,8 +73,8 @@ pageEncoding="UTF-8"%>
 
     },
     mounted() {
-
     },
+    mounted() {},
   });
   app.mount("#app");
 </script>

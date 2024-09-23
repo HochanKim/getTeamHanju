@@ -6,13 +6,13 @@ import lombok.Data;
 public class CartCheckDto {
     private String cartId;
     private int productCount;
-    
+
+	public String getCartId() {
+		return cartId;
+	}
+  
 	public int getProductCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return productCount;
 	}
-	public Object getCartId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
