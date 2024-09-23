@@ -1,6 +1,5 @@
 body, html{
     margin: 0;
-
 }
 .thumb-img{
     width: 300px;
@@ -8,6 +7,7 @@ body, html{
 }
 .thumb{
     display: flex;
+    margin: auto;
 }
 .font-size{
     font-size: 30px;
@@ -24,11 +24,62 @@ body, html{
     float: left;
     align-items: center;
     margin: 30px;
-    
+    padding: 0px;
+
 }
 .title{
     margin: 5px;
+    padding: 0px;
 }
-.content{
+.box-content{
     margin: 5px;
+    max-width: 100%;
+}
+.main-page{
+    width: 80%;
+}
+.side-bar{
+    height: 500px;
+    position: fixed;
+    text-align: center;
+    left: 1500px;
+    border: gray solid 1px;
+    border-radius: 10px;
+    background-color: #eee;
+    top: 110px;
+    
+    
+}
+.container{
+    width: 1000px;
+    margin: auto;
+}
+.img-chart img {
+    max-width: 180px; 
+    height: auto;    
+    object-fit: cover;
+}
+.thumb-content{
+    margin-left: 50px;
+}
+.side-button{
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: rgb(85, 139, 123);
+}
+.q-control{
+    border: none;
+    color: white;
+    background-color: rgb(85, 139, 123);
+    border-radius: 10px;
+    width: 100%;
+
+}
+.input-box{
+    width: 100px;
+    
 }
