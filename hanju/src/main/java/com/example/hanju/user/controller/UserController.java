@@ -27,9 +27,9 @@ public class UserController {
 	@RequestMapping("user/join.do")
 	public String join(Model model) throws Exception{
 		return "user/join";
-		
 	}
 	
+
 	@RequestMapping("user/login.do")
 	public String login(Model model) throws Exception{
 		return "user/login";
@@ -49,11 +49,20 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 	
-	@RequestMapping(value = "user/join.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "user/idCheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchTestList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		System.out.println(map);
 		HashMap<String, Object> result = userService.userList(map);
+		return new Gson().toJson(result);
+	}
+	
+	
+	@RequestMapping(value = "user/join.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String joinUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.userJoin(map);
 		return new Gson().toJson(result);
 	}
 	

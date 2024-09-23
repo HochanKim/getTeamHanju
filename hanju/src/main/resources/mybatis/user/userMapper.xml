@@ -8,13 +8,21 @@
 		FROM TEST_USER
 		WHERE USER_ID = #{userId} 
 	</select>
+	
 	<select id="loginUser" parameterType="hashmap" resultType="UserModel">	
 		SELECT * 
 		FROM TEST_USER
 		WHERE USER_ID = #{userId} AND PASSWORD = #{password}
 	</select>
+	
 	<select id="allUserList" parameterType="hashmap" resultType="UserModel">
 		SELECT *
 		FROM HANJU_USER
 	</select>
+	
+	<insert id="insertUser" parameterType="hashmap" >
+		INSERT INTO TEST_USER
+		VALUES(#{userId},#{password},#{userName},#{status},#{phone},#{email},#{roadFullAddr},TO_DATE(#{birthday}, 'YYYY-MM-DD'),SYSDATE,0)
+	</insert>
+	
 </mapper>	
