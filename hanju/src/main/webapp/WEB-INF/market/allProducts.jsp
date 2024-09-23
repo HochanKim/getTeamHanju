@@ -79,20 +79,19 @@ pageEncoding="UTF-8"%>
       };
     },
     methods: {
-      fnList() {
-        var self = this;
-        var npramap = {};
-        $.ajax({
-          url: "productList.dox",
-          dataType: "json",
-          type: "POST",
-          data: npramap,
-          success: (data) => {
-            console.log(data);
-            self.products = data.list;
-          },
-        });
-      },
+        fnList() {
+            var self = this;
+            var paramap = {};
+            $.ajax({
+                url: "productList.dox",
+                dataType: "json",
+                type: "POST",
+                data: [],
+                success: (data) => {
+                    self.products = data.list;
+                },
+            });
+        },
     },
     mounted() {
       var self = this;

@@ -75,12 +75,12 @@ pageEncoding="UTF-8"%>
     methods: {
         fnList() {
             var self = this;
-            var npramap = {};
+            var paramap = {};
             $.ajax({
                 url: "giftSets.dox",
                 dataType: "json",
                 type: "POST",
-                data: npramap,
+                data: [],
                 success: (data) => {
                     self.products = data.list;
                 },

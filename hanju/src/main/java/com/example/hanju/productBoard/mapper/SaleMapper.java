@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.hanju.productBoard.model.entity.SaleCode;
 import com.example.hanju.productBoard.model.entity.SaleModel;
 
 @Mapper
@@ -19,5 +18,5 @@ public interface SaleMapper {
 	List<SaleModel> getGiftSet(HashMap<String, Object> map);
 	
 	// 판매 페이지 (전통주 > 코드리스트)
-	List<SaleCode> selectCodeList(HashMap<String, Object> map);
+	List<SaleModel> selectCodeList(HashMap<String, Object> map);
 }

@@ -41,14 +41,14 @@ pageEncoding="UTF-8"%>
                     <span>선물세트</span>
                 </a>
             </div>
-            <!-- 분류 코드 리스트 -->
-            <div>
-              <label v-for="item in codeList">
-                <input type="checkbox" v-model="alcoholKind" :value="item.code" @change="fnTradCode">
-                  {{item.codeName}}
-              </label>
-            </div>
         </section>
+        <!-- 분류 코드 리스트 -->
+        <div class="kindList">
+          <label v-for="item in codeList">
+            <input type="checkbox" v-model="selectCodes" :value="item.code" @change="fnTradCode">
+            {{item.codeName}}
+          </label>
+        </div>
         <!-- 상품 리스트 영역 -->
         <section class="productContainer">
             <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
@@ -77,34 +77,42 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         products : [],
-        codeList : []
+        codeList : [],
+        selectCodes : []
       };
     },
     methods: {
-      fnTradCode() {
+      fnTradCode() {  //  종류 선택 체크박스
         var self = this;
-        var npramap = {};
+        var paramap = {};
         $.ajax({
-            url: "code-list.dox",
+            url: "codeList.dox",
             dataType: "json",
             type: "POST",
-            data: npramap,
+            data: [],
             success: (data) => {
-              console.log(data);
+              console.log(self.codeList);
               self.codeList = data.codeList;
             },
         });
       },
-      fnList() {
+      fnList() {  // 상품 리스트
         var self = this;
-        var npramap = {};
+        var paramap = {};
+        console.log("선택 : "+self.selectCodes);
+        if(self.selectCodes.length > 0){
+          var fCode = JSON.stringify(self.selectCodes);
+          paramap = {selectCodes : fCode};
+          console.log("선택 : "+self.selectCodes);
+        }
         $.ajax({
             url: "traditionAlcohol.dox",
             dataType: "json",
             type: "POST",
-            data: npramap,
+            data: paramap,
             success: (data) => {
-                self.products = data.list;
+              console.log(data);
+              self.products = data.tradList;
             },
         });
       },
