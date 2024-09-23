@@ -22,8 +22,7 @@
             </div>
             <div class="subMenu">
                 <div><a href="registerProduct.do"> - 제품 등록</a></div>
-                <div> - 제품 수정</div>
-                <div> - 제품 삭제</div>
+                <div><a href="modifyProduct.do"  > - 제품 수정</a></div>
             </div>
             <div class="menu">
                 <p>일반 판매 관리</p>

@@ -5,7 +5,7 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/css/mainCss.css" />
-    <script src="/js/jquery.js"></script>
+    <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
     <title>document</title>
@@ -14,7 +14,6 @@ pageEncoding="UTF-8"%>
     <div id="app">
       <button @click="fn">ddd</button>
       카카오 페이로 결제하기
-      <button @click="fntest">aa</button>
     </div>
   </body>
 </html>
@@ -22,13 +21,20 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
-        formData: {},
+        sumPrice: "",
+        discountPrice: "",
       };
     },
     methods: {
-      fntest() {
-        console.log("화긴");
-        console.log(this.formData);
+      fnInit() {
+        const itemList = ${cartItem};
+        if(itemList.length==0){
+          alert("구매 상품이 없습니다.");
+          window.history.back();
+        }else{
+
+        }
+
       },
       fn() {
         requestPay("장바구니 전부", 35000, () => {
@@ -37,7 +43,7 @@ pageEncoding="UTF-8"%>
       },
     },
     mounted() {
-      console.log(${resCart});
+      this.fnInit();
     },
   });
   app.mount("#app");

@@ -145,7 +145,9 @@ public class CartServiceImpl implements CartService {
             Map<String, List<String>> map = new HashMap<>();
             map.put("list", list);
             int sum = cartMapper.cartSumPrice(map);
+            int discountSum = cartMapper.discountCartSumPrice(map);
             result.put("sum", sum);
+            result.put("discountSum",discountSum);
         }
         return result;
     }

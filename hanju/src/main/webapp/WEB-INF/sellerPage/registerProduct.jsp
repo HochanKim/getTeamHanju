@@ -7,15 +7,12 @@
     <link rel="stylesheet" href="../../css/sellerPage/registerProduct.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <title>첫번째 페이지</title>
 </head>
 
 <body>
     <div id="app">
-        <div id="header">
-            header
-        </div>
+        <jsp:include page="../mainPage/header.jsp"></jsp:include>
         <div id="main">
             <jsp:include page="sellerSideBar.jsp"></jsp:include>
             <div id="container">
@@ -65,14 +62,14 @@
                         <td>타입</td>
                         <td>
                             <select v-model="type">
-                                <option value="T">전통주</option>
-                                <option value="W">와인</option>
-                                <option value="TW">전통주 와인</option>
-                                <option value="G">선물세트</option>
-                                <option value="TAK">탁주</option>
-                                <option value="CHJ">청주</option>
+                                <option value="TJ">탁주</option>
+                                <option value="CJ">청주</option>
                                 <option value="SJ">증류주</option>
-                                <option value="FA">과실주</option>
+                                <option value="FJ">과실주</option>
+                                <option value="TW">전통주 와인</option>
+                                <option value="RW">레드 와인</option>
+                                <option value="WW">화이트 와인</option>
+                                <option value="G">선물세트</option>
                             </select>
                         </td>
                     </tr>
@@ -162,10 +159,6 @@
                         <td><input type="text" v-model="stock"></td>
                     </tr>
                     <tr>
-                        <td>색깔</td>
-                        <td><input type="text" v-model="color" placeholder="none"></td>
-                    </tr>
-                    <tr>
                         <td>원재료</td>
                         <td><input type="text" v-model="material"></td>
                     </tr>
@@ -173,10 +166,7 @@
                 <div class="submitBtn" @click="fnSubmit">제품등록</div>
             </div>
         </div>
-        <button @click="fnTest">test</button>
-        <div id="footer">
-            footer
-        </div>
+        <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
 </body>
 
@@ -200,7 +190,6 @@
                 body : "",
                 stock : "",
                 capacity : "",
-                color : "",
                 material : "",
 
                 thumbnailUrl   : "../../image/defaultImg.png",
@@ -248,7 +237,6 @@
                         body        : this.body,
                         stock       : this.stock,
                         capacity    : this.capacity,
-                        color       : this.color,
                         material    : this.material
                     },
 					success : (data) => {
@@ -283,9 +271,6 @@
                     }
 				});
             },
-            fnTest() {
-                this.fnUploadProductImg(55);
-            },
             fnAllCheck() {
                 var isEmpty = false;
                 if (this.productName == "") isEmpty = true;
@@ -303,8 +288,6 @@
                 if (this.capacity    == "") isEmpty = true;
                 if (this.material    == "") isEmpty = true;
 
-                // 색깔의 기본값은 'none'
-                if (this.color       == "") this.color = "none"
                 // 제품 이미지는 최소 1개 이상
                 if (this.productImgs[ 0 ] == undefined) isEmpty = true;
 
@@ -325,7 +308,6 @@
                 this.body = "";
                 this.stock = "";
                 this.capacity = "";
-                this.color = "";
                 this.material = "";
 
                 this.thumbnailUrl = "../../image/defaultImg.png";

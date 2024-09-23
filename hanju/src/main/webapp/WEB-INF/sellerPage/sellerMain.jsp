@@ -12,19 +12,14 @@
 
 <body>
     <div id="app">
-        <div id="header">
-            header
-        </div>
+        <jsp:include page="../mainPage/header.jsp"></jsp:include>
         <div id="main">
             <jsp:include page="sellerSideBar.jsp"></jsp:include>
             <div id="container">
                 sellerMain
             </div>
         </div>
-        <div id="footer">
-            footer
-        </div>
-        <testVue />
+        <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
 </body>
 
