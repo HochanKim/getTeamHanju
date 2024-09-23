@@ -5,32 +5,42 @@
 <mapper namespace="com.example.hanju.productBoard.mapper.SaleMapper">
 	<!-- 일반 구매 -->
 	<select id="getProductList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, I.FILE_ORG_NAME, I.FILE_PATH
 		FROM HANJU_PRODUCT P
 		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
-		WHERE I.FILE_STATUS = 'T' AND (P.TYPE = 'T' OR P.TYPE = 'G')
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE I.FILE_STATUS = 'T' AND C.PARENT_CODE = 'T'
 	</select>
 	
 	<!-- 일반구매 > 전통주 -->
 	<select id="getTradAlcohol" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
 		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
-	    FROM HANJU_PRODUCT P
-	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
-	    WHERE I.FILE_STATUS = 'T' AND P.TYPE = 'T' 
+		FROM HANJU_PRODUCT P
+		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE I.FILE_STATUS = 'T'
+		<if test="list != null">
+			AND P.TYPE IN 
+			<foreach collection="list" item="item" open="(" close=")" separator=",">
+				'#{item}'
+			</foreach>
+		</if>
+		AND NOT (P.TYPE = 'G' OR C.PARENT_CODE = 'W')
 	</select>
 	<!-- 전통주 > 코드 리스트-->
-	<select id="selectCodeList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleCode">
+	<select id="selectCodeList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
 		SELECT C1.KIND, C2.CODE_NAME, C2.CODE
 		FROM HANJU_CODE C1
 		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
-		WHERE C1.KIND = 'IMAGE_STATUS'
+		WHERE C1.KIND = 'IMAGE_STATUS' AND NOT C2.CODE = 'G'
 	</select>
 	
 	<!-- 일반구매 > 선물세트 -->
 	<select id="getGiftSet" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+		SELECT DISTINCT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
 	    FROM HANJU_PRODUCT P
 	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
-	    WHERE TYPE = 'G'
+        INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+	    WHERE I.FILE_STATUS = 'T' AND P.TYPE = 'G'
 	</select>
 </mapper>

@@ -20,4 +20,20 @@ public class CartEntity {
   }
     private String storeId;
     private String cartId;
+
+	public Object getProductId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getStoreId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getProductCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

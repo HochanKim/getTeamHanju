@@ -7,7 +7,6 @@ import java.util.Map;
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.productBoard.mapper.SaleMapper;
 import com.example.hanju.productBoard.model.entity.SaleModel;
-import com.example.hanju.productBoard.model.entity.SaleCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +30,7 @@ public class SaleSeviceImpl implements SaleService {
 	public HashMap<String, Object> getTradAlcohol(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		List<SaleModel> tradition = saleMapper.getTradAlcohol(map);
-		resultMap.put("list", tradition);
+		resultMap.put("tradList", tradition);
 		resultMap.put("result", "success");
 		return resultMap;
 	}
@@ -50,10 +49,11 @@ public class SaleSeviceImpl implements SaleService {
 	@Override	// selectCodeList, 코드 리스트
 	public HashMap<String, Object> selectCodeList(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
-		List<SaleCode> code = saleMapper.selectCodeList(map);
+		List<SaleModel> code = saleMapper.selectCodeList(map);
 		resultMap.put("codeList", code);
 		resultMap.put("result", "success");
 		return resultMap;
 	}
+
 
 }
