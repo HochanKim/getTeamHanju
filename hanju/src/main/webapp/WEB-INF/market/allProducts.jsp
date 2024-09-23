@@ -22,18 +22,15 @@ pageEncoding="UTF-8"%>
       <section class="selectSection">
         <!-- 카테고리 버튼 클릭 (1) -->
         <div class="productsListSelect">
-          <a href="javascript:void(0);">
-            <span class="selected">일반구매</span>
-          </a>
-          <a href="javascript:void(0);">
-            <span>픽업</span>
-          </a>
-          <a href="javascript:void(0);">
-            <span>공동구매</span>
-          </a>
-          <a href="javascript:void(0);">
-            <span>펀딩</span>
-          </a>
+            <a href="productList.do">
+                <span class="selected">전체상품</span>
+            </a>
+            <a href="javascript:void(0);">
+                <span>신상품</span>
+            </a>
+            <a href="javascript:void(0);">
+                <span>베스트</span>
+            </a>
         </div>
         <!-- 
                 카테고리 버튼 클릭 (2) 
