@@ -21,8 +21,6 @@ div {
   height: 600px;
 }
 .normal,
-.group,
-.funding,
 .pickup {
   padding: 0;
   display: flex;
@@ -69,6 +67,7 @@ div {
 }
 .priceBox {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
