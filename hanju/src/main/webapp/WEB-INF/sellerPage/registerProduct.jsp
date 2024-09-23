@@ -176,6 +176,9 @@
     const app = Vue.createApp({
         data() {
             return {
+                userId : "${sessionId}",
+                userstatus : "${sessionStatus}",
+
                 productName : "",
                 thumbnail : "",
                 productImgs : [],
@@ -228,6 +231,7 @@
                         type        : this.type,
                         productName : this.productName,
                         price       : this.price,
+                        userId      : this.userId,
                         madeBy      : this.madeBy,
                         alcohol     : this.alcohol,
                         sparkling   : this.sparkling,

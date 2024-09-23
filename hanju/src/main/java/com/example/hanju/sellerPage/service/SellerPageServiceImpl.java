@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.main.model.Product;
+import com.example.hanju.main.model.ProductImage;
 import com.example.hanju.sellerPage.mapper.SellerPageMapper;
 
 @Service
@@ -59,4 +60,38 @@ public class SellerPageServiceImpl implements SellerPageService {
 		resultMap.put("count", result);
 		return resultMap;
 	}
+
+	@Override
+	public HashMap<String, Object> getProductInfo(HashMap<String, Object> map) {
+		
+		Product result = sellerPageMapper.getProductInfo(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("product", result);
+		return resultMap;
+	}
+	
+	@Override
+	public HashMap<String, Object> getProductImages(HashMap<String, Object> map) {
+		
+		List<ProductImage> result = sellerPageMapper.getProductImages(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("result", result);
+		return resultMap;
+	}
+	
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> modifyProduct(HashMap<String, Object> map) {
+		
+		System.out.println(map);
+		
+		sellerPageMapper.modifyProduct(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "수정되었습니다.");
+		return resultMap;
+	}
+	
 }

@@ -1,0 +1,128 @@
+/* 전역 css 초기화 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전역 css 초기화 끝*/
+
+#header {
+    width: 100vw;
+    height: 10vh;
+    background-color: #aaa;
+}
+#main {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+#footer {
+    width: 100vw;
+    height: 10vh;
+    background-color: #ccc;
+}
+
+/* ========================== */
+
+#main #container {
+    width: 50%;
+    padding: 16px;
+}
+
+#container > h3 {
+    font-size: 20px;
+    margin: 16px;
+}
+
+#container #searchBox {
+    width: 300px;
+    height: 30px;
+    border: 3px solid #aaa;
+    border-radius: 3px;
+    margin: 16px;
+}
+
+#container #cardView {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+#cardView .card {
+    margin: 8px;
+    width: 100%;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 1px 1px 3px #aaa;
+}
+
+#cardView .card:hover {
+    box-shadow: 1px 1px 5px #555;
+    cursor: pointer;
+}
+
+#cardView .productImg {
+    margin: 30px;
+    width: 200px;
+    height: 200px;
+
+    background-color: #aaa;
+}
+
+#cardView .infoSection {
+    padding: 16px;
+    width: 70%;
+    height: 100%;
+}
+
+.infoSection table {
+    margin-top: 16px;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.infoSection th {
+    padding: 8px;
+    border: 1px solid #aaa;
+}
+
+.infoSection td {
+    padding: 8px;
+    border: 1px solid #aaa;
+}
+
+/* ========================= */
+
+/* 페이징 */
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#pagination .pageBtn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #aaa;
+    text-align: center;
+    line-height: 50px;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #999;
+}
+
+/* 페이징 끝 */
