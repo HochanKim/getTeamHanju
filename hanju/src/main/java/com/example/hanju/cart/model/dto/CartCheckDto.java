@@ -10,6 +10,7 @@ public class CartCheckDto {
 	public String getCartId() {
 		return cartId;
 	}
+  
 	public int getProductCount() {
 		return productCount;
 	}
