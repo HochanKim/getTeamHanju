@@ -13,7 +13,6 @@
 		SELECT *
 		FROM HANJU_PRODUCT
 		WHERE PRODUCT_ID = '호호'
-
 	</select>
 	<select id="detailImage" parameterType="hashmap" resultType="String">
 		SELECT FILE_PATH
