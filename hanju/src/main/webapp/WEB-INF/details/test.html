@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/details.css" />
+</head>
+<body>
+    <div id="tost_message">토스트 메시지 입니다!</div>
+    <button id="tost_btn" type="button">클릭하면 토스트 메시지가 나옵니다!</button>
+</body>
+</html>
+<script>
+    //1. 토스트 메시지, 버튼요소를 변수에 대입
+let tostMessage = document.getElementById('tost_message');
+let tostBtn = document.getElementById('tost_btn');
+
+//2. 토스트 메시지 노출-사라짐 함수 작성
+function tostOn(){
+    tostMessage.classList.add('active');
+    setTimeout(function(){
+        tostMessage.classList.remove('active');
+    },1000);
+}
+
+//3. 토스트 버튼에 이벤트 연결
+tostBtn.addEventListener('click',function(){
+    console.log('이벤트가 잘 연결 됐는지 확인');
+    tostOn()
+});
+</script>
