@@ -11,18 +11,26 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div id="app">
-        <div>회원가입</div>
-
-        <div>본인인증</div>
-        <div>안전한 회원가입을 위한 본인인증 단계입니다.</div>
-
-
-        <button>휴대폰 사진</button>
-        <div>휴대폰 인증</div>
-
-        <div>본인 인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용 또는 저장하지 않습니다.</div>
-
-
+      <div id="container">
+        <div id="content">
+          <div class="myTit">
+            <h2>회원가입</h2>
+          </div>
+            <div id="phone">
+            <div>
+              <h3>본인인증</h3>
+              <div>안전한 회원가입을 위한 본인인증 단계입니다.</div>
+            </div> 
+            <div @click="fnPhone" class="phonebtn">
+              <div class="imgPhone"></div>
+              <h4>휴대폰 인증</h4>
+            </div>
+            </div>
+            <div class="pro">
+              <div>본인 인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, 인증 이외의 용도로 이용 또는 저장하지 않습니다.</div>
+            </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
@@ -33,7 +41,7 @@ pageEncoding="UTF-8"%>
     },
     methods: {
         fnJoin() {
-            var self = this;
+          var self = this;
 
         $.ajax({
           url: "user/joinbtn.do",
@@ -45,6 +53,21 @@ pageEncoding="UTF-8"%>
           },
         });
       },
+
+      fnPhone(){
+        var self = this;
+
+        $.ajax({
+          url: "user/joinbtn.do",
+          dataType: "json",
+          type: "POST",
+          data: {},
+          success: () => {
+          
+          },
+        });
+
+      }
     },
 
 

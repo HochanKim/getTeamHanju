@@ -1,0 +1,53 @@
+#container{
+    margin: 0 auto;
+}
+
+#content{
+    max-width: 1150px;
+    padding: 0 80px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.myTit{
+    min-height: 30px;
+    margin: 10px 0 60px;
+}
+
+h2{
+    font-size: 33px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+}
+
+#phone{
+    position: relative;
+    width: 370px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+h3{
+    padding: 50px 0 10px;
+    font-size: 22px;
+    color: #222;
+}
+
+.phonebtn{
+    cursor: pointer;
+}
+
+.imgPhone{
+    display: inline-block;
+    background-image: url("../../image/phone.png");
+    background-size: cover;
+    width: 150px;
+    height: 150px;
+    margin: 40px 0px 20px 0px;
+}
+
+.pro{
+    font-size: 15px;
+    width: auto;
+    margin-top: 30px;
+}
