@@ -19,6 +19,7 @@ public class SaleSeviceImpl implements SaleService {
 	@DbExceptionHandle
 	@Override	// getProductList, 판매 페이지 (일반구매)
 	public HashMap<String, Object> getProductList(HashMap<String, Object> map) {
+		System.out.println(map);
 		HashMap<String, Object> resultMap = new HashMap<>();
 		List<SaleModel> products = saleMapper.getProductList(map);
 		resultMap.put("list", products);

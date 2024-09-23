@@ -4,10 +4,21 @@
 
 <mapper namespace="com.example.hanju.cart.mapper.CartMapper">
     <select id="viewCart" parameterType="hashmap" resultType="CartEntity">
-        SELECT C.*, I.FILE_PATH, P.PRODUCT_NAME, P.PRICE
+        SELECT C.*, I.FILE_PATH, P.PRODUCT_NAME, P.PRICE, DIS.DISCOUNT
         FROM HANJU_CART C
         INNER JOIN HANJU_IMAGE I ON C.PRODUCT_ID = I.FK_ID
         INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = C.PRODUCT_ID
+        INNER JOIN (
+        (SELECT C.CART_ID, NVL(NS.DISCOUNT,0) DISCOUNT
+        FROM HANJU_CART C
+        LEFT JOIN HANJU_NORMAL_SELL NS ON NS.PRODUCT_ID = C.PRODUCT_ID
+        WHERE C.KIND = 'N')
+        UNION
+        (SELECT C.CART_ID, NVL(PS.DISCOUNT,0) DISCOUNT
+        FROM HANJU_CART C
+        LEFT JOIN HANJU_PICKUP_STOCK PS ON PS.PRODUCT_ID = C.PRODUCT_ID AND PS.STORE_ID = C.STORE_ID
+        WHERE C.KIND = 'P')
+        ) DIS ON DIS.CART_ID = C.CART_ID
         WHERE I.FILE_STATUS = 'T' AND USER_ID = #{userId}
     </select>
     <select id="storeStockCheck" parameterType="hashmap" resultType="int">
@@ -70,6 +81,25 @@
         FROM HANJU_CART C
         INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = C.PRODUCT_ID
         WHERE CART_ID IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="discountCartSumPrice" parameterType="hashmap" resultType="int">
+        SELECT ROUND(SUM(P.PRICE*C.PRODUCT_COUNT*(100-DIS.DISCOUNT)/100))
+        FROM HANJU_CART C
+        INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = C.PRODUCT_ID
+        INNER JOIN  (
+        (SELECT C.CART_ID, NVL(NS.DISCOUNT,0) DISCOUNT
+        FROM HANJU_CART C
+        LEFT JOIN HANJU_NORMAL_SELL NS ON NS.PRODUCT_ID = C.PRODUCT_ID
+        WHERE C.KIND = 'N')
+        UNION
+        (SELECT C.CART_ID, NVL(PS.DISCOUNT,0) DISCOUNT
+        FROM HANJU_CART C
+        LEFT JOIN HANJU_PICKUP_STOCK PS ON PS.PRODUCT_ID = C.PRODUCT_ID AND PS.STORE_ID = C.STORE_ID
+        WHERE C.KIND = 'P')) DIS ON DIS.CART_ID = C.CART_ID
+        WHERE C.CART_ID IN
         <foreach item="id" collection="list" open="(" separator="," close=")">
             #{id}
         </foreach>

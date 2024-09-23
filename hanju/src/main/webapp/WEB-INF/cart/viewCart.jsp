@@ -19,8 +19,12 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="normal" v-if="normal.length>0">
             <div class="boxHead">
-              <input type="checkbox" v-model="normalAllCheck" /> 일반구매
-              전체선택
+              <input
+                type="checkbox"
+                v-model="normalAllCheck"
+                @change="fnCheckAll('normal')"
+              />
+              일반구매 전체선택
             </div>
             <div class="itemBox" v-for="(item, index) in normal" :key="index">
               <button class="x" @click="fnCartDelete(item.cartId)">X</button>
@@ -52,19 +56,34 @@ pageEncoding="UTF-8"%>
                   </button>
                 </div>
               </div>
-              <div class="priceBox">{{ item.price }}원</div>
+              <div class="priceBox">
+                <div class="price">{{ item.price * item.productCount }}원</div>
+                <div v-if="item.discount != 0">{{ item.discount }}%</div>
+                <div
+                  class="discount"
+                  v-if="item.discount != 0"
+                  class="discount"
+                >
+                  {{
+                    Math.floor(
+                      (item.price *
+                        item.productCount *
+                        (1 - item.discount / 100)) /
+                        10
+                    ) * 10
+                  }}원
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="group" v-if="group.length>0">
-            공동구매 있으면 이거 보여야함.
-          </div>
-          <div class="funding" v-if="funding.length>0">
-            펀딩구매 있으면 이거 보여야함.
           </div>
           <div class="pickup" v-if="pickup.length>0">
             <div class="boxHead">
-              <input type="checkbox" v-model="pickupAllCheck" /> 픽업구매
-              전체선택
+              <input
+                type="checkbox"
+                v-model="pickupAllCheck"
+                @change="fnCheckAll('pickup')"
+              />
+              픽업구매 전체선택
             </div>
             <div class="itemBox" v-for="(item, index) in pickup" :key="index">
               <button class="x" @click="fnCartDelete(item.cartId)">X</button>
@@ -96,15 +115,36 @@ pageEncoding="UTF-8"%>
                   </button>
                 </div>
               </div>
-              <div class="priceBox">{{ item.price }}원</div>
+              <div class="priceBox">
+                <div class="price">{{ item.price * item.productCount }}원</div>
+                <div v-if="item.discount != 0">{{ item.discount }}%</div>
+                <div
+                  class="discount"
+                  v-if="item.discount != 0"
+                  class="discount"
+                >
+                  {{
+                    Math.floor(
+                      (item.price *
+                        item.productCount *
+                        (1 - item.discount / 100)) /
+                        10
+                    ) * 10
+                  }}원
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div id="priceContainer">
-          <div class="priceInfo">{{ sumPrice }} 원</div>
+          <div class="priceInfo">
+            <div>원가 {{ sumPrice }} 원</div>
+            <div>{{ discount }}원 할인</div>
+            <div>{{ discountSum }}원</div>
+          </div>
+
           <div class="paymentBtn">
             <form action="payment.do" method="post">
-              <input type="hidden" name="price" :value="sumPrice" />
               <input type="hidden" name="cartItem" :value="selectItem" />
               <button type="submit">결제하기</button>
             </form>
@@ -127,6 +167,8 @@ pageEncoding="UTF-8"%>
         selectItem: [],
         sumPrice: 0,
         emptyPage: false,
+        discountSum: 0,
+        discount: 0,
       };
     },
     watch: {
@@ -174,6 +216,8 @@ pageEncoding="UTF-8"%>
         const { data } = await axios.post(url, submitForm);
         console.log(data);
         this.sumPrice = data.sum;
+        this.discountSum = data.discountSum;
+        this.discount = data.sum - data.discountSum;
       },
       async fnViewCart() {
         const url = "viewCart.dox";
@@ -184,10 +228,30 @@ pageEncoding="UTF-8"%>
         } else {
           this.emptyPage = false;
           this.normal = res.data.normal;
-          this.group = res.data.group;
-          this.funding = res.data.funding;
           this.pickup = res.data.pickup;
+          console.log(this.normal);
         }
+      },
+      fnCheckAll(value) {
+        if (type === "normal") {
+          this.selectItem = this.normalAllCheck
+            ? this.normal.map((item) => item.cartId)
+            : [];
+        } else if (type === "pickup") {
+          this.selectItem = this.pickupAllCheck
+            ? this.pickup.map((item) => item.cartId)
+            : [];
+        }
+      },
+      async fnAllCartInit() {
+        await this.fnViewCart();
+        for (let i = 0; i < this.normal.length; i++) {
+          this.selectItem.push(this.normal[i].cartId);
+        }
+        for (let i = 0; i < this.pickup.length; i++) {
+          this.selectItem.push(this.pickup[i].cartId);
+        }
+        this.fnSumPrice();
       },
       goToPayment() {
         const url = "payment.do";
@@ -206,7 +270,9 @@ pageEncoding="UTF-8"%>
       },
     },
     mounted() {
-      this.fnViewCart();
+      this.fnAllCartInit();
+
+      // this.fnAllCartInit();
     },
   });
   app.mount("#app");

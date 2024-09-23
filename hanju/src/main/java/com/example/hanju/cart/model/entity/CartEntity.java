@@ -14,6 +14,8 @@ public class CartEntity {
     private String filePath;
     private String productName;
     private String price;
+//    추가
+    private int discount;
 
 	public String getKind() {
 		return kind;

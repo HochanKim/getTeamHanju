@@ -16,6 +16,7 @@ public interface CartMapper {
     int stockCheck(Map<String, Object> map);
     int cartStockChange(Map<String, Object> map);
     int cartSumPrice(Map<String, List<String>> map);
+    int discountCartSumPrice(Map<String, List<String>> map);
     int cartItemDelete(Map<String, Object> map);
     int addPickupCart(Map<String, Object> map);
     int addCart(Map<String, Object> map);
