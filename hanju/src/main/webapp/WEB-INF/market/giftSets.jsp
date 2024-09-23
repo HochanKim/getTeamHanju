@@ -17,16 +17,13 @@ pageEncoding="UTF-8"%>
             <!-- 카테고리 버튼 클릭 (1) -->
             <div class="productsListSelect">
                 <a href="productList.do">
-                    <span class="selected">일반구매</span>
+                    <span class="selected">전체상품</span>
                 </a>
                 <a href="javascript:void(0);">
-                    <span>픽업</span>
+                    <span>신상품</span>
                 </a>
                 <a href="javascript:void(0);">
-                    <span>공동구매</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <span>펀딩</span>
+                    <span>베스트</span>
                 </a>
             </div>
             <!-- 

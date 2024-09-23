@@ -52,15 +52,23 @@ public class SaleController {
 	@ResponseBody
 	public String tradList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		// 코드 리스트 호출
+		// 선택 리스트 호출
 		if(map.containsKey("selectCodes")) {
 			String json = map.get("selectCodes").toString();
 			ObjectMapper mapper = new ObjectMapper();
-			List<Object> kindList = mapper.readValue(json, new TypeReference<List<Object>>(){});
-			map.put("list", kindList);
+			List<Object> codeList = mapper.readValue(json, new TypeReference<List<Object>>(){});
+			map.put("codeList", codeList);
 		}
 		resultMap = saleService.getTradAlcohol(map);
-		
+		return new Gson().toJson(resultMap);
+	}
+	
+	// 코드 리스트
+	@RequestMapping(value = "market/codeList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String codeList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = saleService.selectCodeList(map);
 		return new Gson().toJson(resultMap);
 	}
 	
@@ -73,12 +81,5 @@ public class SaleController {
 		return new Gson().toJson(resultMap);
 	}
 	
-	// 코드 리스트
-	@RequestMapping(value = "market/codeList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String itemGroupList(Model model, @RequestParam HashMap<String, Object> listMap) throws Exception { 
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap = saleService.selectCodeList(listMap);
-		return new Gson().toJson(resultMap);
-	}
+
 }

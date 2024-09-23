@@ -53,7 +53,10 @@ public class CartServiceImpl implements CartService {
     public Map<String, Object> cartCountChange(Map<String, Object> map) {
         Map<String, Object> result = new HashMap<>();
         CartEntity item = cartMapper.getCartItem(map);
+        System.out.println(map);
+        System.out.println(item);
         map.put("productId", item.getProductId());
+        System.out.println(map);
         int stock;
         if (item.getKind().equals("P")) {
             map.put("storeId", item.getStoreId());
@@ -97,11 +100,13 @@ public class CartServiceImpl implements CartService {
         String kind = (String) map.get("kind");
         boolean isKindP = kind.equals("P");
         List<CartCheckDto> checkResult;
+        System.out.println(isKindP);
         if (isKindP) {
             checkResult = cartMapper.pickupCartCheck(map);
         } else {
             checkResult = cartMapper.cartCheck(map);
         }
+        System.out.println(checkResult);
         if (checkResult.isEmpty()) {
             int resultRow;
             if (isKindP) {
