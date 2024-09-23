@@ -20,4 +20,11 @@ public class Details {
     private String capacity;
     private String color;
     private String material;
+
+    //CODE
+    private String kind;
+    private String codeName;
+    private String code;
+    private String codeFull;
+    private String parentCode;
 }
