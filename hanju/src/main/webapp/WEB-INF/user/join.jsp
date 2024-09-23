@@ -27,7 +27,7 @@
             <tr>
               <th>회원구분</th>
               <td>
-                <label><input type="radio" name="status" v-model="status" value="M">일반회원</label>
+                <label><input type="radio" name="status" v-model="status" value="C">일반회원</label>
                 <label><input type="radio" name="status" v-model="status" value="S">사업자회원</label>
               </td>
             </tr>
@@ -264,7 +264,7 @@
     const app = Vue.createApp({
       data() {
         return {
-          status: 'M',
+          status: 'C',
           userId: "",
           idCkMsg: "",
           password: "",
@@ -475,7 +475,7 @@
         },
 
         backBtn(){
-          $.pageChange("login.do", {});
+          location.href="/";
         },
 
         joinBtn(){

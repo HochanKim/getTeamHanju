@@ -27,6 +27,9 @@ pageEncoding="UTF-8"%>
         <button @click="fnGoToTest('user/login.do')">로그인</button>
         <button @click="fnGoToTest('cart/viewCart.do')">장바구니</button>
         <button @click="fnGoToTest('main/addCart.do')">장바구니 담기</button>
+        <button @click="fnGoToTest('user/joinbtn.do')">휴대폰 본인인증</button>
+        <button @click="fnGoToTest('user/join.do')">회원가입</button>
+        <button @click="fnGoToTest('user/login.do')">로그인</button>
       </div>
     </div>
   </body>

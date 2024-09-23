@@ -20,7 +20,7 @@ h2{
     letter-spacing: 0.06em;
 }
 
-form{
+#form{
     position: relative;
     width: 370px;
     margin: 0 auto;
@@ -62,6 +62,7 @@ input{
     font-size: 15px;
     color: #fff;
     background-color: #222;
+    cursor: pointer;
 }
 
 ul{

@@ -41,6 +41,13 @@ public class UserController {
 		return "user/juso";
 		
 	}
+	
+	@RequestMapping("user/mypage.do")
+	public String mypage(Model model) throws Exception{
+		return "user/mypage";
+		
+	}
+	
 	//필요에 의해 만들음. 모든 유저 정보 리스트를 불러오는 API
 	@GetMapping(value = "user/allUserList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
