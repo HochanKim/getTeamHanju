@@ -18,14 +18,7 @@ pageEncoding="UTF-8"%>
             장바구니에 담긴 상품이 없습니다.
           </div>
           <div class="normal" v-if="normal.length>0">
-            <div class="boxHead">
-              <input
-                type="checkbox"
-                v-model="normalAllCheck"
-                @change="fnCheckAll('normal')"
-              />
-              일반구매 전체선택
-            </div>
+            <div class="boxHead">일반구매</div>
             <div class="itemBox" v-for="(item, index) in normal" :key="index">
               <button class="x" @click="fnCartDelete(item.cartId)">X</button>
               <div class="itemCheck">
@@ -77,14 +70,7 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
           <div class="pickup" v-if="pickup.length>0">
-            <div class="boxHead">
-              <input
-                type="checkbox"
-                v-model="pickupAllCheck"
-                @change="fnCheckAll('pickup')"
-              />
-              픽업구매 전체선택
-            </div>
+            <div class="boxHead">픽업구매</div>
             <div class="itemBox" v-for="(item, index) in pickup" :key="index">
               <button class="x" @click="fnCartDelete(item.cartId)">X</button>
               <div class="itemCheck">
@@ -162,8 +148,8 @@ pageEncoding="UTF-8"%>
         group: [],
         funding: [],
         pickup: [],
-        pickupAllCheck: true,
-        normalAllCheck: true,
+        pickupAllCheck: [],
+        normalAllCheck: [],
         selectItem: [],
         sumPrice: 0,
         emptyPage: false,
@@ -223,13 +209,17 @@ pageEncoding="UTF-8"%>
         const url = "viewCart.dox";
         const res = await axios.get(url);
         console.log(res.data);
+        if (res.data.status == "notLogin") {
+          alert("로그인 해주세요.");
+          location.href = "/user/login.do";
+          return;
+        }
         if (!res.data.status) {
           this.emptyPage = true;
         } else {
           this.emptyPage = false;
           this.normal = res.data.normal;
           this.pickup = res.data.pickup;
-          console.log(this.normal);
         }
       },
       fnCheckAll(value) {
@@ -270,9 +260,12 @@ pageEncoding="UTF-8"%>
       },
     },
     mounted() {
+      if ("${userId}" == "") {
+        alert("로그인 해주세요.");
+        location.href = "/user/login.do";
+        return;
+      }
       this.fnAllCartInit();
-
-      // this.fnAllCartInit();
     },
   });
   app.mount("#app");

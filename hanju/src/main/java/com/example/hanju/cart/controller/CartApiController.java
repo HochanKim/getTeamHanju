@@ -2,6 +2,7 @@ package com.example.hanju.cart.controller;
 
 import com.example.hanju.cart.service.CartService;
 import com.google.gson.Gson;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,19 @@ public class CartApiController {
     @Autowired
     CartService cartService;
 
+    @Autowired
+    HttpSession session;
+
     @GetMapping(value = "cart/viewCart.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String viewCart(Model model, @RequestParam Map<String, Object> map) throws Exception {
-        //이부분 로그인 할 경우 세션에 있는 유저 아이디를 보내줘야함.
+    public String viewCart(Model model) throws Exception {
         Map<String,Object> tempMap = new HashMap<>();
-        tempMap.put("userId","user1");
+        if(session.getAttribute("sessionId") == null){
+            tempMap.put("status","notLogin");
+            return new Gson().toJson(tempMap);
+        }
+        tempMap.put("userId",session.getAttribute("sessionId"));
+        System.out.println("로그인유저 : "+tempMap);
         Map<String, Object> result = cartService.viewCart(tempMap);
         return new Gson().toJson(result);
     }
