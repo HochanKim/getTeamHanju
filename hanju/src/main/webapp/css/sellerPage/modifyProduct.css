@@ -29,6 +29,7 @@
 #main #container {
     width: 50%;
     padding: 16px;
+    font-size: 14px;
 }
 
 #container > h3 {
@@ -36,88 +37,63 @@
     margin: 16px;
 }
 
-#container #searchBox {
-    width: 300px;
-    height: 30px;
-    border: 3px solid #aaa;
-    border-radius: 3px;
+#container table {
     margin: 16px;
 }
 
-#container #cardView {
-    width: 100%;
+#container td {
+    padding: 8px;
+}
 
+#container .imageUploaderLine {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
+    justify-content: start;
+    align-items: end;
 }
 
-#cardView .card {
-    margin: 8px;
+#container .imgBox {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-left: 0;
+    margin-right: 8px;
+    border: 3px solid #aaa;
+    border-radius: 3px;
+}
+
+#container .img {
     width: 100%;
-    border-radius: 5px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    box-shadow: 1px 1px 3px #aaa;
-}
-
-#cardView .productImg {
-    margin: 30px;
-    width: 200px;
-    height: 200px;
-
-    background-color: #aaa;
-}
-
-#cardView .infoSection {
-    padding: 16px;
-    width: 70%;
     height: 100%;
 }
 
-.infoSection table {
-    margin-top: 16px;
-    width: 100%;
+#container .imgUploadBtn {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
     text-align: center;
-    border-collapse: collapse;
+    line-height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #abc;
 }
 
-.infoSection th {
-    padding: 8px;
-    border: 1px solid #aaa;
+#container .imgUploadBtn:hover {
+    background-color: #bca;
 }
 
-.infoSection td {
-    padding: 8px;
-    border: 1px solid #aaa;
+#container .submitBtn {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #abc;
+}
+
+#container .submitBtn:hover {
+    background-color: #bca;
 }
 
 /* ========================= */
-
-/* 페이징 */
-
-#pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-#pagination .pageBtn {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    background-color: #aaa;
-    text-align: center;
-    line-height: 50px;
-    margin: 8px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px #999;
-}
-
-/* 페이징 끝 */
