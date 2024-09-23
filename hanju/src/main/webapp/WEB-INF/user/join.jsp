@@ -70,37 +70,9 @@
                 <div>
                   <input type="text" id="post" v-model="zipNo" placeholder="우편번호">
                   <button @click="fnSearchAddr" class="adrBtn">주소검색</button>
-                  {{zipNo}}
-                  {{roadAddrPart1}}
-                  {{addrDetail}}
                 </div>
                 <div><input type="text" id="addr1" v-model="roadAddrPart1" placeholder="기본주소"></div>
                 <div><input type="text" id="addr2" v-model="addrDetail" placeholder="나머지 주소(선택 입력 가능)"></div>
-              </td>
-            </tr>
-            <tr>
-              <th>일반전화</th>
-              <td>
-                <select id="tel1" v-model="tel1">
-                  <option value="02">02</option>
-                  <option value="031">031</option>
-                  <option value="032">032</option>
-                  <option value="033">033</option>
-                  <option value="041">041</option>
-                  <option value="042">042</option>
-                  <option value="043">043</option>
-                  <option value="044">044</option>
-                  <option value="051">051</option>
-                  <option value="052">052</option>
-                  <option value="053">053</option>
-                  <option value="054">054</option>
-                  <option value="055">055</option>
-                  <option value="061">061</option>
-                  <option value="062">062</option>
-                  <option value="063">063</option>
-                  <option value="064">064</option>
-                </select>-<input type="text" id="tel2" v-model="tel2" maxlength="3">-<input type="text" id="tel3"
-                  v-model="tel3" maxlength="4">
               </td>
             </tr>
             <tr>
@@ -292,13 +264,14 @@
     const app = Vue.createApp({
       data() {
         return {
-          status: "M",
+          status: 'M',
           userId: "",
           idCkMsg: "",
           password: "",
           passwordCheck: "",
           pwdCkMsg: "",
           userName:"",
+          zipNo: "",
           roadFullAddr: "",
           roadAddrPart1: "",
           addrDetail: "",
@@ -319,27 +292,47 @@
           agree2: false,
           notAgree1: false,
           notAgree2: false,
-          zipNo: "",
-          roadAddrPart1: "",
-          addrDetail: "",
-
         };
       },
       methods: {
         validate() {
           var self = this;
 
-          const telText2 = /^[0-9]{3}$/;
-          const telText3 = /^[0-9]{4}$/;
           const phoneText = /^[0-9]{4}$/;
-
-          if (!telText2.test(this.tel2) || !telText3.test(this.tel3)) {
-            alert('일반전화번호 형식이 올바르지 않습니다.')
+          
+          
+          if (!phoneText.test(this.phone2) || !phoneText.test(this.phone3)) {
+            alert('휴대폰번호 형식이 올바르지 않습니다.')
             return false;
           }
 
-          if (!phoneText.test(this.phone2) || !phoneText.test(this.phone3)) {
-            alert('휴대폰번호 형식이 올바르지 않습니다.')
+          if(self.userId == null){
+            alert('아이디 항목은 필수 입력값입니다.')
+            return false;
+          }
+
+          if(self.password == null){
+            alert('비밀번호 항목은 필수 입력값입니다.')
+            return false;
+          }
+
+          if(self.passwordCheck == null){
+            alert('비밀번호 항목은 필수 입력값입니다.')
+            return false;
+          }
+
+          if(self.userName == null){
+            alert('이름 항목은 필수 입력값입니다.')
+            return false;
+          }
+
+          if(self.zipNo == null || self.roadAddrPart1 == null){
+            alert('주소 항목은 필수 입력값입니다.')
+            return false;
+          }
+
+          if(self.email == null || self.emailDomain == null){
+            alert('이메일 항목은 필수 입력값입니다.')
             return false;
           }
         },
@@ -365,7 +358,7 @@
           };
 
           $.ajax({
-            url: "join.dox",
+            url: "idCheck.dox",
             dataType: "json",
             type: "POST",
             data: nparmap,
@@ -420,6 +413,7 @@
           self.zipNo = zipNo; //<- 위에 넣은 값
           self.roadAddrPart1 = roadAddrPart1;
           self.addrDetail = addrDetail;
+          self.roadFullAddr = roadFullAddr;
           // 콘솔 통해 각 변수 값 찍어보고 필요한거 가져다 쓰면 됩니다.
           console.log(zipNo);
           console.log(roadAddrPart1);
@@ -439,6 +433,7 @@
           var self = this;
 
           var prefix = "";
+
           if (self.email.indexOf('@') == -1 ) { 
             prefix = self.email;
           }else if(self.emailDomain == '직접입력'){
@@ -486,31 +481,24 @@
         joinBtn(){
           var self = this;
 
+          const phone = self.phone1 + "-" + self.phone2 + "-" + self.phone3;
+          const birthday = self.year + "-" + self.month + "-" + self.day;
+
           var nparmap = {
             status:self.status,
             userId: self.userId,
             password: self.password,
             userName: self.userName,
-            zipNo:self.zipNo,
-            roadAddrPart1:self.roadAddrPart1,
-            addrDetail:self.addrDetail,
-            tel1:self.tel1,
-            tel2:self.tel2,
-            tel3:self.tel3,
-            phone1:self.phone1,
-            phone2:self.phone2,
-            phone3:self.phone3,
-            email:self.email,
-            emailDomain:self.emailDomain,
-            year:self.year,
-            month:self.month,
-            day:self.day,
-            allAgree:self.allAgree,
-            agree1:self.agree1,
-            agree2:self.agree2,
-            notAgree1:self.notAgree1,
-            notAgree2:self.notAgree2
+            roadFullAddr:self.roadFullAddr,
+            phone : phone,
+            email : self.email,
+            birthday : birthday
+           
           };
+
+          if(self.validate() == false){
+                return;
+              }
 
           $.ajax({
             url: "join.dox",
@@ -519,9 +507,6 @@
             data: nparmap,
             success: function (data) {
               console.log(data);
-              if(self.validate() == false){
-                return;
-              }
               $.pageChange("login.do", {});
               
               

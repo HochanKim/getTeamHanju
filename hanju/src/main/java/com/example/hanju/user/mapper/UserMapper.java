@@ -11,9 +11,19 @@ import com.example.hanju.user.model.UserModel;
 
 @Mapper
 public interface UserMapper {
+	
+	void insertUser(HashMap<String, Object> map);
+	
 	List<UserModel> selectUser(HashMap<String, Object> map);
 	
-	List<UserModel> loginUser(HashMap<String, Object> map);
+	
+	 UserModel loginUser(HashMap<String, Object> map);
 
+	
+	
+	
 	List<UserModel> allUserList();
+
+	
+	
 }
