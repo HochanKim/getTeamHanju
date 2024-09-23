@@ -11,7 +11,7 @@
 			#{type},
 			#{productName},
 			#{price},
-			'admin',
+			'ADMIN',
 			#{madeBy},
 			#{alcohol},
 			#{sparkling},
@@ -21,7 +21,6 @@
 			#{body},
 			#{stock},
 			#{capacity},
-			#{color},
 			#{material}
 		)
 	</insert>
@@ -30,5 +29,21 @@
 		INSERT INTO TEST_IMAGE
 		VALUES (image_seq.nextVal, #{productId}, #{fileName}, #{fileOrgName}, #{filePath}, #{fileStatus})
 	</insert>
+	
+	<select id="getTotalProductCount" parameterType="hashmap" resultType="Integer">
+		SELECT	COUNT(*)
+		FROM	HANJU_PRODUCT
+		WHERE	SELLER_ID = #{userId}
+	</select>
+	
+	<select id="getProductList" parameterType="hashmap" resultType="com.example.hanju.main.model.Product">
+		SELECT	*
+		FROM	HANJU_PRODUCT P
+		INNER JOIN HANJU_CODE C  ON C.KIND = 'PRODUCT_CODE' AND P.TYPE = C.CODE
+		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
+		WHERE	SELLER_ID = #{userId}
+		ORDER BY P.PRODUCT_ID DESC
+		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
 	
 </mapper>

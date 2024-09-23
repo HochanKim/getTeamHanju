@@ -36,6 +36,11 @@ public class SellerPageController {
         return "/sellerPage/registerProduct";
     }
 	
+	@RequestMapping("/sellerPage/modifyProduct.do")
+    public String modifyProduct(Model model) throws Exception {
+        return "/sellerPage/modifyProduct";
+    }
+	
 	@RequestMapping(value = "/sellerPage/registerProduct.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String registerProduct(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -44,30 +49,6 @@ public class SellerPageController {
 		return new Gson().toJson(result);
 	}
 	
-//	@RequestMapping("/sellerPage/uploadProductImg.dox")
-//	@ResponseBody
-//    public String uploadProductImg(@RequestParam("productId") int productId,
-//    					 		   @RequestParam("thumbnail")   MultipartFile thumbnail,
-//    					 		   @RequestParam("productImg1") MultipartFile productImg1,
-//    					 		   @RequestParam("productImg2") MultipartFile productImg2,
-//    					 		   @RequestParam("productImg3") MultipartFile productImg3,
-//    					 		   HttpServletRequest request,
-//    					 		   HttpServletResponse response,
-//    					 		   Model model) {
-//		
-//		try {
-//			uploadImg(productId, thumbnail  , "T");
-//			uploadImg(productId, productImg1, "P");
-//			uploadImg(productId, productImg2, "P");
-//			uploadImg(productId, productImg3, "P");
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//		
-//		HashMap<String, Object> resultMap = new HashMap<>();
-//		resultMap.put("result", "성공했습니다.");
-//		return new Gson().toJson(resultMap);
-//    }
 	@RequestMapping("/sellerPage/uploadProductImg.dox")
 	@ResponseBody
     public String uploadProductImg(@RequestParam("productId") int productId,
@@ -91,6 +72,22 @@ public class SellerPageController {
 		resultMap.put("result", "성공했습니다.");
 		return new Gson().toJson(resultMap);
     }
+	
+	@RequestMapping(value = "/sellerPage/getTotalProductCount.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getTotalProductCount(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getTotalProductCount(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/getProductList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getProductList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getProductList(map);
+		return new Gson().toJson(result);
+	}
 	
 	private void uploadImg(int productId, MultipartFile file, String type) throws IOException {
 		
