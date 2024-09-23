@@ -1,16 +1,15 @@
-package com.example.hanju.cart.model;
+package com.example.hanju.cart.model.entity;
 
 import lombok.Data;
 
 @Data
-public class CartModel {
+public class CartEntity {
 
     private String userId;
     private String productId;
-    private String productCount;
+    private int productCount;
     private String cDateTime;
     private String kind;
-    private String store_id;
     private String pickupDate;
     private String filePath;
     private String productName;

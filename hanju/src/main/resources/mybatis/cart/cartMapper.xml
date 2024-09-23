@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.hanju.cart.mapper.CartMapper">
-    <select id="viewCart" parameterType="hashmap" resultType="CartModel">
+    <select id="viewCart" parameterType="hashmap" resultType="CartEntity">
         SELECT C.*, I.FILE_PATH, P.PRODUCT_NAME, P.PRICE
         FROM HANJU_CART C
         INNER JOIN HANJU_IMAGE I ON C.PRODUCT_ID = I.FK_ID
@@ -15,6 +15,11 @@
         FROM HANJU_PICKUP_STOCK
         WHERE PRODUCT_ID = #{productId} AND STORE_ID = #{storeId}
     </select>
+    <select id="stockCheck" parameterType="hashmap" resultType="int">
+        SELECT STOCK
+        FROM HANJU_PRODUCT
+        WHERE PRODUCT_ID = #{productId}
+    </select>
     <update id="cartStockChange" parameterType="hashmap">
         UPDATE HANJU_CART
         <if test="value.equals('plus')">
@@ -23,11 +28,51 @@
         <if test="value.equals('minus')">
             SET PRODUCT_COUNT = PRODUCT_COUNT-1
         </if>
-        WHERE PRODUCT_ID = #{productId}
+        WHERE CART_ID = #{cartId}
     </update>
     <delete id="cartItemDelete" parameterType="hashmap">
         DELETE
         FROM HANJU_CART
         WHERE CART_ID = #{cartId}
     </delete>
+    <insert id="addCart" parameterType="hashmap">
+        INSERT
+        INTO HANJU_CART (CART_ID,USER_ID,PRODUCT_ID,PRODUCT_COUNT,KIND,CDATETIME)
+        VALUES (CART_SEQ.NEXTVAL,#{userId},#{productId},#{productCount},#{kind},sysdate)
+    </insert>
+    <insert id="addPickupCart" parameterType="hashmap">
+        INSERT
+        INTO HANJU_CART (CART_ID,USER_ID,PRODUCT_ID,PRODUCT_COUNT,KIND,STORE_ID,CDATETIME,PICKUP_DATE)
+        VALUES (CART_SEQ.NEXTVAL,#{userId},#{productId},#{productCount},#{kind},#{storeId},sysdate,sysdate)
+    </insert>
+    <select id="pickupCartCheck" parameterType="hashmap" resultType="CartCheckDto">
+        SELECT CART_ID, PRODUCT_COUNT
+        FROM HANJU_CART
+        WHERE PRODUCT_ID = #{productId} AND STORE_ID = #{storeId} AND KIND = #{kind} AND USER_ID = #{userId}
+    </select>
+    <select id="cartCheck" parameterType="hashmap" resultType="CartCheckDto">
+        SELECT CART_ID, PRODUCT_COUNT
+        FROM HANJU_CART
+        WHERE PRODUCT_ID = #{productId} AND KIND = #{kind} AND USER_ID = #{userId}
+    </select>
+    <update id="updateCart" parameterType="hashmap">
+        UPDATE HANJU_CART
+        SET PRODUCT_COUNT = PRODUCT_COUNT + #{productCount}
+        WHERE CART_ID = #{cartId}
+    </update>
+    <select id="getCartItem" parameterType="hashmap" resultType="CartEntity">
+        SELECT *
+        FROM HANJU_CART
+        WHERE CART_ID = #{cartId}
+    </select>
+    <select id="cartSumPrice" parameterType="hashmap" resultType="int">
+        SELECT SUM(P.PRICE*C.PRODUCT_COUNT)
+        FROM HANJU_CART C
+        INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = C.PRODUCT_ID
+        WHERE CART_ID IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

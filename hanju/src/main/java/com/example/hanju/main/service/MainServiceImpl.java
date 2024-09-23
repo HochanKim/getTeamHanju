@@ -2,10 +2,13 @@ package com.example.hanju.main.service;
 
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.main.mapper.MainMapper;
+import com.example.hanju.main.model.PickUpStore;
+import com.example.hanju.main.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -36,5 +39,22 @@ public class MainServiceImpl implements MainService {
         map.put("status", "P");
         result.put("productImage", mapper.detailImage(map));
         return result;
+    }
+    @DbExceptionHandle
+    @Override
+    public Map<String, Object> getProductList() {
+        Map<String,Object> map = new HashMap<>();
+        List<Product> list =  mapper.getProductList();
+        map.put("list",list);
+        return map;
+    }
+    @DbExceptionHandle
+    @Override
+    public Map<String, Object> getItemStoreList(Map<String, Object> id) {
+        System.out.println(id);
+        List<PickUpStore> list = mapper.getItemStoreList(id);
+        Map<String,Object> map = new HashMap<>();
+        map.put("list",list);
+        return map;
     }
 }

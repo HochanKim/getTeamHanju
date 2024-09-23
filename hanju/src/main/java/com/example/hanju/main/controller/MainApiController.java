@@ -65,10 +65,24 @@ public class MainApiController {
 
         return fileName;
     }
+
     @GetMapping(value = "pickup/itemDetailView.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String itemDetailView(Model model, @RequestParam Map<String, Object> map) throws Exception {
         Map<String, Object> result = service.searchItemImage(map);
+        return new Gson().toJson(result);
+    }
+
+    @GetMapping(value = "main/productList.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String productList(Model model) throws Exception {
+        Map<String, Object> result = service.getProductList();
+        return new Gson().toJson(result);
+    }
+    @GetMapping(value = "main/getItemStoreList.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String getItemStoreList(Model model, @RequestParam Map<String, Object> map) throws Exception {
+        Map<String, Object> result = service.getItemStoreList(map);
         return new Gson().toJson(result);
     }
 }

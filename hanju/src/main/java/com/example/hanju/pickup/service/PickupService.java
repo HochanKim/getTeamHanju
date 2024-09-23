@@ -6,4 +6,5 @@ public interface PickupService {
 
     Map<String,Object> getBoardList(Map<String,Object> map);
     Map<String,Object> searchProduct(Map<String,Object> map);
+
 }
