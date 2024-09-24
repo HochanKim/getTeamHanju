@@ -5,13 +5,13 @@
 <mapper namespace="com.example.hanju.user.mapper.UserMapper">	
 	<select id="selectUser" parameterType="hashmap" resultType="UserModel">	
 		SELECT * 
-		FROM TEST_USER
+		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</select>
 	
 	<select id="loginUser" parameterType="hashmap" resultType="UserModel">	
 		SELECT * 
-		FROM TEST_USER
+		FROM HANJU_USER
 		WHERE USER_ID = #{userId} AND PASSWORD = #{password}
 	</select>
 	
@@ -21,8 +21,27 @@
 	</select>
 	
 	<insert id="insertUser" parameterType="hashmap" >
-		INSERT INTO TEST_USER
-		VALUES(#{userId},#{password},#{userName},#{status},#{phone},#{email},#{roadFullAddr},TO_DATE(#{birthday}, 'YYYY-MM-DD'),SYSDATE,0)
+		INSERT INTO HANJU_USER
+		VALUES(#{userId},#{password},#{userName},#{status},#{phone},#{email},TO_DATE(#{birthday}, 'YYYY-MM-DD'),SYSDATE,0,#{zipNo},#{roadAddrPart1},#{addrDetail})
 	</insert>
+	
+	<update id="modifyUser" parameterType="hashmap">
+		UPDATE HANJU_USER
+		SET
+			PASSWORD=#{password},
+			PHONE=#{phone},
+			EMAIL=#{email},
+			BIRTHDAY=TO_DATE(#{birthday}, 'YYYY-MM-DD'),
+			ZIPNO=#{zipNo},
+			ROADADDRPART1=#{roadAddrPart1},
+			ADDRDDETAIL=#{addrDetail}
+		WHERE USER_ID = #{userId} 
+	</update>
+	
+	<delete id="deleteUser" parameterType="hashmap">	
+		DELETE
+		FROM HANJU_USER
+		WHERE USER_ID = #{userId} 
+	</delete>
 	
 </mapper>	

@@ -5,6 +5,7 @@ import java.util.Map;
 
 public interface UserService {
 	
+	//회원조회
 	HashMap<String, Object> userList(HashMap<String, Object> map);
 	//로그인
 	HashMap<String, Object> userLogin(HashMap<String, Object> map);

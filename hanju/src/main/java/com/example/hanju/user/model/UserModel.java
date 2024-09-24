@@ -40,11 +40,24 @@ public class UserModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAddress() {
-		return address;
+	
+	public String getZipNo() {
+		return zipNo;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setZipNo(String zipNo) {
+		this.zipNo = zipNo;
+	}
+	public String getRoadAddrPart1() {
+		return roadAddrPart1;
+	}
+	public void setRoadAddrPart1(String roadAddrPart1) {
+		this.roadAddrPart1 = roadAddrPart1;
+	}
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
 	}
 	public String getBirthday() {
 		return birthday;
@@ -53,10 +66,10 @@ public class UserModel {
 		this.birthday = birthday;
 	}
 	public String getCdatetime() {
-		return cdatetime;
+		return cDateTime;
 	}
 	public void setCdatetime(String cdatetime) {
-		this.cdatetime = cdatetime;
+		this.cDateTime = cdatetime;
 	}
 	public String getPoint() {
 		return point;
@@ -70,9 +83,11 @@ public class UserModel {
 	private String status;
 	private String phone;
 	private String email;
-	private String address;
+	private String zipNo;
+	private String roadAddrPart1;
+	private String addrDetail;
 	private String birthday;
-	private String cdatetime;
+	private String cDateTime;
 	private String point;
 	
 

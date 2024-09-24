@@ -72,8 +72,7 @@ pageEncoding="UTF-8"%>
 			},
 
     },
-    mounted() {
-    },
+    
     mounted() {},
   });
   app.mount("#app");

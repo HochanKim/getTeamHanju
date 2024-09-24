@@ -17,34 +17,40 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-	
+	//휴대폰인증
 	@RequestMapping("user/joinbtn.do")
 	public String joinBtn(Model model) throws Exception{
 		return "user/joinbtn";
-		
 	}
-	
+	//회원가입
 	@RequestMapping("user/join.do")
 	public String join(Model model) throws Exception{
 		return "user/join";
 	}
-	
-
+	//로그인
 	@RequestMapping("user/login.do")
 	public String login(Model model) throws Exception{
 		return "user/login";
-		
 	}
-	
+	//주소검색
 	@RequestMapping("user/juso.do")
 	public String juso(Model model) throws Exception{
 		return "user/juso";
-		
 	}
-	
+	//마이페이지
 	@RequestMapping("user/mypage.do")
 	public String mypage(Model model) throws Exception{
 		return "user/mypage";
+	}
+	//회원정보수정
+	@RequestMapping("user/modify.do")
+	public String modify(Model model) throws Exception{
+		return "user/modify";
+		
+	}
+	@RequestMapping("user/modifybefore.do")
+	public String modifybefore(Model model) throws Exception{
+		return "user/modifybefore";
 		
 	}
 	
@@ -56,6 +62,7 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 	
+	//회원조회
 	@RequestMapping(value = "user/idCheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchTestList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -63,8 +70,7 @@ public class UserController {
 		HashMap<String, Object> result = userService.userList(map);
 		return new Gson().toJson(result);
 	}
-	
-	
+	//회원가입
 	@RequestMapping(value = "user/join.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String joinUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -72,7 +78,7 @@ public class UserController {
 		HashMap<String, Object> result = userService.userJoin(map);
 		return new Gson().toJson(result);
 	}
-	
+	//로그인
 	@RequestMapping(value = "user/login.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
