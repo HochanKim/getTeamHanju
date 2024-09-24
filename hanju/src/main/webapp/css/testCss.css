@@ -47,7 +47,12 @@ button {
   margin-right: 10px;
   transition: background-color 0.3s;
 }
-
+.ha {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgb(255, 91, 91);
+  color: black;
+}
 button:hover {
   background-color: #0056b3;
 }

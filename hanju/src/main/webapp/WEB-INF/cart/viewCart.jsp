@@ -130,7 +130,7 @@ pageEncoding="UTF-8"%>
           </div>
 
           <div class="paymentBtn">
-            <form action="payment.do" method="post">
+            <form action="cartPayment.do" method="post">
               <input type="hidden" name="cartItem" :value="selectItem" />
               <button type="submit">결제하기</button>
             </form>
@@ -202,8 +202,8 @@ pageEncoding="UTF-8"%>
         const { data } = await axios.post(url, submitForm);
         console.log(data);
         this.sumPrice = data.sum;
-        this.discountSum = data.discountSum;
-        this.discount = data.sum - data.discountSum;
+        this.discountSum = data.discountSum || 0;
+        this.discount = data.sum - data.discountSum || 0;
       },
       async fnViewCart() {
         const url = "viewCart.dox";

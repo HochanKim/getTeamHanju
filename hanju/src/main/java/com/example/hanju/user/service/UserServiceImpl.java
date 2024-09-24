@@ -88,11 +88,18 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
-
-
-
-	
-
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object> getUserInfo(HashMap<String, Object> map) {
+		Map<String,Object> result= new HashMap<>();
+		List<UserModel> user = userMapper.selectUser(map);
+		if(user.isEmpty()){
+			result.put("status","error");
+		}else{
+			result.put("userInfo",user.get(0));
+		}
+		return result;
+	}
 
 
 }

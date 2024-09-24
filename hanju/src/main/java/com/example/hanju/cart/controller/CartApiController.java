@@ -49,6 +49,8 @@ public class CartApiController {
     @PostMapping(value = "cart/sumPrice.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String sumPrice(Model model, @RequestBody List<String> list) throws Exception {
+        //list = [cartId들]
+        //result = sum(총합 가격),discountSum(할인된 가격)
         System.out.println(list);
         Map<String, Object> result = cartService.cartSumPrice(list);
         return new Gson().toJson(result);
@@ -57,6 +59,14 @@ public class CartApiController {
     @ResponseBody
     public String addCart(Model model, @RequestBody Map<String,Object> map) throws Exception {
         Map<String, Object> result = cartService.addCart(map);
+        return new Gson().toJson(result);
+    }
+    @PostMapping(value = "cart/getCartName.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String getCartName(Model model, @RequestBody List<String> list) throws Exception {
+        //list = [cartId들]
+        //result = {nameList:[cartId 에 따른 제품 이름]}
+        Map<String, Object> result = cartService.getCartName(list);
         return new Gson().toJson(result);
     }
 

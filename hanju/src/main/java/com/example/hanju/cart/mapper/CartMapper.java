@@ -23,4 +23,5 @@ public interface CartMapper {
     List<CartCheckDto> pickupCartCheck(Map<String, Object> map);
     List<CartCheckDto> cartCheck(Map<String, Object> map);
     int updateCart(Map<String, Object> map);
+    List<String> getCartName(Map<String,Object> map);
 }

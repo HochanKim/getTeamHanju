@@ -24,9 +24,16 @@ public class CartController {
         return "cart/viewCart";
     }
 
-    @RequestMapping("cart/payment.do")
-    public String payment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
+    @RequestMapping("cart/cartPayment.do")
+    public String cartPayment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
+        model.addAttribute("userId",session.getAttribute("sessionId"));
         model.addAttribute("cartItem",new Gson().toJson(map));
-        return "cart/payment";
+        return "cart/cartPayment";
+    }
+    @RequestMapping("cart/directPayment.do")
+    public String directPayment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
+        model.addAttribute("userId",session.getAttribute("sessionId"));
+        model.addAttribute("cartItem",new Gson().toJson(map));
+        return "cart/directPayment";
     }
 }
