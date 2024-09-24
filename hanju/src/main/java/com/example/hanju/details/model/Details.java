@@ -27,4 +27,11 @@ public class Details {
     private String code;
     private String codeFull;
     private String parentCode;
+
+    //NORMAL_SELL
+    private String sellId;
+    private String discount;
+    private String cDateTime;
+    private String contents;
+    private String description;
 }

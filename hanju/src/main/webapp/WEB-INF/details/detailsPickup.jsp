@@ -4,6 +4,8 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset="UTF-8" />
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+    <meta http-equiv='x-ua-compatible' content='ie=edge'>
     <link rel="stylesheet" href="/css/details.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
@@ -20,7 +22,6 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="thumb-content">
                 <div>
-                    <div class="pad2">{{info.description}}</div>
                     <div class="font-size ">{{info.productName}}</div>
                     <div class="pad2">판매가격 :</div>
                     <div class="font-size">{{info.price}}원</div>
@@ -42,10 +43,39 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="pad font-size2">총 상품가격</div>
             <div class="font-size2">{{sum()}}원</div>
+            <div class="pad font-size2">
+                픽업매장 선택
+            </div>
+            <button @click="modalOpen" class="side-button font-size2">픽업매장 선택</button>
+            <div class="modal-wrap" v-show="modalCheck" @click="modalOpen">
+                <div class="modal-container" @click.stop="">
+                
+               현수형 술꾼이래요
+                
+                <div class="modal-btn">
+                <button @click="modalOpen">닫기</button>
+                <button @click="modalOpen" class="modal-button">선택</button>
+                </div>
+            </div>
+            </div>
+
+            <button @click="modalOpen2" class="side-button font-size2">날짜 선택</button>
+            <div class="modal-wrap" v-show="modalCheck2" @click="modalOpen2">
+                <div class="modal-container" @click.stop="">
+                    <input type="date">
+                <div class="modal-btn">
+                <button @click="modalOpen2">닫기</button>
+                <button @click="modalOpen2">선택</button>
+                </div>
+            </div>
+            </div>
+            
             <div>
                 <button  @click="showToastMessage" class="side-button font-size2">장바구니</button>
             </div>
-            <div><button class="side-button font-size2">바로 구매하기</button></div>
+            <div>
+                <button class="side-button font-size2">바로 구매하기</button>
+            </div>
         </div>
         <div class="box" style="clear: both;">
             <div class="row">
@@ -148,7 +178,10 @@ const app = Vue.createApp({
             number: 1,
             userId: "",
             cnt : 1,
-            pStock : ""
+            pStock : "",
+            modalCheck: false,
+            modalCheck2: false,
+            selectedDate: null,
         };
     },
     methods: {
@@ -173,6 +206,12 @@ const app = Vue.createApp({
                 this.cnt--;
             }
         },
+        modalOpen() {
+            this.modalCheck = !this.modalCheck
+        },
+        modalOpen2() {
+            this.modalCheck2 = !this.modalCheck2
+        },
         increase() {
             this.cnt++;
         },
@@ -194,7 +233,8 @@ const app = Vue.createApp({
                 productId : self.info.productId, 
                 userId : self.userId, 
                 productCount : self.cnt, 
-                kind : "N"
+                kind : "P",
+                
                 }
                 const url="/cart/addCart.dox"
                 const res=await axios.post(url,cart)

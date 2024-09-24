@@ -12,6 +12,6 @@ import java.util.Map;
 public interface DetailsMapper {
     List<Details> selectDetail(HashMap<String, Object> map);
     Product selectProduct(Map<String,Object> map);
-    List<String> thumbImage(Map<String,Object>map);
     List<String> detailImage(Map<String,Object> map);
+
 }

@@ -10,4 +10,7 @@ public interface DetailsService {
     //이미지 불러오는 코드
     HashMap<String,Object> searchItemImage(Map<String,Object> map);
 
+
+
+
 }
