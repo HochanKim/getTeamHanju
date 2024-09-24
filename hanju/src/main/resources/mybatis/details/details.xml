@@ -8,17 +8,22 @@
 		SELECT *
 		FROM HANJU_PRODUCT P
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
-		WHERE P.PRODUCT_NAME = '호호'
+		WHERE P.PRODUCT_NAME = '아스코니 리슬링 아이스와인 블루라벨'
 	</select>
 	<select id="selectProduct" parameterType="hashmap" resultType="Product">
 		SELECT *
 		FROM HANJU_PRODUCT
-		WHERE PRODUCT_ID = '27'
+		WHERE PRODUCT_ID = '29'
+	</select>
+<!--	픽업매장-->
+	<select id="selectPickUpStore" parameterType="hashmap" resultType="pickUpStore">
+		SELECT *
+		FROM HANJU_PICKUP_STORE
 	</select>
 	<select id="detailImage" parameterType="hashmap" resultType="String">
 		SELECT FILE_PATH
 		FROM HANJU_IMAGE
-		WHERE FK_ID = '27' AND FILE_STATUS = #{status}
+		WHERE FK_ID = '29' AND FILE_STATUS = #{status}
 	</select>
 	
 </mapper>
