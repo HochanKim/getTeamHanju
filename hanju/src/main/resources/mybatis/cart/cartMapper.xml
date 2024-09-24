@@ -104,5 +104,13 @@
             #{id}
         </foreach>
     </select>
-
+    <select id="getCartName" parameterType="hashmap" resultType="String">
+        SELECT P.PRODUCT_NAME
+        FROM HANJU_CART C
+        INNER JOIN HANJU_PRODUCT P ON C.PRODUCT_ID = P.PRODUCT_ID
+        WHERE CART_ID IN
+        <foreach item="id" collection="nameList" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

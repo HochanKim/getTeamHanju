@@ -141,6 +141,7 @@ public class CartServiceImpl implements CartService {
         return result;
     }
 
+    @DbExceptionHandle
     @Override
     public Map<String, Object> cartSumPrice(List<String> list) {
         Map<String, Object> result = new HashMap<>();
@@ -152,8 +153,18 @@ public class CartServiceImpl implements CartService {
             int sum = cartMapper.cartSumPrice(map);
             int discountSum = cartMapper.discountCartSumPrice(map);
             result.put("sum", sum);
-            result.put("discountSum",discountSum);
+            result.put("discountSum", discountSum);
         }
+        return result;
+    }
+
+    @DbExceptionHandle
+    @Override
+    public Map<String, Object> getCartName(List<String> list) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("nameList", list);
+        List<String> nameList = cartMapper.getCartName(result);
+        result.put("nameList", nameList);
         return result;
     }
 
