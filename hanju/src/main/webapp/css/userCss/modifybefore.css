@@ -1,0 +1,66 @@
+#container{
+    max-width: 1060px;
+    min-width: 1024px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+#contents{
+    margin-top: 75px;
+    padding: 50px 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+.titTop{
+    letter-spacing: -1px;
+    font-size: 24px;
+}
+
+.titBot{
+    letter-spacing: -1px;
+    padding-top: 14px;
+}
+
+.pwdCheck{
+    margin-top: 35px;
+    padding-right: 0;
+    display: inline-block;
+    height: 34px;
+}
+
+input{
+    width: 298px;
+    display: block;
+    height: 32px;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    color: #888;
+    font-size: 14px;
+    line-height: 32px;
+}
+
+.pwdBtn{
+    padding-top: 20px;
+    text-align: center;
+}
+
+button{
+    min-width: 160px;
+    height: 40px;
+    margin: 0 3px;
+    padding: 0 15px;
+    border: 1px solid #333;
+    border-radius: 3px;
+    line-height: 38px;
+    cursor: pointer;
+}
+
+.backBtn{
+    background-color: #fff;
+}
+
+.comBtn{
+    background-color: #333;
+    color: #fff;
+}

@@ -22,7 +22,26 @@
 	
 	<insert id="insertUser" parameterType="hashmap" >
 		INSERT INTO HANJU_USER
-		VALUES(#{userId},#{password},#{userName},#{status},#{phone},#{email},#{roadFullAddr},TO_DATE(#{birthday}, 'YYYY-MM-DD'),SYSDATE,0)
+		VALUES(#{userId},#{password},#{userName},#{status},#{phone},#{email},TO_DATE(#{birthday}, 'YYYY-MM-DD'),SYSDATE,0,#{zipNo},#{roadAddrPart1},#{addrDetail})
 	</insert>
+	
+	<update id="modifyUser" parameterType="hashmap">
+		UPDATE HANJU_USER
+		SET
+			PASSWORD=#{password},
+			PHONE=#{phone},
+			EMAIL=#{email},
+			BIRTHDAY=TO_DATE(#{birthday}, 'YYYY-MM-DD'),
+			ZIPNO=#{zipNo},
+			ROADADDRPART1=#{roadAddrPart1},
+			ADDRDDETAIL=#{addrDetail}
+		WHERE USER_ID = #{userId} 
+	</update>
+	
+	<delete id="deleteUser" parameterType="hashmap">	
+		DELETE
+		FROM HANJU_USER
+		WHERE USER_ID = #{userId} 
+	</delete>
 	
 </mapper>	

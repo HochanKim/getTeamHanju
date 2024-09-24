@@ -248,8 +248,8 @@
             <ul class="check">
               <li><label>SMS 수신을 동의하십니까?<input type="checkbox" v-model="notAgree1" @change="reset">동의함</label></li>
               <li><label>이메일 수신을 동의하십니까?<input type="checkbox" v-model="notAgree2" @change="reset">동의함</label></li>
-          </div>
           </ul>
+        </div>
           <div class="joinComBtn">
             <button id="backBtn" @click="backBtn">취소</button>
             <button id="ComBtn" @click="joinBtn">회원가입</button>
@@ -272,7 +272,6 @@
           pwdCkMsg: "",
           userName:"",
           zipNo: "",
-          roadFullAddr: "",
           roadAddrPart1: "",
           addrDetail: "",
           tel1: '02',
@@ -413,7 +412,6 @@
           self.zipNo = zipNo; //<- 위에 넣은 값
           self.roadAddrPart1 = roadAddrPart1;
           self.addrDetail = addrDetail;
-          self.roadFullAddr = roadFullAddr;
           // 콘솔 통해 각 변수 값 찍어보고 필요한거 가져다 쓰면 됩니다.
           console.log(zipNo);
           console.log(roadAddrPart1);
@@ -489,7 +487,9 @@
             userId: self.userId,
             password: self.password,
             userName: self.userName,
-            roadFullAddr:self.roadFullAddr,
+            zipNo : self.zipNo,
+            roadAddrPart1 : self.roadAddrPart1,
+            addrDetail : self.addrDetail,
             phone : phone,
             email : self.email,
             birthday : birthday
