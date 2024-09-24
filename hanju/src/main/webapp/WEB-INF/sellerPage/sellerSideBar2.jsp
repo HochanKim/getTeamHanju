@@ -16,7 +16,7 @@
             <div class="normalMenu">
                 <a href="sellerMain.do">사업자 홈</a>
             </div>
-            <div class="menu">
+            <div class="menu" @click="fnMenuClick">
                 <p>제품 관리</p>
                 <span class="material-symbols-outlined">arrow_drop_down</span>
             </div>
@@ -55,17 +55,36 @@
 </body>
 </html>
 <script>
-$(function() {
-    $(".menu").on("click", function(e) {
-        var status = $(this).next().css("maxHeight");
+    const sideBar = Vue.createApp({
+        data() {
+            return {
+                
+            };
+        },
+        methods : {
+            fnMenuClick(event) {
+                console.log("hi");
+            }
+        },
+        mounted() {
 
-        if (status == "0px") {
-            $(this).next().css("maxHeight", "200px");
-            $(this).children("span").text("arrow_drop_up");
-        } else {
-            $(this).next().css("maxHeight", "0px");
-            $(this).children("span").text("arrow_drop_down");
         }
     });
-});
+    const sideBarObj = sideBar.mount('#sideBar');
+
+
+    
+// $(function() {
+//     $(".menu").on("click", function(e) {
+//         var status = $(this).next().css("maxHeight");
+
+//         if (status == "0px") {
+//             $(this).next().css("maxHeight", "200px");
+//             $(this).children("span").text("arrow_drop_up");
+//         } else {
+//             $(this).next().css("maxHeight", "0px");
+//             $(this).children("span").text("arrow_drop_down");
+//         }
+//     });
+// });
 </script>

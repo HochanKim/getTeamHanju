@@ -29,7 +29,8 @@
                         <td>썸네일</td>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img class="img" :src="thumbnailUrl">
+                                <img v-if="thumbnailUrl == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-else class="img" :src="thumbnailUrl">
                             </div>
                             <label class="imgUploadBtn">
                                 등록하기
@@ -44,13 +45,16 @@
                         </td>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img class="img" :src="productImgUrls[ 0 ]">
+                                <img v-if="productImgUrls[ 0 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-else class="img" :src="productImgUrls[ 0 ]">
                             </div>
                             <div class="imgBox">
-                                <img class="img" :src="productImgUrls[ 1 ]">
+                                <img v-if="productImgUrls[ 1 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-else class="img" :src="productImgUrls[ 1 ]">
                             </div>
                             <div class="imgBox">
-                                <img class="img" :src="productImgUrls[ 2 ]">
+                                <img v-if="productImgUrls[ 2 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-else class="img" :src="productImgUrls[ 2 ]">
                             </div>
                             <label class="imgUploadBtn">
                                 등록하기
@@ -166,7 +170,6 @@
                 <div class="submitBtn" @click="fnSubmit">수정하기</div>
             </div>
         </div>
-        <button @click="fnTest">test</button>
         <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
 </body>
@@ -182,8 +185,6 @@
                 userStatus : "${sessionStatus}",
 
                 productName : null,
-                thumbnail : null,
-                productImgs : [],
                 type : null,
                 price : null,
                 madeBy : null,
@@ -197,12 +198,19 @@
                 capacity : null,
                 material : null,
 
-                thumbnailUrl   : "../../image/defaultImg.png",
-                productImgUrls : [
-                    "../../image/defaultImg.png",
-                    "../../image/defaultImg.png",
-                    "../../image/defaultImg.png"
-                ],
+                thumbnailId : null,
+                productImgIds : [],
+                thumbnail : null,
+                productImgs : [],
+
+                isThumbnailChange : false,
+                isProductImgChange : false,
+
+                thumbnailUrl   : null,
+                productImgUrls : [],
+
+                beforeThumbnailId : "",
+                beforeProductImgIds : [],
                 beforeThumbnailUrl : "",
                 beforeProductImgUrls : [],
             }
@@ -211,8 +219,13 @@
             fnThumbnailChange(event) {
                 this.thumbnail = event.target.files[ 0 ];
                 this.thumbnailUrl = URL.createObjectURL(this.thumbnail);
+
+                this.isThumbnailChange = true;
             },
             fnImgChange(event) {
+
+                this.fnImageFlush();
+
                 // 제품 이미지는 최대 3개
                 for (var i = 0; i < 3; i++) {
                     if (event.target.files[ i ] == undefined) continue;
@@ -220,13 +233,14 @@
                     this.productImgs[ i ] = event.target.files[ i ];
                     this.productImgUrls[ i ] = URL.createObjectURL(this.productImgs[ i ]);
                 }
+
+                this.isProductImgChange = true;
+            },
+            fnImageFlush() {
+                this.productImgIds  = [];
+                this.productImgUrls = [];
             },
             fnSubmit() {
-                // if (this.fnAllCheck() ) {
-                //     alert("전부 채워주세요");
-                //     return;
-                // }
-
                 $.ajax({
 					url:"modifyProduct.dox",
 					dataType:"json",
@@ -249,33 +263,49 @@
                     },
 					success : (data) => {
 						console.log(data);
-                        //this.fnDeleteBeforeImg();
-                        //this.fnUploadProductImg();
+                        this.fnUploadImages();
 					}
 				});
             },
-            fnDeleteBeforeImgs() {
+            fnUploadImages() {
+                if (this.isThumbnailChange) {
+                    var beforeImageId      = this.beforeThumbnailId;
+                    var beforeThumbnailUrl = this.beforeThumbnailUrl;
+                    this.fnDeleteBeforeImg(beforeImageId, beforeThumbnailUrl);
+
+                    this.fnUploadProductImg(this.thumbnail, "T");
+                }
+                if (this.isProductImgChange) {
+                    for (var i = 0; i < this.beforeProductImgIds.length; i++) {
+                        var beforeProductImgId  = this.beforeProductImgIds[ i ];
+                        var beforeProductImgUrl = this.beforeProductImgUrls[ i ];
+
+                        this.fnDeleteBeforeImg(beforeProductImgId, beforeProductImgUrl);
+                    }
+                    for (var image of this.productImgs) {
+                        this.fnUploadProductImg(image, "P");
+                    }
+                }
+            },
+            fnDeleteBeforeImg(imageId, imageUrl) {
                 $.ajax({
-					url:"deleteBeforeImgs.dox",
+					url:"deleteBeforeImg.dox",
 					dataType:"json",
 					type : "POST", 
 					data : {
-                        beforeThumbnailUrl   : this.beforeThumbnailUrl,
-                        beforeProductImgUrls : this.beforeProductImgUrls
+                        imageId : imageId,
+                        imageUrl : imageUrl,
                     },
 					success : (data) => {
 						console.log(data);
 					}
 				});
             },
-            fnUploadProductImg() {
+            fnUploadProductImg(imageFile, imageCode) {
                 const formData = new FormData();
                 formData.append("productId", this.productId);
-                formData.append("thumbnail", this.thumbnail);
-
-                for (var img of this.productImgs) {
-                    formData.append("productImgs", img);
-                }
+                formData.append("imageCode", imageCode);
+                formData.append("productImg", imageFile);
 
                 $.ajax({
 					url:"uploadProductImg.dox",
@@ -286,34 +316,12 @@
                     contentType : false,
 					success : () => {
 						alert("등록되었습니다!");
-                        this.fnReset();
 					},
                     error : function(jqXHR, textStatus, errorThrown) {
                         console.error('업로드 실패!', textStatus, errorThrown);
                     }
 				});
             },
-            // fnAllCheck() {
-            //     var isEmpty = false;
-            //     if (this.productName == "") isEmpty = true;
-            //     if (this.type        == "") isEmpty = true;
-            //     if (this.price       == "") isEmpty = true;
-            //     if (this.madeBy      == "") isEmpty = true;
-            //     if (this.alcohol     == "") isEmpty = true;
-            //     if (this.sparkling   == "") isEmpty = true;
-            //     if (this.sweet       == "") isEmpty = true;
-            //     if (this.sour        == "") isEmpty = true;
-            //     if (this.bitter      == "") isEmpty = true;
-            //     if (this.body        == "") isEmpty = true;
-            //     if (this.stock       == "") isEmpty = true;
-            //     if (this.capacity    == "") isEmpty = true;
-            //     if (this.material    == "") isEmpty = true;
-
-            //     // thumbnail하고 productImg 빼놨음
-            //     // 나중에 추가
-
-            //     return isEmpty;
-            // },
             fnGetProductInfo() {
                 $.ajax({
 					url:"getProductInfo.dox",
@@ -343,8 +351,6 @@
                 this.material    = info.material;
             },
             fnSetImages() {
-                this.fnBackUpImages();
-
                 $.ajax({
 					url:"getProductImages.dox",
 					dataType:"json",
@@ -354,21 +360,25 @@
 						console.log(data);
                         for (var item of data.result) {
                             if (item.fileStatus == "T") {
+                                this.thumbnailId = item.imageId;
                                 this.thumbnailUrl = item.filePath;
                             }
                             if (item.fileStatus == "P") {
-                                this.productImgUrls.unshift(item.filePath);
+                                this.productImgIds.push(item.imageId);
+                                this.productImgUrls.push(item.filePath);
                             }
                         }
+                        this.fnBackUpImages();
 					}
 				});
             },
             fnBackUpImages() {
-                this.beforeThumbnailUrl   = this.thumbnailUrl;
-                this.beforeProductImgUrls = this.productImgUrls;
-            },
-            fnTest() {
-                this.fnDeleteBeforeImgs();
+                this.beforeThumbnailId  = this.thumbnailId;
+                this.beforeThumbnailUrl = this.thumbnailUrl;
+                for (var i = 0; i < this.productImgIds.length; i++) {
+                    this.beforeProductImgIds.push(this.productImgIds[ i ]);
+                    this.beforeProductImgUrls.push(this.productImgUrls[ i ]);
+                }
             }
         },
         mounted() {
