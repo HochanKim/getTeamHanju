@@ -35,8 +35,11 @@
 }
 select {
     margin-right:10px;
-    width:100px;
+    width:120px;
     text-align: center;
+}
+.material {
+    width:150px;
 }
 
 /* 상품 리스트 영역 */
