@@ -46,36 +46,49 @@ pageEncoding="UTF-8"%>
               </label>
             </div>
             <!-- 선택 코드 리스트 영역 2 -->
-            <select>
-              <option v-model="alcohol">-- 도수 --</option>
+            <select v-model="alcohol" @change="fnList">
+              <option value="">-- 도수 --</option>
               <option value="1">:: 10도 미만 ::</option>
               <option value="2">:: 10 ~ 19도 ::</option>
               <option value="3">:: 20 ~ 29도 ::</option>
               <option value="4">:: 30도 이상 ::</option>
             </select>
-            <select>
-              <option>-- 단맛 --</option>
-              <option>:: 약함 ::</option>
-              <option>:: 중간 ::</option>
-              <option>:: 강함 ::</option>
+            <select v-model="sweet" @change="fnList">
+              <option value="">-- 단맛 --</option>
+              <option value="1">:: 약함 ::</option>
+              <option value="2">:: 중간 ::</option>
+              <option value="3">:: 강함 ::</option>
             </select>
-            <select>
-              <option>-- 신맛 --</option>
-              <option>:: 약함 ::</option>
-              <option>:: 중간 ::</option>
-              <option>:: 강함 ::</option>
+            <select v-model="sour" @change="fnList">
+              <option value="">-- 신맛 --</option>
+              <option value="1">:: 약함 ::</option>
+              <option value="2">:: 중간 ::</option>
+              <option value="3">:: 강함 ::</option>
             </select>
-            <select>
-              <option>-- 바디감 --</option>
-              <option>:: 약함 ::</option>
-              <option>:: 좋음 ::</option>
-              <option>:: 매우좋음 ::</option>
+            <select v-model="body" @change="fnList">
+              <option value="">-- 바디감 --</option>
+              <option value="1">:: 약함 ::</option>
+              <option value="2">:: 좋음 ::</option>
+              <option value="3">:: 매우좋음 ::</option>
             </select>
-            <select>
-              <option>-- 용량 --</option>
-              <option>:: 400ml 미만 ::</option>
-              <option>:: 400ml ~ 700ml ::</option>
-              <option>:: 700ml 이상 ::</option>
+            <select v-model="capacity" @change="fnList">
+              <option value="">-- 용량 --</option>
+              <option value="1">:: 400ml 미만 ::</option>
+              <option value="2">:: 400ml ~ 700ml ::</option>
+              <option value="3">:: 700ml 이상 ::</option>
+            </select>
+            <select v-model="material" @change="fnList" class="material">
+              <option value="">-- 원료(과채류) --</option>
+              <option value="1">:: 사과 ::</option>
+              <option value="2">:: 배 ::</option>
+              <option value="3">:: 바나나 ::</option>
+              <option value="4">:: 유자 ::</option>
+              <option value="5">:: 베리류 ::</option>
+              <option value="6">:: 무화과 ::</option>
+              <option value="7">:: 레몬 ::</option>
+              <option value="8">:: 귤/오렌지 ::</option>
+              <option value="9">:: 파인애플 ::</option>
+              <option value="10">:: 단호박 ::</option>
             </select>
         </section>
         <!-- 상품 리스트 영역 -->
@@ -108,7 +121,12 @@ pageEncoding="UTF-8"%>
         products : [],
         codeList : [],
         selectCodes : [],
-        alcohol : ''  // 알콜 도수
+        alcohol : "",     // 알콜 도수
+        sweet : "",       // 당도
+        sour : "",        // 산미
+        body : "",        // 바디감
+        capacity : "",    // 용량
+        material : ""     // 원료(과실주)
       };
     },
     methods: {
@@ -121,7 +139,6 @@ pageEncoding="UTF-8"%>
 					type : "POST", 
 					data : paramap,
 					success : function(data) {
-            console.log(data); 
 						self.codeList = data.list;
 					}
 				});
@@ -131,7 +148,24 @@ pageEncoding="UTF-8"%>
         var paramap = {};
         if(self.selectCodes.length > 0){
           var fCode = JSON.stringify(self.selectCodes);
-          paramap = {selectCodes : fCode};
+          paramap = {
+            selectCodes : fCode,
+            alcohol : self.alcohol,
+            sweet : self.sweet,
+            sour : self.sour,
+            body : self.body,
+            capacity : self.capacity,
+            material : self.material
+          };
+        } else {
+          paramap = {
+            alcohol : self.alcohol,
+            sweet : self.sweet,
+            sour : self.sour,
+            body : self.body,
+            capacity : self.capacity,
+            material : self.material
+          };
         }
         $.ajax({
             url: "traditionAlcohol.dox",
@@ -139,7 +173,6 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: paramap,
             success: (data) => {
-              console.log(data);
               self.products = data.tradList;
             },
         });
