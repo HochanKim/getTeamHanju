@@ -14,7 +14,7 @@
             </div>
         
         <ul class ="navbar__menu">
-            <li><a href="">전통주</a></li>
+            <li><a href="productList.do">전통주</a></li>
             <li><a href="">와인</a></li>
             <li><a href="">펀딩</a></li>
             <li><a href="">공동구매</a></li>

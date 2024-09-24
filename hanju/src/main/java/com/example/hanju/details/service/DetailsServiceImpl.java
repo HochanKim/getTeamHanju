@@ -20,7 +20,6 @@ public class DetailsServiceImpl implements DetailsService {
 	@Override
 	public HashMap<String, Object> searchDetails(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
-		System.out.println("service");
 			List<Details> details = detailsMapper.selectDetail(map);
 			resultMap.put("info", details);
 			resultMap.put("result", "success");

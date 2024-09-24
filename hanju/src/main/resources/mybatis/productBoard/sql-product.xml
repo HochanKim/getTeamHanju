@@ -15,34 +15,87 @@
 	
 	<!-- 전체상품 > 전통주 -->
 	<select id="getTradAlcohol" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
-		FROM HANJU_NORMAL_SELL NS
-		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
-		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
-		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
-		WHERE I.FILE_STATUS = 'T'
-		<if test="codeList != null">
-			AND P.TYPE IN 
-			<foreach collection="codeList" item="item" open="(" close=")" separator=",">
-				#{item}
-			</foreach>
-		</if>
-		<choose>
-			<when test="alcohol == 1">
-				(ALCOHOL >= 0 AND 10 > ALCOHOL)
-			</when>
-			<when test="alcohol == 2">
-				(ALCOHOL >= 10 AND 20 > ALCOHOL)
-			</when>
-			<when test="alcohol == 3">
-				(ALCOHOL >= 20 AND 30 > ALCOHOL)
-			</when>
-			<when test="alcohol == 4">
-				(ALCOHOL >= 30)
-			</when>
-		</choose>
-		AND NOT (P.TYPE = 'G' OR C.PARENT_CODE = 'W')
+	    SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+	    FROM HANJU_NORMAL_SELL NS
+	    INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
+	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+	    INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+	    <where>
+	        I.FILE_STATUS = 'T'
+	        <!-- P.TYPE이 codeList에 있을 경우 -->
+	        <if test="codeList != null">
+	            AND P.TYPE IN 
+	            <foreach collection="codeList" item="item" open="(" close=")" separator=",">
+	                #{item}
+	            </foreach>
+	        </if>
+	        
+	        <!-- 알코올 도수 -->
+	        <if test="alcohol != null">
+	            <choose>
+	                <when test="alcohol == 1">AND (ALCOHOL >= 0 AND 10 > ALCOHOL)</when>
+	                <when test="alcohol == 2">AND (ALCOHOL >= 10 AND 20 > ALCOHOL)</when>
+	                <when test="alcohol == 3">AND (ALCOHOL >= 20 AND 30 > ALCOHOL)</when>
+	                <when test="alcohol == 4">AND (ALCOHOL >= 30)</when>
+	            </choose>
+	        </if>
+	
+	        <!-- 당도 -->
+	        <if test="sweet != null">
+	            <choose>
+	                <when test="sweet == 1">AND (SWEET = 1 OR SWEET = 2)</when>
+	                <when test="sweet == 2">AND (SWEET = 3)</when>
+	                <when test="sweet == 3">AND (SWEET = 4 OR SWEET = 5)</when>
+	            </choose>
+	        </if>
+	
+	        <!-- 산미 -->
+	        <if test="sour != null">
+	            <choose>
+	                <when test="sour == 1">AND (SOUR = 1 OR SOUR = 2)</when>
+	                <when test="sour == 2">AND (SOUR = 3)</when>
+	                <when test="sour == 3">AND (SOUR = 4 OR SOUR = 5)</when>
+	            </choose>
+	        </if>
+	
+	        <!-- 바디감 -->
+	        <if test="body != null">
+	            <choose>
+	                <when test="body == 1">AND (BODY = 1 OR BODY = 2)</when>
+	                <when test="body == 2">AND (BODY = 3)</when>
+	                <when test="body == 3">AND (BODY = 4 OR BODY = 5)</when>
+	            </choose>
+	        </if>
+	
+	        <!-- 용량 -->
+	        <if test="capacity != null">
+	            <choose>
+	                <when test="capacity == 1">AND (400 > CAPACITY)</when>
+	                <when test="capacity == 2">AND (CAPACITY >= 400 AND 700 > CAPACITY)</when>
+	                <when test="capacity == 3">AND (CAPACITY >= 700)</when>
+	            </choose>
+	        </if>
+	        
+	        <!-- 원료 -->
+	        <if test="material != null">
+	            <choose>
+	                <when test="material == 1">AND MATERIAL = '사과'</when>
+	                <when test="material == 2">AND MATERIAL = '배'</when>
+	                <when test="material == 3">AND MATERIAL = '바나나'</when>
+	                <when test="material == 4">AND MATERIAL = '유자'</when>
+	                <when test="material == 5">AND MATERIAL = '딸기' OR MATERIAL = '복분자' OR MATERIAL LIKE '%베리%'</when>
+	                <when test="material == 6">AND MATERIAL = '무화과'</when>
+	                <when test="material == 7">AND MATERIAL = '레몬'</when>
+	                <when test="material == 8">AND MATERIAL = '귤' OR MATERIAL = '오렌지'</when>
+	                <when test="material == 9">AND MATERIAL = '파인애플'</when>
+	                <when test="material == 10">AND MATERIAL = '단호박'</when>
+	            </choose>
+	        </if>
+	        AND NOT (P.TYPE = 'G' OR C.PARENT_CODE = 'W')
+	    </where>
 	</select>
+
+	
 	<!-- 전체상품 > 선택 코드 리스트 -->
 	<select id="selectCodeList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleCodeModel">
 		SELECT C1.KIND, C2.CODE_NAME, C2.CODE

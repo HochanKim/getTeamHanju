@@ -22,6 +22,10 @@ public class TestController {
 	public String testPage(Model model) throws Exception{
 		return "test/test";
 	}
+	@RequestMapping("test/cal.do")
+	public String cal(Model model) throws Exception{
+		return "test/cal";
+	}
 	@RequestMapping("test/list.do")
 	public String testList(Model model) throws Exception{
 		return "test/list";

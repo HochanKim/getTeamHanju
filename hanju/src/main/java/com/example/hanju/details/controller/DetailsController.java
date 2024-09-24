@@ -21,9 +21,15 @@ public class DetailsController {
 	@Autowired
 	HttpSession session;
 	@RequestMapping("details/details.do")
-	public String testPage(Model model) throws Exception{
+	public String detailPage(Model model) throws Exception{
 		model.addAttribute("userId",session.getAttribute("sessionId"));
 		return "details/details";
+	}
+
+	@RequestMapping("details/detailsPickup.do")
+	public String detail(Model model) throws Exception{
+		model.addAttribute("userId",session.getAttribute("sessionId"));
+		return "details/detailsPickup";
 	}
 
 

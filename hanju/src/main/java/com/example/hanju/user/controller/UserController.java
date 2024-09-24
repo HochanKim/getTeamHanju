@@ -14,7 +14,6 @@ import com.google.gson.Gson;
 
 @Controller
 public class UserController {
-	
 	@Autowired
 	UserService userService;
 	//휴대폰인증
@@ -86,6 +85,4 @@ public class UserController {
 		HashMap<String, Object> result = userService.userLogin(map);
 		return new Gson().toJson(result);
 	}
-	
-
 }
