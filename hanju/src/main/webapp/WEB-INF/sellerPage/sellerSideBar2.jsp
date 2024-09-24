@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../../css/sellerPage/sellerSideBar.css" />
+    <link rel="stylesheet" href="../../css/sellerPage/sellerSideBar2.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
@@ -63,7 +63,7 @@
         },
         methods : {
             fnMenuClick(event) {
-                console.log("hi");
+                //event.srcElement.style.maxHeight = "200px";
             }
         },
         mounted() {
