@@ -26,6 +26,24 @@ public class SellerPageController {
 	@Autowired
 	SellerPageService sellerPageService;
 	
+	@RequestMapping("/sellerPage/test.do")
+    public String test(Model model) throws Exception {
+        return "/sellerPage/test";
+    }
+	
+	@RequestMapping("/sellerPage/sellerRoot.do")
+    public String sellerRoot(Model model) throws Exception {
+        return "/sellerPage/sellerRoot";
+    }
+	
+	@RequestMapping(value = "/sellerPage/test.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String testdox(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.test(map);
+		return new Gson().toJson(result);
+	}
+	
 	@RequestMapping("/sellerPage/sellerMain.do")
     public String groupSell(Model model) throws Exception {
         return "/sellerPage/sellerMain";
@@ -39,6 +57,11 @@ public class SellerPageController {
 	@RequestMapping("/sellerPage/modifyProductList.do")
     public String modifyProductList(Model model) throws Exception {
         return "/sellerPage/modifyProductList";
+    }
+	
+	@RequestMapping("/sellerPage/registerNormalSell.do")
+    public String registerNormalSell(Model model) throws Exception {
+		return "/sellerPage/registerNormalSell";
     }
 	
 	@RequestMapping("/sellerPage/modifyProduct.do")
@@ -58,18 +81,13 @@ public class SellerPageController {
 	@RequestMapping("/sellerPage/uploadProductImg.dox")
 	@ResponseBody
     public String uploadProductImg(@RequestParam("productId") int productId,
-    					 		   @RequestParam("thumbnail")   MultipartFile thumbnail,
-    					 		   @RequestParam("productImgs") MultipartFile[] productImgs,
+    							   @RequestParam("imageCode") String imageCode,
+    					 		   @RequestParam("productImg") MultipartFile productImg,
     					 		   HttpServletRequest request,
     					 		   HttpServletResponse response,
     					 		   Model model) {
-		
 		try {
-			uploadImg(productId, thumbnail  , "T");
-			
-			for (int i = 0; i < productImgs.length; i++) {
-				uploadImg(productId, productImgs[ i ], "P");
-			}
+			uploadImg(productId, productImg, imageCode);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -119,18 +137,31 @@ public class SellerPageController {
 		return new Gson().toJson(result);
 	}
 	
-	@RequestMapping(value = "/sellerPage/deleteBeforeImgs.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/sellerPage/deleteBeforeImg.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String deleteBeforeImgs(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+	public String deleteBeforeImg(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 
-		System.out.println(map);
-		
 		String path = System.getProperty("user.dir");
-		File targetFile = new File(path + "\\src\\main\\webapp\\upload\\프로젝트 셋팅.png");
+		String imageUrl = (String) map.get("imageUrl");
+		imageUrl = imageUrl.replace('/', '\\');
+		String fullPath = path + "\\src\\main\\webapp" + imageUrl;
+		
+		System.out.println(fullPath);
+		
+		// 파일 삭제
+		File targetFile = new File(fullPath);
 		targetFile.delete();
 		
-		//HashMap<String, Object> result = sellerPageService.modifyProduct(map);
-		HashMap<String, Object> result = new HashMap<>();
+		// DB 삭제
+		HashMap<String, Object> result = sellerPageService.deleteImage(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/registerSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String registerSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.registerSell(map);
 		return new Gson().toJson(result);
 	}
 	
@@ -151,7 +182,7 @@ public class SellerPageController {
         map.put("productId"  , productId);
         map.put("fileName"   , saveFileName);
         map.put("fileOrgName", fileOrgName);
-        map.put("filePath"   , "..\\..\\upload\\" + saveFileName);
+        map.put("filePath"   , "/upload/" + saveFileName);
         map.put("fileStatus" , type);
         
         sellerPageService.uploadProductImg(map);
