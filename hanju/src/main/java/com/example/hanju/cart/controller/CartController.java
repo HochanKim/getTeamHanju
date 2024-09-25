@@ -23,7 +23,6 @@ public class CartController {
         model.addAttribute("userId",session.getAttribute("sessionId"));
         return "cart/viewCart";
     }
-
     @RequestMapping("cart/cartPayment.do")
     public String cartPayment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
         model.addAttribute("userId",session.getAttribute("sessionId"));
@@ -33,7 +32,6 @@ public class CartController {
     @RequestMapping("cart/directPayment.do")
     public String directPayment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
         model.addAttribute("userId",session.getAttribute("sessionId"));
-        model.addAttribute("cartItem",new Gson().toJson(map));
         return "cart/directPayment";
     }
 }
