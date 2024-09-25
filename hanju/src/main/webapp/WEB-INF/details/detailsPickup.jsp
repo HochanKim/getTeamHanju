@@ -2,70 +2,85 @@
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
-    <meta http-equiv='x-ua-compatible' content='ie=edge'>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/details.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="https://unpkg.com/@vuepic/vue-datepicker@latest"></script>
-	<link rel="stylesheet" href="https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css"
+    />
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
-</head>
-<body>
-<div id="app">
-    <div class="container">
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
         <div class="thumb">
+          <div>
+            <img :src="img.productImage" class="thumb-img" />
+          </div>
+          <div class="thumb-content">
             <div>
-                <img :src="img.productImage" class="thumb-img">
+              <div class="font-size">{{ info.productName }}</div>
+              <div class="pad2">판매가격 :</div>
+              <div class="font-size">{{ info.price }}원</div>
             </div>
-            <div class="thumb-content">
-                <div>
-                    <div class="font-size ">{{info.productName}}</div>
-                    <div class="pad2">판매가격 :</div>
-                    <div class="font-size">{{info.price}}원</div>
-                </div>
-            </div>
+          </div>
         </div>
         <div class="side-bar">
-            <div class="font-size2">수량</div>
-            <div class="row pad">
-                <div>
-                    <button @click="decrease" class="q-control font-size2">-</button>
-                </div>
-                <div>
-                    <input type="text" class="input-box font-size2" @input="inputNumber" v-model="cnt">
-                </div>
-                <div>
-                    <button @click="increase" class="q-control font-size2">+</button>
-                </div>
+          <div class="font-size2">수량</div>
+          <div class="row pad">
+            <div>
+              <button @click="decrease" class="q-control font-size2">-</button>
             </div>
-            <div class="pad font-size2">총 상품가격</div>
-            <div class="font-size2">{{sum()}}원</div>
-            <div class="pad font-size2">
-                픽업매장 선택
+            <div>
+              <input
+                type="text"
+                class="input-box font-size2"
+                @input="inputNumber"
+                v-model="cnt"
+              />
             </div>
-            <button @click="modalOpen" class="side-button font-size2">픽업매장 선택</button>
-            <div class="modal-wrap" v-show="modalCheck" @click="modalOpen">
-                <div class="modal-container" @click.stop="">
-                    <h4>픽업매장 리스트</h4>
-                    <ul>
-                      <li v-for="info in list">
-                        {{info.storeName}}
-                        <button @click="pickUpStoreSelect(info.storeId)" class="modal-button" v-model="storeId">선택</button>
-                      </li>
-                    </ul>
-                    <button @click="modalOpen" class="modal-button">닫기</button>
-                <div class="modal-btn">
-               
-                </div>
+            <div>
+              <button @click="increase" class="q-control font-size2">+</button>
             </div>
+          </div>
+          <div class="pad font-size2">총 상품가격</div>
+          <div class="font-size2">{{ sum() }}원</div>
+          <div class="pad font-size2">픽업매장 선택</div>
+          <button @click="modalOpen" class="side-button font-size2">
+            픽업매장 선택
+          </button>
+          <div class="modal-wrap" v-show="modalCheck" @click="modalOpen">
+            <div class="modal-container" @click.stop="">
+              <h4>픽업매장 리스트</h4>
+              <ul>
+                <li v-for="info in list">
+                  {{ info.storeName }}
+                  <button
+                    @click="pickUpStoreSelect(info.storeId)"
+                    class="modal-button"
+                    v-model="storeId"
+                  >
+                    선택
+                  </button>
+                </li>
+              </ul>
+              <button @click="modalOpen" class="modal-button">닫기</button>
+              <div class="modal-btn"></div>
             </div>
-        <div class="">
-            <vue-date-picker  v-model="date" locale="ko"></vue-date-picker>
+          </div>
+          <div class="">
+            <vue-date-picker v-model="date" locale="ko"></vue-date-picker>
             <!-- <div class="modal-wrap" v-show="modalCheck2" @click="modalOpen2">
                 <div class="modal-container" @click.stop="">
                     <input type="date" v-model="pickUpDate">
@@ -75,234 +90,304 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             </div> -->
+          </div>
+          <div>
+            <button
+              v-if=""
+              @click="showToastMessage"
+              class="side-button font-size2"
+            >
+              장바구니
+            </button>
+          </div>
+          <div>
+            <button class="side-button font-size2">바로 구매하기</button>
+          </div>
         </div>
-            <div>
-                <button v-if="" @click="showToastMessage" class="side-button font-size2">장바구니</button>
-            </div>
-            <div>
-                <button class="side-button font-size2">바로 구매하기</button>
-            </div>
+        <div class="box" style="clear: both">
+          <div class="row">
+            <div class="title">주종</div>
+            <div class="box-content">{{ info.codeName }}</div>
+          </div>
+          <div class="row">
+            <div class="title">도수</div>
+            <div class="box-content">{{ info.alcohol }}%</div>
+          </div>
+          <div class="row">
+            <div class="title">용량</div>
+            <div class="box-content">{{ info.capacity }}ml</div>
+          </div>
+          <div class="row">
+            <div class="title">생산지</div>
+            <div class="box-content">{{ info.madeBy }}</div>
+          </div>
+          <div class="row">
+            <div class="title">주재료</div>
+            <div class="box-content">{{ info.material }}</div>
+          </div>
         </div>
-        <div class="box" style="clear: both;">
-            <div class="row">
-                <div class="title">주종</div>
-                <div class="box-content">{{info.codeName}}</div>
-            </div>
-            <div class="row">
-                <div class="title">도수</div>
-                <div class="box-content">{{info.alcohol}}%</div>
-            </div>
-            <div class="row">
-                <div class="title">용량</div>
-                <div class="box-content">{{info.capacity}}ml</div>
-            </div>
-            <div class="row">
-                <div class="title">생산지</div>
-                <div class="box-content">{{info.madeBy}}</div>
-            </div>
-            <div class="row">
-                <div class="title">주재료</div>
-                <div class="box-content">{{info.material}}</div>
-            </div>
-        </div>
-       
+
         <div class="box">
-            <div class="row">
-                <div class="title">단맛</div>
-                <div class="img-chart">
-                    <div v-if="info.sweet == 0"><img src="../../image/chart0.png"></div>
-                    <div v-if="info.sweet == 1"><img src="../../image/chart1.png"></div>
-                    <div v-if="info.sweet == 2"><img src="../../image/chart2.png"></div>
-                    <div v-if="info.sweet == 3"><img src="../../image/chart3.png"></div>
-                    <div v-if="info.sweet == 4"><img src="../../image/chart4.png"></div>
-                    <div v-if="info.sweet == 5"><img src="../../image/chart5.png"></div>
-                </div>
+          <div class="row">
+            <div class="title">단맛</div>
+            <div class="img-chart">
+              <div v-if="info.sweet == 0">
+                <img src="../../image/chart0.png" />
+              </div>
+              <div v-if="info.sweet == 1">
+                <img src="../../image/chart1.png" />
+              </div>
+              <div v-if="info.sweet == 2">
+                <img src="../../image/chart2.png" />
+              </div>
+              <div v-if="info.sweet == 3">
+                <img src="../../image/chart3.png" />
+              </div>
+              <div v-if="info.sweet == 4">
+                <img src="../../image/chart4.png" />
+              </div>
+              <div v-if="info.sweet == 5">
+                <img src="../../image/chart5.png" />
+              </div>
             </div>
-            <div class="row">
-                <div class="title">산미</div>
-                <div class="img-chart">
-                    <div v-if="info.sour == 0"><img src="../../image/chart0.png"></div>
-                    <div v-if="info.sour == 1"><img src="../../image/chart1.png"></div>
-                    <div v-if="info.sour == 2"><img src="../../image/chart2.png"></div>
-                    <div v-if="info.sour == 3"><img src="../../image/chart3.png"></div>
-                    <div v-if="info.sour == 4"><img src="../../image/chart4.png"></div>
-                    <div v-if="info.sour == 5"><img src="../../image/chart5.png"></div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="title">산미</div>
+            <div class="img-chart">
+              <div v-if="info.sour == 0">
+                <img src="../../image/chart0.png" />
+              </div>
+              <div v-if="info.sour == 1">
+                <img src="../../image/chart1.png" />
+              </div>
+              <div v-if="info.sour == 2">
+                <img src="../../image/chart2.png" />
+              </div>
+              <div v-if="info.sour == 3">
+                <img src="../../image/chart3.png" />
+              </div>
+              <div v-if="info.sour == 4">
+                <img src="../../image/chart4.png" />
+              </div>
+              <div v-if="info.sour == 5">
+                <img src="../../image/chart5.png" />
+              </div>
             </div>
-            <div class="row">
-                <div class="title">씁쓸</div>
-                <div class="img-chart">
-                    <div v-if="info.bitter == 0"><img src="../../image/chart0.png"></div>
-                    <div v-if="info.bitter == 1"><img src="../../image/chart1.png"></div>
-                    <div v-if="info.bitter == 2"><img src="../../image/chart2.png"></div>
-                    <div v-if="info.bitter == 3"><img src="../../image/chart3.png"></div>
-                    <div v-if="info.bitter == 4"><img src="../../image/chart4.png"></div>
-                    <div v-if="info.bitter == 5"><img src="../../image/chart5.png"></div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="title">씁쓸</div>
+            <div class="img-chart">
+              <div v-if="info.bitter == 0">
+                <img src="../../image/chart0.png" />
+              </div>
+              <div v-if="info.bitter == 1">
+                <img src="../../image/chart1.png" />
+              </div>
+              <div v-if="info.bitter == 2">
+                <img src="../../image/chart2.png" />
+              </div>
+              <div v-if="info.bitter == 3">
+                <img src="../../image/chart3.png" />
+              </div>
+              <div v-if="info.bitter == 4">
+                <img src="../../image/chart4.png" />
+              </div>
+              <div v-if="info.bitter == 5">
+                <img src="../../image/chart5.png" />
+              </div>
             </div>
-            <div class="row">
-                <div class="title">바디</div>
-                <div class="img-chart">
-                    <div v-if="info.body == 0"><img src="../../image/chart0.png"></div>
-                    <div v-if="info.body == 1"><img src="../../image/chart1.png"></div>
-                    <div v-if="info.body == 2"><img src="../../image/chart2.png"></div>
-                    <div v-if="info.body == 3"><img src="../../image/chart3.png"></div>
-                    <div v-if="info.body == 4"><img src="../../image/chart4.png"></div>
-                    <div v-if="info.body == 5"><img src="../../image/chart5.png"></div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="title">바디</div>
+            <div class="img-chart">
+              <div v-if="info.body == 0">
+                <img src="../../image/chart0.png" />
+              </div>
+              <div v-if="info.body == 1">
+                <img src="../../image/chart1.png" />
+              </div>
+              <div v-if="info.body == 2">
+                <img src="../../image/chart2.png" />
+              </div>
+              <div v-if="info.body == 3">
+                <img src="../../image/chart3.png" />
+              </div>
+              <div v-if="info.body == 4">
+                <img src="../../image/chart4.png" />
+              </div>
+              <div v-if="info.body == 5">
+                <img src="../../image/chart5.png" />
+              </div>
             </div>
-            <div class="row">
-                <div class="title">탄산</div>
-                <div class="img-chart">
-                    <div v-if="info.sparkling == 0"><img src="../../image/chart0.png"></div>
-                    <div v-if="info.sparkling == 1"><img src="../../image/chart1.png"></div>
-                    <div v-if="info.sparkling == 2"><img src="../../image/chart2.png"></div>
-                    <div v-if="info.sparkling == 3"><img src="../../image/chart3.png"></div>
-                    <div v-if="info.sparkling == 4"><img src="../../image/chart4.png"></div>
-                    <div v-if="info.sparkling == 5"><img src="../../image/chart5.png"></div>
-                </div>
+          </div>
+          <div class="row">
+            <div class="title">탄산</div>
+            <div class="img-chart">
+              <div v-if="info.sparkling == 0">
+                <img src="../../image/chart0.png" />
+              </div>
+              <div v-if="info.sparkling == 1">
+                <img src="../../image/chart1.png" />
+              </div>
+              <div v-if="info.sparkling == 2">
+                <img src="../../image/chart2.png" />
+              </div>
+              <div v-if="info.sparkling == 3">
+                <img src="../../image/chart3.png" />
+              </div>
+              <div v-if="info.sparkling == 4">
+                <img src="../../image/chart4.png" />
+              </div>
+              <div v-if="info.sparkling == 5">
+                <img src="../../image/chart5.png" />
+              </div>
             </div>
+          </div>
         </div>
-        <div style="clear: both;">
-            <img :src="img.detailImage" class="detail-img">
+        <div style="clear: both">
+          <img :src="img.detailImage" class="detail-img" />
         </div>
+      </div>
+      <!-- 토스트 메시지 요소 추가 -->
+      <div id="tost_message">장바구니에 추가되었습니다!</div>
+      <div id="login_message">로그인을 해주세요!</div>
+      <div id="jago_message">재고가 부족합니다. 재고 : {{ pStock }}</div>
     </div>
-    <!-- 토스트 메시지 요소 추가 -->
-    <div id="tost_message">장바구니에 추가되었습니다!</div>
-    <div id="login_message">로그인을 해주세요!</div>
-    <div id="jago_message">재고가 부족합니다. 재고 : {{pStock}}</div>
-</div>
 
-
-
-<script>
-const app = Vue.createApp({
-    data() {
-        return {
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
             info: {},
             img: {},
             number: 1,
             userId: "",
-            cnt : 1,
-            pStock : "",
+            cnt: 1,
+            pStock: "",
             modalCheck: false,
             modalCheck2: false,
             selectedDate: null,
-            list:[],
-            pickUpDate:"",
-            storeId:"",
-            date : new Date()
-
-        };
-    },
-    components: { 
-        VueDatePicker 
-	},
-    methods: {
-        fnGetList() {
+            list: [],
+            pickUpDate: "",
+            storeId: "",
+            date: new Date(),
+            pickupId: "",
+          };
+        },
+        components: {
+          VueDatePicker,
+        },
+        methods: {
+          fnGetList() {
             var self = this;
+            const asdf = {
+              pickupId: this.pickupId,
+            };
             $.ajax({
-                url: "detailsPickUp.dox",
-                dataType: "json",
-                type: "POST",
-                success: function(data) {
-                    self.info = data.pickUpProduct[0];
-                    self.list = data.pickUpProduct;
-                    self.img = data.img;
-                    console.log(self.list);
-                }
+              url: "detailsPickUp.dox",
+              dataType: "json",
+              type: "POST",
+              data: asdf,
+              success: function (data) {
+                self.info = data.pickUpProduct[0];
+                self.list = data.pickUpProduct;
+                self.img = data.img;
+                console.log(self.list);
+              },
             });
-        },
-        inputNumber(event) {
+          },
+          inputNumber(event) {
             this.number = event.target.value;
-        },
-        decrease() {
+          },
+          decrease() {
             if (this.cnt > 1) {
-                this.cnt--;
+              this.cnt--;
             }
-        },
-        modalOpen() {
-            this.modalCheck = !this.modalCheck
-        },
-        selectDate(){
+          },
+          modalOpen() {
+            this.modalCheck = !this.modalCheck;
+          },
+          selectDate() {
             console.log(this.pickUpDate);
             this.modalOpen2();
-        },
-        fnDatePicker(){
-            const date=document.getElementById("datePicker");
+          },
+          fnDatePicker() {
+            const date = document.getElementById("datePicker");
             date.showPicker("show");
             console.log(date.showPicker);
-        },
-        pickUpStoreSelect(storeId) {
+          },
+          pickUpStoreSelect(storeId) {
             console.log(storeId);
             this.modalOpen();
-        },
-        modalOpen2() {
-            this.modalCheck2 = !this.modalCheck2
-        },
-        increase() {
+          },
+          modalOpen2() {
+            this.modalCheck2 = !this.modalCheck2;
+          },
+          increase() {
             this.cnt++;
-        },
-        sum() {
+          },
+          sum() {
             return this.cnt * this.info.price;
-        },
-       async showToastMessage() {
-            if(this.userId == ""){
-                const tostMessage = document.getElementById('login_message');
-            tostMessage.classList.add('active'); // 토스트 메시지 표시
-            setTimeout(() => {
-                tostMessage.classList.remove('active'); // 1초 후에 숨김
-            }, 2000);
-                return;
+          },
+          async showToastMessage() {
+            if (this.userId == "") {
+              const tostMessage = document.getElementById("login_message");
+              tostMessage.classList.add("active"); // 토스트 메시지 표시
+              setTimeout(() => {
+                tostMessage.classList.remove("active"); // 1초 후에 숨김
+              }, 2000);
+              return;
             }
-           
+
             var self = this;
             const cart = {
-                productId : self.info.productId, 
-                userId : self.userId, 
-                productCount : self.cnt, 
-                kind : "P",
-                pickupDate : self.pickUpDate,
-                storeId : self.storeId                
-                }
-                const url="/cart/addCart.dox"
-                const res=await axios.post(url,cart)
-                const susses = res.data;
-                console.log(susses);
-                if(susses.status=="newAddCart" || susses.status =="oldAddCart"){
-                    const tostMessage = document.getElementById('tost_message');
-                    tostMessage.classList.add('active'); // 토스트 메시지 표시
-                    setTimeout(() => {
-                        tostMessage.classList.remove('active'); // 1초 후에 숨김
-                    }, 2000);
-                }else if(susses.status=="outOfStock"){
-                    this.pStock = susses.pStock 
-                    const tostMessage = document.getElementById('jago_message');
-                    tostMessage.classList.add('active'); // 토스트 메시지 표시
-                    setTimeout(() => {
-                        tostMessage.classList.remove('active'); // 1초 후에 숨김
-                    }, 2000);
-                }else{
-                    alert("서버 오류");
-                }
-
-
-        }
-    },
-    mounted() {
-        this.fnGetList();
-        this.userId="${userId}"
-    },
-    watch: {
-        number(val) {
+              productId: self.info.productId,
+              userId: self.userId,
+              productCount: self.cnt,
+              kind: "P",
+              pickupDate: self.pickUpDate,
+              storeId: self.storeId,
+            };
+            const url = "/cart/addCart.dox";
+            const res = await axios.post(url, cart);
+            const susses = res.data;
+            console.log(susses);
+            if (
+              susses.status == "newAddCart" ||
+              susses.status == "oldAddCart"
+            ) {
+              const tostMessage = document.getElementById("tost_message");
+              tostMessage.classList.add("active"); // 토스트 메시지 표시
+              setTimeout(() => {
+                tostMessage.classList.remove("active"); // 1초 후에 숨김
+              }, 2000);
+            } else if (susses.status == "outOfStock") {
+              this.pStock = susses.pStock;
+              const tostMessage = document.getElementById("jago_message");
+              tostMessage.classList.add("active"); // 토스트 메시지 표시
+              setTimeout(() => {
+                tostMessage.classList.remove("active"); // 1초 후에 숨김
+              }, 2000);
+            } else {
+              alert("서버 오류");
+            }
+          },
+        },
+        mounted() {
+          this.userId = "${userId}";
+          this.pickupId = "${pickupId}";
+          this.fnGetList();
+        },
+        watch: {
+          number(val) {
             const reg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z]/;
             if (reg.exec(val) !== null) {
-                this.number = val.replace(/[^0-9]/g, '');
+              this.number = val.replace(/[^0-9]/g, "");
             }
-        }
-    }
-});
-app.mount("#app");
-</script>
-</body>
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
 </html>

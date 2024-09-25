@@ -9,7 +9,7 @@
 		FROM HANJU_PRODUCT P
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
 		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
-		WHERE N.SELL_ID = '75'
+		WHERE N.SELL_ID = #{sellId}
 	</select>
 	<select id="selectProduct" parameterType="hashmap" resultType="Product">
 		SELECT *
@@ -28,7 +28,7 @@
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
 		INNER JOIN HANJU_PICKUP_STOCK S ON P.PRODUCT_ID = S.PRODUCT_ID
 		INNER JOIN HANJU_PICKUP_STORE S2 ON S.STORE_ID = S2.STORE_ID
-		WHERE P.PRODUCT_ID = '1'
+		WHERE P.PRODUCT_ID = #{pickupId}
 	</select>
 
 	<!--이미지 불러오는 쿼리-->

@@ -23,7 +23,7 @@ pageEncoding="UTF-8"%>
           <div>{{ item.productName }}</div>
           <div>{{ item.price }}</div>
           <div>찜한 날짜: {{ item.cDateTime }}</div>
-          <button @click="fnGoToDetailBoard(item.fkId)">
+          <button @click="fnGoToDetailBoard(item.fkId,item.type)">
             상세 페이지 가기
           </button>
           <button @click="fnItemDelete(item.productId)">찜목록에서 제거</button>
@@ -50,10 +50,12 @@ pageEncoding="UTF-8"%>
         this.favoriteList = res.data.list;
         console.log(res.data);
       },
-      fnGoToDetailBoard(fkId) {
-        alert(
-          "상세페이지에 제품 넘버 or 게시판 넘버를 넘기며 이동 넘버는 : " + fkId
-        );
+      fnGoToDetailBoard(fkId, type) {
+        if (type == "T") {
+          location.href = `/details/details.do?id=\${fkId}`;
+        } else if (type == "W") {
+          location.href = `/details/detailsPickup.do?id=\${fkId}`;
+        }
       },
       async fnItemDelete(productId) {
         const url = "deleteFavoriteItem.dox";
