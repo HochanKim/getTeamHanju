@@ -23,6 +23,14 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	HttpSession session;
 
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> userList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		List<UserModel> testList = userMapper.selectUser(map);
+		resultMap.put("result", testList.size());
+		return resultMap;
+	}
 	/* 아이디 중복체크 */
 	@DbExceptionHandle
 	@Override
@@ -70,6 +78,7 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
+	//모든 유저 리스트
 	@DbExceptionHandle
 	@Override
 	public Map<String, Object> allUserList() {
@@ -78,6 +87,7 @@ public class UserServiceImpl implements UserService{
 		map.put("list",list);
 		return map;
 	}
+	//유저의 찜 목록 리스트
 	@DbExceptionHandle
 	@Override
 	public Map<String, Object> getFavoriteItemList(Map<String, Object> map) {
@@ -87,6 +97,7 @@ public class UserServiceImpl implements UserService{
 		result.put("list",list);
 		return result;
 	}
+	//찜 목록 삭제
 	@DbExceptionHandle
 	@Override
 	public Map<String, Object> deleteFavoriteItem(Map<String, Object> map) {
@@ -96,7 +107,6 @@ public class UserServiceImpl implements UserService{
 		result.put("status","success");
 		return result;
 	}
-
 	/* 회원가입 */
 	@Override
 	public HashMap<String, Object> userJoin(HashMap<String, Object> map) {
@@ -113,8 +123,19 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
-	
-
+	//유저 한명 정보 불러오기
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object> getUserInfo(HashMap<String, Object> map) {
+		Map<String,Object> result= new HashMap<>();
+		List<UserModel> user = userMapper.selectUser(map);
+		if(user.isEmpty()){
+			result.put("status","error");
+		}else{
+			result.put("userInfo",user.get(0));
+		}
+		return result;
+	}
 	/* 회원정보수정 */
 	@Override
 	public HashMap<String, Object> userModify(HashMap<String, Object> map) {
@@ -132,7 +153,7 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
-
+	@DbExceptionHandle
 	@Override
 	public HashMap<String, Object> userDelete(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();

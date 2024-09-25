@@ -70,13 +70,14 @@ public class UserController {
 		return "user/reviewwrite";
 	}
 	
-	//필요에 의해 만들음. 모든 유저 정보 리스트를 불러오는 API
+	//모든 유저 정보 리스트
 	@GetMapping(value = "user/allUserList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String allUserList(Model model) throws Exception {
 		Map<String, Object> result = userService.allUserList();
 		return new Gson().toJson(result);
 	}
+	//유저 한명 정보 불러오기
 	@GetMapping(value = "user/getUserInfo.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getUserInfo(Model model, @RequestParam HashMap<String,Object> map) throws Exception {
@@ -84,8 +85,6 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 
-
-	
 	//아이디 중복체크
 	@RequestMapping(value = "user/idCheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -142,6 +141,7 @@ public class UserController {
 		Map<String, Object> result = userService.getFavoriteItemList(map);
 		return new Gson().toJson(result);
 	}
+	//찜 목록 삭제
 	@PostMapping(value = "user/deleteFavoriteItem.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String deleteFavoriteItem(Model model, @RequestBody Map<String, Object> map) throws Exception {
