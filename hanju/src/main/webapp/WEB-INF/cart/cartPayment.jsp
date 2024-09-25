@@ -78,93 +78,117 @@ pageEncoding="UTF-8"%>
         sumPrice: "",
         discountPrice: "",
         userInfo: "",
-        usePoint: 0,
+        usePoint: "0",
         cartNameList: [],
         userId: "",
       };
     },
     methods: {
-      addrChange(){
+      addrChange() {
         console.log(this.userId);
         console.log(this.userInfo.address);
       },
-      fnPointInputCheck(){
-        this.usePoint = this.usePoint.replace(/[^0-9]/g, '').replace(/^0+/, '');
+      fnPointInputCheck() {
+        this.usePoint = this.usePoint.replace(/[^0-9]/g, "").replace(/^0+/, "");
         const price = parseInt(this.discountPrice);
-        const use = parseInt(this.usePoint,10);
-        const full = parseInt(this.userInfo.point,10);
-        console.log(use>price);
-        if(use > this.discountPrice){
+        const use = parseInt(this.usePoint, 10);
+        const full = parseInt(this.userInfo.point, 10);
+        console.log(use > price);
+        if (use > this.discountPrice) {
           this.usePoint = this.discountPrice;
           console.log(this.usePoint);
           console.log(use);
           console.log(this.discountPrice);
           return;
-        };
-        if(use > this.userInfo.point){
+        }
+        if (use > this.userInfo.point) {
           this.usePoint = this.userInfo.point;
-        };
+        }
       },
       fnInit() {
         const itemList = ${cartItem};
         const userId = "${userId}";
-        if(itemList.length==0){
+        if (itemList.length == 0) {
           alert("구매 상품이 없습니다.");
           window.history.back();
           return;
         }
-        const userUrl = "/user/getUserInfo.dox"
-        axios.get(userUrl,{params:{userId:userId}}).then(({data})=>{
-          const user = data.userInfo;
-          this.userInfo = {
-            point:user.point,
-            address:user.address,
-            name:user.userName,
-            phone:user.phone
-          }
-        }).catch((error)=>{
-          console.log("유저정보 받아오기 오류");
-          console.log(error);
+        const userUrl = "/user/getUserInfo.dox";
+        axios
+          .get(userUrl, { params: { userId: userId } })
+          .then(({ data }) => {
+            const user = data.userInfo;
+            this.userInfo = {
+              point: user.point,
+              address: user.address,
+              name: user.userName,
+              phone: user.phone,
+            };
+          })
+          .catch((error) => {
+            console.log("유저정보 받아오기 오류");
+            console.log(error);
+          });
+        const url = "sumPrice.dox";
+        axios
+          .post(url, itemList)
+          .then(({ data }) => {
+            this.sumPrice = data.sum;
+            this.discountPrice = data.discountSum;
+          })
+          .catch((error) => {
+            alert("서버이상");
+            console.log(error);
+          });
+        const nameUrl = "getCartName.dox";
+        axios.post(nameUrl, itemList).then(({ data }) => {
+          this.cartNameList = data.nameList;
         });
-        const url = "sumPrice.dox"
-        axios.post(url,itemList).then(({data})=>{
-          this.sumPrice = data.sum;
-          this.discountPrice = data.discountSum;
-        }).catch((error)=>{
-          alert("서버이상")
-          console.log(error);
-        });
-        const nameUrl = "getCartName.dox"
-        axios.post(nameUrl,itemList).then(({data})=>{
-          this.cartNameList = data.nameList
-        })
       },
       fnPayment() {
         const itemList = ${cartItem};
-        axios.post("sumPrice.dox",itemList).then(({data})=>{
-          const sumPrice = data.sum;
-          const discountPrice = data.discountSum;
-          const point = this.usePoint;
-          const realPrice = discountPrice - point;
-          if(realPrice == 0){
-            if(confirm("포인트로 결제하시겠습니까?")){
-              this.fnSuccessPayment(itemList);
+        axios
+          .post("sumPrice.dox", itemList)
+          .then(({ data }) => {
+            const userId = this.userId;
+            const sumPrice = data.sum;
+            const discountPrice = data.discountSum;
+            const point = this.usePoint;
+            const realPrice = discountPrice - point;
+            console.log(itemList);
+            console.log(point);
+            console.log(userId);
+            if (realPrice == 0) {
+              if (confirm("포인트로 결제하시겠습니까?")) {
+                this.fnSuccessPayment(itemList, point, userId);
+              }
+              return;
             }
-            return;
-          }
-          const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`
-          requestPay(item, realPrice, () => {
-          this.fnSuccessPayment(itemList);
-        });
-        }).catch((error)=>{
-          alert("서버이상")
-          console.log(error);
-        });
+            const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`;
+            // requestPay(item, realPrice, () => {
+            //   this.fnSuccessPayment(itemList, point, userId);
+            // });
+            this.fnSuccessPayment(itemList, point, userId);
+          })
+          .catch((error) => {
+            alert("서버이상");
+            console.log(error);
+          });
       },
-      fnSuccessPayment(list){
-        console.log(list);
+      async fnSuccessPayment(list, point, userId) {
+        const submitForm = {
+          list: list,
+          userId: userId,
+          point: point,
+        };
+        console.log(submitForm);
+        const url = "cartPayment.dox";
+        const res = await axios.post(url, submitForm);
+        console.log(res.data);
+        console.log("보내준 cartIdList : " + list);
+        console.log("list.length : " + list.length);
         alert("결제완료");
-      }
+      },
     },
     mounted() {
       if ("${userId}" == "") {
@@ -172,7 +196,7 @@ pageEncoding="UTF-8"%>
         location.href = "/user/login.do";
         return;
       }
-      this.userId = "${userId}"
+      this.userId = "${userId}";
       this.fnInit();
     },
   });

@@ -54,7 +54,7 @@
     <insert id="addPickupCart" parameterType="hashmap">
         INSERT
         INTO HANJU_CART (CART_ID,USER_ID,PRODUCT_ID,PRODUCT_COUNT,KIND,STORE_ID,CDATETIME,PICKUP_DATE)
-        VALUES (CART_SEQ.NEXTVAL,#{userId},#{productId},#{productCount},#{kind},#{storeId},sysdate,sysdate)
+        VALUES (CART_SEQ.NEXTVAL,#{userId},#{productId},#{productCount},#{kind},#{storeId},sysdate,#{pickupDate})
     </insert>
     <select id="pickupCartCheck" parameterType="hashmap" resultType="CartCheckDto">
         SELECT CART_ID, PRODUCT_COUNT

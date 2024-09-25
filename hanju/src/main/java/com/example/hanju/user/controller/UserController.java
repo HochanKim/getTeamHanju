@@ -3,6 +3,7 @@ package com.example.hanju.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import com.google.gson.Gson;
 public class UserController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	HttpSession session;
 	//휴대폰인증
 	@RequestMapping("user/joinbtn.do")
 	public String joinBtn(Model model) throws Exception{
@@ -45,12 +48,15 @@ public class UserController {
 	@RequestMapping("user/modify.do")
 	public String modify(Model model) throws Exception{
 		return "user/modify";
-		
 	}
 	@RequestMapping("user/modifybefore.do")
 	public String modifybefore(Model model) throws Exception{
 		return "user/modifybefore";
-		
+	}
+	@RequestMapping("user/favorite.do")
+	public String favoritePage(Model model) throws Exception{
+		model.addAttribute("userId",session.getAttribute("sessionId"));
+		return "user/favoritePage";
 	}
 	
 	//필요에 의해 만들음. 모든 유저 정보 리스트를 불러오는 API
@@ -60,6 +66,14 @@ public class UserController {
 		Map<String, Object> result = userService.allUserList();
 		return new Gson().toJson(result);
 	}
+	@GetMapping(value = "user/getUserInfo.dox", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getUserInfo(Model model, @RequestParam HashMap<String,Object> map) throws Exception {
+		Map<String, Object> result = userService.getUserInfo(map);
+		return new Gson().toJson(result);
+	}
+
+
 	
 	//회원조회
 	@RequestMapping(value = "user/idCheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -85,4 +99,19 @@ public class UserController {
 		HashMap<String, Object> result = userService.userLogin(map);
 		return new Gson().toJson(result);
 	}
+	//찜 목록 리스트 불러오기
+	@GetMapping(value = "user/getFavoriteItemList.dox", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getFavoriteItemList(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		Map<String, Object> result = userService.getFavoriteItemList(map);
+		return new Gson().toJson(result);
+	}
+	@PostMapping(value = "user/deleteFavoriteItem.dox", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteFavoriteItem(Model model, @RequestBody Map<String, Object> map) throws Exception {
+		Map<String, Object> result = userService.deleteFavoriteItem(map);
+		return new Gson().toJson(result);
+	}
+
+
 }

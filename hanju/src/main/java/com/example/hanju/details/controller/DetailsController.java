@@ -21,14 +21,17 @@ public class DetailsController {
 	@Autowired
 	HttpSession session;
 	@RequestMapping("details/details.do")
-	public String detailPage(Model model) throws Exception{
+	public String detailPage(Model model, @RequestParam String id) throws Exception{
+		System.out.println(id);
 		model.addAttribute("userId",session.getAttribute("sessionId"));
+		model.addAttribute("boardId",id);
 		return "details/details";
 	}
 
 	@RequestMapping("details/detailsPickup.do")
-	public String detail(Model model) throws Exception{
+	public String detail(Model model,@RequestParam String id) throws Exception{
 		model.addAttribute("userId",session.getAttribute("sessionId"));
+		model.addAttribute("pickupId",id);
 		return "details/detailsPickup";
 	}
 
@@ -36,9 +39,19 @@ public class DetailsController {
 	@RequestMapping(value = "details/details.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchDetails(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
 		HashMap<String, Object> result = detailsService.searchDetails(map);
 		result.put("img", detailsService.searchItemImage(map)) ;
-		System.out.println("controller");
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(value = "details/detailsPickUp.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchDetailsPickUp(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = detailsService.searchDetailsPickup(map);
+		result.put("img", detailsService.searchItemImage(map)) ;
+		System.out.println("controller" + result);
 		return new Gson().toJson(result);
 	}
 

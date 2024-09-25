@@ -56,3 +56,13 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+.user {
+  font-weight: bold;
+  font-size: 24px;
+}
+.imgBox {
+  width: 200px;
+}
+img {
+  width: 100%;
+}

@@ -23,13 +23,13 @@ public class CartApiController {
     @GetMapping(value = "cart/viewCart.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String viewCart(Model model) throws Exception {
-        Map<String,Object> tempMap = new HashMap<>();
-        if(session.getAttribute("sessionId") == null){
-            tempMap.put("status","notLogin");
+        Map<String, Object> tempMap = new HashMap<>();
+        if (session.getAttribute("sessionId") == null) {
+            tempMap.put("status", "notLogin");
             return new Gson().toJson(tempMap);
         }
-        tempMap.put("userId",session.getAttribute("sessionId"));
-        System.out.println("로그인유저 : "+tempMap);
+        tempMap.put("userId", session.getAttribute("sessionId"));
+        System.out.println("로그인유저 : " + tempMap);
         Map<String, Object> result = cartService.viewCart(tempMap);
         return new Gson().toJson(result);
     }
@@ -40,12 +40,15 @@ public class CartApiController {
         Map<String, Object> result = cartService.cartCountChange(map);
         return new Gson().toJson(result);
     }
+
     @PostMapping(value = "cart/cartItemDelete.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String cartItemDelete(Model model, @RequestBody Map<String, Object> map) throws Exception {
+
         Map<String, Object> result = cartService.cartItemDelete(map);
         return new Gson().toJson(result);
     }
+
     @PostMapping(value = "cart/sumPrice.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String sumPrice(Model model, @RequestBody List<String> list) throws Exception {
@@ -55,18 +58,27 @@ public class CartApiController {
         Map<String, Object> result = cartService.cartSumPrice(list);
         return new Gson().toJson(result);
     }
+
     @PostMapping(value = "cart/addCart.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String addCart(Model model, @RequestBody Map<String,Object> map) throws Exception {
+    public String addCart(Model model, @RequestBody Map<String, Object> map) throws Exception {
         Map<String, Object> result = cartService.addCart(map);
         return new Gson().toJson(result);
     }
+
     @PostMapping(value = "cart/getCartName.dox", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String getCartName(Model model, @RequestBody List<String> list) throws Exception {
         //list = [cartId들]
         //result = {nameList:[cartId 에 따른 제품 이름]}
         Map<String, Object> result = cartService.getCartName(list);
+        return new Gson().toJson(result);
+    }
+
+    @PostMapping(value = "cart/cartPayment.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String cartPayment(Model model, @RequestBody Map<String, Object> map) throws Exception {
+        Map<String, Object> result = cartService.cartPayment(map);
         return new Gson().toJson(result);
     }
 

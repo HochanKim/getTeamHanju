@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.hanju.user.model.Favorite;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.hanju.user.model.UserModel;
@@ -11,15 +12,19 @@ import com.example.hanju.user.model.UserModel;
 
 @Mapper
 public interface UserMapper {
-	
-	void insertUser(HashMap<String, Object> map);
-	
-	List<UserModel> selectUser(HashMap<String, Object> map);
 
-	 UserModel loginUser(HashMap<String, Object> map);
+    void insertUser(HashMap<String, Object> map);
 
-	List<UserModel> allUserList();
+    List<UserModel> selectUser(HashMap<String, Object> map);
 
-	
-	
+    UserModel loginUser(HashMap<String, Object> map);
+
+    List<UserModel> allUserList();
+
+    void pointChange(Map<String,Object> map);
+
+    List<Favorite> getFavoriteItemList(Map<String,Object> map);
+    void deleteFavoriteItem(Map<String,Object> map);
+
+
 }
