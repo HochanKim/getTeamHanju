@@ -27,6 +27,7 @@ public class DetailsServiceImpl implements DetailsService {
 			resultMap.put("comment", comment);
 			resultMap.put("result", "success");
 			resultMap.put("message", "조회되었음");
+		System.out.println("아무거나" + details);
 
 		return resultMap;
 	}
