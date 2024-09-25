@@ -8,30 +8,24 @@
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</select>
-	
-	<select id="infoUser" parameterType="hashmap" resultType="UserModel">	
+	<select id="infoUser" parameterType="hashmap" resultType="UserModel">
 		SELECT *
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</select>
-	
-	
-	<select id="loginUser" parameterType="hashmap" resultType="UserModel">	
+	<select id="loginUser" parameterType="hashmap" resultType="UserModel">
 		SELECT * 
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} AND PASSWORD = #{password}
 	</select>
-	
 	<select id="allUserList" parameterType="hashmap" resultType="UserModel">
 		SELECT *
 		FROM HANJU_USER
 	</select>
-	
 	<insert id="insertUser" parameterType="hashmap" >
 		INSERT INTO HANJU_USER
 		VALUES(#{userId},#{password},#{userName},#{status},#{phone},#{email},TO_DATE(#{birthday}, 'YYYY-MM-DD'),SYSDATE,0,#{zipNo},#{roadAddrPart1},#{addrDetail})
 	</insert>
-	
 	<update id="modifyUser" parameterType="hashmap">
 		UPDATE HANJU_USER
 		SET
@@ -45,15 +39,14 @@
 			ADDRDETAIL=#{addrDetail}
 		WHERE USER_ID = #{userId} 
 	</update>
-	
-	<delete id="deleteUser" parameterType="hashmap">	
+	<delete id="deleteUser" parameterType="hashmap">
 		DELETE
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</delete>
 	<update id="pointChange" parameterType="hashmap">
 		UPDATE HANJU_USER
-		SET POINT = POINT + #{point}
+		SET POINT = POINT - #{point}
 		WHERE USER_ID = #{userId}
 	</update>
 	<select id="getFavoriteItemList" parameterType="hashmap" resultType="Favorite">

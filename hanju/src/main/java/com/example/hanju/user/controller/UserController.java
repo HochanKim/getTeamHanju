@@ -81,6 +81,7 @@ public class UserController {
 	@GetMapping(value = "user/getUserInfo.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getUserInfo(Model model, @RequestParam HashMap<String,Object> map) throws Exception {
+		System.out.println(map);
 		Map<String, Object> result = userService.getUserInfo(map);
 		return new Gson().toJson(result);
 	}

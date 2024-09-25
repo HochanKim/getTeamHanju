@@ -113,4 +113,18 @@
             #{id}
         </foreach>
     </select>
+    <insert id="addBill" parameterType="CartEntity" useGeneratedKeys="true" keyProperty="billId">
+        <selectKey keyProperty="billId" resultType="int" order="BEFORE">
+            SELECT BILL_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT
+        INTO HANJU_BILL (BILL_ID,PRODUCT_ID,PRODUCT_COUNT,USER_ID,CDATETIME,STATUS)
+        VALUES (#{billId},#{productId},#{productCount},#{userId},sysdate,'B')
+    </insert>
+    <insert id="addCartBill" parameterType="hashmap">
+        INSERT
+        INTO HANJU_PICKUP_BILL (BILL_ID,STORE_ID,PICKUP_DATE,PICKUP_STATUS)
+        VALUES (#{billId},#{storeId},#{pickupDate},'B')
+    </insert>
+
 </mapper>

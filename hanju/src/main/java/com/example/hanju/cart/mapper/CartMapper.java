@@ -24,4 +24,6 @@ public interface CartMapper {
     List<CartCheckDto> cartCheck(Map<String, Object> map);
     int updateCart(Map<String, Object> map);
     List<String> getCartName(Map<String,Object> map);
+    void addBill(CartEntity cart);
+    void addCartBill(Map<String,Object> map);
 }

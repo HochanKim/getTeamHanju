@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class CartEntity {
 
+    private int billId;
     private String userId;
     private String productId;
     private int productCount;

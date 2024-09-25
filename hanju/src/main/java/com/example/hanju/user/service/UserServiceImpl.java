@@ -128,11 +128,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Map<String, Object> getUserInfo(HashMap<String, Object> map) {
 		Map<String,Object> result= new HashMap<>();
-		List<UserModel> user = userMapper.selectUser(map);
-		if(user.isEmpty()){
-			result.put("status","error");
+		UserModel user = userMapper.infoUser(map);
+		if(user!=null){
+			result.put("userInfo",user);
 		}else{
-			result.put("userInfo",user.get(0));
+			result.put("status","error");
 		}
 		return result;
 	}

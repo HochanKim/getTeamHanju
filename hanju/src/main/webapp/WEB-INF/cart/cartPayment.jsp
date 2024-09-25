@@ -164,7 +164,7 @@ pageEncoding="UTF-8"%>
               }
               return;
             }
-            const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`;
+            // const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`;
             // requestPay(item, realPrice, () => {
             //   this.fnSuccessPayment(itemList, point, userId);
             // });

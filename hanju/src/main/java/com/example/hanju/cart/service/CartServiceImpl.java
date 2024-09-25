@@ -169,11 +169,22 @@ public class CartServiceImpl implements CartService {
     public Map<String, Object> cartPayment(Map<String, Object> map) {
         Map<String, Object> result = new HashMap<>();
         List<Integer> list = (List<Integer>) map.get("list");
+
         System.out.println(map);
         userMapper.pointChange(map);
         for(int cartId : list){
             result.put("cartId",cartId);
-
+            CartEntity cart = cartMapper.getCartItem(result);
+            cartMapper.addBill(cart);
+            int seq = cart.getBillId();
+            System.out.println(seq);
+            if(cart.getKind().equals("P")){
+                result.put("billId",seq);
+                result.put("storeId",cart.getStoreId());
+                result.put("pickupDate",cart.getPickupDate());
+                cartMapper.addCartBill(result);
+            }
+            cartMapper.cartItemDelete(result);
         }
         return result;
     }
