@@ -318,7 +318,6 @@
             data : nparmap,
             success : function(data) { 
               console.log(data);
-              self.password = data.password
               self.userName = data.userName
               self.phone = data.phone
               self.email = data.email

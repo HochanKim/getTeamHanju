@@ -13,6 +13,8 @@ public interface UserService {
 	HashMap<String, Object> userJoin(HashMap<String, Object> map);
 	//유저 한명 정보
 	Map<String,Object> getUserInfo(HashMap<String,Object> map);
+	//회원정보 수정
+	HashMap<String, Object> userModify(HashMap<String, Object> map);
 	//모든 유저 정보
 	Map<String, Object> allUserList();
 	

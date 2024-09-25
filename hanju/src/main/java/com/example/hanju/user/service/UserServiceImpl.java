@@ -42,9 +42,9 @@ public class UserServiceImpl implements UserService{
 				resultMap.put("code", 400);
 				List<UserModel> idCheck = userMapper.selectUser(map); 
 				if(idCheck == null) {	//아이디가 틀렸다.(id가 null이다)
-					resultMap.put("message", "아이디가 틀렸다");
+					resultMap.put("message", "아이디가 틀렸습니다");
 				}else {
-					resultMap.put("message", "비밀번호가 틀렸다");
+					resultMap.put("message", "비밀번호가 틀렸습니다");
 				}
 					
 			}else { //로그인 성공
@@ -99,6 +99,22 @@ public class UserServiceImpl implements UserService{
 			result.put("userInfo",user.get(0));
 		}
 		return result;
+	}
+
+	@Override
+	public HashMap<String, Object> userModify(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			userMapper.modifyUser(map);
+			System.out.println(map);
+			resultMap.put("result", "success");
+			resultMap.put("message", "수정되었습니다.");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", "예기치 못한 문제가 발생했습니다. \n나중에 다시 시도해주세요.");
+		}
+		return resultMap;
 	}
 
 

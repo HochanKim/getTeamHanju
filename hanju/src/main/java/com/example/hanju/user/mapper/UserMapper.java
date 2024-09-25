@@ -16,7 +16,9 @@ public interface UserMapper {
 	
 	List<UserModel> selectUser(HashMap<String, Object> map);
 
-	 UserModel loginUser(HashMap<String, Object> map);
+	UserModel loginUser(HashMap<String, Object> map);
+	
+	List<UserModel> modifyUser(HashMap<String, Object> map);
 
 	List<UserModel> allUserList();
 

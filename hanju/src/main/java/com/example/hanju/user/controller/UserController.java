@@ -85,4 +85,13 @@ public class UserController {
 		HashMap<String, Object> result = userService.userLogin(map);
 		return new Gson().toJson(result);
 	}
+	
+	//회원정보 수정
+		@RequestMapping(value = "user/modify.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String modifyUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+			System.out.println(map);
+			HashMap<String, Object> result = userService.userModify(map);
+			return new Gson().toJson(result);
+		}
 }
