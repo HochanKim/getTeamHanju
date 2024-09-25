@@ -1,0 +1,62 @@
+#sideBar {
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    font-weight: bold;
+}
+
+#sideBar #sideTitle {
+    width: 100%;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 16px;
+}
+
+#sideBar #sideBox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+#sideBar a {
+    text-decoration: none;
+    color: black;
+}
+
+#sideBar .normalMenu {
+    width: 100%;
+    margin: 16px;
+    font-size: 16px;
+}
+
+#sideBar .menu {
+    width: 100%;
+    margin: 16px;
+    font-size: 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+#sideBar .subMenu {
+    width: 100%;
+    font-size: 14px;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.5s ease;
+}
+
+.subMenu > div {
+    width: 100%;
+    margin: 16px;
+}
