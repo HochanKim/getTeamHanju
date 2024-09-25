@@ -27,7 +27,8 @@
 			#{body},
 			#{stock},
 			#{capacity},
-			#{material}
+			#{material},
+			SYSDATE
 		)
 	</insert>
 	

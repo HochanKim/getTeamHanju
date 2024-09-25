@@ -38,7 +38,7 @@ select {
     width:120px;
     text-align: center;
 }
-.material {
+.materialList {
     width:150px;
 }
 
@@ -69,12 +69,21 @@ ul {
     height:640px;
 }
 .productName {
-    font-size:22px;
+    font-size:20px;
     font-weight: 500;
 }
 .price {
     font-size:18px;
     font-weight: bold;
+    display: inline;
+}
+.mini {
+    font-size:12px;
+    font-weight:500;
+    margin-left:20px;
+}
+.title {
+    margin:0;
 }
 
 /* 이미지 */
@@ -89,4 +98,12 @@ ul {
 img:hover {
     transform: scale(1.1, 1.1); 
     transition-duration: 0.5s;
+}
+
+/* 와인 픽업 페이지 */
+.productName.wine {
+    font-size: 19px;
+}
+.material, .alcohol {
+    font-weight: 700;
 }

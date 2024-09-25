@@ -19,7 +19,7 @@ pageEncoding="UTF-8"%>
               <a href="productList.do">
                   <span class="selected">전체상품</span>
               </a>
-              <a href="javascript:void(0);">
+              <a href="newProducts.do">
                   <span>신상품</span>
               </a>
               <a href="javascript:void(0);">
@@ -77,37 +77,39 @@ pageEncoding="UTF-8"%>
               <option value="2">:: 400ml ~ 700ml ::</option>
               <option value="3">:: 700ml 이상 ::</option>
             </select>
-            <select v-model="material" @change="fnList" class="material">
+            <select v-model="material" @change="fnList" class="materialList">
               <option value="">-- 원료(과채류) --</option>
               <option value="1">:: 사과 ::</option>
               <option value="2">:: 배 ::</option>
-              <option value="3">:: 바나나 ::</option>
+              <option value="3">:: 고구마 ::</option>
               <option value="4">:: 유자 ::</option>
               <option value="5">:: 베리류 ::</option>
               <option value="6">:: 무화과 ::</option>
               <option value="7">:: 레몬 ::</option>
-              <option value="8">:: 귤/오렌지 ::</option>
-              <option value="9">:: 파인애플 ::</option>
-              <option value="10">:: 단호박 ::</option>
+              <option value="8">:: 복숭아 ::</option>
+              <option value="9">:: 단호박 ::</option>
+              <option value="10">:: 기타 ::</option>
             </select>
         </section>
         <!-- 상품 리스트 영역 -->
         <section class="productContainer">
             <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
             <ul v-for="item in products">
-                <li class="productList">
-                    <a href="javascript:void(0); ">
-                        <div>
-                            <div class="img-wrap">
-                                <img :src="item.filePath" :alt="item.fileOrgName" />
-                            </div>
-                            <p class="productName">{{item.productName}}</p>
-                            <p class="price">\ {{item.priceComma}}</p>
-                            <p>{{item.alcohol}} %</p>
-                            <p>평점 0.0</p>
-                        </div>
-                    </a>
-                </li>
+              <li class="productList">
+                <a href="javascript:void(0); ">
+                  <div>
+                    <div class="img-wrap">
+                      <img :src="item.filePath" :alt="item.fileOrgName" />
+                    </div>
+                    <p class="productName">{{ item.productName }}</p>
+                    <p class="price">\ {{ item.priceComma }}</p>
+                    <span class="mini">생산지 {{ item.madeBy }}</span>
+                    <p class="alcohol">
+                      <span class="mini title">알코올 도수</span> {{ item.alcohol }} %</p>
+                    <p>평점 0.0</p>
+                  </div>
+                </a>
+              </li>
             </ul>
         </section>
     </div>
@@ -126,7 +128,7 @@ pageEncoding="UTF-8"%>
         sour : "",        // 산미
         body : "",        // 바디감
         capacity : "",    // 용량
-        material : ""     // 원료(과실주)
+        material : ""     // 원료
       };
     },
     methods: {

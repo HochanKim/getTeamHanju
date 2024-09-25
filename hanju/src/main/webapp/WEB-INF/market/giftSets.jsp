@@ -19,7 +19,7 @@ pageEncoding="UTF-8"%>
                 <a href="productList.do">
                     <span class="selected">전체상품</span>
                 </a>
-                <a href="javascript:void(0);">
+                <a href="newProducts.do">
                     <span>신상품</span>
                 </a>
                 <a href="javascript:void(0);">
@@ -44,19 +44,21 @@ pageEncoding="UTF-8"%>
             <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
             <ul v-for="item in products">
                 <li class="productList">
-                    <a href="javascript:void(0); ">
-                        <div>
-                            <div class="img-wrap">
-                                <img :src="item.filePath" :alt="item.fileOrgName" />
-                            </div>
-                            <p class="productName">{{item.productName}}</p>
-                            <p class="price">\ {{item.priceComma}}</p>
-                            <p>{{item.alcohol}} %</p>
-                            <p>평점 0.0</p>
-                        </div>
-                    </a>
+                  <a href="javascript:void(0); ">
+                    <div>
+                      <div class="img-wrap">
+                        <img :src="item.filePath" :alt="item.fileOrgName" />
+                      </div>
+                      <p class="productName">{{ item.productName }}</p>
+                      <p class="price">\ {{ item.priceComma }}</p>
+                      <span class="mini">생산지 {{ item.madeBy }}</span>
+                      <p class="alcohol">
+                        <span class="mini title">알코올 도수</span> {{ item.alcohol }} %</p>
+                      <p>평점 0.0</p>
+                    </div>
+                  </a>
                 </li>
-            </ul>
+              </ul>
         </section>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>

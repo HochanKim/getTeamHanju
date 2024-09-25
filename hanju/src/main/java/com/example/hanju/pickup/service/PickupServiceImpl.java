@@ -6,6 +6,8 @@ import com.example.hanju.main.mapper.MainMapper;
 import com.example.hanju.main.model.PickUpStore;
 import com.example.hanju.pickup.mapper.PickupMapper;
 import com.example.hanju.pickup.model.dto.PickupBoardDto;
+import com.example.hanju.productBoard.model.entity.SaleCodeModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,23 @@ public class PickupServiceImpl implements PickupService {
         result.put("result",mainMapper.selectProduct(map));
         return result;
     }
+
+    @DbExceptionHandle
+	@Override	// getPickUpList, 와인 픽업 리스트
+	public HashMap<String, Object> getPickUpList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		List<PickupBoardDto> pickUp = pickupMapper.getPickUpList(map);
+		resultMap.put("pickup", pickUp);
+		return resultMap;
+	}
+
+	@Override	// selectCodeList, 코드 리스트
+	public HashMap<String, Object> selectCodeList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<PickupBoardDto> codeList = pickupMapper.selectCodeList(map);
+		resultMap.put("list", codeList);
+		return resultMap;
+	}
 
 
 }
