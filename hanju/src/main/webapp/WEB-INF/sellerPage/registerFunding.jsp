@@ -89,7 +89,7 @@
                     </td>
                 </tr>
             </table>
-            <button>펀딩 등록</button>
+            <button @click="fnTest">펀딩 등록</button>
         </div>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>
@@ -139,6 +139,9 @@
                 });
                 this.inputOptionName  = "",
                 this.inputOptionPrice = ""
+            },
+            fnTest() {
+                console.log(this.endDate.getFullYear() );
             }
         },
         mounted() {
