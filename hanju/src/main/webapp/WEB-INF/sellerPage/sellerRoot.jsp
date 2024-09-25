@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/sellerPage/sellerRoot.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
+    <script src="../../js/sellerSideBar3.js"></script>
     <title>첫번째 페이지</title>
 </head>
 
@@ -16,7 +17,7 @@
         <jsp:include page="sellerSideBar2.jsp"></jsp:include>
         <div id="app">
             <div id="container">
-                
+                <sample2-component></sample2-component>
             </div>
             <button @click="fnTest">test</button>
         </div>
@@ -43,5 +44,5 @@
             
         },
     });
-    app.mount("#app");
+    const appObj = app.mount("#app");
 </script>

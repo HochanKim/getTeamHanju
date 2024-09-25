@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +70,19 @@ public class SellerPageController {
         request.setAttribute("productId", map.get("productId") );
 		return "/sellerPage/modifyProduct";
     }
+	
+	@RequestMapping("/sellerPage/registerFunding.do")
+    public String registerFunding(Model model) throws Exception {
+		return "/sellerPage/registerFunding";
+    }
+	
+	@RequestMapping(value = "/sellerPage/getProductCodeList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getProductCodeList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getProductCodeList(map);
+		return new Gson().toJson(result);
+	}
 	
 	@RequestMapping(value = "/sellerPage/registerProduct.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -192,6 +206,9 @@ public class SellerPageController {
     private String genSaveFileName(String extName) {
         String fileName = "";
         
+        Random random = new Random();
+        int randomNum = random.nextInt(100000000);
+        
         Calendar calendar = Calendar.getInstance();
         fileName += calendar.get(Calendar.YEAR);
         fileName += calendar.get(Calendar.MONTH);
@@ -200,6 +217,7 @@ public class SellerPageController {
         fileName += calendar.get(Calendar.MINUTE);
         fileName += calendar.get(Calendar.SECOND);
         fileName += calendar.get(Calendar.MILLISECOND);
+        fileName += randomNum;
         fileName += extName;
         
         return fileName;
