@@ -58,6 +58,9 @@ pageEncoding="UTF-8"%>
         }
       },
       async fnItemDelete(productId) {
+        if (!confirm("찜목록에서 제거 하시겠습니까?")) {
+          return;
+        }
         const url = "deleteFavoriteItem.dox";
         const submitForm = {
           userId: this.userId,
