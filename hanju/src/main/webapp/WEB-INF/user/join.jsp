@@ -4,7 +4,7 @@
 
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/userCss/join.css" />
+    <link rel="stylesheet" href="../../css/userCss/join.css"/>
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
     <title>document</title>

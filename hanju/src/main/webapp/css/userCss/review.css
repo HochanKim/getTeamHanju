@@ -1,0 +1,60 @@
+#container{
+    
+}
+#tit{
+    
+}
+
+#stateReview{
+    display: flex;
+    width: 100%;
+    max-width: 1144px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+.ing{
+    margin-left: 60px;
+}
+
+.com{
+    margin-left: 40px;
+}
+
+table{
+    table-layout: fixed;
+    width: 100%;
+    border-top: 2px solid #d6d6d6;
+    border-bottom: 1px solid #e6e6e6;
+    border-spacing: 0;
+}
+
+th{
+    padding: 11px 0 10px;
+    background: #fafafa;
+}
+
+tr td {
+    padding: 30px 5px;
+    color: #333;
+    text-align: center;
+    border-top: 1px solid #e6e6e6;
+    line-height: 18px;
+}
+
+.product{
+    padding-left: 20px;
+}
+
+.writeBtn{
+    width: 80px;
+    line-height: 28px;
+    border: 1px solid #dadde0;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}

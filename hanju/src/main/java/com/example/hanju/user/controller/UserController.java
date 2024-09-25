@@ -41,6 +41,12 @@ public class UserController {
 	public String mypage(Model model) throws Exception{
 		return "user/mypage";
 	}
+	//리뷰페이지
+	@RequestMapping("user/review.do")
+	public String review(Model model) throws Exception{
+	return "user/review";
+	}
+	
 	//회원정보수정
 	@RequestMapping("user/modify.do")
 	public String modify(Model model) throws Exception{
@@ -52,6 +58,11 @@ public class UserController {
 		return "user/modifybefore";
 		
 	}
+	//리뷰쓰기
+	@RequestMapping("user/reviewwrite.do")
+	public String reviewwrite(Model model) throws Exception{
+		return "user/reviewwrite";
+	}
 	
 	//필요에 의해 만들음. 모든 유저 정보 리스트를 불러오는 API
 	@GetMapping(value = "user/allUserList.dox", produces = "application/json;charset=UTF-8")
@@ -61,12 +72,12 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 	
-	//회원조회
+	//아이디 중복체크
 	@RequestMapping(value = "user/idCheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchTestList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		System.out.println(map);
-		HashMap<String, Object> result = userService.userList(map);
+		HashMap<String, Object> result = userService.idCheck(map);
 		return new Gson().toJson(result);
 	}
 	//회원가입
@@ -85,13 +96,29 @@ public class UserController {
 		HashMap<String, Object> result = userService.userLogin(map);
 		return new Gson().toJson(result);
 	}
+	//회원정보
+	@RequestMapping(value = "user/info.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String infoUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.userInfo(map);
+		return new Gson().toJson(result);
+	}
 	
 	//회원정보 수정
-		@RequestMapping(value = "user/modify.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-		@ResponseBody
-		public String modifyUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-			System.out.println(map);
-			HashMap<String, Object> result = userService.userModify(map);
-			return new Gson().toJson(result);
-		}
+	@RequestMapping(value = "user/modify.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String modifyUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.userModify(map);
+		return new Gson().toJson(result);
+	}
+	//회원탈퇴
+	@RequestMapping(value = "user/delete.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteUser(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.userDelete(map);
+		return new Gson().toJson(result);
+	}
 }

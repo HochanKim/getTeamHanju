@@ -20,14 +20,10 @@
           <h3>기본정보</h3>
           <div class="required"><a>*</a>필수입력사항</div>
           <table>
-            <colgroup>
-              <col style="width: 150px;">
-              <col style="width: auto;">
-            </colgroup>
             <tr>
               <th>아이디<a>*</a></th>
               <td>
-                <input type="text" id="userId" v-model="userId"><span>(영문소문자/숫자,4~16자)</span>
+                <input type="text" readonly id="userId" v-model="userId"><span>(영문소문자/숫자,4~16자)</span>
               </td>
             </tr>
             <tr>
@@ -41,12 +37,15 @@
             </tr>
             <tr>
               <th>새 비밀번호 확인<a>*</a></th>
-              <td><input type="password" id="newPasswordCheck" v-model="newPasswordCheck" @input="fnNewPwdCheck2"></td>
-              <div class="msg">{{newPwdCkMsg}}</div>
+              <td>
+                <input type="password" id="newPasswordCheck" v-model="newPasswordCheck" @input="fnNewPwdCheck2">
+                <div class="msg">{{newPwdCkMsg}}</div>
+              </td>
+              
             </tr>
             <tr>
               <th>이름<a>*</a></th>
-              <td><input type="text" id="userName" v-model="userName"></td>
+              <td><input type="text" readonly id="userName" v-model="userName"></td>
             </tr>
             <tr>
               <th>주소<a>*</a></th>
@@ -62,14 +61,7 @@
             <tr>
               <th>휴대전화<a>*</a></th>
               <td>
-                <select id="phone1" v-model="phone1">
-                  <option value="010">010</option>
-                  <option value="011">011</option>
-                  <option value="016">016</option>
-                  <option value="017">017</option>
-                  <option value="018">018</option>
-                  <option value="019">019</option>
-                </select>-<input type="text" id="phone2" v-model="phone2" maxlength="4">-<input type="text" id="phone3" v-model="phone3" maxlength="4">
+                <input id="phone1" v-model="phone1" readonly>-<input type="text" id="phone2" v-model="phone2" maxlength="4" readonly>-<input type="text" id="phone3" v-model="phone3" maxlength="4" readonly>
                 <button @click="fnPhoneNumber" class="phoneNumber">변경하기</button>
               </td>
             </tr>
@@ -97,15 +89,15 @@
             <tr>
               <th>생년월일</th>
               <td>
-                <input type="text" id="year" v-model="year" maxlength="4">년
-                <input type="text" id="month" v-model="month" maxlength="2">월
-                <input type="text" id="day" v-model="day" maxlength="2">일
+                <input type="text" id="year" v-model="year" maxlength="4" readonly>년
+                <input type="text" id="month" v-model="month" maxlength="2" readonly>월
+                <input type="text" id="day" v-model="day" maxlength="2" readonly>일
               </td>
             </tr>
           </table>
           <div class="joinComBtn">
-            <button id="backBtn" @click="backBtn">회원정보수정</button>
-            <button id="ComBtn" @click="joinBtn">취소</button>
+            <button id="backBtn" @click="joinBtn">회원정보수정</button>
+            <button id="ComBtn" @click="backBtn">취소</button>
             <button id="DelBtn" @click="deleteBtn">회원탈퇴</button>
           </div>
         </div>
@@ -120,8 +112,6 @@
         return {
           status: 'C',
           userId: "${sessionId}",
-          password: "",
-          pwdCkMsg: "",
           newPassword: "",
           newPasswordCheck: "",
           newPwdCkMsg: "",
@@ -130,9 +120,6 @@
           roadFullAddr: "",
           roadAddrPart1: "",
           addrDetail: "",
-          tel1: '02',
-          tel2: "",
-          tel3: "",
           phone1: '010',
           phone2: "",
           phone3: "",
@@ -156,12 +143,7 @@
             return false;
           }
 
-          if(self.password == null){
-            alert('비밀번호 항목은 필수 입력값입니다.')
-            return false;
-          }
-
-          
+            
           if(self.userName == null){
             alert('이름 항목은 필수 입력값입니다.')
             return false;
@@ -182,20 +164,6 @@
           location.href="/";
         },
 
-        fnPwdCheck() {
-          var self = this;
-
-          if (self.newPassword == '') {
-            self.newPwdCkMsg = "비밀번호를 입력해주세요";
-            return false;
-          }else if (self.password != self.password) {
-            self.pwdCkMsg = "비밀번호가 일치하지 않습니다."
-            return false;
-          } else {
-            self.pwdCkMsg = "";
-          }
-
-        },
         
         fnNewPwdCheck() {
           var self = this;
@@ -204,6 +172,9 @@
 
           if (!pwdText.test(self.newPassword)) {
             self.newPwdCkMsg = "영문대소문자/숫자/특수문자 중 2가지 이상 조합,10자~16자";
+            return false;
+          } else if (self.newPassword != self.newPasswordCheck) {
+            self.newPwdCkMsg = "비밀번호가 일치하지 않습니다."
             return false;
           } else {
             self.newPwdCkMsg = "";
@@ -265,7 +236,7 @@
 
 
         backBtn(){
-          location.href="/user/modify.do";
+          location.href="/user/mypage.do";
         },
 
         joinBtn(){
@@ -275,11 +246,12 @@
           const birthday = self.year + "-" + self.month + "-" + self.day;
 
           var nparmap = {
-            status:self.status,
             userId: self.userId,
             password: self.newPassword,
             userName: self.userName,
-            roadFullAddr:self.roadFullAddr,
+            zipNo : self.zipNo,
+            roadAddrPart1 : self.roadAddrPart1,
+            addrDetail : self.addrDetail,
             phone : phone,
             email : self.email,
             birthday : birthday
@@ -289,12 +261,13 @@
                 return;
               }
           $.ajax({
-            url: "join.dox",
+            url: "modify.dox",
             dataType: "json",
             type: "POST",
             data: nparmap,
             success: function (data) {
               console.log(data);
+              alert('수정되었습니다');
               $.pageChange("mypage.do", {});
             }
           });
@@ -302,26 +275,51 @@
         },
 
         deleteBtn(){
-          location.href="/";
+          var self = this;
+
+          var nparmap = {
+            userId: self.userId
+          };
+        
+          $.ajax({
+            url: "delete.dox",
+            dataType: "json",
+            type: "POST",
+            data: nparmap,
+            success: function (data) {
+              console.log(data);
+              alert('탈퇴되었습니다');
+              $.pageChange("login.do", {});
+            }
+          });
         },
 
         fnInfo(){
           var self = this;
-                var nparmap = {
-                    userId:self.userId
-                };
+       
+          var nparmap = {
+            userId:self.userId
+          };
                 
           $.ajax({
-            url:"join.dox", 
+            url:"info.dox", 
             dataType:"json",	
             type : "POST", 
             data : nparmap,
             success : function(data) { 
               console.log(data);
-              self.userName = data.userName
-              self.phone = data.phone
-              self.email = data.email
-              self.birthday = data.birthday
+              self.newPassword = data.list.password
+              self.userName = data.list.userName
+              self.zipNo = data.list.zipNo
+              self.roadAddrPart1 = data.list.roadAddrPart1
+              self.addrDetail = data.list.addrDetail
+              self.phone1 = data.list.phone.substring(0,3)
+              self.phone2 = data.list.phone.substring(4,8)
+              self.phone3 = data.list.phone.substring(9,13)
+              self.email = data.list.email
+              self.year = data.list.birthday.substring(0,4)
+              self.month = data.list.birthday.substring(5,7)
+              self.day = data.list.birthday.substring(8,10)
             }
           });
         }

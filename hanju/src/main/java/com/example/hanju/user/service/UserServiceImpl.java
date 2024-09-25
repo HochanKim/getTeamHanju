@@ -22,15 +22,27 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	HttpSession session;
 
+	/* 아이디 중복체크 */
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> userList(HashMap<String, Object> map) {
+	public HashMap<String, Object> idCheck(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<>();
-		List<UserModel> testList = userMapper.selectUser(map);
-		resultMap.put("result", testList.size());
+		int idCount = userMapper.idCheck(map);
+		resultMap.put("result", idCount);
+		return resultMap;
+	}
+	
+	/* 회원정보 */
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> userInfo(HashMap<String, Object> map) {
+		HashMap<String,Object> resultMap = new HashMap<>();
+		UserModel list = userMapper.infoUser(map);
+		resultMap.put("list",list);
 		return resultMap;
 	}
 
+	/* 로그인 */
 	@Override
 	public HashMap<String, Object> userLogin(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -40,8 +52,8 @@ public class UserServiceImpl implements UserService{
 			
 			if(u == null) {	//아이디나 비밀번호가 틀렸다.(null이다)
 				resultMap.put("code", 400);
-				List<UserModel> idCheck = userMapper.selectUser(map); 
-				if(idCheck == null) {	//아이디가 틀렸다.(id가 null이다)
+				int idCheck = userMapper.idCheck(map); 
+				if(idCheck == 0) {	//아이디가 틀렸다.(id가 null이다)
 					resultMap.put("message", "아이디가 틀렸습니다");
 				}else {
 					resultMap.put("message", "비밀번호가 틀렸습니다");
@@ -73,6 +85,7 @@ public class UserServiceImpl implements UserService{
 		return map;
 	}
 
+	/* 회원가입 */
 	@Override
 	public HashMap<String, Object> userJoin(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -88,19 +101,9 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
-	@DbExceptionHandle
-	@Override
-	public Map<String, Object> getUserInfo(HashMap<String, Object> map) {
-		Map<String,Object> result= new HashMap<>();
-		List<UserModel> user = userMapper.selectUser(map);
-		if(user.isEmpty()){
-			result.put("status","error");
-		}else{
-			result.put("userInfo",user.get(0));
-		}
-		return result;
-	}
+	
 
+	/* 회원정보수정 */
 	@Override
 	public HashMap<String, Object> userModify(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -111,6 +114,24 @@ public class UserServiceImpl implements UserService{
 			resultMap.put("message", "수정되었습니다.");
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+			resultMap.put("result", "fail");
+			resultMap.put("message", "예기치 못한 문제가 발생했습니다. \n나중에 다시 시도해주세요.");
+		}
+		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> userDelete(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			userMapper.deleteUser(map);
+			System.out.println(map);
+			resultMap.put("result", "success");
+			resultMap.put("message", "삭제되었습니다.");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 			resultMap.put("result", "fail");
 			resultMap.put("message", "예기치 못한 문제가 발생했습니다. \n나중에 다시 시도해주세요.");
 		}

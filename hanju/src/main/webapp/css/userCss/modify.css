@@ -108,19 +108,9 @@ input[type=text], input[type=password]{
 }
 
 
-#tel1,#phone1{
-    width: 60px;
-    margin: 0 4px 0 0;
-}
-
-#tel2,#tel3,#phone2,#phone3{
+#phone1,#phone2,#phone3{
     width: 50px;
     margin: 0 4px;
-}
-
-select{
-    height: 30px;
-    border: 1px solid #e3e3e3;
 }
 
 #email{
