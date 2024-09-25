@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
                             <li>
                                 <strong>포인트</strong>
                                 <a href="" class="count">
-                                    <span>0</span>
+                                    <span>{{point}}</span>
                                 </a>
                             </li>
                             <li>
@@ -57,7 +57,7 @@ pageEncoding="UTF-8"%>
                         </li>
                         <li>
                             <img src="../../image/review.png">
-                            <a href="">
+                            <a href="../user/review.do">
                                 <strong>리뷰</strong>
                                 <p>리뷰 작성시 포인트 적립을 해드립니다.</p>
                             </a>
@@ -100,10 +100,36 @@ pageEncoding="UTF-8"%>
 <script>
   const app = Vue.createApp({
     data() {
-      return {};
+      return {
+        userId: "${sessionId}",
+        point : ""
+      };
     },
-    methods: {},
-    mounted() {},
+    methods: {
+        fnPoint(){
+            var self = this;
+
+          var nparmap = {
+            userId: self.userId
+          };
+        
+          $.ajax({
+            url: "info.dox",
+            dataType: "json",
+            type: "POST",
+            data: nparmap,
+            success: function (data) {
+              console.log(data);
+              self.point = data.list.point
+            }
+          });
+        }
+
+    },
+    mounted() {
+        var self = this;
+        self.fnPoint();
+    },
   });
   app.mount("#app");
 </script>

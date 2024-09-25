@@ -3,11 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.hanju.user.mapper.UserMapper">	
-	<select id="selectUser" parameterType="hashmap" resultType="UserModel">	
-		SELECT * 
+	<select id="idCheck" parameterType="hashmap" resultType="Integer">	
+		SELECT count(*)
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</select>
+	
+	<select id="infoUser" parameterType="hashmap" resultType="UserModel">	
+		SELECT *
+		FROM HANJU_USER
+		WHERE USER_ID = #{userId} 
+	</select>
+	
 	
 	<select id="loginUser" parameterType="hashmap" resultType="UserModel">	
 		SELECT * 
@@ -29,12 +36,13 @@
 		UPDATE HANJU_USER
 		SET
 			PASSWORD=#{password},
+			USER_NAME=#{userName},
 			PHONE=#{phone},
 			EMAIL=#{email},
 			BIRTHDAY=TO_DATE(#{birthday}, 'YYYY-MM-DD'),
 			ZIPNO=#{zipNo},
 			ROADADDRPART1=#{roadAddrPart1},
-			ADDRDDETAIL=#{addrDetail}
+			ADDRDETAIL=#{addrDetail}
 		WHERE USER_ID = #{userId} 
 	</update>
 	

@@ -12,19 +12,25 @@ import com.example.hanju.user.model.UserModel;
 
 @Mapper
 public interface UserMapper {
-
-    void insertUser(HashMap<String, Object> map);
+	//회원가입
+	void insertUser(HashMap<String, Object> map);
+	//아이디체크
+	int idCheck(HashMap<String, Object> map);
+	//로그인
+	UserModel loginUser(HashMap<String, Object> map);
+	//회원정보
+	UserModel infoUser(HashMap<String, Object> map);
+	//회원정보수정
+	void modifyUser(HashMap<String, Object> map);
+	//회원탈퇴
+	void deleteUser(HashMap<String, Object> map);
+	
+	List<UserModel> allUserList();
 
     List<UserModel> selectUser(HashMap<String, Object> map);
-
-    UserModel loginUser(HashMap<String, Object> map);
-
-    List<UserModel> allUserList();
 
     void pointChange(Map<String,Object> map);
 
     List<Favorite> getFavoriteItemList(Map<String,Object> map);
     void deleteFavoriteItem(Map<String,Object> map);
-
-
 }
