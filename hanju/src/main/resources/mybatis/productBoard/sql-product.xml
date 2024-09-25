@@ -5,7 +5,7 @@
 <mapper namespace="com.example.hanju.productBoard.mapper.SaleMapper">
 	<!-- 전체상품(전통주, 일반구매) -->
 	<select id="getProductList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, ALCOHOL, FILE_ORG_NAME, FILE_PATH
 		FROM HANJU_NORMAL_SELL NS
 		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
 		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
@@ -15,7 +15,7 @@
 	
 	<!-- 전체상품 > 전통주 -->
 	<select id="getTradAlcohol" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-	    SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+	    SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, ALCOHOL, FILE_ORG_NAME, FILE_PATH
 	    FROM HANJU_NORMAL_SELL NS
 	    INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
 	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
@@ -81,14 +81,14 @@
 	            <choose>
 	                <when test="material == 1">AND MATERIAL = '사과'</when>
 	                <when test="material == 2">AND MATERIAL = '배'</when>
-	                <when test="material == 3">AND MATERIAL = '바나나'</when>
+	                <when test="material == 3">AND MATERIAL = '고구마'</when>
 	                <when test="material == 4">AND MATERIAL = '유자'</when>
-	                <when test="material == 5">AND MATERIAL = '딸기' OR MATERIAL = '복분자' OR MATERIAL LIKE '%베리%'</when>
+	                <when test="material == 5">AND MATERIAL LIKE '%딸기%' OR MATERIAL = '복분자' OR MATERIAL LIKE '%베리%'</when>
 	                <when test="material == 6">AND MATERIAL = '무화과'</when>
 	                <when test="material == 7">AND MATERIAL = '레몬'</when>
-	                <when test="material == 8">AND MATERIAL = '귤' OR MATERIAL = '오렌지'</when>
-	                <when test="material == 9">AND MATERIAL = '파인애플'</when>
-	                <when test="material == 10">AND MATERIAL = '단호박'</when>
+	                <when test="material == 8">AND MATERIAL = '복숭아'</when>
+	                <when test="material == 9">AND MATERIAL = '단호박'</when>
+	                <when test="material == 10">AND MATERIAL NOT LIKE '%베리%' AND MATERIAL NOT IN ('사과', '배', '고구마', '유자', '딸기', '복분자', '무화과', '레몬', '복숭아', '단호박')</when>
 	            </choose>
 	        </if>
 	        AND NOT (P.TYPE = 'G' OR C.PARENT_CODE = 'W')
@@ -106,11 +106,22 @@
 
 	<!-- 전체상품 > 선물세트 -->
 	<select id="getGiftSet" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT DISTINCT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, ALCOHOL, FILE_ORG_NAME, FILE_PATH
 	    FROM HANJU_NORMAL_SELL NS
 		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
 	    LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
         INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
-	    WHERE I.FILE_STATUS = 'T' AND P.TYPE = 'G'
+	    WHERE I.FILE_STATUS = 'T' AND P.TYPE = 'G' AND C.PARENT_CODE = 'T'
+	</select>
+	
+	<!-- 신상품 목록 -->
+	<select id="newProducts" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, ALCOHOL, FILE_ORG_NAME, FILE_PATH
+		FROM HANJU_NORMAL_SELL NS
+		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
+		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE I.FILE_STATUS = 'T' AND 10 >= ROWNUM AND NOT C.PARENT_CODE = 'W'
+		ORDER BY NS.SELL_ID DESC
 	</select>
 </mapper>

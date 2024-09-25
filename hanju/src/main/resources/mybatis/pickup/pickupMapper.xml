@@ -9,5 +9,87 @@
 		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		WHERE P.TYPE = 'WINE' AND P.STOCK != 0 AND  P.PRODUCT_NAME LIKE '%'||#{searchKeyword}||'%'
 	</select>
+	
+	<!-- 와인 픽업 리스트 -->
+	<select id="getPickUpList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, MATERIAL, FILE_ORG_NAME, FILE_PATH
+		FROM HANJU_PRODUCT P
+		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE I.FILE_STATUS = 'T' AND C.PARENT_CODE = 'W'
+		<!-- P.TYPE이 codeList에 있을 경우 -->
+        <if test="codeList != null">
+            AND P.TYPE IN 
+            <foreach collection="codeList" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        
+        <!-- 알코올 도수 -->
+        <if test="alcohol != null">
+            <choose>
+                <when test="alcohol == 1">AND (ALCOHOL >= 0 AND 10 > ALCOHOL)</when>
+                <when test="alcohol == 2">AND (ALCOHOL >= 10)</when>
+            </choose>
+        </if>
+        
+        <!-- 당도 -->
+        <if test="sweet != null">
+            <choose>
+                <when test="sweet == 1">AND (SWEET = 1 OR SWEET = 2)</when>
+                <when test="sweet == 2">AND (SWEET = 3)</when>
+                <when test="sweet == 3">AND (SWEET = 4 OR SWEET = 5)</when>
+            </choose>
+        </if>
 
+        <!-- 산미 -->
+        <if test="sour != null">
+            <choose>
+                <when test="sour == 1">AND (SOUR = 1 OR SOUR = 2)</when>
+                <when test="sour == 2">AND (SOUR = 3)</when>
+                <when test="sour == 3">AND (SOUR = 4 OR SOUR = 5)</when>
+            </choose>
+        </if>
+        
+        <!-- 탄산 -->
+        <if test="sparkling != null">
+            <choose>
+                <when test="sparkling == 1">AND SPARKLING = 0</when>
+                <when test="sparkling == 2">AND SPARKLING >= 1</when>
+            </choose>
+        </if>
+
+        <!-- 바디감 -->
+        <if test="body != null">
+            <choose>
+                <when test="body == 1">AND (BODY = 1 OR BODY = 2)</when>
+                <when test="body == 2">AND (BODY = 3)</when>
+                <when test="body == 3">AND (BODY = 4 OR BODY = 5)</when>
+            </choose>
+        </if>
+
+        <!-- 용량 -->
+        <if test="capacity != null">
+            <choose>
+                <when test="capacity == 1">AND (400 > CAPACITY)</when>
+                <when test="capacity == 2">AND (CAPACITY >= 400 AND 700 > CAPACITY)</when>
+                <when test="capacity == 3">AND (CAPACITY >= 700)</when>
+            </choose>
+        </if>
+        
+        <!-- 품종 -->
+        <if test="material != null">
+        	AND MATERIAL = #{material}
+        </if>
+ 
+        AND C.PARENT_CODE = 'W'        
+	</select>
+	
+	<!-- 와인 종류 코드 리스트 -->
+	<select id="selectCodeList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
+		SELECT C1.KIND, C2.CODE_NAME, C2.CODE
+		FROM HANJU_CODE C1
+		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
+		WHERE C1.KIND = 'PRODUCT_CODE' AND C2.CODE IN ('WW', 'RW')
+	</select>
 </mapper>

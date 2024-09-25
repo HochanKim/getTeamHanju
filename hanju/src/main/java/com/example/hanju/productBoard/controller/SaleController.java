@@ -23,7 +23,7 @@ public class SaleController {
 	// market/allProducts.jsp 연동
 	@RequestMapping("market/productList.do")
 	public String marketAll(Model model) throws Exception {
-		return "market/allProducts";
+		return "market/productList";
 	}
 	// market/traditionProducts.jsp 연동
 	@RequestMapping("market/traditionProducts.do")
@@ -34,6 +34,11 @@ public class SaleController {
 	@RequestMapping("market/giftSets.do")
 	public String giftSet(Model model) throws Exception {
 		return "market/giftSets";
+	}
+	// market/newProducts.jsp 연동
+	@RequestMapping("market/newProducts.do")
+	public String newProd(Model model) throws Exception {
+		return "market/newProducts";
 	}
 	
 	
@@ -60,6 +65,7 @@ public class SaleController {
 			map.put("codeList", codeList);
 		}
 		resultMap = saleService.getTradAlcohol(map);
+		System.out.println("일구 컨트롤러 : "+map);
 		return new Gson().toJson(resultMap);
 	}
 	
@@ -81,5 +87,14 @@ public class SaleController {
 		return new Gson().toJson(resultMap);
 	}
 	
-
+	// market/newProducts.do
+	@RequestMapping(value = "market/newProducts.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String newProd(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = saleService.newProducts(map);
+		return new Gson().toJson(resultMap);
+	}
+	
+	
 }
