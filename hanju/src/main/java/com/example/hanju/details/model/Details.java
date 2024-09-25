@@ -34,4 +34,13 @@ public class Details {
     private String cDateTime;
     private String contents;
     private String description;
+
+    //pickUpStore
+    private String storeId;
+    private String storeName;
+    private String address;
+    private String zipNo;
+    private String roadaddrpart1;
+    private String addrdetail;
+    private String phone;
 }

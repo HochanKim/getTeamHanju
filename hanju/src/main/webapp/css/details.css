@@ -68,6 +68,11 @@ body, html{
     height: auto;    
     object-fit: cover;
 }
+.img-grade div img {
+    width: 50px; 
+    height: auto;    
+    object-fit: cover;
+}
 .thumb-content{
     margin-left: 50px;
 }
@@ -92,7 +97,6 @@ body, html{
     width: 100px;
     height: 20px;
     text-align: center;
-    
 }
 .pad{
     padding: 30px 0px;
@@ -100,6 +104,26 @@ body, html{
 }
 .pad2{
     padding: 20px 0px;
+}
+.review-name{
+    margin-left: 10px;
+    margin-right: 550px;
+    float: left;
+}
+.review{
+    margin-right:10px;
+    float: left;
+}
+.review-box{
+    background-color: rgb(85, 139, 123);
+    border-radius: 5px;
+    width: 800px;
+    color: #fff;
+    height: 30px;
+}
+.review-box2{
+    width: 800px;
+    height: 100px;
 }
 
 /*버튼 기본 스타일링*/

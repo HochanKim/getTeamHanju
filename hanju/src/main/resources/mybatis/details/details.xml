@@ -8,22 +8,49 @@
 		SELECT *
 		FROM HANJU_PRODUCT P
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
-		WHERE P.PRODUCT_NAME = '아스코니 리슬링 아이스와인 블루라벨'
+		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
+		WHERE N.SELL_ID = '75'
 	</select>
 	<select id="selectProduct" parameterType="hashmap" resultType="Product">
 		SELECT *
 		FROM HANJU_PRODUCT
-		WHERE PRODUCT_ID = '29'
+		WHERE PRODUCT_ID = '28'
 	</select>
-<!--	픽업매장-->
+
+	<!--픽업매장-->
 	<select id="selectPickUpStore" parameterType="hashmap" resultType="pickUpStore">
 		SELECT *
 		FROM HANJU_PICKUP_STORE
 	</select>
+	<select id ="selectPickUpProduct" parameterType="hashmap" resultType="Details">
+		SELECT *
+		FROM HANJU_PRODUCT P
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		INNER JOIN HANJU_PICKUP_STOCK S ON P.PRODUCT_ID = S.PRODUCT_ID
+		INNER JOIN HANJU_PICKUP_STORE S2 ON S.STORE_ID = S2.STORE_ID
+		WHERE P.PRODUCT_ID = '1'
+	</select>
+
+	<!--이미지 불러오는 쿼리-->
 	<select id="detailImage" parameterType="hashmap" resultType="String">
 		SELECT FILE_PATH
 		FROM HANJU_IMAGE
-		WHERE FK_ID = '29' AND FILE_STATUS = #{status}
+		WHERE FK_ID = '28' AND FILE_STATUS = #{status}
+	</select>
+
+	<!--리뷰-->
+	<select id="selectComment" parameterType="hashmap" resultType="Comment">
+		SELECT C.*,
+		CASE
+		WHEN LENGTH(U.USER_NAME) > 1 THEN
+		SUBSTR(U.USER_NAME, 1, FLOOR(LENGTH(U.USER_NAME) / 2)) || '*' ||
+		SUBSTR(U.USER_NAME, CEIL(LENGTH(U.USER_NAME) / 2) + 1)
+		ELSE
+		U.USER_NAME
+		END AS USER_NAME
+		FROM HANJU_COMMENT C
+		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
+		WHERE C.SELL_ID = '75'
 	</select>
 	
 </mapper>

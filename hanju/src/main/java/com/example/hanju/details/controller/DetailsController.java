@@ -38,7 +38,15 @@ public class DetailsController {
 	public String searchDetails(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> result = detailsService.searchDetails(map);
 		result.put("img", detailsService.searchItemImage(map)) ;
-		System.out.println("controller");
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(value = "details/detailsPickUp.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchDetailsPickUp(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> result = detailsService.searchDetailsPickup(map);
+		result.put("img", detailsService.searchItemImage(map)) ;
+		System.out.println("controller" + result);
 		return new Gson().toJson(result);
 	}
 
