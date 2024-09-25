@@ -13,6 +13,10 @@ pageEncoding="UTF-8"%>
     <div id="app">
       <div style="text-align: center; font-weight: bold">
         <div style="color: blue; font-size: 40px">서버 돌아가는 중</div>
+        <div v-if="loginUser" class="user">
+          로그인 중인 아이디 : {{ loginUser }}
+        </div>
+        <div v-if="loginMsg">{{ loginMsg }}</div>
         <div>vue.js 확인</div>
         <div style="color: red; font-size: 30px">{{ check }}</div>
         <button @click="fnGoToTest('test/list.do')">
@@ -25,7 +29,12 @@ pageEncoding="UTF-8"%>
           이미지 업로더 바로가기
         </button>
         <button @click="fnGoToTest('user/login.do')">로그인</button>
-        <button @click="fnGoToTest('cart/viewCart.do')">장바구니</button>
+        <button @click="fnGoToTest('cart/viewCart.do')" class="ha">
+          장바구니
+        </button>
+        <button @click="fnGoToTest('user/favorite.do')" class="ha">
+          찜목록
+        </button>
         <button @click="fnGoToTest('main/addCart.do')">장바구니 담기</button>
         <button @click="fnGoToTest('user/joinbtn.do')">휴대폰 본인인증</button>
         <button @click="fnGoToTest('user/join.do')">회원가입</button>
@@ -40,6 +49,8 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         check: "이게 보이면 vue.js 정상 작동중",
+        loginUser: "",
+        loginMsg: "",
       };
     },
     methods: {
@@ -48,7 +59,11 @@ pageEncoding="UTF-8"%>
         location.href = url;
       },
     },
-    mounted() {},
+    mounted() {
+      "${userId}" == ""
+        ? (this.loginMsg = "로그인 유저 없음.")
+        : (this.loginUser = "${userId}");
+    },
   });
   app.mount("#app");
 </script>

@@ -4,6 +4,7 @@ import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.cart.mapper.CartMapper;
 import com.example.hanju.cart.model.entity.CartEntity;
 import com.example.hanju.cart.model.dto.CartCheckDto;
+import com.example.hanju.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import java.util.Map;
 public class CartServiceImpl implements CartService {
     @Autowired
     CartMapper cartMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @DbExceptionHandle
     @Override
@@ -26,24 +29,18 @@ public class CartServiceImpl implements CartService {
         Map<String, Object> result = new HashMap<>();
         List<CartEntity> normal = new ArrayList<>();
         List<CartEntity> pickup = new ArrayList<>();
-        List<CartEntity> funding = new ArrayList<>();
-        List<CartEntity> group = new ArrayList<>();
         if (cartList.isEmpty()) {
             result.put("status", false);
         } else {
             for (CartEntity cart : cartList) {
                 switch (cart.getKind()) {
-                    case "G" -> group.add(cart);
                     case "P" -> pickup.add(cart);
-                    case "F" -> funding.add(cart);
                     case "N" -> normal.add(cart);
                 }
             }
             result.put("status", true);
             result.put("normal", normal);
             result.put("pickup", pickup);
-            result.put("funding", funding);
-            result.put("group", group);
         }
         return result;
     }
@@ -165,6 +162,19 @@ public class CartServiceImpl implements CartService {
         result.put("nameList", list);
         List<String> nameList = cartMapper.getCartName(result);
         result.put("nameList", nameList);
+        return result;
+    }
+    @DbExceptionHandle
+    @Override
+    public Map<String, Object> cartPayment(Map<String, Object> map) {
+        Map<String, Object> result = new HashMap<>();
+        List<Integer> list = (List<Integer>) map.get("list");
+        System.out.println(map);
+        userMapper.pointChange(map);
+        for(int cartId : list){
+            result.put("cartId",cartId);
+
+        }
         return result;
     }
 

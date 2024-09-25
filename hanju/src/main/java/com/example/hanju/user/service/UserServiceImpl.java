@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.hanju.user.model.Favorite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,10 +47,8 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public HashMap<String, Object> userLogin(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-
 		try {
 			UserModel u = userMapper.loginUser(map);
-			
 			if(u == null) {	//아이디나 비밀번호가 틀렸다.(null이다)
 				resultMap.put("code", 400);
 				int idCheck = userMapper.idCheck(map); 
@@ -58,31 +57,44 @@ public class UserServiceImpl implements UserService{
 				}else {
 					resultMap.put("message", "비밀번호가 틀렸습니다");
 				}
-					
 			}else { //로그인 성공
 				resultMap.put("code", 200);
 				resultMap.put("message", "로그인 성공");
 				session.setAttribute("sessionId", u.getUserId());
 				session.setAttribute("sessionName", u.getUserName());
 				session.setAttribute("sessionStatus", u.getStatus());
-				
 			}
-			
 		} catch (Exception e) {
-
 			resultMap.put("result", "fail");
 			resultMap.put("message", "db조회 오류");
-
 		}
 		return resultMap;
 	}
-
+	@DbExceptionHandle
 	@Override
 	public Map<String, Object> allUserList() {
 		List<UserModel> list = userMapper.allUserList();
 		Map<String,Object> map = new HashMap<>();
 		map.put("list",list);
 		return map;
+	}
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object> getFavoriteItemList(Map<String, Object> map) {
+		Map<String,Object> result = new HashMap<>();
+		List<Favorite> list = userMapper.getFavoriteItemList(map);
+		System.out.println(list);
+		result.put("list",list);
+		return result;
+	}
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object> deleteFavoriteItem(Map<String, Object> map) {
+		System.out.println(map);
+		userMapper.deleteFavoriteItem(map);
+		Map<String,Object> result = new HashMap<>();
+		result.put("status","success");
+		return result;
 	}
 
 	/* 회원가입 */

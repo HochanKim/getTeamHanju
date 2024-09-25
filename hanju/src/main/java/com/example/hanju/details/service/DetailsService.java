@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface DetailsService {
-    // 정은지 연습용 코드
+    // 제품 불러오는 코드
     HashMap<String, Object> searchDetails(HashMap<String, Object> map);
     
     //이미지 불러오는 코드
     HashMap<String,Object> searchItemImage(Map<String,Object> map);
 
-
+    //픽업 불러오는 코드
+    HashMap<String,Object> searchDetailsPickup(Map<String,Object> map);
 
 
 }

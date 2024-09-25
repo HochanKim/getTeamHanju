@@ -4,18 +4,20 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/mainCss.css" />
-    <script src="/js/jquery.js"></script>
-    <script src="/js/vue.js"></script>
-    <script src="https://unpkg.com/v-calendar"></script>
-    <title>\</title>
+    <script src="https://unpkg.com/vue@latest"></script>
+    <script src="https://unpkg.com/@vuepic/vue-datepicker@latest"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css"
+    />
+    <title>view 기본 세팅 파일</title>
   </head>
+  <style></style>
   <body>
     <div id="app">
-      테스트
-      <div>
-        <VCalendar />
-        <VDatePicker v-model="selectedDate" />
+      <div style="width: 300px">
+        <vue-date-picker v-model="date" locale="ko"></vue-date-picker>
+        <div>선택한 날짜 : {{ date }}</div>
       </div>
     </div>
   </body>
@@ -24,8 +26,11 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
-        selectedDate: null,
+        date: new Date(),
       };
+    },
+    components: {
+      VueDatePicker,
     },
     methods: {},
     mounted() {},
