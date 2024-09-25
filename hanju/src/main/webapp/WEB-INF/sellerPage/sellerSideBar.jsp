@@ -22,7 +22,7 @@
             </div>
             <div class="subMenu">
                 <div><a href="registerProduct.do"> - 제품 등록</a></div>
-                <div><a href="modifyProductList.do"  > - 제품 수정</a></div>
+                <div><a href="modifyProductList.do"> - 제품 수정</a></div>
             </div>
             <div class="menu">
                 <p>일반 판매 관리</p>
@@ -37,9 +37,8 @@
                 <span class="material-symbols-outlined">arrow_drop_down</span>
             </div>
             <div class="subMenu">
-                <div> - 펀딩 게시</div>
+                <div><a href="registerFunding.do"> - 펀딩 게시</a></div>
                 <div> - 펀딩 수정</div>
-                <div> - 펀딩 삭제</div>
             </div>
             <div class="menu">
                 <p>공동구매 관리</p>
@@ -48,7 +47,6 @@
             <div class="subMenu">
                 <div> - 공동구매 게시</div>
                 <div> - 공동구매 수정</div>
-                <div> - 공동구매 삭제</div>
             </div>
         </div>
     </div>

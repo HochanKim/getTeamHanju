@@ -62,14 +62,7 @@
                         <td>타입</td>
                         <td>
                             <select v-model="type">
-                                <option value="TJ">탁주</option>
-                                <option value="CJ">청주</option>
-                                <option value="SJ">증류주</option>
-                                <option value="FJ">과실주</option>
-                                <option value="TW">전통주 와인</option>
-                                <option value="RW">레드 와인</option>
-                                <option value="WW">화이트 와인</option>
-                                <option value="G">선물세트</option>
+                                <option v-for="item in productCodeList" :value="item.code">{{item.codeName}}</option>
                             </select>
                         </td>
                     </tr>
@@ -179,6 +172,9 @@
                 userId : "${sessionId}",
                 userstatus : "${sessionStatus}",
 
+                productCodeList : [],
+
+                productId : "",
                 productName : "",
                 thumbnail : "",
                 productImgs : [],
@@ -245,19 +241,23 @@
                     },
 					success : (data) => {
 						console.log(data);
-                        this.fnUploadProductImg(data.productId);
+                        this.productId = data.productId;
+
+                        this.fnUploadProductImg(this.thumbnail, "T", false);
+                        for (var i = 0; i < this.productImgs.length; i++) {
+                            if (i == this.productImgs.length - 1) {
+                                this.fnUploadProductImg(this.productImgs[ i ], "P", true);
+                            }
+                            this.fnUploadProductImg(this.productImgs[ i ], "P", false); 
+                        }
 					}
 				});
             },
-            fnUploadProductImg(productId) {
-
+            fnUploadProductImg(imageFile, imageCode, isLast) {
                 const formData = new FormData();
-                formData.append("productId", productId);
-                formData.append("thumbnail"  , this.thumbnail);
-
-                for (var img of this.productImgs) {
-                    formData.append("productImgs", img);
-                }
+                formData.append("productId", this.productId);
+                formData.append("imageCode", imageCode);
+                formData.append("productImg", imageFile);
 
                 $.ajax({
 					url:"uploadProductImg.dox",
@@ -267,8 +267,7 @@
                     processData : false,
                     contentType : false,
 					success : () => {
-						alert("등록되었습니다!");
-                        this.fnReset();
+                        if (isLast) alert("등록되었습니다!");
 					},
                     error : function(jqXHR, textStatus, errorThrown) {
                         console.error('업로드 실패!', textStatus, errorThrown);
@@ -320,10 +319,22 @@
                     "../../image/defaultImg.png",
                     "../../image/defaultImg.png"
                 ];
+            },
+            fnGetProductCode() {
+                $.ajax({
+					url:"getProductCodeList.dox",
+					dataType:"json",
+					type : "POST", 
+					data : {},
+					success : (data) => {
+						console.log(data);
+                        this.productCodeList = data.list;
+					}
+				});
             }
         },
         mounted() {
-
+            this.fnGetProductCode();
         },
     });
     app.mount("#app");

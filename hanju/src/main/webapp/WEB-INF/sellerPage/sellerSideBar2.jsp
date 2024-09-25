@@ -63,7 +63,8 @@
         },
         methods : {
             fnMenuClick(event) {
-                //event.srcElement.style.maxHeight = "200px";
+                console.log(event);
+                event.target.style.maxHeight = "200px";
             }
         },
         mounted() {

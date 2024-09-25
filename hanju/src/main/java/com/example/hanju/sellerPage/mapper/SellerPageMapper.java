@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.hanju.main.model.Code;
 import com.example.hanju.main.model.Product;
 import com.example.hanju.main.model.ProductImage;
 import com.example.hanju.sellerPage.model.Test;
@@ -14,6 +15,7 @@ public interface SellerPageMapper {
 
 	Test test(HashMap<String, Object> map);
 	
+	List<Code> getProductCodeList(HashMap<String, Object> map);
 	void registerProduct(HashMap<String, Object> map);
 	void uploadProductImg(HashMap<String, Object> map);
 	int getTotalProductCount(HashMap<String, Object> map);

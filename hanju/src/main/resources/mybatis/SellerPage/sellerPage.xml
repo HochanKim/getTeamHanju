@@ -10,6 +10,12 @@
 		WHERE	SELL_ID = #{sellId}
 	</select>
 
+	<select id="getProductCodeList" parameterType="hashmap" resultType="com.example.hanju.main.model.Code">
+		SELECT	*
+		FROM	HANJU_CODE
+		WHERE	KIND = 'PRODUCT_CODE'
+	</select>
+
 	<insert id="registerProduct" parameterType="hashmap" useGeneratedKeys="true" keyProperty="PRODUCT_ID" keyColumn="PRODUCT_ID">
 		INSERT INTO HANJU_PRODUCT
 		VALUES (
@@ -27,7 +33,8 @@
 			#{body},
 			#{stock},
 			#{capacity},
-			#{material}
+			#{material},
+			SYSDATE
 		)
 	</insert>
 	

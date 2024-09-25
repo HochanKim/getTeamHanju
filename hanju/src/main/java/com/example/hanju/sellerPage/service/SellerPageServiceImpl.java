@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.hanju.annotations.DbExceptionHandle;
+import com.example.hanju.main.model.Code;
 import com.example.hanju.main.model.Product;
 import com.example.hanju.main.model.ProductImage;
 import com.example.hanju.sellerPage.mapper.SellerPageMapper;
@@ -26,6 +27,17 @@ public class SellerPageServiceImpl implements SellerPageService {
 		
 		HashMap<String, Object> resultMap = new HashMap<> ();
 		resultMap.put("result", result);
+		return resultMap;
+	}
+	
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> getProductCodeList(HashMap<String, Object> map) {
+		
+		List<Code> productCodeList = sellerPageMapper.getProductCodeList(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<> ();
+		resultMap.put("list", productCodeList);
 		return resultMap;
 	}
 	
