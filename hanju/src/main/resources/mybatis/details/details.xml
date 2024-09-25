@@ -13,8 +13,9 @@
 	</select>
 	<select id="selectProduct" parameterType="hashmap" resultType="Product">
 		SELECT *
-		FROM HANJU_PRODUCT
-		WHERE PRODUCT_ID = '28'
+		FROM HANJU_PRODUCT P
+		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
+		WHERE N.SELL_ID = #{sellId}
 	</select>
 
 	<!--픽업매장-->
@@ -34,8 +35,10 @@
 	<!--이미지 불러오는 쿼리-->
 	<select id="detailImage" parameterType="hashmap" resultType="String">
 		SELECT FILE_PATH
-		FROM HANJU_IMAGE
-		WHERE FK_ID = '28' AND FILE_STATUS = #{status}
+		FROM HANJU_IMAGE I
+		INNER JOIN HANJU_PRODUCT P ON I.FK_ID = P.PRODUCT_ID
+		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
+		WHERE N.SELL_ID = #{sellId} AND FILE_STATUS = #{status}
 	</select>
 
 	<!--리뷰-->
