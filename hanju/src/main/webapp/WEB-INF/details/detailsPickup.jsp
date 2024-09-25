@@ -10,6 +10,8 @@ pageEncoding="UTF-8"%>
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="https://unpkg.com/@vuepic/vue-datepicker@latest"></script>
+	<link rel="stylesheet" href="https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css">
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
 </head>
@@ -49,29 +51,33 @@ pageEncoding="UTF-8"%>
             <button @click="modalOpen" class="side-button font-size2">픽업매장 선택</button>
             <div class="modal-wrap" v-show="modalCheck" @click="modalOpen">
                 <div class="modal-container" @click.stop="">
-                
-               현수형 술꾼이래요
-                
+                    <h4>픽업매장 리스트</h4>
+                    <ul>
+                      <li v-for="info in list">
+                        {{info.storeName}}
+                        <button @click="pickUpStoreSelect(info.storeId)" class="modal-button" v-model="storeId">선택</button>
+                      </li>
+                    </ul>
+                    <button @click="modalOpen" class="modal-button">닫기</button>
                 <div class="modal-btn">
-                <button @click="modalOpen">닫기</button>
-                <button @click="modalOpen" class="modal-button">선택</button>
+               
                 </div>
             </div>
             </div>
-
-            <button @click="modalOpen2" class="side-button font-size2">날짜 선택</button>
-            <div class="modal-wrap" v-show="modalCheck2" @click="modalOpen2">
+        <div class="">
+            <vue-date-picker  v-model="date" locale="ko"></vue-date-picker>
+            <!-- <div class="modal-wrap" v-show="modalCheck2" @click="modalOpen2">
                 <div class="modal-container" @click.stop="">
-                    <input type="date">
+                    <input type="date" v-model="pickUpDate">
                 <div class="modal-btn">
-                <button @click="modalOpen2">닫기</button>
-                <button @click="modalOpen2">선택</button>
+                <button @click="modalOpen2" class="modal-button">닫기</button>
+                <button @click="selectDate" class="modal-button">선택</button>
                 </div>
             </div>
-            </div>
-            
+            </div> -->
+        </div>
             <div>
-                <button  @click="showToastMessage" class="side-button font-size2">장바구니</button>
+                <button v-if="" @click="showToastMessage" class="side-button font-size2">장바구니</button>
             </div>
             <div>
                 <button class="side-button font-size2">바로 구매하기</button>
@@ -182,19 +188,28 @@ const app = Vue.createApp({
             modalCheck: false,
             modalCheck2: false,
             selectedDate: null,
+            list:[],
+            pickUpDate:"",
+            storeId:"",
+            date : new Date()
+
         };
     },
+    components: { 
+        VueDatePicker 
+	},
     methods: {
         fnGetList() {
             var self = this;
             $.ajax({
-                url: "details.dox",
+                url: "detailsPickUp.dox",
                 dataType: "json",
                 type: "POST",
                 success: function(data) {
-                    self.info = data.info[0];
+                    self.info = data.pickUpProduct[0];
+                    self.list = data.pickUpProduct;
                     self.img = data.img;
-                    console.log(self.info);
+                    console.log(self.list);
                 }
             });
         },
@@ -208,6 +223,19 @@ const app = Vue.createApp({
         },
         modalOpen() {
             this.modalCheck = !this.modalCheck
+        },
+        selectDate(){
+            console.log(this.pickUpDate);
+            this.modalOpen2();
+        },
+        fnDatePicker(){
+            const date=document.getElementById("datePicker");
+            date.showPicker("show");
+            console.log(date.showPicker);
+        },
+        pickUpStoreSelect(storeId) {
+            console.log(storeId);
+            this.modalOpen();
         },
         modalOpen2() {
             this.modalCheck2 = !this.modalCheck2
@@ -234,7 +262,8 @@ const app = Vue.createApp({
                 userId : self.userId, 
                 productCount : self.cnt, 
                 kind : "P",
-                
+                pickupDate : self.pickUpDate,
+                storeId : self.storeId                
                 }
                 const url="/cart/addCart.dox"
                 const res=await axios.post(url,cart)

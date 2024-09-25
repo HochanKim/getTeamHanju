@@ -130,7 +130,28 @@ pageEncoding="UTF-8"%>
         <div style="clear: both;">
             <img :src="img.detailImage" class="detail-img">
         </div>
+        <div>
+            <ul>
+                <div v-for="list in comment">
+                    <div class="review-box">
+                        <div class="review-name">{{list.userName}}</div>
+                        <div class="review">{{info.productName}}</div>
+                        <div class="img-grade review">
+                            <div v-if="list.grade == 0"><img src="../../image/grade0.png"></div>
+                            <div v-if="list.grade == 1"><img src="../../image/grade1.png"></div>
+                            <div v-if="list.grade == 2"><img src="../../image/grade2.png"></div>
+                            <div v-if="list.grade == 3"><img src="../../image/grade3.png"></div>
+                            <div v-if="list.grade == 4"><img src="../../image/grade4.png"></div>
+                            <div v-if="list.grade == 5"><img src="../../image/grade5.png"></div>
+                        </div>
+                        <div>{{list.cDateTime}}</div>
+                    </div>
+                    <div class="review-box2">{{list.content}}</div>
+                </div>
+            </ul>
+        </div>
     </div>
+   
     <!-- 토스트 메시지 요소 추가 -->
     <div id="tost_message">장바구니에 추가되었습니다!</div>
     <div id="login_message">로그인을 해주세요!</div>
@@ -148,7 +169,9 @@ const app = Vue.createApp({
             number: 1,
             userId: "",
             cnt : 1,
-            pStock : ""
+            pStock : "",
+            comment : [],
+
         };
     },
     methods: {
@@ -162,6 +185,8 @@ const app = Vue.createApp({
                     self.info = data.info[0];
                     self.img = data.img;
                     console.log(self.info);
+                    self.comment = data.comment;
+                    console.log(self.comment);
                 }
             });
         },
