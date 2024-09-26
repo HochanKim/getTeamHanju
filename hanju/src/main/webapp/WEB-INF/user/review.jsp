@@ -12,43 +12,46 @@ pageEncoding="UTF-8"%>
   <body>
     <div id="app">
         <div id="container">
-            <div id="tit">
-                <h2>리뷰</h2>
-            </div>
-            <div id="stateReview">
-                <div class="ing">
-                    <a href="../user/review.do">작성 가능한 리뷰</a>
+            <div id="contents">
+                <div id="tit">
+                    <h2>리뷰</h2>
                 </div>
-                <div class="com">
-                    <a href="../user/review.do">작성한 리뷰</a>
-                </div>
-            </div>
-            <table>
-                <tr>
-                    <th>상품</th>
-                    <th>주문일자</th>
-                    <th>리뷰작성</th>
-                </tr>
-                <tr>
-                    <td class="product">
-                        <div class="reviewArea">
-                            <a href="" class="thum">
-                                <img>
-                            </a>
-                            <div class="text">
-                            <a href="" class=""></a>
-                            </div>
+                <div id="inside">
+                    <div id="stateReview">
+                        <div class="ing">
+                            <a href="../user/review.do">작성 가능한 리뷰</a>
                         </div>
-                    </td>
-                    <td class="orderDate">
-                        <div></div>
-                    </td>
-                    <td class="write">
-                        <button class="writeBtn" @click="fnReviewWrite">리뷰 작성</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                        <div class="com">
+                            <a href="../user/reviewCom.do">작성한 리뷰</a>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>상품</th>
+                            <th>주문일자</th>
+                            <th>리뷰작성</th>
+                        </tr>
+                        <tr>
+                            <td class="product">
+                                <div class="reviewArea">
+                                    <a href="" class="thum">
+                                        <img>
+                                    </a>
+                                    <div class="text">
+                                    <a href="" class=""></a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="orderDate">
+                                <div></div>
+                            </td>
+                            <td class="write">
+                                <button class="writeBtn" @click="fnReviewWrite">리뷰 작성</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
     </div>
   </body>
 </html>

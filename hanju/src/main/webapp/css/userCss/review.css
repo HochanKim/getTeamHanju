@@ -1,24 +1,44 @@
 #container{
-    
+    margin: 0 auto;
+    padding: 0;
 }
+
+#contents{
+    max-width: 1150px;
+    padding: 0 80px;
+}
+
+#inside{
+    margin: 0;
+    padding: 0 0 20px;
+    display: block;
+}
+
 #tit{
-    
+    transform: translate(0, 0);
+    opacity: 1.0;
+    min-height: 30px;
+    margin: 10px 0 60px;
+    text-align: center;
+}
+
+h2{
+    font-size: 33px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
 }
 
 #stateReview{
     display: flex;
-    width: 100%;
-    max-width: 1144px;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    padding: 0 0 15px;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.03em;
 }
 a{
     text-decoration: none;
     color: #333;
-}
-
-.ing{
-    margin-left: 60px;
 }
 
 .com{
@@ -31,10 +51,16 @@ table{
     border-top: 2px solid #d6d6d6;
     border-bottom: 1px solid #e6e6e6;
     border-spacing: 0;
+    margin: 10px 0 0;
 }
 
 th{
-    padding: 11px 0 10px;
+    padding: 13px 0 12px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    border-left: 0;
+    border-bottom: 1px solid #e7e7e7;
     background: #fafafa;
 }
 
