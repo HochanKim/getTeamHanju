@@ -109,7 +109,7 @@
 	</select>
 	
 	<!-- 전통주 생산지 리스트 -->
-	<select id="getMadeByList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleCodeModel">
+	<select id="getMadeByList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
 		SELECT SUBSTR(MADE_BY, 0, 2) AS MADE_BY
 		FROM HANJU_NORMAL_SELL NS
 		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID

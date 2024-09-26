@@ -65,7 +65,6 @@ public class SaleController {
 			map.put("codeList", codeList);
 		}
 		resultMap = saleService.getTradAlcohol(map);
-		System.out.println("일구 컨트롤러 : "+map);
 		return new Gson().toJson(resultMap);
 	}
 	

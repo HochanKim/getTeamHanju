@@ -180,7 +180,6 @@ pageEncoding="UTF-8"%>
             data: paramap,
             success: (data) => {
               self.products = data.pickup;
-              self.materialAndMadeBy = data.pickup;
             },
         });
         $.ajax({  // 품종 리스트 데이터
