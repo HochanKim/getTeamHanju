@@ -10,6 +10,7 @@ pageEncoding="UTF-8"%>
     <title>sample page</title>
   </head>
   <body>
+    <jsp:include page="mainPage/header.jsp"></jsp:include>
     <div id="app">
       <div style="text-align: center; font-weight: bold">
         <div style="color: blue; font-size: 40px">서버 돌아가는 중</div>

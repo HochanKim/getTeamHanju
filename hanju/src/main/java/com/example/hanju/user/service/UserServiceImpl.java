@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.user.model.Favorite;
+import com.example.hanju.user.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,6 +108,15 @@ public class UserServiceImpl implements UserService{
 		result.put("status","success");
 		return result;
 	}
+
+	@Override
+	public Map<String, Object> getOrderList(Map<String, Object> map) {
+		Map<String,Object> result = new HashMap<>();
+		List<OrderItem> list = userMapper.getOrderList(map);
+		result.put("orderList",list);
+		return result;
+	}
+
 	/* 회원가입 */
 	@Override
 	public HashMap<String, Object> userJoin(HashMap<String, Object> map) {
