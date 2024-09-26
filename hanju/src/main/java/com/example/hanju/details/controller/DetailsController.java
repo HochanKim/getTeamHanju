@@ -36,6 +36,7 @@ public class DetailsController {
 	}
 
 
+
 	@RequestMapping(value = "details/details.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchDetails(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
