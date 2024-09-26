@@ -44,6 +44,7 @@ public class DetailsServiceImpl implements DetailsService {
 		return result;
 	}
 
+	@DbExceptionHandle
 	@Override
 	public HashMap<String, Object> searchDetailsPickup(Map<String, Object> map) {
 		HashMap<String, Object> result = new HashMap<>();
@@ -51,7 +52,11 @@ public class DetailsServiceImpl implements DetailsService {
 		result.put("pickUpProduct", detailsPickUp);
 		List<Details> pickUpStore = detailsMapper.selectPickUpStore(map);
 		result.put("pickUpStore", pickUpStore);
+		List<Comment> comment = detailsMapper.selectComment(map);
+		System.out.println(comment);
+		result.put("comment", comment);
 		System.out.println("service" + result);
+		map.put("status", "R");
 		return result;
 	}
 }

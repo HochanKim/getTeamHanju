@@ -57,10 +57,12 @@ public class CartServiceImpl implements CartService {
         int stock;
         if (item.getKind().equals("P")) {
             map.put("storeId", item.getStoreId());
+            System.out.println(map);
             stock = cartMapper.storeStockCheck(map);
         } else {
             stock = cartMapper.stockCheck(map);
         }
+        System.out.println(stock);
         String pm = (String) map.get("value");
         int count = item.getProductCount();
         if (pm.equals("plus") && stock == count) {

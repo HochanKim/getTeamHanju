@@ -69,8 +69,7 @@ pageEncoding="UTF-8"%>
                   <button
                     @click="pickUpStoreSelect(info.storeId)"
                     class="modal-button"
-                    v-model="storeId"
-                  >
+                    v-model="storeId">
                     선택
                   </button>
                 </li>
@@ -247,6 +246,45 @@ pageEncoding="UTF-8"%>
         <div style="clear: both">
           <img :src="img.detailImage" class="detail-img" />
         </div>
+
+        <!-- 리뷰 페이지 -->
+        <div>
+          <div v-for="list in comment">
+            <div class="review-box">
+              <div class="review-name">{{ list.userName }}</div>
+              <div style=" display: flex; justify-content: flex-end; margin-right: 10px;">
+                <div class="review">{{ info.productName }}</div>
+                <div class="img-grade review">
+                  <div v-if="list.grade == 0">
+                    <img src="../../image/grade0.png" />
+                  </div>
+                  <div v-if="list.grade == 1">
+                    <img src="../../image/grade1.png" />
+                  </div>
+                  <div v-if="list.grade == 2">
+                    <img src="../../image/grade2.png" />
+                  </div>
+                  <div v-if="list.grade == 3">
+                    <img src="../../image/grade3.png" />
+                  </div>
+                  <div v-if="list.grade == 4">
+                    <img src="../../image/grade4.png" />
+                  </div>
+                  <div v-if="list.grade == 5">
+                    <img src="../../image/grade5.png" />
+                  </div>
+                </div>
+                <div>{{ list.cDateTime }}</div>
+              </div>
+            </div>
+            <div class="review-box4">
+              <div class="review-box2">{{ list.content }}</div>
+              <div class="review-box3">
+                <img :src="list.filePath" class="review-img"/>
+              </div>
+          </div>
+          </div>
+        </div>
       </div>
       <!-- 토스트 메시지 요소 추가 -->
       <div id="tost_message">장바구니에 추가되었습니다!</div>
@@ -272,6 +310,7 @@ pageEncoding="UTF-8"%>
             storeId: "",
             date: new Date(),
             pickupId: "",
+            sellId:""
           };
         },
         components: {
@@ -282,6 +321,7 @@ pageEncoding="UTF-8"%>
             var self = this;
             const asdf = {
               pickupId: this.pickupId,
+              sellId : "",
             };
             $.ajax({
               url: "detailsPickUp.dox",
@@ -292,6 +332,8 @@ pageEncoding="UTF-8"%>
                 self.info = data.pickUpProduct[0];
                 self.list = data.pickUpProduct;
                 self.img = data.img;
+                self.comment = data.comment;
+                console.log(self.img);
                 console.log(self.list);
               },
             });
