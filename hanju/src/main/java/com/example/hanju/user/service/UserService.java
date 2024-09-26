@@ -28,5 +28,6 @@ public interface UserService {
   //찜목록 리스트 불러오기
   Map<String, Object> getFavoriteItemList(Map<String, Object> map);
   Map<String, Object> deleteFavoriteItem(Map<String,Object> map);
+  Map<String,Object> getOrderList(Map<String,Object> map);
   
 }

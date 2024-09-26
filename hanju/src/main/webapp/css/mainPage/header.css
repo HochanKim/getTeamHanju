@@ -1,0 +1,59 @@
+/* 전역 css 초기화 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전역 css 초기화 끝 */
+
+#header {
+    width: 100%;
+    background-color: rgb(85, 139, 123);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header #Logo {
+    padding: 16px;
+}
+
+/* center */
+
+#header #center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#center .menu {
+    margin: 16px;
+}
+
+#center a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+/* right */
+
+#header #right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#right .rightIcon {
+    width: 40px;
+    height: 40px;
+    margin: 16px;
+}
+
+#right .icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

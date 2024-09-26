@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="../../css/mainPage/footer.css" />
 </head>
 <body>
     <!-- 푸터 -->
-    <div class="footer">
+    <div id="footer">
         HANJU <br> 
         14780 경기도 부천시 경인로 590 (괴안동 185-34) <br>
         대표전화 : (032)123-0348 / FAX : (032)123-0354

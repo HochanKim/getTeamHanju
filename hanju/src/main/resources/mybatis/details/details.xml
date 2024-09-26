@@ -23,6 +23,7 @@
 		SELECT *
 		FROM HANJU_PICKUP_STORE
 	</select>
+
 	<select id ="selectPickUpProduct" parameterType="hashmap" resultType="Details">
 		SELECT *
 		FROM HANJU_PRODUCT P
@@ -41,19 +42,29 @@
 		WHERE N.SELL_ID = #{sellId} AND FILE_STATUS = #{status}
 	</select>
 
+	<select id="detailImagePickUp" parameterType="hashmap" resultType="String">
+		SELECT FILE_PATH
+		FROM HANJU_IMAGE I
+		INNER JOIN HANJU_PRODUCT P ON I.FK_ID = P.PRODUCT_ID
+		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
+		WHERE N.SELL_ID = #{pickupId} AND FILE_STATUS = #{status}
+	</select>
 	<!--리뷰-->
 	<select id="selectComment" parameterType="hashmap" resultType="Comment">
-		SELECT C.*,
-		CASE
-		WHEN LENGTH(U.USER_NAME) > 1 THEN
-		SUBSTR(U.USER_NAME, 1, FLOOR(LENGTH(U.USER_NAME) / 2)) || '*' ||
-		SUBSTR(U.USER_NAME, CEIL(LENGTH(U.USER_NAME) / 2) + 1)
-		ELSE
-		U.USER_NAME
-		END AS USER_NAME
+		SELECT c.*,replace(user_name, substr(user_name, 2, 1), '*') user_name, i.*
 		FROM HANJU_COMMENT C
 		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
-		WHERE C.SELL_ID = '75'
+		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
+		WHERE C.SELL_ID = #{sellId}
 	</select>
+
+	<select id="selectCommentPickUp" parameterType="hashmap" resultType="Comment">
+		SELECT c.*,replace(user_name, substr(user_name, 2, 1), '*') user_name, i.*
+		FROM HANJU_COMMENT C
+		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
+		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
+		WHERE C.SELL_ID = #{pickupId}
+	</select>
+
 	
 </mapper>
