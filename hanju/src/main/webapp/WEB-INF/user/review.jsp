@@ -115,9 +115,26 @@ pageEncoding="UTF-8"%>
     methods: {
       modalOpen() {
       this.modalCheck = !this.modalCheck
+  },
+
+  fnOrder(){
+    var self = this;
+				
+				$.ajax({
+					url:"getOrderList.dox", 
+					dataType:"json",	
+					type : "GET", 
+				
+					success : function(data) {  
+						console.log(data);
+						
+					}
+				});
   }
     },
-    mounted() {},
+    mounted() {
+      this.fnOrder();
+    },
   });
   app.mount("#app");
 </script>
