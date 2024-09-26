@@ -236,7 +236,7 @@
 
 
         backBtn(){
-          location.href="/user/mypage.do";
+          location.href="/user/myPage.do";
         },
 
         joinBtn(){
@@ -268,7 +268,7 @@
             success: function (data) {
               console.log(data);
               alert('수정되었습니다');
-              $.pageChange("mypage.do", {});
+              $.pageChange("myPage.do", {});
             }
           });
 

@@ -90,17 +90,19 @@ tr td {
     inset: 0px;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    
 }
 
 .modal-wrap {
     width: 560px !important;
     margin-left: -280px !important;
-    position: absolute;
-    top: 20%;
-    left: 50%;
     margin: 0 0 0 -379px;
     border-radius: 5px;
     background: #fff;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    
   }
  
   .modal-container {
