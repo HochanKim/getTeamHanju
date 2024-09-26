@@ -107,7 +107,6 @@ body, html{
 }
 .review-name{
     margin-left: 10px;
-    margin-right: 550px;
     float: left;
 }
 .review{
@@ -123,7 +122,13 @@ body, html{
 }
 .review-box2{
     width: 800px;
-    height: 100px;
+    margin-bottom: 10px;
+}
+.review-img{
+    width:100px;
+}
+.review-box4{
+    margin: 10px;
 }
 
 /*버튼 기본 스타일링*/
