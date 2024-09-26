@@ -61,5 +61,23 @@ public class PickupServiceImpl implements PickupService {
 		return resultMap;
 	}
 
+	@Override	// 품종 리스트
+	public HashMap<String, Object> getMaterialList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<PickupBoardDto> material = pickupMapper.getMaterialList(map);
+		resultMap.put("material", material);
+		return resultMap;
+	}
+
+	@Override	// 원산지 리스트
+	public HashMap<String, Object> getMadeByList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<PickupBoardDto> madeBy = pickupMapper.getMadeByList(map);
+		resultMap.put("madeBy", madeBy);
+		return resultMap;
+	}
+
+
+
 
 }

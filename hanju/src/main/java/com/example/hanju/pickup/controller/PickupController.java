@@ -53,8 +53,8 @@ public class PickupController {
 			List<Object> codeList = mapper.readValue(json, new TypeReference<List<Object>>(){});
 			map.put("codeList", codeList);
 		}
+		System.out.println("보내기 : "+map);
  		resultMap = pickupService.getPickUpList(map);
- 		System.out.println("픽업 컨트롤러 : "+map);
  		return new Gson().toJson(resultMap);
  	}
  	
@@ -64,6 +64,24 @@ public class PickupController {
  	public String codeList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
  		HashMap<String, Object> resultMap = new HashMap<String, Object>();
  		resultMap = pickupService.selectCodeList(map);
+ 		return new Gson().toJson(resultMap);
+ 	}
+ 	
+ 	// 품종
+ 	@RequestMapping(value = "pickup/material.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+ 	@ResponseBody
+ 	public String material(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+ 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+ 		resultMap = pickupService.getMaterialList(map);
+ 		return new Gson().toJson(resultMap);
+ 	}
+ 	
+ 	// 원산지
+ 	@RequestMapping(value = "pickup/madeBy.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+ 	@ResponseBody
+ 	public String madeBy(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+ 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+ 		resultMap = pickupService.getMadeByList(map);
  		return new Gson().toJson(resultMap);
  	}
 

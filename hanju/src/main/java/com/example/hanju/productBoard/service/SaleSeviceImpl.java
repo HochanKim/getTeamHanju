@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.annotations.DbExceptionHandle;
+import com.example.hanju.pickup.model.dto.PickupBoardDto;
 import com.example.hanju.productBoard.mapper.SaleMapper;
 import com.example.hanju.productBoard.model.entity.SaleCodeModel;
 import com.example.hanju.productBoard.model.entity.SaleModel;
@@ -62,6 +63,14 @@ public class SaleSeviceImpl implements SaleService {
 		List<SaleModel> newList = saleMapper.newProducts(map);
 		System.out.println("서비스 : "+newList);
 		resultMap.put("newList", newList);
+		return resultMap;
+	}
+
+	@Override	// 생산지 리스트
+	public HashMap<String, Object> getMadeByList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<SaleModel> madeBy = saleMapper.getMadeByList(map);
+		resultMap.put("madeBy", madeBy);
 		return resultMap;
 	}
 
