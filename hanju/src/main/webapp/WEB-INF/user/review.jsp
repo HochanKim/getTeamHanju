@@ -47,50 +47,53 @@ pageEncoding="UTF-8"%>
                             </td>
                             <td class="write">
                                 <button class="writeBtn" @click="modalOpen">리뷰 작성</button>
-                                <div class="modal-wrap" v-show="modalCheck">
-                                    <div class="modal-container">
-                                      <h1>리뷰작성</h1>
-                                      <div class="productInfo">
-                                        <span class="productName"></span>
-                                        <div></div>
-                                      </div>
-                                      <ul>
-                                        <li>
-                                          <div>
-                                            <span>상품은 어떠셨나요?</span>
+                                
+                                  <div class="modal" v-show="modalCheck">
+                                    <div class="modal-wrap">
+                                      <div class="modal-container">
+                                        <h1>리뷰작성</h1>
+                                        <div class="productInfo">
+                                          <span class="productName"></span>
+                                          <div></div>
+                                        </div>
+                                        <ul>
+                                          <li>
                                             <div>
-                                              <ul>
-                                                <li><button>1점</button></li>
-                                                <li><button>2점</button></li>
-                                                <li><button>3점</button></li>
-                                                <li><button>4점</button></li>
-                                                <li><button>5점</button></li>
-                                              </ul>
+                                              <span>상품은 어떠셨나요?</span>
+                                              <div>
+                                                <ul>
+                                                  <li><button>1점</button></li>
+                                                  <li><button>2점</button></li>
+                                                  <li><button>3점</button></li>
+                                                  <li><button>4점</button></li>
+                                                  <li><button>5점</button></li>
+                                                </ul>
+                                              </div>
                                             </div>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div>
+                                          </li>
+                                          <li>
                                             <div>
-                                              <span>솔직한 상품 리뷰를 남겨주세요</span>
+                                              <div>
+                                                <span>솔직한 상품 리뷰를 남겨주세요</span>
+                                              </div>
+                                              <div>
+                                                <textarea></textarea>
+                                              </div>
+                                            </div>
+                                          </li>
+                                          <li>
+                                            <div>
+                                              <strong>포토</strong>
                                             </div>
                                             <div>
-                                              <textarea></textarea>
+                                              <button><img src="../../image/photo.png"></button>
                                             </div>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div>
-                                            <strong>포토</strong>
-                                          </div>
-                                          <div>
-                                            <button><img src="../../image/photo.png"></button>
-                                          </div>
-                                        </li>
-                                      </ul>
-                                      <div class="modal-btn">
-                                        <button @click="modalOpen">닫기</button>
-                                        <button @click="modalOpen">리뷰 등록 하기</button>
+                                          </li>
+                                        </ul>
+                                        <div class="modal-btn">
+                                          <button @click="modalOpen">닫기</button>
+                                          <button @click="modalOpen">리뷰 등록 하기</button>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
