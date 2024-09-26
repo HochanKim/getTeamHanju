@@ -96,5 +96,14 @@ public class SaleController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	// 전통주 생산지 리스트
+	@RequestMapping(value = "market/madeBy.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String madeBy(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = saleService.getMadeByList(map);
+		return new Gson().toJson(resultMap);
+	}
+	
 	
 }

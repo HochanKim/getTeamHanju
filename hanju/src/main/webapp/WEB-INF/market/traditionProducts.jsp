@@ -75,7 +75,7 @@ pageEncoding="UTF-8"%>
               <option value="">-- 용량 --</option>
               <option value="1">:: 400ml 미만 ::</option>
               <option value="2">:: 400ml ~ 700ml ::</option>
-              <option value="3">:: 700ml 이상 ::</option>
+              <option value="3">:: 700ml 이상 ::</option> 
             </select>
             <select v-model="material" @change="fnList" class="materialList">
               <option value="">-- 원료(과채류) --</option>
@@ -89,6 +89,10 @@ pageEncoding="UTF-8"%>
               <option value="8">:: 복숭아 ::</option>
               <option value="9">:: 단호박 ::</option>
               <option value="10">:: 기타 ::</option>
+            </select>
+            <select v-model="madeBy" @change="fnList">
+              <option value="">-- 생산지 --</option>
+              <option v-for="item in madeByList" :value="item.madeBy">:: {{item.madeBy}} ::</option>
             </select>
         </section>
         <!-- 상품 리스트 영역 -->
@@ -120,6 +124,7 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
+        madeByList : [],
         products : [],
         codeList : [],
         selectCodes : [],
@@ -128,7 +133,8 @@ pageEncoding="UTF-8"%>
         sour : "",        // 산미
         body : "",        // 바디감
         capacity : "",    // 용량
-        material : ""     // 원료
+        material : "",    // 원료
+        madeBy : ""       // 생산지
       };
     },
     methods: {
@@ -175,7 +181,17 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: paramap,
             success: (data) => {
+              self.categoryOptionList = data.tradList;
               self.products = data.tradList;
+            },
+        });
+        $.ajax({  // 생산지 데이터
+            url: "madeBy.dox",
+            dataType: "json",
+            type: "POST",
+            data: [],
+            success: (data) => {
+              self.madeByList = data.madeBy;
             },
         });
       },

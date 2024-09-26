@@ -22,4 +22,6 @@ public interface SaleMapper {
 	
 	// 코드 리스트 (전통주 > 선택 코드 리스트)
 	List<SaleCodeModel> selectCodeList(HashMap<String, Object> map);
+	// 전통주 생산지 리스트
+	List<SaleModel> getMadeByList(HashMap<String, Object> map);
 }

@@ -94,7 +94,6 @@
 	        AND NOT (P.TYPE = 'G' OR C.PARENT_CODE = 'W')
 	    </where>
 	</select>
-
 	
 	<!-- 전체상품 > 선택 코드 리스트 -->
 	<select id="selectCodeList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleCodeModel">
@@ -102,6 +101,18 @@
 		FROM HANJU_CODE C1
 		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
 		WHERE C1.KIND = 'IMAGE_STATUS' AND NOT C2.CODE = 'G'
+	</select>
+	
+	<!-- 전통주 생산지 리스트 -->
+	<select id="getMadeByList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleCodeModel">
+		SELECT SUBSTR(MADE_BY, 0, 2) AS MADE_BY
+		FROM HANJU_NORMAL_SELL NS
+		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
+		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE C.PARENT_CODE = 'T'
+		GROUP BY SUBSTR(MADE_BY, 0, 2)
+		ORDER BY MADE_BY ASC
 	</select>
 
 	<!-- 전체상품 > 선물세트 -->

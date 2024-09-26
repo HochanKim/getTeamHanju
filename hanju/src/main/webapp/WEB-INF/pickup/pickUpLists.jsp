@@ -74,10 +74,16 @@ pageEncoding="UTF-8"%>
           <option value="2">:: 400ml ~ 700ml ::</option>
           <option value="3">:: 700ml 이상 ::</option>
         </select>
-        <select v-model="material" @change="PickUpList" class="materialList">
+        <select v-model="material" @change="PickUpList">
           <option value="">-- 품종 --</option>
-          <option v-for="item in products" :value="item.material">:: {{ item.material }} ::</option>
+          <option v-for="item in materialList" :value="item.material">:: {{ item.material }} ::</option>
         </select>
+
+        <select v-model="madeBy" @change="PickUpList">
+          <option value="">-- 원산지 --</option>
+          <option v-for="item in MadeByList" :value="item.madeBy">:: {{ item.madeBy }} ::</option>
+        </select>
+
     </section>
       </section>
       <!-- 상품 리스트 영역 -->
@@ -111,6 +117,8 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         products: [],
+        materialList : [],
+        MadeByList : [],
         codeList : [],
         selectCodes : [],
         alcohol : "",     // 알콜 도수
@@ -119,7 +127,7 @@ pageEncoding="UTF-8"%>
         sparkling : "",   // 탄산 유무
         body : "",        // 바디감
         capacity : "",    // 용량
-        material : [],    // 품종
+        material : "",    // 품종
         madeBy : ""       // 원산지
       };
     },
@@ -172,6 +180,25 @@ pageEncoding="UTF-8"%>
             data: paramap,
             success: (data) => {
               self.products = data.pickup;
+              self.materialAndMadeBy = data.pickup;
+            },
+        });
+        $.ajax({  // 품종 리스트 데이터
+            url: "material.dox",
+            dataType: "json",
+            type: "POST",
+            data: [],
+            success: (data) => {
+              self.materialList = data.material;
+            },
+        });
+        $.ajax({  // 원산지 리스트 데이터
+            url: "madeBy.dox",
+            dataType: "json",
+            type: "POST",
+            data: [],
+            success: (data) => {
+              self.MadeByList = data.madeBy;
             },
         });
       },
