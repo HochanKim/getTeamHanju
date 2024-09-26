@@ -50,7 +50,7 @@ pageEncoding="UTF-8"%>
         <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
         <ul v-for="item in products"> 
           <li class="productList">
-            <a href="javascript:void(0); ">
+            <a @click="fnDetailPage(item.sellId)">
               <div>
                 <div class="img-wrap">
                   <img :src="item.filePath" :alt="item.fileOrgName" />
@@ -87,10 +87,14 @@ pageEncoding="UTF-8"%>
                 type: "POST",
                 data: [],
                 success: (data) => {
-                    self.products = data.list;
+                  console.log(data);
+                  self.products = data.list;
                 },
             });
         },
+        fnDetailPage(sellId) {
+          location.href = `/details/details.do?id=\${sellId}`;
+        }
     },
     mounted() {
       var self = this;

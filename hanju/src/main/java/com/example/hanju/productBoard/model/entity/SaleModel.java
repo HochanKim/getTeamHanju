@@ -29,4 +29,5 @@ public class SaleModel {
     private String fileOrgName;		// hanju_imamge 테이블 컬럼
     private String sellId;			// hanju_normal_sell 테이블 컬럼
     
+    
 }

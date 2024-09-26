@@ -163,7 +163,8 @@ pageEncoding="UTF-8"%>
             sour : self.sour,
             body : self.body,
             capacity : self.capacity,
-            material : self.material
+            material : self.material,
+            madeIn : self.madeBy
           };
         } else {
           paramap = {
@@ -172,7 +173,8 @@ pageEncoding="UTF-8"%>
             sour : self.sour,
             body : self.body,
             capacity : self.capacity,
-            material : self.material
+            material : self.material,
+            madeIn : self.madeBy
           };
         }
         $.ajax({
@@ -181,7 +183,6 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: paramap,
             success: (data) => {
-              self.categoryOptionList = data.tradList;
               self.products = data.tradList;
             },
         });
@@ -191,6 +192,7 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: [],
             success: (data) => {
+              console.log(data);
               self.madeByList = data.madeBy;
             },
         });

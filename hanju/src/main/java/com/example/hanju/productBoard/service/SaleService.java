@@ -12,9 +12,9 @@ public interface SaleService {
 	HashMap<String, Object> getGiftSet(HashMap<String, Object> map);
 	// 판매 페이지 (전통주 > 신상품)
 	HashMap<String, Object> newProducts(HashMap<String, Object> map);
+	// 전통주 생산지 리스트
+	HashMap<String, Object> getMadeByList(HashMap<String, Object> map);
 	
 	// 코드 리스트 (전통주 > 선택 코드 리스트)
 	HashMap<String, Object> selectCodeList(HashMap<String, Object> map);
-	// 전통주 생산지 리스트
-	HashMap<String, Object> getMadeByList(HashMap<String, Object> map);
 }
