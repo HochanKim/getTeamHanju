@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
             <a href="javascript:void(0); ">
               <div>
                 <div class="img-wrap">
-                  <img :src="item.filePath" :alt="item.fileOrgName" />
+                  <img :src="item.filePath" :alt="item.fileOrgName" /> 
                 </div>
                 <p class="productName">{{ item.productName }}</p>
                 <p class="price">\ {{ item.priceComma }}</p>
