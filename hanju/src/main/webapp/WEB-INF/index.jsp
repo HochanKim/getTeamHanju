@@ -40,7 +40,7 @@ pageEncoding="UTF-8"%>
         <button @click="fnGoToTest('user/joinbtn.do')">휴대폰 본인인증</button>
         <button @click="fnGoToTest('user/join.do')">회원가입</button>
         <button @click="fnGoToTest('user/login.do')">로그인</button>
-        <button @click="fnGoToTest('user/mypage.do')">마이페이지</button>
+        <button @click="fnGoToTest('user/myPage.do')">마이페이지</button>
       </div>
     </div>
   </body>

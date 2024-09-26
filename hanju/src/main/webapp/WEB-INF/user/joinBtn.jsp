@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/userCss/joinbtn.css"/>
+    <link rel="stylesheet" href="../../css/userCss/joinBtn.css"/>
 <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <title>document</title>

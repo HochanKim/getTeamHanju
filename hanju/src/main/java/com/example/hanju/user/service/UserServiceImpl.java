@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.user.model.Favorite;
+import com.example.hanju.user.model.OrderState;
 import com.example.hanju.user.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public HashMap<String, Object> userInfo(HashMap<String, Object> map) {
 		HashMap<String,Object> resultMap = new HashMap<>();
+		
 		UserModel list = userMapper.infoUser(map);
+		List<OrderState> order = userMapper.orderStatus(map);
 		resultMap.put("list",list);
+		resultMap.put("order",order);
 		return resultMap;
 	}
 
@@ -163,6 +167,7 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
+	/* 회원탈퇴 */
 	@DbExceptionHandle
 	@Override
 	public HashMap<String, Object> userDelete(HashMap<String, Object> map) {
@@ -171,7 +176,7 @@ public class UserServiceImpl implements UserService{
 			userMapper.deleteUser(map);
 			System.out.println(map);
 			resultMap.put("result", "success");
-			resultMap.put("message", "삭제되었습니다.");
+			resultMap.put("message", "탈퇴되었습니다.");
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

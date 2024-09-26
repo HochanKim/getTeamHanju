@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/userCss/modifybefore.css"/>
+    <link rel="stylesheet" href="../../css/userCss/modifyBefore.css"/>
 <script src="/js/jquery.js"></script>
 <script src="/js/vue.js"></script>
     <title>document</title>

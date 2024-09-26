@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.user.model.Favorite;
+import com.example.hanju.user.model.OrderState;
 import com.example.hanju.user.model.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,6 +26,8 @@ public interface UserMapper {
 	void modifyUser(HashMap<String, Object> map);
 	//회원탈퇴
 	void deleteUser(HashMap<String, Object> map);
+	//배송상태
+	List<OrderState> orderStatus(HashMap<String, Object> map);
 	
 	List<UserModel> allUserList();
 

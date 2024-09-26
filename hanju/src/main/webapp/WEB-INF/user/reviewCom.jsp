@@ -28,8 +28,7 @@ pageEncoding="UTF-8"%>
                     <table>
                         <tr>
                             <th>상품</th>
-                            <th>주문일자</th>
-                            <th>리뷰작성</th>
+                            <th>리뷰</th>
                         </tr>
                         <tr>
                             <td class="product">
@@ -42,11 +41,10 @@ pageEncoding="UTF-8"%>
                                     </div>
                                 </div>
                             </td>
-                            <td class="orderDate">
-                                <div></div>
-                            </td>
                             <td class="write">
-                                <button class="writeBtn" @click="fnReviewWrite">리뷰 작성</button>
+                                <div>
+                                    <a ></a>
+                                </div>
                             </td>
                         </tr>
                     </table>
