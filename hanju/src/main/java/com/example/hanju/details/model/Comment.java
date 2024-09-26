@@ -14,4 +14,8 @@ public class Comment {
 
    //유저
    private String userName;
+
+   //이미지
+   private String fileOrgName;
+   private String filePath;
 }
