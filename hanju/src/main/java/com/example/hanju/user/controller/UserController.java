@@ -49,7 +49,11 @@ public class UserController {
 	public String review(Model model) throws Exception{
 	return "user/review";
 	}
-	
+	//주문 내역 페이지
+	@RequestMapping("user/orderInfoPage.do")
+	public String orderInfoPage(Model model) throws Exception{
+		return "user/orderInfoPage";
+	}
 	//회원정보수정
 	@RequestMapping("user/modify.do")
 	public String modify(Model model) throws Exception{
@@ -149,4 +153,13 @@ public class UserController {
 		Map<String, Object> result = userService.deleteFavoriteItem(map);
 		return new Gson().toJson(result);
 	}
+	@GetMapping(value = "user/getOrderList.dox", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getOrderList(Model model) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId",session.getAttribute("sessionId"));
+		Map<String, Object> result = userService.getOrderList(map);
+		return new Gson().toJson(result);
+	}
+
 }

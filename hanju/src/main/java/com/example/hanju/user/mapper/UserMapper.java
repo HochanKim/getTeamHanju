@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.user.model.Favorite;
+import com.example.hanju.user.model.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.hanju.user.model.UserModel;
@@ -33,4 +34,5 @@ public interface UserMapper {
 
     List<Favorite> getFavoriteItemList(Map<String,Object> map);
     void deleteFavoriteItem(Map<String,Object> map);
+	List<OrderItem>  getOrderList(Map<String,Object> map);
 }

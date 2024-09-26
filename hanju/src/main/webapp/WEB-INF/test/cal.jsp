@@ -15,10 +15,13 @@ pageEncoding="UTF-8"%>
   <style></style>
   <body>
     <div id="app">
-      <div style="width: 300px">
-        <vue-date-picker v-model="date" locale="ko"></vue-date-picker>
-        <div>선택한 날짜 : {{ date }}</div>
-      </div>
+      <select v-model="select" @change="fnTest">
+        <option value="">전체선택</option>
+        <option v-for="item in list" :value="item.code">
+          {{ item.codeName }}
+        </option>
+      </select>
+      <div>여기 선택한 코드 : {{ select }}</div>
     </div>
   </body>
 </html>
@@ -26,13 +29,43 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
-        date: new Date(),
+        select: "",
+        list: [
+          {
+            codeName: "전통주 선물세트",
+            code: "G",
+          },
+          {
+            codeName: "탁주",
+            code: "TJ",
+          },
+          {
+            codeName: "청주",
+            code: "CJ",
+          },
+          {
+            codeName: "증류주",
+            code: "SJ",
+          },
+          {
+            codeName: "과실주",
+            code: "FJ",
+          },
+          {
+            codeName: "전통주와인",
+            code: "TW",
+          },
+        ],
+        boardList: [],
       };
     },
-    components: {
-      VueDatePicker,
+    methods: {
+      fnTest() {
+        alert(this.select);
+        //ajax 실행 결과 data
+        this.boardList = data.list;
+      },
     },
-    methods: {},
     mounted() {},
   });
   app.mount("#app");

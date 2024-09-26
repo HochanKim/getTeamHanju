@@ -170,7 +170,7 @@ pageEncoding="UTF-8"%>
         }
         const url = "cartItemDelete.dox";
         const res = await axios.post(url, { cartId: id });
-        console.log(res.data);
+        this.fnAllCartInit();
       },
       async fnPickupCountChange(value, id, cnt) {
         const url = "cartCountChange.dox";
