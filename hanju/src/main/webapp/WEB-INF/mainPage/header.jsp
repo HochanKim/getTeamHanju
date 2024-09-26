@@ -28,11 +28,11 @@
         <div id="right">
             <div v-if="userStatus == 'C'" class="icons">
                 <div>로그아웃</div>
-                <img class="rightIcon" src="../../image/person.png">
+                <img class="rightIcon" src="../../image/person.png" @click="fnMyPage">
                 <img class="rightIcon" src="../../image/cart.png">
                 <img class="rightIcon" src="../../image/heart_plus_white.png">
             </div>
-            <div v-else-if="userStatus == 'S'" class="icons">
+            <div v-else-if="userStatus == 'S'" class="icons" @click="fnSellerPage">
                 <div>사업자 페이지</div>
                 <img class="rightIcon" src="../../image/person.png">
             </div>
@@ -40,7 +40,7 @@
                 <div>관리자 페이지</div>
                 <img class="rightIcon" src="../../image/person.png">
             </div>
-            <div v-else class="icons">
+            <div v-else class="icons" @click="fnLogin">
                 <div>로그인</div>
                 <img class="rightIcon" src="../../image/person.png">
             </div>
@@ -60,6 +60,15 @@
             fnTest() {
                 console.log(this.userId);
                 console.log(this.userStatus);
+            },
+            fnSellerPage() {
+                location.href = "../sellerPage/sellerMain.do";
+            },
+            fnLogin() {
+                location.href = "../user/login.do";
+            },
+            fnMyPage() {
+                location.href = "../user/myPage.do";
             }
         },
         mounted() {
