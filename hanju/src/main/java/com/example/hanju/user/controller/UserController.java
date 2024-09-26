@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.hanju.test.service.TestService;
 import com.example.hanju.user.service.UserService;
 import com.google.gson.Gson;
 
@@ -20,9 +19,9 @@ public class UserController {
 	@Autowired
 	HttpSession session;
 	//휴대폰인증
-	@RequestMapping("user/joinbtn.do")
+	@RequestMapping("user/joinBtn.do")
 	public String joinBtn(Model model) throws Exception{
-		return "user/joinbtn";
+		return "user/joinBtn";
 	}
 	//회원가입
 	@RequestMapping("user/join.do")
@@ -40,24 +39,29 @@ public class UserController {
 		return "user/juso";
 	}
 	//마이페이지
-	@RequestMapping("user/mypage.do")
+	@RequestMapping("user/myPage.do")
 	public String mypage(Model model) throws Exception{
-		return "user/mypage";
+		model.addAttribute("userId",session.getAttribute("sessionId"));
+		return "user/myPage";
 	}
 	//리뷰페이지
 	@RequestMapping("user/review.do")
 	public String review(Model model) throws Exception{
-	return "user/review";
+		return "user/review";
 	}
-	
+	//작성완료된 리뷰
+	@RequestMapping("user/reviewCom.do")
+	public String reviewCom(Model model) throws Exception{
+		return "user/reviewCom";
+	}
 	//회원정보수정
 	@RequestMapping("user/modify.do")
 	public String modify(Model model) throws Exception{
 		return "user/modify";
 	}
-	@RequestMapping("user/modifybefore.do")
+	@RequestMapping("user/modifyBefore.do")
 	public String modifybefore(Model model) throws Exception{
-		return "user/modifybefore";
+		return "user/modifyBefore";
 	}
 	@RequestMapping("user/favorite.do")
 	public String favoritePage(Model model) throws Exception{
@@ -65,9 +69,9 @@ public class UserController {
 		return "user/favoritePage";
 	}
 	//리뷰쓰기
-	@RequestMapping("user/reviewwrite.do")
+	@RequestMapping("user/reviewWrite.do")
 	public String reviewwrite(Model model) throws Exception{
-		return "user/reviewwrite";
+		return "user/reviewWrite";
 	}
 	
 	//모든 유저 정보 리스트

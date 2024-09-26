@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/userCss/mypage.css" />
+    <link rel="stylesheet" href="../../css/userCss/myPage.css" />
 <script src="/js/jquery.js"></script>
 <script src="/js/vue.js"></script>
     <title>document</title>
@@ -28,19 +28,19 @@ pageEncoding="UTF-8"%>
                             <li>
                                 <strong>배송준비중</strong>
                                 <a href="" class="count">
-                                    <span>0</span>
+                                    <span>{{bill}}</span>
                                 </a>
                             </li>
                             <li>
                                 <strong>배송중</strong>
                                 <a href="" class="count">
-                                    <span>0</span>
+                                    <span>{{ship}}</span>
                                 </a>
                             </li>
                             <li class="arrive">
                                 <strong>배송완료</strong>
                                 <a href="" class="count">
-                                    <span>0</span>
+                                    <span>{{complete}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -64,7 +64,7 @@ pageEncoding="UTF-8"%>
                         </li>
                         <li>
                             <img src="../../image/profile.png">
-                            <a href="../user/modifybefore.do">
+                            <a href="../user/modifyBefore.do">
                                 <strong>회원정보</strong>
                                 <p>회원이신 고객님의 개인정보를 관리하는 공간입니다.</p>
                             </a>
@@ -102,11 +102,14 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         userId: "${sessionId}",
-        point : ""
+        point : "",
+        bill : "",
+        ship : "",
+        complete : "",
       };
     },
     methods: {
-        fnPoint(){
+        fnInfo(){
             var self = this;
 
           var nparmap = {
@@ -120,7 +123,17 @@ pageEncoding="UTF-8"%>
             data: nparmap,
             success: function (data) {
               console.log(data);
-              self.point = data.list.point
+              self.point = data.list.point;
+              for(var item of data.order){
+                if(item.status == 'B'){
+                    self.bill = item.cnt;
+                }else if(item.status == 'S'){
+                    self.ship = item.cnt;
+                }else if(item.status == 'C'){
+                    self.complete = item.cnt;
+                }
+              }
+              
             }
           });
         }
@@ -128,7 +141,13 @@ pageEncoding="UTF-8"%>
     },
     mounted() {
         var self = this;
-        self.fnPoint();
+        if("${userId}" == ""){
+            alert("로그인 해주세요.");
+            location.href = "/user/login.do";
+            return;
+        }
+        self.userId = "${userId}";
+        self.fnInfo();
     },
   });
   app.mount("#app");

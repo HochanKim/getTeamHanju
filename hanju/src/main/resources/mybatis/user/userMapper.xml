@@ -4,7 +4,7 @@
 
 <mapper namespace="com.example.hanju.user.mapper.UserMapper">	
 	<select id="idCheck" parameterType="hashmap" resultType="Integer">	
-		SELECT count(*)
+		SELECT COUNT(*)
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</select>
@@ -44,6 +44,12 @@
 		FROM HANJU_USER
 		WHERE USER_ID = #{userId} 
 	</delete>
+	<select id="orderStatus" parameterType="hashmap" resultType="com.example.hanju.user.model.OrderState">	
+		SELECT STATUS, COUNT(*) AS CNT
+		FROM HANJU_BILL
+		WHERE USER_ID = #{userId} 
+		GROUP BY STATUS
+	</select>
 	<update id="pointChange" parameterType="hashmap">
 		UPDATE HANJU_USER
 		SET POINT = POINT - #{point}
