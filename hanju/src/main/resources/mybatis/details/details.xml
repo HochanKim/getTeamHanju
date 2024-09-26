@@ -55,7 +55,7 @@
 		FROM HANJU_COMMENT C
 		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
 		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
-		WHERE C.SELL_ID = #{sellId}
+		WHERE C.BILL_ID = #{sellId}
 	</select>
 
 	<select id="selectCommentPickUp" parameterType="hashmap" resultType="Comment">
@@ -63,7 +63,7 @@
 		FROM HANJU_COMMENT C
 		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
 		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
-		WHERE C.SELL_ID = #{pickupId}
+		WHERE C.BILL_ID = #{pickupId}
 	</select>
 
 	
