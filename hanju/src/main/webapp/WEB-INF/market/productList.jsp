@@ -48,7 +48,7 @@ pageEncoding="UTF-8"%>
       <!-- 상품 리스트 영역 -->
       <section class="productContainer">
         <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
-        <ul v-for="item in products">
+        <ul v-for="item in products"> 
           <li class="productList">
             <a href="javascript:void(0); ">
               <div>
