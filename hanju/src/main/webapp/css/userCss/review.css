@@ -84,3 +84,18 @@ tr td {
     background-color: #fff;
     cursor: pointer;
 }
+
+.modal-wrap {
+    width: 560px !important;
+    margin-left: -280px !important;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin: 0 0 0 -379px;
+    border-radius: 5px;
+    background: #fff;
+  }
+ 
+  .modal-container {
+    padding: 0 40px 40px;
+  }

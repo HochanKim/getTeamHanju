@@ -17,8 +17,6 @@ public interface UserService {
 	HashMap<String, Object> userModify(HashMap<String, Object> map);
 	//회원탈퇴
 	HashMap<String, Object> userDelete(HashMap<String, Object> map);
-	//배송상태
-	
 	//모든 유저 정보
 	Map<String, Object> allUserList();
   //회원조회
