@@ -164,7 +164,7 @@ pageEncoding="UTF-8"%>
             body : self.body,
             capacity : self.capacity,
             material : self.material,
-            madeIn : self.madeBy
+            madeBy : self.madeBy
           };
         } else {
           paramap = {
@@ -174,7 +174,7 @@ pageEncoding="UTF-8"%>
             body : self.body,
             capacity : self.capacity,
             material : self.material,
-            madeIn : self.madeBy
+            madeBy : self.madeBy
           };
         }
         $.ajax({
@@ -183,6 +183,7 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: paramap,
             success: (data) => {
+              console.log(data);
               self.products = data.tradList;
             },
         });
