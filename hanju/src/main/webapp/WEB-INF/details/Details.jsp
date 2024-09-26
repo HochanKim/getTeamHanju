@@ -276,10 +276,10 @@ pageEncoding="UTF-8"%>
               type: "POST",
               data: submitForm,
               success: function (data) {
+                console.log(self.info[0]);
                 self.info = data.info[0];
                 self.img = data.img;
                 console.log(self.img);
-                console.log(self.info);
                 self.comment = data.comment;
                 console.log(self.comment);
               },
