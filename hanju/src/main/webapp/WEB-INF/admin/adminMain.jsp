@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/sellerPage/sellerMain.css" />
+    <link rel="stylesheet" href="../../css/admin/adminMain.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
@@ -13,10 +13,10 @@
 <body>
     <jsp:include page="../mainPage/header.jsp"></jsp:include>
     <div id="main">
-        <jsp:include page="sellerSideBar.jsp"></jsp:include>
+        <jsp:include page="adminSideBar.jsp"></jsp:include>
         <div id="app">
             <div id="container">
-                sellerMain
+                adminMain
             </div>
         </div>
     </div>

@@ -26,5 +26,6 @@ public interface SellerPageMapper {
 	void modifyProduct(HashMap<String, Object> map);
 	void deleteImage(HashMap<String, Object> map);
 	void registerSell(HashMap<String, Object> map);
+	void registerGroupSell(HashMap<String, Object> map);
 	
 }

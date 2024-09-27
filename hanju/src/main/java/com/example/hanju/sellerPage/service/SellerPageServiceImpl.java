@@ -136,6 +136,18 @@ public class SellerPageServiceImpl implements SellerPageService {
 		sellerPageMapper.registerSell(map);
 		
 		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("sellId", map.get("SELL_ID") );
+		resultMap.put("message", "등록되었습니다.");
+		return resultMap;
+	}
+	
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> registerGroupSell(HashMap<String, Object> map) {
+		sellerPageMapper.registerGroupSell(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("groupSellId", map.get("GROUP_SELL_ID") );
 		resultMap.put("message", "등록되었습니다.");
 		return resultMap;
 	}

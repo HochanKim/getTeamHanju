@@ -7,17 +7,14 @@
     <link rel="stylesheet" href="../../css/sellerPage/registerNormalSell.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
-    <!-- Quill CDN -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <title>첫번째 페이지</title>
 </head>
 
 <body>
-    <div id="app">
-        <jsp:include page="../mainPage/header.jsp"></jsp:include>
-        <div id="main">
-            <jsp:include page="sellerSideBar.jsp"></jsp:include>
+    <jsp:include page="../mainPage/header.jsp"></jsp:include>
+    <div id="main">
+        <jsp:include page="sellerSideBar.jsp"></jsp:include>
+        <div id="app">
             <div id="container">
                 <h3>일반 판매 등록</h3>
                 <hr>
@@ -49,18 +46,25 @@
                     </tr>
                     <tr>
                         <th>
-                            상세 설명
+                            상세 설명 이미지
                         </th>
-                        <td>
-                            <div id="editor"></div>
+                        <td class="imageUploaderLine">
+                            <div class="imgBox">
+                                <img v-if="productDetailImgUrl == ''" class="img" src="../../image/defaultImg.png"> 
+                                <img v-else class="img" :src="productDetailImgUrl">
+                            </div>
+                            <label class="imgUploadBtn">
+                                등록하기
+                                <input type="file" @change="fnImgChange" style="visibility: hidden;" multiple>
+                            </label>
                         </td>
                     </tr>
                 </table>
                 <button @click="fnRegisterSell">게시하기</button>
             </div>
         </div>
-        <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
 </body>
 
 </html>
@@ -72,14 +76,14 @@
                 userId : "${sessionId}",
                 userStatus : "${sessionStatus}",
 
-                quill : "",
-
                 productList : [],
                 
                 productId : "",
                 discount : 0,
                 description : "",
-                contents : "",
+
+                productDetailImg : "",
+                productDetailImgUrl : "",
             }
         },
         methods: {
@@ -104,41 +108,49 @@
                         productId   : this.productId,
                         discount    : this.discount,
                         description : this.description,
-                        contents    : this.contents
                     },
 					success : (data) => {
 						console.log(data);
+                        this.fnUploadProductImg(data.sellId, this.productDetailImg, "D");
+					}
+				});
+            },
+            fnUploadProductImg(sellId, imageFile, imageCode) {
+                const formData = new FormData();
+                formData.append("productId", sellId);
+                formData.append("imageCode", imageCode);
+                formData.append("productImg", imageFile);
+
+                $.ajax({
+					url:"uploadProductImg.dox",
+					dataType:"json",
+					type : "POST",
+					data : formData,
+                    processData : false,
+                    contentType : false,
+					success : () => {
                         alert("게시되었습니다!");
                         this.fnInit();
-					}
+					},
+                    error : function(jqXHR, textStatus, errorThrown) {
+                        console.error('업로드 실패!', textStatus, errorThrown);
+                    }
 				});
             },
             fnInit() {
                 this.productId = "";
-                this.discount = 1;
+                this.discount = 0;
                 this.description = "";
-                this.quill.root.innerHTML = "";
-                this.contents = "";
-            }
+                this.productDetailImg = "";
+                this.productDetailImgUrl = "";
+            },
+            fnImgChange(event) {
+                this.productDetailImg = event.target.files[ 0 ];
+                this.productDetailImgUrl = URL.createObjectURL(this.productDetailImg);
+            },
         },
         mounted() {
             this.fnGetProductList();
-
-            this.quill = new Quill('#editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        ['link', 'image'],
-                        ['clean']
-                    ]
-                }
-            });
-            this.quill.on('text-change', () => {
-                this.contents = this.quill.root.innerHTML;
-            });
         },
     });
     app.mount("#app");

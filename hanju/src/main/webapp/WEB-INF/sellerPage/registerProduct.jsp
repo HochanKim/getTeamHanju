@@ -11,10 +11,10 @@
 </head>
 
 <body>
-    <div id="app">
-        <jsp:include page="../mainPage/header.jsp"></jsp:include>
-        <div id="main">
-            <jsp:include page="sellerSideBar.jsp"></jsp:include>
+    <jsp:include page="../mainPage/header.jsp"></jsp:include>
+    <div id="main">
+        <jsp:include page="sellerSideBar.jsp"></jsp:include>
+        <div id="app">
             <div id="container">
                 <h3>제품 등록</h3>
                 <hr>
@@ -159,8 +159,8 @@
                 <div class="submitBtn" @click="fnSubmit">제품등록</div>
             </div>
         </div>
-        <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
 </body>
 
 </html>
