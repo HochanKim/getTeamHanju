@@ -74,7 +74,7 @@
 	</select>
 	
 	<insert id="joinGroupSell" parameterType="hashmap">
-		INSERT INTO TEST_GROUP_SELL_STAT
+		INSERT INTO HANJU_GROUP_SELL_STAT
 		VALUES (#{groupSellId}, #{userId})
 	</insert>
 	

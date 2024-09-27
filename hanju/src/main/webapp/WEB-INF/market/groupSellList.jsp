@@ -28,7 +28,7 @@
                     <div v-for="item in groupSellList" class="card" @click="fnClickCard(item.groupSellId)">
                         <div class="area1">
                             <div class="groupSellImage">
-                                image
+                                <img :src="item.filePath" :alt="item.fileOrgName" /> 
                             </div>
                         </div>
                         <div class="area2">
@@ -58,11 +58,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div id="pagination">
+                <div id="pagination">
                     <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
                     <div v-for="index in totalPages" class="pageBtn" @click="fnClickPage(index)">{{ index }}</div>
                     <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -75,25 +75,58 @@
         data() {
             return {
                 groupSellList : [],
+                totalPages : 0,
+                pageSize : 5,
+                currentPage : 1
             };
         },
         methods: {
-            fnClickCard(){
-                var paramap = {};
+            fnGetTotalGroupSell() {
                 $.ajax({
-                    url: "productList.dox",
-                    dataType: "json",
-                    type: "POST",
-                    data: [],
-                    success: (data) => {
-                    console.log(data);
-                    self.products = data.list;
+					url:"getTotalGroupSell.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : {},
+					success : (data) => {
+						console.log(data);
+                        var totalGroupSell = data.list;
+                        this.totalPages = Math.ceil(totalGroupSell / this.pageSize);
+					}
+				});
+            },
+            fnClickCard(sellId) {
+                location.href = `/details/details.do?id=\${sellId}`;
+            },
+            fnClickPage(index) {
+                if (index < 0) return;
+                if (index > this.totalPages) return;
+
+                this.currentPage = index;
+
+                var start = (this.currentPage - 1) * this.pageSize;
+                var size  = this.pageSize;
+                this.fnGetList(start, size);
+            },
+            fnGetList(start, size) {
+                $.ajax({
+					url:"getGroupSellList.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : {
+                        start : start,
+                        size  : size
                     },
-                });
-            }
+					success : (data) => {
+						console.log(data);
+                        this.groupSellList = data.list;
+                        this.fnSetProgressBar();
+					}
+				});
+            },
         },
         mounted() {
-            this.fnClickCard();
+            this.fnGetTotalGroupSell();
+            this.fnGetList(0, this.pageSize);
         },
     });
     app.mount("#app");

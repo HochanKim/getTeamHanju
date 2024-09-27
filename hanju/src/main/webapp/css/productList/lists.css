@@ -124,6 +124,15 @@ img:hover {
     /* background-color: #ddd; */
 }
 
+/* 공동구매 리스트 이미지 */
+.groupSellImage {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 16px;
+}
+
+
 .title {
     margin: 16px;
 }
