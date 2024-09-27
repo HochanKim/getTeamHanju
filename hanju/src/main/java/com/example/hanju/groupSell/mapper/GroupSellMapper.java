@@ -12,9 +12,15 @@ import com.example.hanju.groupSell.model.Review;
 public interface GroupSellMapper {
 
 	List<GroupSell> getGroupSellList(HashMap<String, Object> map);
+	
 	int getTotalGroupSell();
+	
 	void joinGroupSell(HashMap<String, Object> map);
+	
 	GroupSell getGroupSellInfo(HashMap<String, Object> map);
+	
 	List<Review> getReview(HashMap<String, Object> map);
+	
 	int getTotalReviewCount(HashMap<String, Object> map);
 }
+

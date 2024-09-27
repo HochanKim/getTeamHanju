@@ -36,10 +36,10 @@ public class GroupProductController {
 	}
 	
 	// 공동구매 물품 정보 가져오기
-	@RequestMapping(value = "/market/getGroupSellList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/market/getGroupSellInfo.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String GroupSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-		HashMap<String, Object> result = groupSellService.getGroupSellList(map);
+	public String GroupSellInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> result = groupSellService.getGroupSellInfo(map);
 		return new Gson().toJson(result);
 	}
 
