@@ -3,6 +3,7 @@ body, html{
 }
 .thumb-img{
     width: 300px;
+    width: 300px;
 
 }
 .thumb{
@@ -130,6 +131,35 @@ body, html{
 .review-box4{
     margin: 10px;
 }
+
+/* 이미지 슬라이더 */
+.image-container {
+    position: relative;
+    display: inline-block; /* 이미지를 가운데 정렬하기 위해 추가 */
+}
+
+.dots {
+    position: absolute;
+    bottom: 10px; /* 이미지 아래쪽에 위치 */
+    left: 50%;
+    transform: translateX(-50%); /* 수평 중앙 정렬 */
+    display: flex; /* 점을 가로로 배치 */
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: gray; /* 비활성 상태 색상 */
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: rgb(85, 139, 123); /* 활성 상태 색상 */
+}
+
 
 /*버튼 기본 스타일링*/
 #tost_btn {

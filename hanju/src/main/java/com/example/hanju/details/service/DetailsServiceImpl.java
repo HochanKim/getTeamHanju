@@ -53,7 +53,7 @@ public class DetailsServiceImpl implements DetailsService {
 		List<Details> pickUpStore = detailsMapper.selectPickUpStore(map);
 		result.put("pickUpStore", pickUpStore);
 		List<Comment> comment = detailsMapper.selectComment(map);
-		System.out.println(comment);
+		System.out.println("COMMENT"+comment);
 		result.put("comment", comment);
 		System.out.println("service" + result);
 		map.put("status", "R");
