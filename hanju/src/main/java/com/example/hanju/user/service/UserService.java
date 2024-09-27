@@ -11,6 +11,8 @@ public interface UserService {
 	HashMap<String, Object> userInfo(HashMap<String, Object> map);
 	//로그인
 	HashMap<String, Object> userLogin(HashMap<String, Object> map);
+	//로그아웃
+	HashMap<String, Object> userLogout(HashMap<String, Object> map);
 	//회원등록
 	HashMap<String, Object> userJoin(HashMap<String, Object> map);
 	//회원정보 수정

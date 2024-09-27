@@ -83,6 +83,14 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
+	@Override
+	public HashMap<String, Object> userLogout(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		session.invalidate();
+		
+		resultMap.put("message", "로그아웃되었습니다.");
+		return resultMap;
+	}
 	//모든 유저 리스트
 	@DbExceptionHandle
 	@Override
