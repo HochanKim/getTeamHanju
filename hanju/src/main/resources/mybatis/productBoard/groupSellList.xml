@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hanju.productBoard.mapper.GroupSellMapper">
+	<select id="getTotalGroupSell" parameterType="hashmap" resultType="Integer">
+		SELECT	COUNT(*)
+		FROM	TEST_GROUP_SELL
+	</select>
+
+	<!-- 공동구매 리스트 페이징 -->
+	<!--<select id="getGroupSellList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.GroupSellModel">
+		SELECT
+		    G.GROUP_SELL_ID,
+		    G.TARGET_AMOUNT,
+		    TO_CHAR(G.END_DATE, '""MM"월 "DD"일"') AS END_DATE,
+		    G.DISCOUNT,
+		    G.PRODUCT_ID,
+		    P.PRODUCT_NAME,
+		    P.PRICE,
+		    NVL(J.CURRENT_AMOUNT, 0) AS CURRENT_AMOUNT
+		FROM	TEST_GROUP_SELL G
+		INNER JOIN TEST_PRODUCT P ON G.PRODUCT_ID = P.PRODUCT_ID
+		LEFT JOIN (
+		        SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
+		        FROM    TEST_GROUP_SELL_STAT
+		        GROUP BY GROUP_SELL_ID
+		    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
+		ORDER BY G.START_DATE
+		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>-->
+	
+	<!-- 공동구매 뭂품 정보 -->
+	<select id="getGroupSellInfo" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.GroupSellModel">
+		SELECT
+			G.GROUP_SELL_ID,
+		    G.TARGET_AMOUNT,
+		    TO_CHAR(G.END_DATE, '""MM"월 "DD"일"') AS END_DATE,
+		    G.DISCOUNT,
+		    G.PRODUCT_ID,
+		    P.PRODUCT_NAME,
+		    P.PRICE,
+		    NVL(J.CURRENT_AMOUNT, 0) AS CURRENT_AMOUNT,
+		    G.DESCRIPTION
+		FROM	TEST_GROUP_SELL G
+		INNER JOIN TEST_PRODUCT P ON G.PRODUCT_ID = P.PRODUCT_ID
+		LEFT JOIN (
+			SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
+	        FROM    TEST_GROUP_SELL_STAT
+	        GROUP BY GROUP_SELL_ID
+	    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
+		WHERE	G.GROUP_SELL_ID = #{groupSellId}
+	</select>
+</mapper>
+	
