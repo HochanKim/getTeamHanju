@@ -33,15 +33,15 @@ pageEncoding="UTF-8"%>
                         <tr v-for="item in orderList">
                             <td class="product">
                                 <div class="reviewArea2">
-                                    <a @click="fnDetailPage(item.productId)" class="thum"><img :src="item.filePath"></a>
+                                    <a @click="fnDetailPage(item.productId,item.kind)" class="thum"><img :src="item.filePath"></a>
                                     <span>
-                                    <a @click="fnDetailPage(item.productId)" class="productName">{{item.productName}}</a>
+                                    <a @click="fnDetailPage(item.productId,item.kind)" class="productName">{{item.productName}}</a>
                                     </span>
                                 </div>
                             </td>
                             <td class="reviewInfo">
                                 <div>
-                                    <div>{{item.cDateTime}}</div>
+                                    <div>{{item.content}}</div>
                                 </div>
                             </td>
                         </tr>
@@ -69,14 +69,23 @@ pageEncoding="UTF-8"%>
 				
 				success : function(data) {  
 					console.log(data);
-				    self.orderList = data.orderList;
                     console.log(self.orderList);
+                    for(var item of data.orderList){
+                        if(item.isComment == 'Y'){
+                            self.orderList.push(item);
+                        }
+                    }
 					}
 				});
         },
-        fnDetailPage(productId) {
-            location.href = `/details/details.do?id=\${productId}`;
-        }
+        
+      fnDetailPage(productId,kind) {
+        if(kind == 'P'){
+        location.href = `/details/detailsPickup.do?id=\${productId}`;
+      }else{
+          
+      }
+      }
     },
     mounted() {
         this.fnOrder();
