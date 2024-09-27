@@ -13,7 +13,5 @@ public interface DetailsService {
     //픽업 불러오는 코드
     HashMap<String,Object> searchDetailsPickup(Map<String,Object> map);
 
-    //구독 페이지
-    Map<String,Object> getSubscribe(Map<String,Object> map);
 
 }
