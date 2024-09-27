@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
+import com.example.hanju.details.model.Subscribe;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.hanju.productBoard.model.entity.SaleCodeModel;
@@ -24,5 +25,6 @@ public interface SaleMapper {
 	
 	// 코드 리스트 (전통주 > 선택 코드 리스트)
 	List<SaleCodeModel> selectCodeList(HashMap<String, Object> map);
+	List<Subscribe> subscribeList();
 	
 }

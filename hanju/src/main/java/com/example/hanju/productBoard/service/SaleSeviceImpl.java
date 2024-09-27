@@ -74,6 +74,12 @@ public class SaleSeviceImpl implements SaleService {
 	}
 
 
-
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object>	getSubscribeList(){
+		Map<String,Object> result = new HashMap<>();
+		result.put("list",saleMapper.subscribeList());
+		return result;
+	}
 
 }

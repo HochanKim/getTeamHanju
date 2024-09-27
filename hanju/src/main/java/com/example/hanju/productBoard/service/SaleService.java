@@ -17,4 +17,5 @@ public interface SaleService {
 	
 	// 코드 리스트 (전통주 > 선택 코드 리스트)
 	HashMap<String, Object> selectCodeList(HashMap<String, Object> map);
+	Map<String, Object>	getSubscribeList();
 }

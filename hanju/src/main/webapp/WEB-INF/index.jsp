@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
           pickup/board.do 바로가기
         </button>
         <button @click="fnGoToTest('main/imgUploader.do')">
-          이미지 업로더 바로가기
+          이미지 업로더
         </button>
         <button @click="fnGoToTest('user/login.do')">로그인</button>
         <button @click="fnGoToTest('cart/viewCart.do')" class="ha">
@@ -36,6 +36,13 @@ pageEncoding="UTF-8"%>
         <button @click="fnGoToTest('user/favorite.do')" class="ha">
           찜목록
         </button>
+        <button
+          @click="fnGoToTest('productBoard/subscribeBoard.do')"
+          class="ha"
+        >
+          구독 게시판
+        </button>
+
         <button @click="fnGoToTest('main/addCart.do')">장바구니 담기</button>
         <button @click="fnGoToTest('user/joinbtn.do')">휴대폰 본인인증</button>
         <button @click="fnGoToTest('user/join.do')">회원가입</button>
