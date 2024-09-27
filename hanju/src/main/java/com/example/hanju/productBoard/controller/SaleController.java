@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +19,7 @@ public class SaleController {
 	
 	@Autowired
 	SaleService saleService;
-	@Autowired
-	HttpSession session;
+	
 	// market/allProducts.jsp 연동
 	@RequestMapping("market/productList.do")
 	public String marketAll(Model model) throws Exception {
@@ -42,11 +40,7 @@ public class SaleController {
 	public String newProd(Model model) throws Exception {
 		return "market/newProducts";
 	}
-	@RequestMapping("productBoard/subscribeBoard.do")
-	public String subscribeBoard(Model model) throws Exception {
-		return "productBoard/subscribeBoard";
-	}
-
+	
 	
 	// @ResponseBody
 	// market/productList.do
@@ -109,10 +103,6 @@ public class SaleController {
 		resultMap = saleService.getMadeByList(map);
 		return new Gson().toJson(resultMap);
 	}
-	@GetMapping(value = "productBoard/getSubscribeList.dox", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String getSubscribeList(Model model) throws Exception {
-		Map<String, Object> result = saleService.getSubscribeList();
-		return new Gson().toJson(result);
-	}
+	
+	
 }

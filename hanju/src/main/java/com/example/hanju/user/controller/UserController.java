@@ -40,7 +40,7 @@ public class UserController {
 	}
 	//마이페이지
 	@RequestMapping("user/myPage.do")
-	public String myPage(Model model) throws Exception{
+	public String mypage(Model model) throws Exception{
 		model.addAttribute("userId",session.getAttribute("sessionId"));
 		return "user/myPage";
 	}
@@ -55,10 +55,6 @@ public class UserController {
 		return "user/reviewCom";
 	}
 	//주문 내역 페이지
-	@RequestMapping("user/orderListPage.do")
-	public String orderInfoPage(Model model) throws Exception{
-		return "user/orderListPage";
-	}
 	@RequestMapping("user/orderInfo.do")
 	public String orderInfo(Model model) throws Exception{
 		return "user/orderInfo";
@@ -69,7 +65,7 @@ public class UserController {
 		return "user/modify";
 	}
 	@RequestMapping("user/modifyBefore.do")
-	public String modifyBefore(Model model) throws Exception{
+	public String modifybefore(Model model) throws Exception{
 		return "user/modifyBefore";
 	}
 	@RequestMapping("user/favorite.do")
@@ -79,7 +75,7 @@ public class UserController {
 	}
 	//리뷰쓰기
 	@RequestMapping("user/reviewWrite.do")
-	public String reviewWrite(Model model) throws Exception{
+	public String reviewwrite(Model model) throws Exception{
 		return "user/reviewWrite";
 	}
 	

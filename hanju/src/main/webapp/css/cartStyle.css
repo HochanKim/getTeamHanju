@@ -65,8 +65,7 @@ div {
   height: 100%;
   width: 20%;
 }
-.priceBox,
-.btnBox {
+.priceBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
