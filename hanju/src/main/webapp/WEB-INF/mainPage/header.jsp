@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="header">
-        <div id="Logo">
+        <div id="Logo" @click="fnMain">
             <img src="../../image/haju_rogo_white.png" height="80" alt="한주 로고" />
         </div>
         <div id="center">
@@ -29,8 +29,8 @@
             <div v-if="userStatus == 'C'" class="icons">
                 <div>로그아웃</div>
                 <img class="rightIcon" src="../../image/person.png" @click="fnMyPage">
-                <img class="rightIcon" src="../../image/cart.png">
-                <img class="rightIcon" src="../../image/heart_plus_white.png">
+                <img class="rightIcon" src="../../image/cart.png" @click="fnCart">
+                <img class="rightIcon" src="../../image/heart_plus_white.png" @click="fnFavorite">
             </div>
             <div v-else-if="userStatus == 'S'" class="icons" @click="fnSellerPage">
                 <div>사업자 페이지</div>
@@ -61,6 +61,9 @@
                 console.log(this.userId);
                 console.log(this.userStatus);
             },
+            fnMain() {
+                location.href = "../mainPage/mainPage.do";
+            },
             fnSellerPage() {
                 location.href = "../sellerPage/sellerMain.do";
             },
@@ -69,6 +72,12 @@
             },
             fnMyPage() {
                 location.href = "../user/myPage.do";
+            },
+            fnCart() {
+                location.href = "../cart/viewCart.do";
+            },
+            fnFavorite() {
+                location.href = "../user/favorite.do";
             }
         },
         mounted() {
