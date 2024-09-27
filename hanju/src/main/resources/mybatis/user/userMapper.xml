@@ -87,7 +87,4 @@
 		WHERE I.FILE_STATUS = 'T' AND B.USER_ID = #{userId}
 		ORDER BY B.CDATETIME DESC
 	</select>
-	
-	
-
 </mapper>
