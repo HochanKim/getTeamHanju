@@ -27,19 +27,19 @@ pageEncoding="UTF-8"%>
                             </li>
                             <li>
                                 <strong>배송준비중</strong>
-                                <a href="" class="count">
+                                <a href="../user/orderInfo.do" class="count">
                                     <span>{{bill}}</span>
                                 </a>
                             </li>
                             <li>
                                 <strong>배송중</strong>
-                                <a href="" class="count">
+                                <a href="../user/orderInfo.do" class="count">
                                     <span>{{ship}}</span>
                                 </a>
                             </li>
                             <li class="arrive">
                                 <strong>배송완료</strong>
-                                <a href="" class="count">
+                                <a href="../user/orderInfo.do" class="count">
                                     <span>{{complete}}</span>
                                 </a>
                             </li>
@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
                         </li>
                         <li>
                             <img src="../../image/orderList.png">
-                            <a href="">
+                            <a href="../user/orderInfo.do">
                                 <strong>주문내역 조회</strong>
                                 <p>고객님께서 주문하신 상품의  주문내역을 확인하실 수 있습니다.</p>
                             </a>
