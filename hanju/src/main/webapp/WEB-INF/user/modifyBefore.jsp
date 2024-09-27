@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
     },
     methods: {
       fnBackBtn(){
-        $.pageChange("mypage.do", {});
+        $.pageChange("myPage.do", {});
       },
 
       fnComBtn(){

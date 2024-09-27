@@ -30,20 +30,18 @@ pageEncoding="UTF-8"%>
                             <th>상품</th>
                             <th>리뷰</th>
                         </tr>
-                        <tr>
+                        <tr v-for="item in orderList">
                             <td class="product">
-                                <div class="reviewArea">
-                                    <a href="" class="thum">
-                                        <img>
-                                    </a>
-                                    <div class="text">
-                                    <a href="" class=""></a>
-                                    </div>
+                                <div class="reviewArea2">
+                                    <a @click="fnDetailPage(item.productId)" class="thum"><img :src="item.filePath"></a>
+                                    <span>
+                                    <a @click="fnDetailPage(item.productId)" class="productName">{{item.productName}}</a>
+                                    </span>
                                 </div>
                             </td>
-                            <td class="write">
+                            <td class="reviewInfo">
                                 <div>
-                                    <a ></a>
+                                    <div>{{item.cDateTime}}</div>
                                 </div>
                             </td>
                         </tr>
@@ -56,14 +54,33 @@ pageEncoding="UTF-8"%>
 <script>
   const app = Vue.createApp({
     data() {
-      return {};
+      return {
+        orderList:[],
+      };
     },
     methods: {
-        fnReviewWrite(){
-            
+        fnOrder(){
+            var self = this;
+				
+			$.ajax({
+				url:"getOrderList.dox", 
+				dataType:"json",	
+				type : "GET", 
+				
+				success : function(data) {  
+					console.log(data);
+				    self.orderList = data.orderList;
+                    console.log(self.orderList);
+					}
+				});
+        },
+        fnDetailPage(productId) {
+            location.href = `/details/details.do?id=\${productId}`;
         }
     },
-    mounted() {},
+    mounted() {
+        this.fnOrder();
+    },
   });
   app.mount("#app");
 </script>
