@@ -16,4 +16,5 @@ public interface SellerPageService {
 	HashMap<String, Object> deleteImage(HashMap<String, Object> map);
 	HashMap<String, Object> registerSell(HashMap<String, Object> map);
 	HashMap<String, Object> getProductCodeList(HashMap<String, Object> map);
+	HashMap<String, Object> registerGroupSell(HashMap<String, Object> map);
 }

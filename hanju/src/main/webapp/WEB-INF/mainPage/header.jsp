@@ -33,11 +33,13 @@
                 <img class="rightIcon" src="../../image/heart_plus_white.png" @click="fnFavorite">
             </div>
             <div v-else-if="userStatus == 'S'" class="icons" @click="fnSellerPage">
+                <div @click="fnLogout">로그아웃</div>
                 <div>사업자 페이지</div>
                 <img class="rightIcon" src="../../image/person.png">
             </div>
             <div v-else-if="userStatus == 'A'" class="icons">
-                <div>관리자 페이지</div>
+                <div @click="fnLogout">로그아웃</div>
+                <div @click="fnAdminPage">관리자 페이지</div>
                 <img class="rightIcon" src="../../image/person.png">
             </div>
             <div v-else class="icons" @click="fnLogin">
@@ -90,6 +92,9 @@
             },
             fnFavorite() {
                 location.href = "../user/favorite.do";
+            },
+            fnAdminPage() {
+                location.href = "../admin/adminMain.do"
             }
         },
         mounted() {
