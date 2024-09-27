@@ -94,7 +94,7 @@
 	        
 	        <!-- 생산지 -->
 	        <if test="madeBy != ''">
-	        	AND MADE_BY = '%'||#{madeBy}||'%'
+	        	AND MADE_BY LIKE '%'||#{madeBy}||'%'
 	        </if>
 	        AND NOT (P.TYPE = 'G' OR C.PARENT_CODE = 'W')
 	    </where>
@@ -113,7 +113,6 @@
 		SELECT SUBSTR(MADE_BY, 0, 2) AS MADE_BY
 		FROM HANJU_NORMAL_SELL NS
 		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = NS.PRODUCT_ID
-		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
 		WHERE C.PARENT_CODE = 'T'
 		GROUP BY SUBSTR(MADE_BY, 0, 2)

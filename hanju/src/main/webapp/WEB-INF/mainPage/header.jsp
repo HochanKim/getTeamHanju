@@ -22,12 +22,12 @@
                 <a href="">펀딩</a>
             </div>
             <div class="menu">
-                <a href>공동구매</a>
+                <a href="../market/groupSellList.do">공동구매</a>
             </div>
         </div>
         <div id="right">
             <div v-if="userStatus == 'C'" class="icons">
-                <div @click="fnLogout">로그아웃</div>
+                <div @click="fnLogout"><a>로그아웃</a></div>
                 <img class="rightIcon" src="../../image/person.png" @click="fnMyPage">
                 <img class="rightIcon" src="../../image/cart.png" @click="fnCart">
                 <img class="rightIcon" src="../../image/heart_plus_white.png" @click="fnFavorite">
@@ -43,7 +43,7 @@
                 <img class="rightIcon" src="../../image/person.png">
             </div>
             <div v-else class="icons" @click="fnLogin">
-                <div>로그인</div>
+                <div><a>로그인</a></div>
                 <img class="rightIcon" src="../../image/person.png">
             </div>
         </div>

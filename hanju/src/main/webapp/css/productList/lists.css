@@ -28,7 +28,7 @@
 /* 분류코드 리스트 */
 .kindList {
     height:20px;
-    margin:20px 0 10px 0;
+    margin:10px 0;
 }
 .kindList label {
     margin-right:10px;
@@ -100,6 +100,7 @@ img:hover {
     transition-duration: 0.5s;
 }
 
+
 /* 와인 픽업 페이지 */
 .productName.wine {
     font-size: 19px;
@@ -107,3 +108,142 @@ img:hover {
 .material, .alcohol {
     font-weight: 700;
 }
+
+
+/* 공동구매 페이지 */
+/* 공통 요소 */
+
+.margin16 {
+    margin: 16px;
+}
+
+/* 공통 요소 끝 */
+
+#container {
+    width: 60vw;
+    /* background-color: #ddd; */
+}
+
+.title {
+    margin: 16px;
+}
+
+#sortBox {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 16px;
+}
+
+#cardView {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #eee; */
+}
+
+.card {
+    margin: 16px;
+    padding: 8px;
+    width: 90%;
+    /* height: 300px; */
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(146, 146, 146);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "area1 area2 area2 area2";
+}
+
+.card:hover {
+    box-shadow: 0px 0px 10px rgb(146, 146, 146);
+    cursor: pointer;
+}
+
+.area1 {
+    grid-area: area1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.area2 {
+    grid-area: area2;
+    padding: 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.line1 .title {
+    margin: 0px;
+    margin-bottom: 8px;
+}
+
+.area2 .line2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.line3 .progressBar {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.line3 .progress {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+.area2 .line4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cell2 .joinBtn {
+    margin: 16px;
+}
+
+.groupSellImage {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: #ddd;
+    margin: 16px;
+}
+
+/* 페이징 */
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#pagination .pageBtn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #aaa;
+    text-align: center;
+    line-height: 50px;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #999;
+}
+
+/* 페이징 끝 */

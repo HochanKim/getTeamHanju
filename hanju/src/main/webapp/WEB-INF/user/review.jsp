@@ -31,19 +31,17 @@ pageEncoding="UTF-8"%>
                             <th>주문일자</th>
                             <th>리뷰작성</th>
                         </tr>
-                        <tr>
+                        <tr v-for="item in orderList">
                             <td class="product">
                                 <div class="reviewArea">
-                                    <a href="" class="thum">
-                                        <img>
-                                    </a>
-                                    <div class="text">
-                                    <a href="" class=""></a>
-                                    </div>
+                                    <a @click="fnDetailPage(item.productId)" class="thum"><img :src="item.filePath"></a>
+                                    <span>
+                                    <a @click="fnDetailPage(item.productId)" class="productName">{{item.productName}}</a>
+                                    </span>
                                 </div>
                             </td>
-                            <td class="orderDate">
-                                <div></div>
+                            <td class="cDateTime">
+                                <div>{{item.cDateTime}}</div>
                             </td>
                             <td class="write">
                                 <button class="writeBtn" @click="modalOpen">리뷰 작성</button>
@@ -109,6 +107,7 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
+        orderList:[],
         modalCheck: false,
       };
     },
@@ -127,10 +126,15 @@ pageEncoding="UTF-8"%>
 				
 					success : function(data) {  
 						console.log(data);
-						
+						self.orderList = data.orderList;
+            console.log(self.orderList);
 					}
 				});
-  }
+  },
+
+  fnDetailPage(productId) {
+    location.href = `/details/details.do?id=\${productId}`;
+    }
     },
     mounted() {
       this.fnOrder();
