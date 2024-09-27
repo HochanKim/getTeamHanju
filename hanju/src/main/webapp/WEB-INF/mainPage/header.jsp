@@ -27,7 +27,7 @@
         </div>
         <div id="right">
             <div v-if="userStatus == 'C'" class="icons">
-                <div>로그아웃</div>
+                <div @click="fnLogout">로그아웃</div>
                 <img class="rightIcon" src="../../image/person.png" @click="fnMyPage">
                 <img class="rightIcon" src="../../image/cart.png" @click="fnCart">
                 <img class="rightIcon" src="../../image/heart_plus_white.png" @click="fnFavorite">
@@ -69,6 +69,18 @@
             },
             fnLogin() {
                 location.href = "../user/login.do";
+            },
+            fnLogout() {
+                $.ajax({
+					url:"../user/logout.dox",
+					dataType:"json",
+					type : "POST", 
+					data : {},
+					success : (data) => {
+						console.log(data);
+                        location.href = "../mainPage/mainPage.do"
+					}
+				});
             },
             fnMyPage() {
                 location.href = "../user/myPage.do";
