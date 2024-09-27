@@ -51,30 +51,6 @@
 		WHERE (C.BILL_ID = #{sellId}) OR (C.BILL_ID = #{pickupId})
 	</select>
 
-<<<<<<< HEAD
-	<select id="selectCommentPickUp" parameterType="hashmap" resultType="Comment">
-		SELECT c.*,replace(user_name, substr(user_name, 2, 1), '*') user_name, i.*
-		FROM HANJU_COMMENT C
-		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
-		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
-		WHERE C.BILL_ID = #{pickupId}
-	</select>
-	<select id="getSubscribe" parameterType="hashmap" resultType="Subscribe">
-		SELECT *
-		FROM HANJU_SUBSCRIBE
-		WHERE SUBSCRIBE_ID = #{id}
-	</select>
-	<select id="getSubscribeItem" parameterType="hashmap" resultType="String">
-		SELECT PRODUCT_ID
-		FROM HANJU_SUBSCRIBE S
-		INNER JOIN HANJU_SUBSCRIBE_ITEM SI ON SI.SUBSCRIBE_ID = S.SUBSCRIBE_ID
-		WHERE S.SUBSCRIBE_ID = #{id}
-	</select>
-=======
->>>>>>> refs/remotes/origin/main
 
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/main
 </mapper>
