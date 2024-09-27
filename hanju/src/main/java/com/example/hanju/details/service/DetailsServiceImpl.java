@@ -4,6 +4,7 @@ import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.details.mapper.DetailsMapper;
 import com.example.hanju.details.model.Comment;
 import com.example.hanju.details.model.Details;
+import com.example.hanju.details.model.Subscribe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,4 +60,14 @@ public class DetailsServiceImpl implements DetailsService {
 		map.put("status", "R");
 		return result;
 	}
+
+	@DbExceptionHandle
+	@Override
+	public Map<String,Object> getSubscribe(Map<String,Object> map){
+		Map<String,Object> result = new HashMap<>();
+		Subscribe item = detailsMapper.getSubscribe(map);
+		List<String> productList = detailsMapper.getSubscribeItem(map);
+		return result;
+	}
+
 }

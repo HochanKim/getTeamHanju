@@ -65,6 +65,16 @@
 		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
 		WHERE C.BILL_ID = #{pickupId}
 	</select>
+	<select id="getSubscribe" parameterType="hashmap" resultType="Subscribe">
+		SELECT *
+		FROM HANJU_SUBSCRIBE
+		WHERE SUBSCRIBE_ID = #{id}
+	</select>
+	<select id="getSubscribeItem" parameterType="hashmap" resultType="String">
+		SELECT PRODUCT_ID
+		FROM HANJU_SUBSCRIBE S
+		INNER JOIN HANJU_SUBSCRIBE_ITEM SI ON SI.SUBSCRIBE_ID = S.SUBSCRIBE_ID
+		WHERE S.SUBSCRIBE_ID = #{id}
+	</select>
 
-	
 </mapper>

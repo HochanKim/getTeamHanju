@@ -140,4 +140,12 @@
 		WHERE I.FILE_STATUS = 'T' AND 10 >= ROWNUM AND NOT C.PARENT_CODE = 'W'
 		ORDER BY NS.SELL_ID DESC
 	</select>
+
+<!--	구독 글 목록-->
+	<select id="subscribeList" parameterType="hashmap" resultType="Subscribe">
+		SELECT *
+		FROM HANJU_SUBSCRIBE S
+		INNER JOIN HANJU_IMAGE I ON S.SUBSCRIBE_ID = I.FK_ID
+		WHERE I.FILE_STATUS = 'T'
+	</select>
 </mapper>
