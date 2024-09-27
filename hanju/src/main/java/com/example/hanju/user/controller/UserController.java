@@ -59,6 +59,10 @@ public class UserController {
 	public String orderInfoPage(Model model) throws Exception{
 		return "user/orderListPage";
 	}
+	@RequestMapping("user/orderInfo.do")
+	public String orderInfo(Model model) throws Exception{
+		return "user/orderInfo";
+	}
 	//회원정보수정
 	@RequestMapping("user/modify.do")
 	public String modify(Model model) throws Exception{
@@ -165,6 +169,7 @@ public class UserController {
 		Map<String, Object> result = userService.deleteFavoriteItem(map);
 		return new Gson().toJson(result);
 	}
+	//주문정보
 	@GetMapping(value = "user/getOrderList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getOrderList(Model model) throws Exception {

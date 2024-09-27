@@ -2,6 +2,11 @@ html, body{
     margin: 0;
     padding: 0;
 }
+
+a {
+    cursor: pointer;
+}
+
 .slider {
     width: 100%;
     max-width: 1500px;

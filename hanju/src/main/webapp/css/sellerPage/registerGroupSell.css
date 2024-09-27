@@ -1,0 +1,85 @@
+/* 전역 css 초기화 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 전역 css 초기화 끝*/
+
+#main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* ========================== */
+
+#main #app {
+    width: 50%;
+    padding: 16px;
+}
+
+#app > h3 {
+    font-size: 20px;
+    margin: 16px;
+}
+
+#app #inputTemplate {
+    width: 100%;
+    margin-top: 16px;
+    text-align: left;
+}
+
+#inputTemplate th {
+    width: 16%;
+    padding: 8px;
+}
+
+#inputTemplate td {
+    padding: 8px;
+}
+
+#app .description {
+    width: 100%;
+    height: 100px;
+}
+
+#container .imageUploaderLine {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+}
+
+#container .imgBox {
+    display: inline-block;
+    width: 100%;
+    /* height: 500px; */
+    margin-left: 0;
+    margin-right: 8px;
+    border: 3px solid #aaa;
+    border-radius: 3px;
+}
+
+#container .img {
+    width: 100%;
+    height: 100%;
+}
+
+#container .imgUploadBtn {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #abc;
+}
+
+#container .imgUploadBtn:hover {
+    background-color: #bca;
+}
+
+/* ========================= */

@@ -8,26 +8,20 @@
 
 /* 전역 css 초기화 끝*/
 
-#header {
-    width: 100vw;
-    height: 10vh;
-    background-color: #aaa;
-}
 #main {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
-}
-#footer {
-    width: 100vw;
-    height: 10vh;
-    background-color: #ccc;
 }
 
 /* ========================== */
 
-#main #container {
+#main #app {
     width: 50%;
+}
+
+#main #container {
+    width: 100%;
     padding: 16px;
     font-size: 14px;
 }

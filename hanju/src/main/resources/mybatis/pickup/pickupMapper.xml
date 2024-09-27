@@ -93,18 +93,18 @@
 	<select id="getMaterialList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
 		SELECT MATERIAL
 		FROM HANJU_PRODUCT P
-		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
-		WHERE I.FILE_STATUS = 'T' AND C.PARENT_CODE = 'W'
+		WHERE C.PARENT_CODE = 'W'
+		ORDER BY MATERIAL
 	</select>
 	
 	<!-- 와인 픽업 리스트 (원산지) -->
 	<select id="getMadeByList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
 		SELECT MADE_BY
 		FROM HANJU_PRODUCT P
-		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
-		WHERE I.FILE_STATUS = 'T' AND C.PARENT_CODE = 'W'
+		WHERE C.PARENT_CODE = 'W'
+		ORDER BY MADE_BY
 	</select>
 	
 	<!-- 와인 종류 코드 리스트 -->

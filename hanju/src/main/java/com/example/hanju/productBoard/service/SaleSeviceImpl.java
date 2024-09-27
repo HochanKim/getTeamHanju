@@ -61,7 +61,6 @@ public class SaleSeviceImpl implements SaleService {
 	public HashMap<String, Object> newProducts(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		List<SaleModel> newList = saleMapper.newProducts(map);
-		System.out.println("서비스 : "+newList);
 		resultMap.put("newList", newList);
 		return resultMap;
 	}

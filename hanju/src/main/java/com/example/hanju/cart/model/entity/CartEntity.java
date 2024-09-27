@@ -8,7 +8,7 @@ public class CartEntity {
     private int billId;
     private String userId;
     private String productId;
-    private int productCount;
+	private int productCount;
     private String cDateTime;
     private String kind;
     private String pickupDate;
@@ -67,4 +67,8 @@ public class CartEntity {
     public String getCartId() {
         return cartId;
     }
+    
+    public int getBillId() {
+		return billId;
+	}
 }

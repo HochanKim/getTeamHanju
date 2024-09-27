@@ -25,11 +25,16 @@ pageEncoding="UTF-8"%>
     <div id="app">
       <div class="container">
         <div class="thumb">
-          <div>
-            <img :src="img.productImage" class="thumb-img" />
+          <div class="image-container">
+            <img :src="img.productImage[currentImageIndex]" class="thumb-img" />
+            <div class="dots">
+              <span v-for="(image, index) in img.productImage" :key="index" class="dot"
+                :class="{ active: currentImageIndex === index }" @click="setCurrentImage(index)"></span>
+            </div>
           </div>
           <div class="thumb-content">
             <div>
+              <div class="pad2">{{ info.description }}</div>
               <div class="font-size">{{ info.productName }}</div>
               <div class="pad2">판매가격 :</div>
               <div class="font-size">{{ info.price }}원</div>
@@ -310,7 +315,9 @@ pageEncoding="UTF-8"%>
             storeId: "",
             date: new Date(),
             pickupId: "",
-            sellId:""
+            sellId:"",
+            img: { productImage: [] },
+            currentImageIndex: 0,
           };
         },
         components: {
@@ -337,6 +344,23 @@ pageEncoding="UTF-8"%>
                 console.log(self.list);
               },
             });
+          },
+          nextImage() {
+            if (this.currentImageIndex < this.img.productImage.length - 1) {
+              this.currentImageIndex++;
+            } else {
+              this.currentImageIndex = 0; // 처음으로 돌아가기
+            }
+          },
+          prevImage() {
+            if (this.currentImageIndex > 0) {
+              this.currentImageIndex--;
+            } else {
+              this.currentImageIndex = this.img.productImage.length - 1; // 마지막으로 돌아가기
+            }
+          },
+          setCurrentImage(index) {
+            this.currentImageIndex = index;
           },
           inputNumber(event) {
             this.number = event.target.value;

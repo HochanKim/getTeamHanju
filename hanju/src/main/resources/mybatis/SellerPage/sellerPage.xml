@@ -102,9 +102,14 @@
 		WHERE		IMAGE_ID = #{imageId}
 	</delete>
 	
-	<insert id="registerSell" parameterType="hashmap">
+	<insert id="registerSell" parameterType="hashmap" useGeneratedKeys="true" keyProperty="SELL_ID" keyColumn="SELL_ID">
 		INSERT INTO HANJU_NORMAL_SELL
-		VALUES (main_seq.nextVal, #{productId}, #{discount}, SYSDATE, #{contents}, #{description})
+		VALUES (main_seq.nextVal, #{productId}, #{discount}, SYSDATE, null, #{description})
+	</insert>
+	
+	<insert id="registerGroupSell" parameterType="hashmap" useGeneratedKeys="true" keyProperty="GROUP_SELL_ID" keyColumn="GROUP_SELL_ID">
+		INSERT INTO TEST_GROUP_SELL
+		VALUES (main_seq.nextVal, #{targetAmount}, SYSDATE, #{endDate}, #{discount}, #{productId}, #{description})
 	</insert>
 	
 </mapper>
