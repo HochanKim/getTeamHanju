@@ -34,7 +34,12 @@ public class DetailsController {
 		model.addAttribute("pickupId",id);
 		return "details/detailsPickup";
 	}
-
+	@RequestMapping("details/subscribe.do")
+	public String subscribeBoard(Model model, @RequestParam String id) throws Exception {
+		model.addAttribute("userId", session.getAttribute("sessionId"));
+		model.addAttribute("subscribeId", id);
+		return "details/detailsSubscribe";
+	}
 
 
 	@RequestMapping(value = "details/details.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -55,5 +60,10 @@ public class DetailsController {
 		System.out.println("controller" + result);
 		return new Gson().toJson(result);
 	}
-
+	@GetMapping(value = "details/getSubscribeItem.dox", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getSubscribeItem(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		Map<String, Object> result = detailsService.getSubscribe(map);
+		return new Gson().toJson(result);
+	}
 }

@@ -90,7 +90,7 @@
         },
         methods: {
             fnGetTotalGroupSell() {
-                $.ajax({
+                $.ajax({	
 					url:"getTotalGroupSell.dox",
 					dataType:"json",	
 					type : "POST", 
