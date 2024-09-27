@@ -38,33 +38,19 @@
 		SELECT FILE_PATH
 		FROM HANJU_IMAGE I
 		INNER JOIN HANJU_PRODUCT P ON I.FK_ID = P.PRODUCT_ID
-		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
-		WHERE N.SELL_ID = #{sellId} AND FILE_STATUS = #{status}
+		LEFT JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
+		WHERE (N.SELL_ID = #{sellId} AND FILE_STATUS = #{status}) OR (P.PRODUCT_ID = #{pickupId} AND FILE_STATUS = #{status})
 	</select>
 
-	<select id="detailImagePickUp" parameterType="hashmap" resultType="String">
-		SELECT FILE_PATH
-		FROM HANJU_IMAGE I
-		INNER JOIN HANJU_PRODUCT P ON I.FK_ID = P.PRODUCT_ID
-		INNER JOIN HANJU_NORMAL_SELL N ON P.PRODUCT_ID = N.PRODUCT_ID
-		WHERE N.SELL_ID = #{pickupId} AND FILE_STATUS = #{status}
-	</select>
 	<!--리뷰-->
 	<select id="selectComment" parameterType="hashmap" resultType="Comment">
 		SELECT c.*,replace(user_name, substr(user_name, 2, 1), '*') user_name, i.*
 		FROM HANJU_COMMENT C
 		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
 		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
-		WHERE C.BILL_ID = #{sellId}
+		WHERE (C.BILL_ID = #{sellId}) OR (C.BILL_ID = #{pickupId})
 	</select>
 
-	<select id="selectCommentPickUp" parameterType="hashmap" resultType="Comment">
-		SELECT c.*,replace(user_name, substr(user_name, 2, 1), '*') user_name, i.*
-		FROM HANJU_COMMENT C
-		INNER JOIN HANJU_USER U ON C.USER_ID = U.USER_ID
-		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
-		WHERE C.BILL_ID = #{pickupId}
-	</select>
 
-	
+
 </mapper>
