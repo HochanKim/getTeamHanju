@@ -2,7 +2,6 @@ package com.example.hanju.productBoard.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.productBoard.mapper.GroupProductMapper;
@@ -13,25 +12,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class GroupProductSeviceImpl implements GroupProductService {
 	@Autowired
-	GroupProductMapper groupsellMapper;
+	GroupProductMapper groupProductMapper;
 
 	@DbExceptionHandle
-	@Override
+	@Override	// getGroupSellList, 공동구매 물품 카드형 목록
 	public HashMap<String, Object> getGroupSellList(HashMap<String, Object> map) {
+		List<GroupSellModel> result = groupProductMapper.getGroupSellList(map);
+		System.out.println("데이터 : "+result);
 		HashMap<String, Object> resultMap = new HashMap<>();
-		List<GroupSellModel> products = groupsellMapper.getGroupSellList(map);
-		resultMap.put("list", products);
-		resultMap.put("result", "success");
-		return resultMap;
-	}
-
-	@DbExceptionHandle
-	@Override
-	public HashMap<String, Object> getGroupSellInfo(HashMap<String, Object> map) {
-		HashMap<String, Object> resultMap = new HashMap<>();
-		List<GroupSellModel> products = groupsellMapper.getGroupSellInfo(map);
-		resultMap.put("list", products);
-		resultMap.put("result", "success");
+		resultMap.put("list", result);
 		return resultMap;
 	}
 

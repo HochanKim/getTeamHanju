@@ -2,53 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.hanju.productBoard.mapper.GroupSellMapper">
-	<!-- 페이징 버튼을 위한 데이터 개수 -->
-	<select id="getTotalGroupSell" parameterType="hashmap" resultType="Integer">
-		SELECT	
-			COUNT(*)
-		FROM	
-			HANJU_GROUP_SELL
-	</select>
-
-	<!-- 공동구매 리스트 페이징 -->
+<mapper namespace="com.example.hanju.productBoard.mapper.GroupProductMapper">
+	<!-- 공동구매 물품 카드형 목록 -->
 	<select id="getGroupSellList" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.GroupSellModel">
 		SELECT
 		    G.GROUP_SELL_ID,
 		    G.TARGET_AMOUNT,
-		    TO_CHAR(G.END_DATE, '""MM"월 "DD"일"') AS END_DATE,
-		    G.DISCOUNT,
-		    G.PRODUCT_ID,
-		    P.PRODUCT_NAME,
-		    P.PRICE,
-		    NVL(J.CURRENT_AMOUNT, 0) AS CURRENT_AMOUNT
-		FROM	
-			HANJU_GROUP_SELL G
-		INNER JOIN 
-			HANJU_PRODUCT P ON G.PRODUCT_ID = P.PRODUCT_ID
-		LEFT JOIN (
-			SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
-	        FROM    HANJU_GROUP_SELL GS
-            LEFT JOIN HANJU_BILL B ON GS .PRODUCT_ID = B.PRODUCT_ID
-	        GROUP BY GROUP_SELL_ID
-		    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
-		ORDER BY 
-			G.START_DATE
-		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
-	</select>
-	
-	<!-- 공동구매 뭂품 정보 -->
-	<select id="getGroupSellInfo" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.GroupSellModel">
-		SELECT
-			G.GROUP_SELL_ID,
-		    G.TARGET_AMOUNT,
-		    TO_CHAR(G.END_DATE, '""MM"월 "DD"일"') AS END_DATE,
+		    TO_CHAR(G.END_DATE, '""YYYY"년 "MM"월 "DD"일"') AS END_DATE,
 		    G.DISCOUNT,
 		    G.PRODUCT_ID,
 		    P.PRODUCT_NAME,
 		    P.PRICE,
 		    NVL(J.CURRENT_AMOUNT, 0) AS CURRENT_AMOUNT,
-		    G.DESCRIPTION,
             I.FILE_PATH,
             I.FILE_ORG_NAME
 		FROM	
@@ -58,52 +23,16 @@
         INNER JOIN 
         	HANJU_IMAGE I ON I.FK_ID = P.PRODUCT_ID
 		LEFT JOIN (
-			SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
-	        FROM    HANJU_GROUP_SELL GS
-            LEFT JOIN HANJU_BILL B ON GS .PRODUCT_ID = B.PRODUCT_ID
-	        GROUP BY GROUP_SELL_ID
-	    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
-		WHERE	
-            G.GROUP_SELL_ID = '100' AND I.FILE_STATUS = 'T'
-	</select>
-	
-	<!-- 공동구매 제품 리뷰 댓글 -->
-	<select id="getReview" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.GroupSellModel">
-		SELECT
-			C.COMMENT_ID,
-			C.BILL_ID,
-			C.USER_ID,
-			C.CONTENT,
-			C.GRADE,
-			TO_CHAR(C.CDATETIME, 'YY/MM/DD') AS CDATETIME,
-			SUBSTR(U.USER_NAME, 1, 1) || '*' || SUBSTR(U.USER_NAME, 3, 1) AS USER_NAME
-		FROM	
-			HANJU_COMMENT C
-		INNER JOIN 
-			HANJU_USER U ON C.USER_ID = U.USER_ID
-		WHERE	
-			BILL_ID = #{groupSellId}
+		        SELECT  GROUP_SELL_ID, COUNT(*) AS CURRENT_AMOUNT
+		        FROM    HANJU_GROUP_SELL_STAT
+		        GROUP BY GROUP_SELL_ID
+		    ) J ON G.GROUP_SELL_ID = J.GROUP_SELL_ID
+        WHERE 
+        	I.FILE_STATUS = 'T'
 		ORDER BY 
-			C.CDATETIME DESC
-		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
+			G.START_DATE
 	</select>
 	
-	<!-- 공동구매 제품 리뷰 댓글 개수 -->
-	<select id="getTotalReviewCount" parameterType="hashmap" resultType="Integer">
-		SELECT	
-			COUNT(*)
-		FROM	
-			HANJU_COMMENT
-		WHERE	
-			BILL_ID = #{groupSellId}
-	</select>
-	
-	<!-- 공동구매 참여 고객 추가 -->
-	<insert id="joinGroupSell" parameterType="hashmap">
-		INSERT INTO 
-			HANJU_GROUP_SELL_STAT
-		VALUES 
-			(#{groupSellId}, #{userId})
-	</insert>
+
 </mapper>
 	

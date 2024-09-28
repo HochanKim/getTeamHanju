@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div id="cardView">
-                    <div v-for="item in groupSellList" class="card" @click="fnClickCard(item.groupSellId)">
+                    <div v-for="item in groupSellList" class="card" @click="fnClickCard(item.groupSellId)" >
                         <div class="area1">
                             <div class="groupSellImage">
                                 image
