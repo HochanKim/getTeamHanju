@@ -33,6 +33,14 @@ public class GroupProductController {
 		HashMap<String, Object> result = groupSellService.getGroupSellList(map);
 		return new Gson().toJson(result);
 	}
+	
+	// 공동구매 데이터 개수
+	@RequestMapping(value = "/market/getTotalGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getTotalGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> result = groupSellService.getTotalGroupSell();
+		return new Gson().toJson(result);
+	}
 
 	
 	

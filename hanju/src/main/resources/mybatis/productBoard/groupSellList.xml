@@ -31,8 +31,19 @@
         	I.FILE_STATUS = 'T'
 		ORDER BY 
 			G.START_DATE
+		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	
-
+	<!-- 공동구매 데이터 총 개수 -->
+	<select id="getTotalGroupSell" parameterType="hashmap" resultType="Integer">
+		SELECT	
+			COUNT(*)
+		FROM	
+			HANJU_GROUP_SELL
+	</select>
+	
+	<!--<select id="getGroupSellInfo" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.GroupSellModel">
+	
+	</select>-->
 </mapper>
 	

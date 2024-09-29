@@ -12,5 +12,7 @@ import com.example.hanju.productBoard.model.entity.GroupSellModel;
 public interface GroupProductMapper {	
 	// 공동구매 물품 카드형 목록
 	List<GroupSellModel> getGroupSellList(HashMap<String, Object> map);
+	// 공동구매 데이터 개수
+	int getTotalGroupSell();
 	
 }

@@ -90,19 +90,23 @@
         },
         methods: {
             fnGetTotalGroupSell() {
+                console.log("토탈페이지 : "+this.totalPages);
                 $.ajax({	
 					url:"getTotalGroupSell.dox",
 					dataType:"json",	
 					type : "POST", 
 					data : {},
 					success : (data) => {
-						console.log(data);
+						console.log("페이징 : "+data);
+                        console.log("토탈페이지 : "+this.totalPages);
                         var totalGroupSell = data.result;
                         this.totalPages = Math.ceil(totalGroupSell / this.pageSize);
 					}
 				});
             },
             fnGetList(start, size) {
+                console.log("시작 : "+start);
+                console.log("사이즈 : "+size);
                 $.ajax({
 					url:"getGroupSellList.dox",
 					dataType:"json",	
@@ -128,7 +132,7 @@
                 $.pageChange("groupSellView.do", {groupSellId : groupSellId});
             },
             fnClickPage(index) {
-
+                console.log("인덱스 번호 : "+index);
                 if (index < 0) return;
                 if (index > this.totalPages) return;
 
