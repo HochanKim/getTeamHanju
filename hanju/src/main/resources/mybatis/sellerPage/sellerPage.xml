@@ -108,7 +108,7 @@
 	</insert>
 	
 	<insert id="registerGroupSell" parameterType="hashmap" useGeneratedKeys="true" keyProperty="GROUP_SELL_ID" keyColumn="GROUP_SELL_ID">
-		INSERT INTO TEST_GROUP_SELL
+		INSERT INTO HANJU_GROUP_SELL
 		VALUES (main_seq.nextVal, #{targetAmount}, SYSDATE, #{endDate}, #{discount}, #{productId}, #{description})
 	</insert>
 	
