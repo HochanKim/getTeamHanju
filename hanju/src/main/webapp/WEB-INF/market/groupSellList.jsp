@@ -59,7 +59,7 @@
                 <!-- 페이징 버튼 -->
                 <div id="pagination">
                     <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
-                    <div v-for="index in totalPages" class="pageBtn" @click="fnClickPage(index)">{{ index }}</div>
+                    <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
                     <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
             return {
                 groupSellList : [], // 공동구매 데이터 리스트
                 totalPages : 0,     // 페이지 첫 인덱스
-                pageSize : 3,       // 한 페이지의 호출 리스트 개수
+                pageSize : 5,       // 한 페이지의 호출 리스트 개수
                 currentPage : 1     // 페이지 첫 호출시 시작 페이지 번호 
             };
         },
@@ -104,7 +104,7 @@
                     item.progress = "width:" + percent + "%";
                 }
             },
-            fnGetTotalGroupSell() {     // 공동구매 페이징 메소드
+            fnGetTotalGroupSell() {     // 페이징 메소드
                 $.ajax({	
 					url:"getTotalGroupSell.dox",
 					dataType:"json",	
@@ -116,7 +116,7 @@
 					}
 				});
             },
-            fnClickPage(index){    // 공동구매 페이지의 페이징 숫자 버튼
+            fnClickPage(index){    // 페이징 숫자 버튼
                 if (index < 0) return;
                 if (index > this.totalPages) return;
 

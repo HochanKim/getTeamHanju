@@ -32,6 +32,7 @@
 		INNER JOIN HANJU_PRODUCT P ON BEST.PRODUCT_ID = P.PRODUCT_ID
 		INNER JOIN HANJU_IMAGE I ON BEST.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
 	</select>
+	
 	<select id="getBestGroupSell" resultType="com.example.hanju.mainPage.model.BestGroupSell">
 		SELECT  BEST.GROUP_SELL_ID, P.PRODUCT_NAME, P.PRICE, GS.DISCOUNT, I.FILE_PATH
 		FROM    (
@@ -45,6 +46,7 @@
 		INNER JOIN HANJU_PRODUCT P ON GS.PRODUCT_ID = P.PRODUCT_ID
 		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
 	</select>
+	
 	<select id="getNewReview" resultType="com.example.hanju.mainPage.model.NewReview">
 		SELECT  SUBSTR(U.USER_NAME, 1, 1) || '*' || SUBSTR(U.USER_NAME, 3, 1) AS USER_NAME, C.CONTENT, C.GRADE, I.FILE_PATH
 		FROM    HANJU_COMMENT C

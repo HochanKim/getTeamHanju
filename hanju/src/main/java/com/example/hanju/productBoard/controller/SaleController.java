@@ -40,6 +40,13 @@ public class SaleController {
 	public String newProd(Model model) throws Exception {
 		return "market/newProducts";
 	}
+	// market/bestSeller.jsp 연동
+	@RequestMapping("market/bestSeller.do")
+	public String best(Model model) throws Exception {
+		return "market/bestSeller";
+	}
+	
+	
 	@RequestMapping("productBoard/subscribeBoard.do")
 	public String subscribeBoard(Model model) throws Exception {
 		return "productBoard/subscribeBoard";
@@ -98,6 +105,16 @@ public class SaleController {
 		return new Gson().toJson(resultMap);
 	}
 	
+	// market/bestSeller.do
+	@RequestMapping(value = "market/bestSeller.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String best(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = saleService.getBestSellerProducts(map);
+		return new Gson().toJson(resultMap);
+	}
+	
+	
 	// 전통주 생산지 리스트
 	@RequestMapping(value = "market/madeBy.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -106,6 +123,9 @@ public class SaleController {
 		resultMap = saleService.getMadeByList(map);
 		return new Gson().toJson(resultMap);
 	}
+	
+	
+	// 구독 리스트
 	@GetMapping(value = "productBoard/getSubscribeList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getSubscribeList(Model model) throws Exception {
@@ -113,4 +133,19 @@ public class SaleController {
 		return new Gson().toJson(result);
 	}
 	
+	// 페이징
+	@RequestMapping(value = "/market/getTotalNormalSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getTotalNormalSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> result = saleService.getTotalNormalSell();
+		return new Gson().toJson(result);
+	}
+	
+	// 평점
+	@RequestMapping(value = "/market/getGrade.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getGrade(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> result = saleService.getGrade(map);
+		return new Gson().toJson(result);
+	}
 }

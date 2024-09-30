@@ -16,9 +16,15 @@ public interface PickupService {
     
     // 와인 픽업 코드 리스트
     HashMap<String,Object> selectCodeList(HashMap<String,Object> map);
+    
+    // 와인 픽업 코드 리스트
+    HashMap<String,Object> getNewPickUpWineList(HashMap<String,Object> map);
 
     // 품종 리스트
     HashMap<String,Object> getMaterialList(HashMap<String,Object> map);
     // 원산지 리스트
     HashMap<String,Object> getMadeByList(HashMap<String,Object> map);
+    
+    // 베스트 셀러
+	HashMap<String, Object> getBestSellerWine(HashMap<String, Object> map);
 }	

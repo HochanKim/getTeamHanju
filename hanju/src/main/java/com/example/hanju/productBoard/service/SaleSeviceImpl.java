@@ -74,10 +74,37 @@ public class SaleSeviceImpl implements SaleService {
     }
 
     @DbExceptionHandle
-    @Override
+    @Override	// 구독 리스트
     public Map<String, Object> getSubscribeList() {
         Map<String, Object> result = new HashMap<>();
         result.put("list", saleMapper.subscribeList());
         return result;
     }
+
+    @DbExceptionHandle
+	@Override	// 판매페이지 데이터 개수
+	public HashMap<String, Object> getTotalNormalSell() {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int getCount = saleMapper.getTotalNormalSell();
+		resultMap.put("number", getCount);
+		return resultMap;
+	}
+
+    @DbExceptionHandle
+	@Override	// 베스트 셀러
+	public HashMap<String, Object> getBestSellerProducts(HashMap<String, Object> map) {
+    	HashMap<String, Object> resultMap = new HashMap<String, Object>();
+    	List<SaleModel> best = saleMapper.getBestSellerProducts(map);
+		resultMap.put("best", best);
+		return resultMap;
+	}
+
+	@Override	// 평점
+	public HashMap<String, Object> getGrade(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<SaleModel> grade = saleMapper.getGrade(map);
+    	System.out.println("숫자 : "+map);
+		resultMap.put("grade", grade);
+		return resultMap;
+	}
 }

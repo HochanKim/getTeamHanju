@@ -22,13 +22,13 @@ pageEncoding="UTF-8"%>
       <section class="selectSection">
         <!-- 카테고리 버튼 클릭 (1) -->
         <div class="productsListSelect">
-            <a href="javascript:void(0);">
-                <span class="selected">둘러보기</span>
+            <a href="pickUpLists.do">
+                <span class="selected">전체보기</span>
             </a>
-            <a href="javascript:void(0);">
+            <a href="newPickUpProducts.do">
                 <span>신상품</span>
             </a>
-            <a href="javascript:void(0);">
+            <a href="bestPickUp.do">
                 <span>베스트</span>
             </a>
         </div>
@@ -83,15 +83,13 @@ pageEncoding="UTF-8"%>
           <option value="">-- 원산지 --</option>
           <option v-for="item in MadeByList" :value="item.madeBy">:: {{ item.madeBy }} ::</option>
         </select>
-
-    </section>
       </section>
       <!-- 상품 리스트 영역 -->
       <section class="productContainer">
         <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
         <ul v-for="item in products">
           <li class="productList">
-            <a @click="fnDetailPage(item.sellId)">
+            <a @click="fnDetailPage(item.productId)">
               <div>
                 <div class="img-wrap">
                   <img :src="item.filePath" :alt="item.fileOrgName" />
@@ -201,8 +199,8 @@ pageEncoding="UTF-8"%>
             },
         });
       },
-      fnDetailPage(sellId) {
-        location.href = `/details/details.do?id=\${sellId}`;
+      fnDetailPage(productId) {
+        location.href = `/details/details.do?id=\${productId}`;
       }
     },
     mounted() {

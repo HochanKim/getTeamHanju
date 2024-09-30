@@ -21,15 +21,14 @@ pageEncoding="UTF-8"%>
     <div id="app">
       <section class="selectSection">
         <!-- 카테고리 버튼 클릭 (1) -->
-        <!-- 카테고리 버튼 클릭 (1) -->
         <div class="productsListSelect">
-          <a href="productList.do">
-              <span>전체상품</span>
+          <a href="pickUpLists.do">
+              <span>전체보기</span>
           </a>
-          <a href="newProducts.do">
+          <a href="newPickUpProducts.do">
               <span class="selected">신상품</span>
           </a>
-          <a href="bestSeller.do">
+          <a href="bestPickUp.do">
               <span>베스트</span>
           </a>
         </div>
@@ -42,13 +41,14 @@ pageEncoding="UTF-8"%>
             <a @click="fnDetailPage(item.sellId)">
               <div>
                 <div class="img-wrap">
-                  <img :src="item.filePath" :alt="item.fileOrgName" /> 
+                  <img :src="item.filePath" :alt="item.fileOrgName" />
                 </div>
-                <p class="productName">{{ item.productName }}</p>
+                <p class="productName.wine">{{ item.productName }}</p>
                 <p class="price">\ {{ item.priceComma }}</p>
-                <span class="mini">생산지 {{ item.madeBy }}</span>
-                <p class="alcohol">
-                  <span class="mini title">알코올 도수</span> {{ item.alcohol }} %</p>
+                <span class="mini">원산지 {{ item.madeBy }}</span>
+                <p class="material">
+                  <span class="mini title">품종</span> {{ item.material }}
+                </p>
                 <p>평점 0.0</p>
               </div>
             </a>
@@ -57,7 +57,6 @@ pageEncoding="UTF-8"%>
       </section>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>
-  </body>
 </html>
 <script>
   const app = Vue.createApp({
@@ -71,7 +70,7 @@ pageEncoding="UTF-8"%>
             var self = this;
             var paramap = {};
             $.ajax({
-                url: "newProducts.dox",
+                url: "newPickUpProducts.dox",
                 dataType: "json",
                 type: "POST",
                 data: [],

@@ -5,14 +5,14 @@
 <mapper namespace="com.example.hanju.pickup.mapper.PickupMapper">
 	<select id="getBoardList" parameterType="hashmap" resultType="PickupBoardDto">
 		SELECT P.PRODUCT_ID, P.PRODUCT_NAME,P.MADE_BY, P.PRICE, P.ALCOHOL, P.COLOR, P.MATERIAL, P.CAPACITY, I.FILE_PATH
-		FROM TEST_PRODUCT P
+		FROM HANJU_PRODUCT P
 		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		WHERE P.TYPE = 'WINE' AND P.STOCK != 0 AND  P.PRODUCT_NAME LIKE '%'||#{searchKeyword}||'%'
 	</select>
 	
 	<!-- 와인 픽업 리스트 -->
 	<select id="getPickUpList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
-		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, MATERIAL, FILE_ORG_NAME, FILE_PATH
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, MATERIAL, FILE_ORG_NAME, FILE_PATH, P.PRODUCT_ID
 		FROM HANJU_PRODUCT P
 		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
 		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
@@ -113,5 +113,32 @@
 		FROM HANJU_CODE C1
 		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
 		WHERE C1.KIND = 'PRODUCT_CODE' AND C2.CODE IN ('WW', 'RW')
+	</select>
+	
+	<!-- 신상품 목록 -->
+	<select id="getNewPickUpWineList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
+		SELECT PRODUCT_NAME, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, MADE_BY, ALCOHOL, FILE_ORG_NAME, FILE_PATH, PRODUCT_ID
+		FROM HANJU_PRODUCT P
+		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID
+		INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+		WHERE I.FILE_STATUS = 'T' AND 10 >= ROWNUM AND C.PARENT_CODE = 'W'
+		ORDER BY PRODUCT_ID DESC
+	</select>
+	
+	<!-- 베스트 셀러 -->
+	<select id="getBestSellerWine" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
+		SELECT P.PRODUCT_NAME, P.PRICE, I.FILE_PATH, P.PRODUCT_ID, TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, P.MATERIAL
+		FROM    (
+		    SELECT  P.PRODUCT_ID, COUNT(*) AS CNT
+		    FROM    HANJU_BILL B
+		    LEFT JOIN HANJU_PRODUCT P ON B.PRODUCT_ID = P.PRODUCT_ID
+		    WHERE P.TYPE IN ('WW', 'RW')
+		    GROUP BY P.PRODUCT_ID
+		    ORDER BY CNT DESC
+		    OFFSET 0 ROWS FETCH FIRST 10 ROWS ONLY
+		) BEST
+		INNER JOIN HANJU_PRODUCT P ON BEST.PRODUCT_ID = P.PRODUCT_ID
+		INNER JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
+		WHERE P.TYPE IN ('WW', 'RW')
 	</select>
 </mapper>

@@ -77,6 +77,24 @@ public class PickupServiceImpl implements PickupService {
 		return resultMap;
 	}
 
+	@DbExceptionHandle
+	@Override	// 신상 리스트
+	public HashMap<String, Object> getNewPickUpWineList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<PickupBoardDto> newPickUp = pickupMapper.getNewPickUpWineList(map);
+		resultMap.put("newList", newPickUp);
+		return resultMap;
+	}
+
+	@DbExceptionHandle
+	@Override	// 베스트 셀러
+	public HashMap<String, Object> getBestSellerWine(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		List<PickupBoardDto> best = pickupMapper.getBestSellerWine(map);
+		resultMap.put("best", best);
+		return resultMap;
+	}
+
 
 
 
