@@ -11,24 +11,14 @@ import com.example.hanju.main.model.Code;
 import com.example.hanju.main.model.Product;
 import com.example.hanju.main.model.ProductImage;
 import com.example.hanju.sellerPage.mapper.SellerPageMapper;
-import com.example.hanju.sellerPage.model.Test;
+import com.example.hanju.sellerPage.model.GroupSell;
+import com.example.hanju.sellerPage.model.NormalSell;
 
 @Service
 public class SellerPageServiceImpl implements SellerPageService {
 
 	@Autowired
 	SellerPageMapper sellerPageMapper;
-	
-	@DbExceptionHandle
-	@Override
-	public HashMap<String, Object> test(HashMap<String, Object> map) {
-		
-		Test result = sellerPageMapper.test(map);
-		
-		HashMap<String, Object> resultMap = new HashMap<> ();
-		resultMap.put("result", result);
-		return resultMap;
-	}
 	
 	@DbExceptionHandle
 	@Override
@@ -149,6 +139,56 @@ public class SellerPageServiceImpl implements SellerPageService {
 		HashMap<String, Object> resultMap = new HashMap<>();
 		resultMap.put("groupSellId", map.get("GROUP_SELL_ID") );
 		resultMap.put("message", "등록되었습니다.");
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> getNormalSellList(HashMap<String, Object> map) {
+		List<NormalSell> list = sellerPageMapper.getNormalSellList(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("list", list);
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> modifyNormalSell(HashMap<String, Object> map) {
+		sellerPageMapper.modifyNormalSell(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "수정되었습니다.");
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> getGroupSellList(HashMap<String, Object> map) {
+		List<GroupSell> list = sellerPageMapper.getGroupSellList(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("list", list);
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> modifyGroupSell(HashMap<String, Object> map) {
+		sellerPageMapper.modifyGroupSell(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "수정되었습니다.");
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> getSellerMainInfo(HashMap<String, Object> map) {
+		
+		int productCount    = sellerPageMapper.getProductCount(map);
+		int normalSellCount = sellerPageMapper.getNormalSellCount(map);
+		int groupSellCount  = sellerPageMapper.getGroupSellCount(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("productCount"   , productCount   );
+		resultMap.put("normalSellCount", normalSellCount);
+		resultMap.put("groupSellCount" , groupSellCount );
 		return resultMap;
 	}
 }

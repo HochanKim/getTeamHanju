@@ -11,18 +11,20 @@
 </head>
 
 <body>
-    <div id="app">
-        <jsp:include page="../mainPage/header.jsp"></jsp:include>
-        <div id="main">
-            <jsp:include page="sellerSideBar.jsp"></jsp:include>
+    <jsp:include page="../mainPage/header.jsp"></jsp:include>
+    <div id="main">
+        <jsp:include page="sellerSideBar.jsp"></jsp:include>
+        <div id="app">
             <div id="container">
                 <h3>제품 수정</h3>
                 <hr>
                 <table>
                     <tr>
-                        <td>제품명</td>
+                        <td>제품</td>
                         <td>
-                            <input type="text" v-model="productName">
+                            <select v-model="productId" @change="fnGetProductInfo">
+                                <option v-for="item in productList" :value="item.productId">{{item.productName}}</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -170,8 +172,8 @@
                 <div class="submitBtn" @click="fnSubmit">수정하기</div>
             </div>
         </div>
-        <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
 </body>
 
 </html>
@@ -180,10 +182,12 @@
     const app = Vue.createApp({
         data() {
             return {
-                productId : "${productId}",
                 userId : "${sessionId}",
                 userStatus : "${sessionStatus}",
 
+                productList : [],
+
+                productId : null,
                 productName : null,
                 type : null,
                 price : null,
@@ -216,6 +220,18 @@
             }
         },
         methods: {
+            fnGetProductList() {
+                $.ajax({
+					url:"getProductList.dox",
+					dataType:"json",
+					type : "POST", 
+					data : { userId : this.userId },
+					success : (data) => {
+						console.log(data);
+                        this.productList = data.list;
+					}
+				});
+            },
             fnThumbnailChange(event) {
                 this.thumbnail = event.target.files[ 0 ];
                 this.thumbnailUrl = URL.createObjectURL(this.thumbnail);
@@ -263,6 +279,7 @@
                     },
 					success : (data) => {
 						console.log(data);
+                        alert("수정되었습니다!");
                         this.fnUploadImages();
 					}
 				});
@@ -298,6 +315,7 @@
                     },
 					success : (data) => {
 						console.log(data);
+                        console.log("이미지 삭제 성공");
 					}
 				});
             },
@@ -315,7 +333,7 @@
                     processData : false,
                     contentType : false,
 					success : () => {
-						alert("등록되었습니다!");
+						console.log("이미지 업로드 성공!");
 					},
                     error : function(jqXHR, textStatus, errorThrown) {
                         console.error('업로드 실패!', textStatus, errorThrown);
@@ -382,7 +400,8 @@
             }
         },
         mounted() {
-            this.fnGetProductInfo();
+            this.fnGetProductList();
+            //this.fnGetProductInfo();
         },
     });
     app.mount("#app");

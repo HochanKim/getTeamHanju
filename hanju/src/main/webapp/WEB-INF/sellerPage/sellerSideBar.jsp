@@ -22,7 +22,7 @@
             </div>
             <div class="subMenu">
                 <div><a href="registerProduct.do"> - 제품 등록</a></div>
-                <div><a href="modifyProductList.do"> - 제품 수정</a></div>
+                <div><a href="modifyProduct.do"> - 제품 수정</a></div>
             </div>
             <div class="menu">
                 <p>일반 판매 관리</p>
@@ -30,7 +30,7 @@
             </div>
             <div class="subMenu">
                 <div><a href="registerNormalSell.do"> - 일반 판매 등록</a></div>
-                <div> - 판매글 수정</div>
+                <div><a href="modifyNormalSell.do"> - 판매글 수정</a></div>
             </div>
             <!-- <div class="menu">
                 <p>펀딩 관리</p>
@@ -46,7 +46,7 @@
             </div>
             <div class="subMenu">
                 <div><a href="registerGroupSell.do"> - 공동구매 등록</a></div>
-                <div> - 공동구매 수정</div>
+                <div><a href="modifyGroupSell.do">- 공동구매 수정</a></div>
             </div>
         </div>
     </div>

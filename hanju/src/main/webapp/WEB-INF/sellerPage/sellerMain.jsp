@@ -16,7 +16,10 @@
         <jsp:include page="sellerSideBar.jsp"></jsp:include>
         <div id="app">
             <div id="container">
-                sellerMain
+                <div class="cardView">
+                    <div>등록한 제품 개수</div>
+                    <div>{{}}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -29,11 +32,26 @@
     const app = Vue.createApp({
         data() {
             return {
-                
+                userId : "${sessionId}",
+                userStatus : "${sessionStatus}",
+
+                productCount : null,
+                normalSellCount : null,
+                groupSellCount : null
             };
         },
         methods: {
-            
+            fnGetSellerMainInfo() {
+                $.ajax({
+					url:"getSellerMainInfo.dox",
+					dataType:"json",
+					type : "POST", 
+					data : { userId : this.userId },
+					success : (data) => {
+						console.log(data);
+					}
+				});
+            }
         },
         mounted() {
 

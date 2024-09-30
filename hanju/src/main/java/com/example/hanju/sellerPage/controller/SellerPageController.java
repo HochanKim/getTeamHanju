@@ -27,18 +27,6 @@ public class SellerPageController {
 	@Autowired
 	SellerPageService sellerPageService;
 	
-//	@RequestMapping("/sellerPage/test.do")
-//    public String test(Model model) throws Exception {
-//        return "/sellerPage/test";
-//    }
-//	@RequestMapping(value = "/sellerPage/test.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-//	@ResponseBody
-//	public String testdox(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-//
-//		HashMap<String, Object> result = sellerPageService.test(map);
-//		return new Gson().toJson(result);
-//	}
-	
 	@RequestMapping("/sellerPage/sellerRoot.do")
     public String sellerRoot(Model model) throws Exception {
         return "/sellerPage/sellerRoot";
@@ -54,9 +42,9 @@ public class SellerPageController {
         return "/sellerPage/registerProduct";
     }
 	
-	@RequestMapping("/sellerPage/modifyProductList.do")
-    public String modifyProductList(Model model) throws Exception {
-        return "/sellerPage/modifyProductList";
+	@RequestMapping("/sellerPage/modifyProduct.do")
+    public String modifyProduct(Model model) throws Exception {
+		return "/sellerPage/modifyProduct";
     }
 	
 	@RequestMapping("/sellerPage/registerNormalSell.do")
@@ -64,10 +52,9 @@ public class SellerPageController {
 		return "/sellerPage/registerNormalSell";
     }
 	
-	@RequestMapping("/sellerPage/modifyProduct.do")
-    public String modifyProduct(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-        request.setAttribute("productId", map.get("productId") );
-		return "/sellerPage/modifyProduct";
+	@RequestMapping("/sellerPage/modifyNormalSell.do")
+    public String modifyNormalSell(Model model) throws Exception {
+		return "/sellerPage/modifyNormalSell";
     }
 	
 	@RequestMapping("/sellerPage/registerFunding.do")
@@ -78,6 +65,10 @@ public class SellerPageController {
 	@RequestMapping("/sellerPage/registerGroupSell.do")
     public String registerGroupSell(Model model) throws Exception {
 		return "/sellerPage/registerGroupSell";
+    }
+	@RequestMapping("/sellerPage/modifyGroupSell.do")
+    public String modifyGroupSell(Model model) throws Exception {
+		return "/sellerPage/modifyGroupSell";
     }
 	
 	@RequestMapping(value = "/sellerPage/getProductCodeList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -188,6 +179,44 @@ public class SellerPageController {
 	public String registerGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 
 		HashMap<String, Object> result = sellerPageService.registerGroupSell(map);
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(value = "/sellerPage/getNormalSellList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getNormalSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getNormalSellList(map);
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(value = "/sellerPage/modifyNormalSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String modifyNormalSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.modifyNormalSell(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/getGroupSellList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getGroupSellList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getGroupSellList(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/modifyGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String modifyGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.modifyGroupSell(map);
+		return new Gson().toJson(result);
+	}
+	
+	@RequestMapping(value = "/sellerPage/getSellerMainInfo.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getSellerMainInfo(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getSellerMainInfo(map);
 		return new Gson().toJson(result);
 	}
 	

@@ -4,12 +4,6 @@
 
 <mapper namespace="com.example.hanju.sellerPage.mapper.SellerPageMapper">
 
-	<select id="test" parameterType="hashmap" resultType="com.example.hanju.sellerPage.model.Test">
-		SELECT	*
-		FROM	HANJU_NORMAL_SELL
-		WHERE	SELL_ID = #{sellId}
-	</select>
-
 	<select id="getProductCodeList" parameterType="hashmap" resultType="com.example.hanju.main.model.Code">
 		SELECT	*
 		FROM	HANJU_CODE
@@ -111,5 +105,47 @@
 		INSERT INTO HANJU_GROUP_SELL
 		VALUES (main_seq.nextVal, #{targetAmount}, SYSDATE, #{endDate}, #{discount}, #{productId}, #{description})
 	</insert>
+	
+	<select id="getNormalSellList" parameterType="hashmap" resultType="com.example.hanju.sellerPage.model.NormalSell">
+		SELECT  NS.SELL_ID, P.PRODUCT_ID, P.PRODUCT_NAME, NS.DISCOUNT, NS.DESCRIPTION, I.IMAGE_ID, I.FILE_PATH
+		FROM    HANJU_NORMAL_SELL NS
+		INNER JOIN HANJU_PRODUCT P ON NS.PRODUCT_ID = P.PRODUCT_ID
+		LEFT JOIN HANJU_IMAGE I ON P.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'D'
+	</select>
+	
+	<update id="modifyNormalSell" parameterType="hashmap">
+		UPDATE HANJU_NORMAL_SELL
+		SET
+			DISCOUNT = #{discount},
+			CDATETIME = SYSDATE,
+			DESCRIPTION = #{description}
+		WHERE SELL_ID = #{sellId}
+	</update>
+	
+	<select id="getGroupSellList" parameterType="hashmap" resultType="com.example.hanju.sellerPage.model.GroupSell">
+		SELECT
+			GS.GROUP_SELL_ID,
+			GS.PRODUCT_ID,
+			P.PRODUCT_NAME,
+			GS.DESCRIPTION,
+			GS.TARGET_AMOUNT,
+			GS.END_DATE,
+			GS.DISCOUNT,
+			I.IMAGE_ID,
+			I.FILE_PATH
+		FROM    HANJU_GROUP_SELL GS
+		INNER JOIN HANJU_PRODUCT P ON GS.PRODUCT_ID = P.PRODUCT_ID
+		LEFT JOIN HANJU_IMAGE I ON GS.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'D'
+	</select>
+	
+	<update id="modifyGroupSell" parameterType="hashmap">
+		UPDATE HANJU_GROUP_SELL
+		SET
+			DESCRIPTION = #{description},
+			TARGET_AMOUNT = #{targetAmount},
+			END_DATE = #{endDate},
+			DISCOUNT = #{discount}
+		WHERE GROUP_SELL_ID = #{groupSellId}
+	</update>
 	
 </mapper>
