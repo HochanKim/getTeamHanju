@@ -19,10 +19,10 @@
                 <a href="../pickup/pickUpLists.do">와인</a>
             </div>
             <div class="menu">
-                <a href="">펀딩</a>
+                <a href="../market/groupSellList.do">공동구매</a>
             </div>
             <div class="menu">
-                <a href="../market/groupSellList.do">공동구매</a>
+                <a href="">펀딩</a>
             </div>
         </div>
         <div id="right">

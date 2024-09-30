@@ -26,6 +26,10 @@
     border-radius: 5px;
 }
 
+#sideBox hr {
+    width: 100%;
+}
+
 #sideBar a {
     text-decoration: none;
     color: black;

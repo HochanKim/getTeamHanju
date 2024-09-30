@@ -16,63 +16,22 @@
             <div class="normalMenu">
                 <a href="adminMain.do">관리자 홈</a>
             </div>
+            <hr>
             <div class="menu">
-                <p>유저 관리</p>
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-            </div>
-            <div class="subMenu">
-                <div><a href=""> - </a></div>
-                <div><a href=""> - </a></div>
+                <a href="modifyUser.do">유저 관리</a>
             </div>
             <div class="menu">
-                <p>사업자 관리</p>
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-            </div>
-            <div class="subMenu">
-                <div><a href=""> - </a></div>
-                <div> - </div>
+                제품 관리
             </div>
             <div class="menu">
-                <p>제품 관리</p>
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-            </div>
-            <div class="subMenu">
-                <div><a href=""> - </a></div>
-                <div> - </div>
+                일반 판매 관리
             </div>
             <div class="menu">
-                <p>일반 판매 관리</p>
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-            </div>
-            <div class="subMenu">
-                <div><a href=""> - </a></div>
-                <div> - </div>
-            </div>
-            
-            <div class="menu">
-                <p>공동구매 관리</p>
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-            </div>
-            <div class="subMenu">
-                <div><a href=""> - </a></div>
-                <div> - </div>
+                공동구매 관리
             </div>
         </div>
     </div>
 </body>
 </html>
 <script>
-$(function() {
-    $(".menu").on("click", function(e) {
-        var status = $(this).next().css("maxHeight");
-
-        if (status == "0px") {
-            $(this).next().css("maxHeight", "200px");
-            $(this).children("span").text("arrow_drop_up");
-        } else {
-            $(this).next().css("maxHeight", "0px");
-            $(this).children("span").text("arrow_drop_down");
-        }
-    });
-});
 </script>
