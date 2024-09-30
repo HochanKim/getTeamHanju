@@ -60,10 +60,17 @@ public class DetailsController {
 		System.out.println("controller" + result);
 		return new Gson().toJson(result);
 	}
-	@GetMapping(value = "details/getSubscribeItem.dox", produces = "application/json;charset=UTF-8")
+	@GetMapping("details/getSubscribeItem.dox")
 	@ResponseBody
 	public String getSubscribeItem(Model model, @RequestParam Map<String, Object> map) throws Exception {
-		Map<String, Object> result = detailsService.getSubscribe(map);
+		Map<String, Object> result = detailsService.getSubscribeItem(map);
+		return new Gson().toJson(result);
+	}
+	@GetMapping("details/userSubCheck.dox")
+	@ResponseBody
+	public String userSubCheck(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		System.out.println(map);
+		Map<String, Object> result = detailsService.userSubCheck(map);
 		return new Gson().toJson(result);
 	}
 }
