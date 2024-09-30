@@ -12,6 +12,10 @@ public interface DetailsService {
 
     //픽업 불러오는 코드
     HashMap<String,Object> searchDetailsPickup(Map<String,Object> map);
+    //공동구매 불러오는 코드
+    HashMap<String, Object> searchGroup(Map<String, Object> map);
 
     Map<String,Object> getSubscribe(Map<String,Object> map);
+    // 공동구매 insert
+    HashMap<String,Object> addGroup(HashMap<String,Object> map);
 }

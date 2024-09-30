@@ -60,6 +60,21 @@ public class DetailsServiceImpl implements DetailsService {
 		map.put("status", "R");
 		return result;
 	}
+
+	@Override
+	public HashMap<String, Object> searchGroup(Map<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		List<Details> group = detailsMapper.selectGroup(map);
+		List<Details> cntGroup = detailsMapper.countGroup(map);
+		List<Comment> comment = detailsMapper.selectComment(map);
+		resultMap.put("group", group);
+		resultMap.put("cntGroup", cntGroup);
+		System.out.println("카운트" + cntGroup);
+		resultMap.put("comment", comment);
+
+		return resultMap;
+	}
+
 	@DbExceptionHandle
 	@Override
 	public Map<String,Object> getSubscribe(Map<String,Object> map){
@@ -67,5 +82,22 @@ public class DetailsServiceImpl implements DetailsService {
 		Subscribe item = detailsMapper.getSubscribe(map);
 		List<String> productList = detailsMapper.getSubscribeItem(map);
 		return result;
+	}
+
+	@Override
+	public HashMap<String, Object> addGroup(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap =
+				new HashMap<String, Object>();
+		try {
+			detailsMapper.insertGroup(map);
+			resultMap.put("result", "success");
+			resultMap.put("message", "등록되었습니다.");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", "예기치 못한 문제가 발생했습니다. \n나중에 다시 시도해주세요.");
+		}
+		return resultMap;
 	}
 }

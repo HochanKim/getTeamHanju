@@ -33,7 +33,15 @@ public class DetailsController {
 		model.addAttribute("userId",session.getAttribute("sessionId"));
 		model.addAttribute("pickupId",id);
 		return "details/detailsPickup";
+}
+
+@RequestMapping("details/detailsGroup.do")
+public String detailGroup(Model model,@RequestParam String id) throws Exception{
+		model.addAttribute("userId",session.getAttribute("sessionId"));
+		model.addAttribute("groupId",id);
+		return "details/detailsGroup";
 	}
+	//그룹 상세보기 페이지
 	@RequestMapping("details/subscribe.do")
 	public String subscribeBoard(Model model, @RequestParam String id) throws Exception {
 		model.addAttribute("userId", session.getAttribute("sessionId"));
@@ -45,7 +53,6 @@ public class DetailsController {
 	@RequestMapping(value = "details/details.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchDetails(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-		System.out.println(map);
 		HashMap<String, Object> result = detailsService.searchDetails(map);
 		result.put("img", detailsService.searchItemImage(map)) ;
 		return new Gson().toJson(result);
@@ -60,10 +67,26 @@ public class DetailsController {
 		System.out.println("controller" + result);
 		return new Gson().toJson(result);
 	}
+	@RequestMapping(value = "details/detailsGroup.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String searchDetailsGroup(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> result = detailsService.searchGroup(map);
+		result.put("img", detailsService.searchItemImage(map)) ;
+		System.out.println("controller" + result);
+		return new Gson().toJson(result);
+	}
 	@GetMapping(value = "details/getSubscribeItem.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getSubscribeItem(Model model, @RequestParam Map<String, Object> map) throws Exception {
 		Map<String, Object> result = detailsService.getSubscribe(map);
+		return new Gson().toJson(result);
+	}
+
+	@RequestMapping(value = "details/joinGroupSell.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String joinGroupSell(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = detailsService.addGroup(map);
 		return new Gson().toJson(result);
 	}
 }

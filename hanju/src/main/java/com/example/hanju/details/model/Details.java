@@ -44,4 +44,11 @@ public class Details {
     private String addrdetail;
     private String phone;
 
+    //groupSell
+    private String groupSellId;
+    private String targetAmount;
+    private String startDate;
+    private String endDate;
+    private String userId;
+    private String currentAmount;
 }

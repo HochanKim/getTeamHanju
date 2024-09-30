@@ -260,6 +260,7 @@
             boardId: "",
             contents: "",
             pickupId: "",
+            groupId : "",
             img: { productImage: [] },
             currentImageIndex: 0,
           };
@@ -269,7 +270,8 @@
             var self = this;
             const submitForm = {
               sellId: this.boardId,
-              pickupId: ""
+              pickupId: "",
+              groupId : ""
             };
             console.log(submitForm);
             $.ajax({
