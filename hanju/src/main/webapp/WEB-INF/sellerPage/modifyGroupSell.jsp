@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/sellerPage/modifyNormalSell.css" />
+    <link rel="stylesheet" href="../../css/sellerPage/registerGroupSell.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
+    <script src="https://unpkg.com/@vuepic/vue-datepicker@latest"></script>
+	<link rel="stylesheet" href="https://unpkg.com/@vuepic/vue-datepicker@latest/dist/main.css">
     <title>첫번째 페이지</title>
 </head>
 
@@ -16,24 +18,14 @@
         <jsp:include page="sellerSideBar.jsp"></jsp:include>
         <div id="app">
             <div id="container">
-                <h3>판매글 수정</h3>
+                <h3>공동 구매 수정</h3>
                 <hr>
-                <table>
+                <table id="inputTemplate">
                     <tr>
-                        <th>판매글</th>
+                        <th>공동 구매 글</th>
                         <td>
-                            <select v-model="sellIndex" @change="fnSetNormalSellInfo">
-                                <option v-for="(item, index) in normalSellList" :value="index">
-                                    {{item.productName}}
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>할인율</th>
-                        <td>
-                            <select v-model="discount">
-                                <option v-for="i in 100" :value="i-1">{{ i-1 }}%</option>
+                            <select v-model="sellIndex" @change="fnSetInfo">
+                                <option v-for="(item, index) in groupSellList" :value="index">{{item.productName}}</option>
                             </select>
                         </td>
                     </tr>
@@ -44,9 +36,27 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>
-                            상세 설명 이미지
-                        </th>
+                        <th>목표 인원</th>
+                        <td>
+                            <input type="text" v-model="targetAmount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>종료일</th>
+                        <td>
+                            <vue-date-picker v-model="endDate" locale="ko"></vue-date-picker>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>할인율</th>
+                        <td>
+                            <select v-model="discount">
+                                <option v-for="i in 100" :value="i-1">{{i-1}}%</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>상세 설명 이미지</th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
                                 <img v-if="detailImgUrl == null" class="img" src="../../image/defaultImg.png"> 
@@ -59,7 +69,7 @@
                         </td>
                     </tr>
                 </table>
-                <button @click="fnModifyNormalSell">게시하기</button>
+                <button @click="fnModifyGroupSell">수정하기</button>
             </div>
         </div>
     </div>
@@ -76,12 +86,14 @@
                 userStatus : "${sessionStatus}",
 
                 sellIndex : null,
-                normalSellList : [],
+                groupSellList : [],
 
                 productId : null,
-                sellId : null,
-                discount : 0,
+                groupSellId : null,
                 description : null,
+                targetAmount : null,
+                endDate : null,
+                discount : null,
                 detailImgId : null,
                 detailImgUrl : null,
 
@@ -91,26 +103,31 @@
                 beforeImgUrl : null,
             }
         },
+        components: {
+			VueDatePicker 
+		},
         methods: {
-            fnGetNormalSellList() {
+            fnGetGroupSellList() {
                 $.ajax({
-					url:"getNormalSellList.dox",
+					url:"getGroupSellList.dox",
 					dataType:"json",
-					type : "POST", 
+					type : "POST",
 					data : { userId : this.userId },
 					success : (data) => {
 						console.log(data);
-                        this.normalSellList = data.list;
+                        this.groupSellList = data.list;
 					}
 				});
             },
-            fnSetNormalSellInfo() {
-                this.sellId       = this.normalSellList[ this.sellIndex ].sellId;
-                this.productId    = this.normalSellList[ this.sellIndex ].productId
-                this.discount     = this.normalSellList[ this.sellIndex ].discount;
-                this.description  = this.normalSellList[ this.sellIndex ].description;
-                this.detailImgId  = this.normalSellList[ this.sellIndex ].imageId;
-                this.detailImgUrl = this.normalSellList[ this.sellIndex ].filePath;
+            fnSetInfo() {
+                this.groupSellId  = this.groupSellList[ this.sellIndex ].groupSellId;
+                this.productId    = this.groupSellList[ this.sellIndex ].productId;
+                this.description  = this.groupSellList[ this.sellIndex ].description;
+                this.targetAmount = this.groupSellList[ this.sellIndex ].targetAmount;
+                this.discount     = this.groupSellList[ this.sellIndex ].discount;
+                this.detailImgUrl = this.groupSellList[ this.sellIndex ].filePath;
+
+                this.endDate = new Date(this.groupSellList[ this.sellIndex ].endDate);
             },
             fnImgChange(event) {
                 this.isImageChange = true;
@@ -124,15 +141,17 @@
                 this.beforeImgId  = this.detailImgId;
                 this.beforeImgUrl = this.detailImgUrl;
             },
-            fnModifyNormalSell() {
+            fnModifyGroupSell() {
                 $.ajax({
-					url:"modifyNormalSell.dox",
+					url:"modifyGroupSell.dox",
 					dataType:"json",
-					type : "POST", 
+					type : "POST",
 					data : {
-                        sellId : this.sellId,
-                        discount : this.discount,
-                        description : this.description
+                        groupSellId  : this.groupSellId,
+                        description  : this.description,
+                        targetAmount : this.targetAmount,
+                        endDate      : this.fnChangeDBFormat(this.endDate),
+                        discount     : this.discount
                     },
 					success : (data) => {
 						console.log(data);
@@ -160,6 +179,7 @@
                         imageUrl : this.beforeImgUrl
                     },
 					success : (data) => {
+                        console.log("fnDeleteBeforeImg()");
 						console.log(data);
 					}
 				});
@@ -188,22 +208,51 @@
             },
             fnInit() {
                 this.sellIndex = null;
-                this.fnGetNormalSellList();
+                this.fnGetGroupSellList();
 
-                this.sellId = null;
-                this.discount = null;
+                this.productId = null;
+                this.groupSellId = null;
                 this.description = null;
-                this.detailImgId = null;
+                this.targetAmount = null;
+                this.endDate = null;
+                this.discount = null;
+                this.detailImg = null;
                 this.detailImgUrl = null;
 
                 this.isImageChange = false;
                 this.detailImg = null;
                 this.beforeImgId = null;
                 this.beforeImgUrl = null;
+            },
+            fnChangeDBFormat(date) {
+
+                var year = date.getFullYear() + "";
+                year = year.substr(2, 2);
+
+                var month = date.getMonth() + 1; // 0 ~ 11이라 +1해줘야 함
+                if (month < 10) {
+                    month = "0" + month;
+                } else {
+                    month = month + "";
+                }
+
+                var day = date.getDate();
+                if (day < 10) {
+                    day = "0" + day;
+                } else {
+                    day = day + "";
+                }
+
+                var result = year + "/" + month + "/" + day;
+
+                return result;
+            },
+            fnDateChange() {
+                console.log("fnDateChange");
             }
         },
         mounted() {
-            this.fnGetNormalSellList();
+            this.fnGetGroupSellList();
         },
     });
     app.mount("#app");
