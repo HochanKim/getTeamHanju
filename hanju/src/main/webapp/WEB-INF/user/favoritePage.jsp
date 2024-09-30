@@ -4,29 +4,43 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/testCss.css" />
+    <link rel="stylesheet" href="../../css/userCss/favoritePage.css"/>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
     <title>favorite</title>
   </head>
   <body>
     <div id="app">
       <div id="container">
-        <div>찜목록</div>
-        <div class="item" v-for="(item, index) in favoriteList" :key="index">
-          <div class="imgBox">
-            <img :src="item.filePath" />
+        <div id="contents">
+          <div class="tit">
+            <h2>찜목록</h2>
           </div>
-          <div>
-            {{ item.type == "T" ? "일반 구매 상품" : "픽업 구매 상품" }}
+          <div class="inside">
+            <table class="item">
+            <tr>
+              <th>상품정보</th>
+              <th>판매가</th>
+              <th>선택</th>
+            </tr>
+            <tr v-for="item in favoriteList">
+              <td class="product">
+                <div class="productInfo">
+                  <a @click="fnDetailPage(item.sellId,item.productId)" class="thum"><img :src="item.filePath"></a>
+                  <span>
+                    <a @click="fnDetailPage(item.sellId,item.productId)" class="productName">{{item.productName}}</a>
+                  </span>
+                </div>
+              </td>
+              <td class="price"><strong>{{item.price}}</strong></td>
+              <td class="state">
+                <p>{{ item.type == "T" ? "일반 구매 상품" : "픽업 구매 상품" }}</p>
+                <button @click="fnItemDelete(item.productId)">삭제</button>
+              </td>
+            </tr>
+            </table>
           </div>
-          <div>{{ item.productName }}</div>
-          <div>{{ item.price }}</div>
-          <div>찜한 날짜: {{ item.cDateTime }}</div>
-          <button @click="fnGoToDetailBoard(item.fkId,item.type)">
-            상세 페이지 가기
-          </button>
-          <button @click="fnItemDelete(item.productId)">찜목록에서 제거</button>
         </div>
       </div>
     </div>
@@ -41,35 +55,82 @@ pageEncoding="UTF-8"%>
       };
     },
     methods: {
-      async fnGetFavoriteItemList() {
-        const url = "getFavoriteItemList.dox";
-        const submitForm = {
-          userId: this.userId,
-        };
-        const res = await axios.get(url, { params: submitForm });
-        this.favoriteList = res.data.list;
-        console.log(res.data);
+      fnGetFavoriteItemList() {
+        var self = this;
+
+          var nparmap = {
+            userId: self.userId
+          };
+        
+          $.ajax({
+            url: "getFavoriteItemList.dox",
+            dataType: "json",
+            type: "GET",
+            data: nparmap,
+            success: function (data) {
+              console.log(data);
+              self.favoriteList = data.list;
+              
+            }
+          });
       },
-      fnGoToDetailBoard(fkId, type) {
-        if (type == "T") {
-          location.href = `/details/details.do?id=\${fkId}`;
-        } else if (type == "W") {
-          location.href = `/details/detailsPickup.do?id=\${fkId}`;
+
+      fnDetailPage(sellId,productId) {
+        console.log(productId);
+      
+        if(!sellId){
+        location.href = `/details/detailsPickup.do?id=\${productId}`;
+      }else {
+          location.href = `/details/details.do?id=\${sellId}`;
         }
       },
-      async fnItemDelete(productId) {
-        if (!confirm("찜목록에서 제거 하시겠습니까?")) {
+
+      fnGetFavoriteItemList() {
+        var self = this;
+
+          var nparmap = {
+            userId: self.userId
+          };
+        
+          $.ajax({
+            url: "getFavoriteItemList.dox",
+            dataType: "json",
+            type: "GET",
+            data: nparmap,
+            success: function (data) {
+              console.log(data);
+              self.favoriteList = data.list;
+              
+            }
+          });
+      },
+
+      fnItemDelete(productId) {
+        var self = this;
+
+          var nparmap = {
+            userId: self.userId,
+            productId: productId,
+          };
+
+        if (!confirm("찜 상품을 삭제하시겠습니까?")) {
           return;
+        }else{
+          alert("삭제되었습니다.")
         }
-        const url = "deleteFavoriteItem.dox";
-        const submitForm = {
-          userId: this.userId,
-          productId: productId,
-        };
-        const res = await axios.post(url, submitForm);
-        if (res.data.status == "success") {
-          this.fnGetFavoriteItemList();
-        }
+
+        $.ajax({
+            url: "deleteFavoriteItem.dox",
+            dataType: "json",
+            type: "POST",
+            data: nparmap,
+            success: function (data) {
+              console.log(data);
+              self.fnGetFavoriteItemList();
+              
+              
+            }
+          });
       },
     },
     mounted() {

@@ -11,4 +11,5 @@ public class Favorite {
     private String productId;
     private String filePath;
     private String fkId;
+    private String sellId;
 }
