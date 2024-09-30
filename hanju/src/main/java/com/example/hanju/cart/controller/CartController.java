@@ -30,8 +30,34 @@ public class CartController {
         return "cart/cartPayment";
     }
     @RequestMapping("cart/directPayment.do")
-    public String directPayment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
+    public String directPayment(Model model, @RequestParam("id") String id,
+                                @RequestParam("dis") String dis,
+                                @RequestParam("cnt") String cnt,
+                                @RequestParam("kind") String kind) throws Exception{
         model.addAttribute("userId",session.getAttribute("sessionId"));
+        model.addAttribute("id",id);
+        model.addAttribute("cnt",cnt);
+        model.addAttribute("kind",kind);
+        model.addAttribute("dis",dis);
         return "cart/directPayment";
     }
+    @RequestMapping("cart/pickupPayment.do")
+    public String pickupPayment(Model model, @RequestParam("pId") String pId,
+                                @RequestParam("sId") String sId,
+                                @RequestParam("cnt") String cnt,
+                                @RequestParam("date") String date) throws Exception{
+        model.addAttribute("userId",session.getAttribute("sessionId"));
+        model.addAttribute("pId",pId);
+        model.addAttribute("cnt",cnt);
+        model.addAttribute("date",date);
+        model.addAttribute("sId",sId);
+        return "cart/pickupPayment";
+    }
+    @RequestMapping("cart/subPayment.do")
+    public String subPayment(Model model, @RequestParam("subId") String subId) throws Exception{
+        model.addAttribute("userId",session.getAttribute("sessionId"));
+        model.addAttribute("subId",subId);
+        return "cart/subPayment";
+    }
+
 }

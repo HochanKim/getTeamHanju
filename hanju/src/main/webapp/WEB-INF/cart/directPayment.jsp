@@ -26,23 +26,25 @@ pageEncoding="UTF-8"%>
             </div>
             <button @click="addrChange">주소 변경</button>
           </div>
-
           <div class="연락처">
             <div>연락처</div>
             <div>{{ userInfo.phone }}</div>
           </div>
         </div>
         <div class="가격정보">
-          <div>제품들</div>
-          <span
-            class="제품항목"
-            v-for="(item, index) in cartNameList"
-            :key="index"
-            >{{ item }}</span
-          >
+          <div class="제품 이름">
+            <div>제품이름</div>
+            <div>{{ info.productName }}</div>
+            <div>수량</div>
+            <div>{{ cnt }}</div>
+          </div>
           <div class="원래가격">
             <div>원래가격</div>
             <div>{{ sumPrice }}</div>
+          </div>
+          <div class="할인율">
+            <div>할인율</div>
+            <div>{{ dis }}%</div>
           </div>
           <div class="할인된 가격">
             <div>할인된 진짜 가격</div>
@@ -75,11 +77,15 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
+        id: "${id}",
+        cnt: "${cnt}",
+        kind: "${kind}",
+        dis: "${dis}",
+        info: {},
         sumPrice: "",
         discountPrice: "",
         userInfo: "",
         usePoint: 0,
-        cartNameList: [],
         userId: "",
       };
     },
@@ -105,16 +111,55 @@ pageEncoding="UTF-8"%>
           this.usePoint = this.userInfo.point;
         }
       },
-      fnInit() {},
+      async fnInit() {
+        const url = "productInfo.dox";
+        const res = await axios.get(url, { params: { itemId: this.id } });
+        const item = res.data.item;
+        this.info = item;
+        this.sumPrice = item.price * this.cnt;
+        this.discountPrice = (this.sumPrice * (100 - this.dis)) / 100;
+      },
       fnPayment() {
-        const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`;
-        requestPay(item, realPrice, () => {
-          this.fnSuccessPayment(itemList);
+        const itemName = this.info.productName;
+        const usePoint = parseInt(this.usePoint, 10);
+        const realPrice = this.discountPrice - usePoint;
+        requestPay(this.info.productName + `(\${this.cnt})`, realPrice, () => {
+          this.fnSuccessPayment();
         });
       },
-      fnSuccessPayment(list) {
-        console.log(list);
-        alert("결제완료");
+      async fnSuccessPayment() {
+        const url = "directPayment.dox";
+        const submitForm = {
+          point: this.usePoint,
+          userId: this.userId,
+          count: this.cnt,
+          productId: this.id,
+          kind: "N",
+        };
+        const res = await axios.post(url, submitForm);
+        if (res.data.status == "success") {
+          ("결제가 완료 되었습니다.");
+          location.href = "/user/orderInfo.do";
+        }
+      },
+      async fnGetUserInfo() {
+        const userUrl = "/user/getUserInfo.dox";
+        const res = await axios.get(userUrl, {
+          params: { userId: this.userId },
+        });
+        const user = res.data.userInfo;
+        this.userInfo = {
+          point: user.point,
+          address: {
+            roadNum: user.zipNo,
+            road: user.roadAddrPart1,
+            detail: user.addrDetail,
+          },
+          name: user.userName,
+          phone: user.phone,
+        };
+        console.log(this.userInfo);
+        console.log(this.subId);
       },
     },
     mounted() {
@@ -125,6 +170,7 @@ pageEncoding="UTF-8"%>
       }
       this.userId = "${userId}";
       this.fnInit();
+      this.fnGetUserInfo();
     },
   });
   app.mount("#app");

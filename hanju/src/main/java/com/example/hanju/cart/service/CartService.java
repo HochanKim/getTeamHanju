@@ -11,5 +11,7 @@ public interface CartService {
     Map<String,Object> cartSumPrice(List<String> list);
     Map<String,Object> getCartName(List<String> list);
     Map<String,Object> cartPayment(Map<String, Object> map);
-
+    Map<String,Object> subPayment(Map<String, Object> map);
+    Map<String,Object> selectItem(Map<String,Object> map);
+    Map<String,Object> directPayment(Map<String,Object> map);
 }

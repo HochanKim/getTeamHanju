@@ -4,6 +4,7 @@ import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.cart.mapper.CartMapper;
 import com.example.hanju.cart.model.entity.CartEntity;
 import com.example.hanju.cart.model.dto.CartCheckDto;
+import com.example.hanju.main.mapper.MainMapper;
 import com.example.hanju.user.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class CartServiceImpl implements CartService {
     CartMapper cartMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    MainMapper mainMapper;
 
     @DbExceptionHandle
     @Override
@@ -187,7 +190,31 @@ public class CartServiceImpl implements CartService {
                 cartMapper.addCartBill(result);
             }
             cartMapper.cartItemDelete(result);
+            result.clear();
         }
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> subPayment(Map<String, Object> map) {
+        Map<String,Object> result = new HashMap<>();
+        cartMapper.subPayment(map);
+        result.put("status","success");
+        return result;
+    }
+    @Override
+    public Map<String,Object> selectItem(Map<String,Object> map) {
+        Map<String,Object> result = new HashMap<>();
+        result.put("item",mainMapper.selectProduct(map));
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> directPayment(Map<String, Object> map) {
+        Map<String,Object> result = new HashMap<>();
+        cartMapper.directPayment(map);
+        userMapper.pointChange(map);
+        result.put("status","success");
         return result;
     }
 

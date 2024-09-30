@@ -26,4 +26,6 @@ public interface CartMapper {
     List<String> getCartName(Map<String,Object> map);
     void addBill(CartEntity cart);
     void addCartBill(Map<String,Object> map);
+    void subPayment(Map<String,Object> map);
+    void directPayment(Map<String,Object> map);
 }

@@ -50,7 +50,34 @@
 		LEFT JOIN HANJU_IMAGE I ON I.FK_ID = C.COMMENT_ID
 		WHERE (C.BILL_ID = #{sellId}) OR (C.BILL_ID = #{pickupId})
 	</select>
-
+	<select id="getSubscribe" parameterType="hashmap" resultType="Subscribe">
+		SELECT S.SUBSCRIBE_ID, S.TITLE, S.DISCOUNT, S.CDATETIME, S.ARRIVE_DATE, P.PRICE
+		FROM HANJU_SUBSCRIBE S
+		INNER JOIN
+		(SELECT S.SUBSCRIBE_ID,SUM(P.PRICE) PRICE
+		FROM HANJU_SUBSCRIBE S
+		INNER JOIN HANJU_SUBSCRIBE_ITEM SI ON SI.SUBSCRIBE_ID = S.SUBSCRIBE_ID
+		INNER JOIN HANJU_PRODUCT P ON P.PRODUCT_ID = SI.PRODUCT_ID
+		GROUP BY S.SUBSCRIBE_ID) P ON P.SUBSCRIBE_ID = S.SUBSCRIBE_ID
+		WHERE S.SUBSCRIBE_ID = #{subId}
+	</select>
+	<select id="getSubscribeItem" parameterType="hashmap" resultType="Product">
+		SELECT *
+		FROM HANJU_SUBSCRIBE_ITEM SI
+		INNER JOIN HANJU_PRODUCT HP ON HP.PRODUCT_ID = SI.PRODUCT_ID
+		INNER JOIN HANJU_IMAGE HI ON HI.FK_ID = HP.PRODUCT_ID
+		WHERE SI.SUBSCRIBE_ID = #{subId} AND HI.FILE_STATUS = 'T'
+	</select>
+	<select id="getItemImage" parameterType="hashmap" resultType="ProductSubImage">
+		SELECT FILE_PATH,FILE_STATUS
+		FROM HANJU_IMAGE
+		WHERE FK_ID = #{subId}
+	</select>
+	<select id="userSubCheck" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*)
+		FROM HANJU_SUBSCRIBE_STATUS
+		WHERE USER_ID = #{userId} AND SUBSCRIBE_ID = #{subId}
+	</select>
 
 
 </mapper>

@@ -118,13 +118,26 @@
             SELECT BILL_SEQ.NEXTVAL FROM DUAL
         </selectKey>
         INSERT
-        INTO HANJU_BILL (BILL_ID,PRODUCT_ID,PRODUCT_COUNT,USER_ID,CDATETIME,STATUS)
-        VALUES (#{billId},#{productId},#{productCount},#{userId},sysdate,'B')
+        INTO HANJU_BILL (BILL_ID,PRODUCT_ID,PRODUCT_COUNT,USER_ID,CDATETIME,STATUS,KIND)
+        VALUES (#{billId},#{productId},#{productCount},#{userId},sysdate,'B',#{kind})
     </insert>
     <insert id="addCartBill" parameterType="hashmap">
         INSERT
         INTO HANJU_PICKUP_BILL (BILL_ID,STORE_ID,PICKUP_DATE,PICKUP_STATUS)
         VALUES (#{billId},#{storeId},#{pickupDate},'B')
     </insert>
+    <insert id="subPayment" parameterType="hashmap">
+        INSERT
+        INTO HANJU_SUBSCRIBE_STATUS (SUBSCRIBE_ID,USER_ID,SUB_DATE,NEXT_SUB)
+        VALUES (#{subId},#{userId},sysdate,'Y')
+    </insert>
+    <insert id="directPayment" parameterType="hashmap">
+        INSERT
+        INTO HANJU_BILL (BILL_ID,PRODUCT_ID,PRODUCT_COUNT,USER_ID,CDATETIME,STATUS,KIND)
+        VALUES (BILL_SEQ.NEXTVAL,#{productId},#{count},#{userId},sysdate,'B',#{kind})
+    </insert>
+
+
+
 
 </mapper>

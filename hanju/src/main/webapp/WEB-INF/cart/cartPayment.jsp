@@ -120,7 +120,11 @@ pageEncoding="UTF-8"%>
             const user = data.userInfo;
             this.userInfo = {
               point: user.point,
-              address: user.address,
+              address: {
+                roadNum: user.zipNo,
+                road: user.roadAddrPart1,
+                detail: user.addrDetail,
+              },
               name: user.userName,
               phone: user.phone,
             };
@@ -164,11 +168,10 @@ pageEncoding="UTF-8"%>
               }
               return;
             }
-            // const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`;
-            // requestPay(item, realPrice, () => {
-            //   this.fnSuccessPayment(itemList, point, userId);
-            // });
-            this.fnSuccessPayment(itemList, point, userId);
+            const item = `\${this.cartNameList[0]} 외 \${this.cartNameList.length-1}품목`;
+            requestPay(item, realPrice, () => {
+              this.fnSuccessPayment(itemList, point, userId);
+            });
           })
           .catch((error) => {
             alert("서버이상");
