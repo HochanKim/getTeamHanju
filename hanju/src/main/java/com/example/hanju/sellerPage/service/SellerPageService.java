@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public interface SellerPageService {
 
-	HashMap<String, Object> test(HashMap<String, Object> map);
-	
 	HashMap<String, Object> registerProduct(HashMap<String, Object> map);
 	HashMap<String, Object> uploadProductImg(HashMap<String, Object> map);
 	HashMap<String, Object> getProductList(HashMap<String, Object> map);
@@ -17,4 +15,10 @@ public interface SellerPageService {
 	HashMap<String, Object> registerSell(HashMap<String, Object> map);
 	HashMap<String, Object> getProductCodeList(HashMap<String, Object> map);
 	HashMap<String, Object> registerGroupSell(HashMap<String, Object> map);
+	HashMap<String, Object> getNormalSellList(HashMap<String, Object> map);
+	HashMap<String, Object> modifyNormalSell(HashMap<String, Object> map);
+	HashMap<String, Object> getGroupSellList(HashMap<String, Object> map);
+	HashMap<String, Object> modifyGroupSell(HashMap<String, Object> map);
+	HashMap<String, Object> getSellerMainInfo(HashMap<String, Object> map);
+	
 }

@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-  <!DOCTYPE html>
-  <html>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/css/details.css" />
@@ -19,8 +19,13 @@
           <div class="image-container">
             <img :src="img.productImage[currentImageIndex]" class="thumb-img" />
             <div class="dots">
-              <span v-for="(image, index) in img.productImage" :key="index" class="dot"
-                :class="{ active: currentImageIndex === index }" @click="setCurrentImage(index)"></span>
+              <span
+                v-for="(image, index) in img.productImage"
+                :key="index"
+                class="dot"
+                :class="{ active: currentImageIndex === index }"
+                @click="setCurrentImage(index)"
+              ></span>
             </div>
           </div>
           <div class="thumb-content">
@@ -39,7 +44,12 @@
               <button @click="decrease" class="q-control font-size2">-</button>
             </div>
             <div>
-              <input type="text" class="input-box font-size2" @input="inputNumber" v-model="cnt" />
+              <input
+                type="text"
+                class="input-box font-size2"
+                @input="inputNumber"
+                v-model="cnt"
+              />
             </div>
             <div>
               <button @click="increase" class="q-control font-size2">+</button>
@@ -53,7 +63,9 @@
             </button>
           </div>
           <div>
-            <button class="side-button font-size2">바로 구매하기</button>
+            <button class="side-button font-size2" @click="fnPayment">
+              바로 구매하기
+            </button>
           </div>
         </div>
         <div class="box" style="clear: both">
@@ -205,7 +217,13 @@
           <div v-for="list in comment">
             <div class="review-box">
               <div class="review-name">{{ list.userName }}</div>
-              <div style=" display: flex; justify-content: flex-end; margin-right: 10px;">
+              <div
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-right: 10px;
+                "
+              >
                 <div class="review">{{ info.productName }}</div>
                 <div class="img-grade review">
                   <div v-if="list.grade == 0">
@@ -361,6 +379,9 @@
               alert("서버 오류");
             }
           },
+          fnPayment() {
+            location.href = `/cart/directPayment.do?id=\${this.info.productId}&cnt=\${this.cnt}&kind=N&dis=\${this.info.discount}`;
+          },
         },
         mounted() {
           this.userId = "${userId}";
@@ -379,5 +400,4 @@
       app.mount("#app");
     </script>
   </body>
-
-  </html>
+</html>

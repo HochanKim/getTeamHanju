@@ -4,33 +4,29 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/sellerPage/registerNormalSell.css" />
+    <link rel="stylesheet" href="../../css/sellerPage/modifyNormalSell.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
-    <!-- Quill CDN -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <title>첫번째 페이지</title>
 </head>
 
 <body>
-    <div id="app">
-        <jsp:include page="../mainPage/header.jsp"></jsp:include>
-        <div id="main">
-            <jsp:include page="sellerSideBar.jsp"></jsp:include>
+    <jsp:include page="../mainPage/header.jsp"></jsp:include>
+    <div id="main">
+        <jsp:include page="sellerSideBar.jsp"></jsp:include>
+        <div id="app">
             <div id="container">
-                <h3>일반 판매 등록</h3>
+                <h3>판매글 수정</h3>
                 <hr>
                 <table>
                     <tr>
-                        <th>제품</th>
+                        <th>판매글</th>
                         <td>
-                            <select v-model="productId">
-                                <option v-for="item in productList" :value="item.productId">
+                            <select v-model="sellIndex" @change="fnSetNormalSellInfo">
+                                <option v-for="(item, index) in normalSellList" :value="index">
                                     {{item.productName}}
                                 </option>
                             </select>
-                            <!-- <input id="searchBox" type="text" placeholder="검색"> -->
                         </td>
                     </tr>
                     <tr>
@@ -49,18 +45,25 @@
                     </tr>
                     <tr>
                         <th>
-                            상세 설명
+                            상세 설명 이미지
                         </th>
-                        <td>
-                            <div id="editor"></div>
+                        <td class="imageUploaderLine">
+                            <div class="imgBox">
+                                <img v-if="detailImgUrl == null" class="img" src="../../image/defaultImg.png"> 
+                                <img v-else class="img" :src="detailImgUrl">
+                            </div>
+                            <label class="imgUploadBtn">
+                                등록하기
+                                <input type="file" @change="fnImgChange" style="visibility: hidden;">
+                            </label>
                         </td>
                     </tr>
                 </table>
-                <button @click="fnRegisterSell">게시하기</button>
+                <button @click="fnModifyNormalSell">게시하기</button>
             </div>
         </div>
-        <jsp:include page="../mainPage/footer.jsp"></jsp:include>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
 </body>
 
 </html>
@@ -72,30 +75,135 @@
                 userId : "${sessionId}",
                 userStatus : "${sessionStatus}",
 
-                quill : "",
+                sellIndex : null,
+                normalSellList : [],
+
+                productId : null,
+                sellId : null,
+                discount : 0,
+                description : null,
+                detailImgId : null,
+                detailImgUrl : null,
+
+                isImageChange : false,
+                detailImg : null,
+                beforeImgId : null,
+                beforeImgUrl : null,
             }
         },
         methods: {
-            
+            fnGetNormalSellList() {
+                $.ajax({
+					url:"getNormalSellList.dox",
+					dataType:"json",
+					type : "POST", 
+					data : { userId : this.userId },
+					success : (data) => {
+						console.log(data);
+                        this.normalSellList = data.list;
+					}
+				});
+            },
+            fnSetNormalSellInfo() {
+                this.sellId       = this.normalSellList[ this.sellIndex ].sellId;
+                this.productId    = this.normalSellList[ this.sellIndex ].productId
+                this.discount     = this.normalSellList[ this.sellIndex ].discount;
+                this.description  = this.normalSellList[ this.sellIndex ].description;
+                this.detailImgId  = this.normalSellList[ this.sellIndex ].imageId;
+                this.detailImgUrl = this.normalSellList[ this.sellIndex ].filePath;
+            },
+            fnImgChange(event) {
+                this.isImageChange = true;
+
+                this.fnBackUpImg();
+                
+                this.detailImg = event.target.files[ 0 ];
+                this.detailImgUrl = URL.createObjectURL(this.detailImg);
+            },
+            fnBackUpImg() {
+                this.beforeImgId  = this.detailImgId;
+                this.beforeImgUrl = this.detailImgUrl;
+            },
+            fnModifyNormalSell() {
+                $.ajax({
+					url:"modifyNormalSell.dox",
+					dataType:"json",
+					type : "POST", 
+					data : {
+                        sellId : this.sellId,
+                        discount : this.discount,
+                        description : this.description
+                    },
+					success : (data) => {
+						console.log(data);
+                        this.fnUploadImg();
+					}
+				});
+            },
+            fnUploadImg() {
+                if (this.isImageChange) {
+                    this.fnDeleteBeforeImg();
+                    // 원래 sellId여야하나 현재 데이터베이스가 productId로 되어있다.
+                    // 나중에 수정해야함.
+                    this.fnUploadImgToServer(this.productId, this.detailImg, "D");
+                } else {
+                    this.fnInit();
+                }
+            },
+            fnDeleteBeforeImg() {
+                $.ajax({
+					url:"deleteBeforeImg.dox",
+					dataType:"json",
+					type : "POST", 
+					data : {
+                        imageId  : this.beforeImgId,
+                        imageUrl : this.beforeImgUrl
+                    },
+					success : (data) => {
+						console.log(data);
+					}
+				});
+            },
+            fnUploadImgToServer(sellId, imageFile, imageCode) {
+                const formData = new FormData();
+                formData.append("productId", sellId);
+                formData.append("imageCode", imageCode);
+                formData.append("productImg", imageFile);
+
+                $.ajax({
+					url:"uploadProductImg.dox",
+					dataType:"json",
+					type : "POST",
+					data : formData,
+                    processData : false,
+                    contentType : false,
+					success : () => {
+                        alert("게시되었습니다!");
+                        this.fnInit();
+					},
+                    error : function(jqXHR, textStatus, errorThrown) {
+                        console.error('업로드 실패!', textStatus, errorThrown);
+                    }
+				});
+            },
+            fnInit() {
+                this.sellIndex = null;
+                this.fnGetNormalSellList();
+
+                this.sellId = null;
+                this.discount = null;
+                this.description = null;
+                this.detailImgId = null;
+                this.detailImgUrl = null;
+
+                this.isImageChange = false;
+                this.detailImg = null;
+                this.beforeImgId = null;
+                this.beforeImgUrl = null;
+            }
         },
         mounted() {
-            this.fnGetProductList();
-
-            this.quill = new Quill('#editor', {
-                theme: 'snow',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                        ['bold', 'italic', 'underline'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        ['link', 'image'],
-                        ['clean']
-                    ]
-                }
-            });
-            this.quill.on('text-change', () => {
-                this.contents = this.quill.root.innerHTML;
-            });
+            this.fnGetNormalSellList();
         },
     });
     app.mount("#app");

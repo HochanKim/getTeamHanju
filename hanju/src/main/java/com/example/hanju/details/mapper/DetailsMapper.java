@@ -2,6 +2,7 @@ package com.example.hanju.details.mapper;
 
 import com.example.hanju.details.model.Comment;
 import com.example.hanju.details.model.Details;
+import com.example.hanju.details.model.ProductSubImage;
 import com.example.hanju.details.model.Subscribe;
 import com.example.hanju.main.model.Product;
 import org.apache.ibatis.annotations.Mapper;
@@ -22,6 +23,7 @@ public interface DetailsMapper {
     List<Details> countGroup(Map<String, Object> map);
     void insertGroup(HashMap<String, Object> map);
     Subscribe getSubscribe(Map<String, Object> map);
-    List<String> getSubscribeItem(Map<String, Object> map);
-
+    List<Product> getSubscribeItem(Map<String, Object> map);
+    List<ProductSubImage> getItemImage(Map<String, Object> map);
+    int userSubCheck(Map<String, Object> map);
 }

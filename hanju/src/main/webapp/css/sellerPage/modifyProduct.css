@@ -16,8 +16,12 @@
 
 /* ========================== */
 
-#main #container {
+#main #app {
     width: 50%;
+}
+
+#app #container {
+    width: 100%;
     padding: 16px;
     font-size: 14px;
 }

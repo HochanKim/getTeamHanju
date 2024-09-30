@@ -138,7 +138,7 @@
                 var year = date.getFullYear() + "";
                 year = year.substr(2, 2);
 
-                var month = date.getMonth();
+                var month = date.getMonth() + 1; // 0 ~ 11이라 +1해줘야 함
                 if (month < 10) {
                     month = "0" + month;
                 } else {

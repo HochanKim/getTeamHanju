@@ -81,5 +81,28 @@ public class CartApiController {
         Map<String, Object> result = cartService.cartPayment(map);
         return new Gson().toJson(result);
     }
+    @PostMapping(value = "cart/subPayment.dox", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String subPayment(Model model, @RequestBody Map<String, Object> map) throws Exception {
+        Map<String, Object> result = cartService.subPayment(map);
+        return new Gson().toJson(result);
+    }
+    @GetMapping("cart/productInfo.dox")
+    @ResponseBody
+    public String productInfo(Model model, @RequestParam Map<String, Object> map) throws Exception {
+        System.out.println("주목" +map);
+        Map<String, Object> result = cartService.selectItem(map);
+        return new Gson().toJson(result);
+    }
+    @PostMapping("cart/directPayment.dox")
+    @ResponseBody
+    public String directPayment(Model model, @RequestBody Map<String, Object> map) throws Exception {
+        Map<String, Object> result = cartService.directPayment(map);
+        return new Gson().toJson(result);
+    }
+
+
+
+
 
 }

@@ -4,7 +4,9 @@ import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.details.mapper.DetailsMapper;
 import com.example.hanju.details.model.Comment;
 import com.example.hanju.details.model.Details;
+import com.example.hanju.details.model.ProductSubImage;
 import com.example.hanju.details.model.Subscribe;
+import com.example.hanju.main.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,10 +79,24 @@ public class DetailsServiceImpl implements DetailsService {
 
 	@DbExceptionHandle
 	@Override
-	public Map<String,Object> getSubscribe(Map<String,Object> map){
+	public Map<String,Object> getSubscribeItem(Map<String,Object> map){
 		Map<String,Object> result = new HashMap<>();
-		Subscribe item = detailsMapper.getSubscribe(map);
-		List<String> productList = detailsMapper.getSubscribeItem(map);
+		Subscribe subscribe = detailsMapper.getSubscribe(map);
+		List<Product> productList = detailsMapper.getSubscribeItem(map);
+		List<ProductSubImage> imgList = detailsMapper.getItemImage(map);
+		result.put("subItem",subscribe);
+		result.put("subImgList",imgList);
+		result.put("productList",productList);
+		return result;
+	}
+	@DbExceptionHandle
+	@Override
+	public Map<String,Object> userSubCheck(Map<String,Object> map){
+		System.out.println("여기");
+		System.out.println(map);
+		int flg = detailsMapper.userSubCheck(map);
+		Map<String,Object> result = new HashMap<>();
+		result.put("flg",flg);
 		return result;
 	}
 

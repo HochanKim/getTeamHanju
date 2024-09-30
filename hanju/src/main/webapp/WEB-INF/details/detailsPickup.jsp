@@ -28,8 +28,13 @@ pageEncoding="UTF-8"%>
           <div class="image-container">
             <img :src="img.productImage[currentImageIndex]" class="thumb-img" />
             <div class="dots">
-              <span v-for="(image, index) in img.productImage" :key="index" class="dot"
-                :class="{ active: currentImageIndex === index }" @click="setCurrentImage(index)"></span>
+              <span
+                v-for="(image, index) in img.productImage"
+                :key="index"
+                class="dot"
+                :class="{ active: currentImageIndex === index }"
+                @click="setCurrentImage(index)"
+              ></span>
             </div>
           </div>
           <div class="thumb-content">
@@ -74,7 +79,8 @@ pageEncoding="UTF-8"%>
                   <button
                     @click="pickUpStoreSelect(info.storeId)"
                     class="modal-button"
-                    v-model="storeId">
+                    v-model="storeId"
+                  >
                     선택
                   </button>
                 </li>
@@ -257,7 +263,13 @@ pageEncoding="UTF-8"%>
           <div v-for="list in comment">
             <div class="review-box">
               <div class="review-name">{{ list.userName }}</div>
-              <div style=" display: flex; justify-content: flex-end; margin-right: 10px;">
+              <div
+                style="
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-right: 10px;
+                "
+              >
                 <div class="review">{{ info.productName }}</div>
                 <div class="img-grade review">
                   <div v-if="list.grade == 0">
@@ -285,9 +297,9 @@ pageEncoding="UTF-8"%>
             <div class="review-box4">
               <div class="review-box2">{{ list.content }}</div>
               <div class="review-box3">
-                <img :src="list.filePath" class="review-img"/>
+                <img :src="list.filePath" class="review-img" />
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>
@@ -325,6 +337,13 @@ pageEncoding="UTF-8"%>
           VueDatePicker,
         },
         methods: {
+          fnPayment() {
+            const pId = "여기 제품 아이디";
+            const sId = " 여기 스토어 아이디";
+            const date = "여기 날짜";
+            const cnt = "여기 수량";
+            location.href = `/cart/directPayment.do?pId=\${pId}&cnt=\${cnt}&sId=\${sId}&date=\${date}`;
+          },
           fnGetList() {
             var self = this;
             const asdf = {

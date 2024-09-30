@@ -67,6 +67,7 @@ public String detailGroup(Model model,@RequestParam String id) throws Exception{
 		System.out.println("controller" + result);
 		return new Gson().toJson(result);
 	}
+
 	@RequestMapping(value = "details/detailsGroup.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String searchDetailsGroup(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -78,7 +79,14 @@ public String detailGroup(Model model,@RequestParam String id) throws Exception{
 	@GetMapping(value = "details/getSubscribeItem.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getSubscribeItem(Model model, @RequestParam Map<String, Object> map) throws Exception {
-		Map<String, Object> result = detailsService.getSubscribe(map);
+		Map<String, Object> result = detailsService.getSubscribeItem(map);
+		return new Gson().toJson(result);
+	}
+	@GetMapping("details/userSubCheck.dox")
+	@ResponseBody
+	public String userSubCheck(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		System.out.println(map);
+		Map<String, Object> result = detailsService.userSubCheck(map);
 		return new Gson().toJson(result);
 	}
 
