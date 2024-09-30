@@ -34,8 +34,10 @@ public interface UserMapper {
     List<UserModel> selectUser(HashMap<String, Object> map);
 
     void pointChange(Map<String,Object> map);
-
+    //찜목록
     List<Favorite> getFavoriteItemList(Map<String,Object> map);
+    //찜삭제
     void deleteFavoriteItem(Map<String,Object> map);
+    //주문목록
 	List<OrderItem>  getOrderList(Map<String,Object> map);
 }

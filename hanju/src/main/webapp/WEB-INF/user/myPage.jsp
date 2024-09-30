@@ -78,7 +78,7 @@ pageEncoding="UTF-8"%>
                         </li>
                         <li>
                             <img src="../../image/heart_plus.png">
-                            <a href="">
+                            <a href="../user/favorite.do">
                                 <strong>관심상품</strong>
                                 <p>찜하신 상품의 목록을 보여드립니다.</p>
                             </a>
