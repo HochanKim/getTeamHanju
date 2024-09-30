@@ -21,23 +21,22 @@ pageEncoding="UTF-8"%>
     <div id="app">
       <section class="selectSection">
         <!-- 카테고리 버튼 클릭 (1) -->
-        <!-- 카테고리 버튼 클릭 (1) -->
         <div class="productsListSelect">
-          <a href="productList.do">
-              <span>전체상품</span>
-          </a>
-          <a href="newProducts.do">
-              <span class="selected">신상품</span>
-          </a>
-          <a href="bestSeller.do">
-              <span>베스트</span>
-          </a>
+            <a href="productList.do">
+                <span>전체상품</span>
+            </a>
+            <a href="newProducts.do">
+                <span>신상품</span>
+            </a>
+            <a href="bestSeller.do">
+                <span class="selected">베스트</span>
+            </a>
         </div>
       </section>
       <!-- 상품 리스트 영역 -->
       <section class="productContainer">
         <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
-        <ul v-for="item in newProducts">
+        <ul v-for="item in bestProducts">
           <li class="productList">
             <a @click="fnDetailPage(item.sellId)">
               <div>
@@ -63,7 +62,7 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
-        newProducts : [],
+        bestProducts : [],
       };
     },
     methods: {
@@ -71,12 +70,12 @@ pageEncoding="UTF-8"%>
             var self = this;
             var paramap = {};
             $.ajax({
-                url: "newProducts.dox",
+                url: "bestSeller.dox",
                 dataType: "json",
                 type: "POST",
                 data: [],
                 success: (data) => {
-                  self.newProducts = data.newList;
+                    self.bestProducts = data.best;
                 },
             });
         },

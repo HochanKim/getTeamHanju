@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
               <a href="newProducts.do">
                   <span>신상품</span>
               </a>
-              <a href="javascript:void(0);">
+              <a href="bestSeller.do">
                   <span>베스트</span>
               </a>
             </div>
@@ -128,13 +128,13 @@ pageEncoding="UTF-8"%>
         products : [],
         codeList : [],
         selectCodes : [],
-        alcohol : "",     // 알콜 도수
-        sweet : "",       // 당도
-        sour : "",        // 산미
-        body : "",        // 바디감
-        capacity : "",    // 용량
-        material : "",    // 원료
-        madeBy : ""       // 생산지
+        alcohol : "",       // 알콜 도수
+        sweet : "",         // 당도
+        sour : "",          // 산미
+        body : "",          // 바디감
+        capacity : "",      // 용량
+        material : "",      // 원료
+        madeBy : "",        // 생산지
       };
     },
     methods: {
@@ -164,7 +164,7 @@ pageEncoding="UTF-8"%>
             body : self.body,
             capacity : self.capacity,
             material : self.material,
-            madeBy : self.madeBy
+            madeBy : self.madeBy,
           };
         } else {
           paramap = {
@@ -174,7 +174,7 @@ pageEncoding="UTF-8"%>
             body : self.body,
             capacity : self.capacity,
             material : self.material,
-            madeBy : self.madeBy
+            madeBy : self.madeBy,
           };
         }
         $.ajax({
@@ -200,7 +200,7 @@ pageEncoding="UTF-8"%>
       },
       fnDetailPage(sellId) {
         location.href = `/details/details.do?id=\${sellId}`;
-      }
+      },
     },
     mounted() {
       var self = this;

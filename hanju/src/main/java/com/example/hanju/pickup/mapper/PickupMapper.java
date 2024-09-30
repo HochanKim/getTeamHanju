@@ -16,9 +16,15 @@ public interface PickupMapper {
     
     // 와인 픽업 코드 리스트
     List<PickupBoardDto> selectCodeList(HashMap<String,Object> map);
+    
+    // 와인 픽업 신상 리스트
+    List<PickupBoardDto> getNewPickUpWineList(HashMap<String,Object> map);
 
     // 품종 리스트
     List<PickupBoardDto> getMaterialList(HashMap<String,Object> map);
     // 원산지 리스트
     List<PickupBoardDto> getMadeByList(HashMap<String,Object> map);
+
+    // 베스트 셀러
+	List<PickupBoardDto> getBestSellerWine(HashMap<String, Object> map);
 }

@@ -28,6 +28,8 @@ public class SaleModel {
     private String filePath;		// hanju_imamge 테이블 컬럼
     private String fileOrgName;		// hanju_imamge 테이블 컬럼
     private String sellId;			// hanju_normal_sell 테이블 컬럼
+    private double grade;			// hanju_comment 테이블 컬럼
+    private double average;
     
     
 }
