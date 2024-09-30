@@ -33,9 +33,9 @@ pageEncoding="UTF-8"%>
                         <tr v-for="item in orderList">
                             <td class="product">
                                 <div class="reviewArea2">
-                                    <a @click="fnDetailPage(item.productId,item.kind)" class="thum"><img :src="item.filePath"></a>
+                                    <a @click="fnDetailPage(item.billId,item.kind)" class="thum"><img :src="item.filePath"></a>
                                     <span>
-                                    <a @click="fnDetailPage(item.productId,item.kind)" class="productName">{{item.productName}}</a>
+                                    <a @click="fnDetailPage(item.billId,item.kind)" class="productName">{{item.productName}}</a>
                                     </span>
                                 </div>
                             </td>
