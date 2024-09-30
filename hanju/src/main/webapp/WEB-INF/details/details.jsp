@@ -278,6 +278,7 @@ pageEncoding="UTF-8" %>
             boardId: "",
             contents: "",
             pickupId: "",
+            groupId : "",
             img: { productImage: [] },
             currentImageIndex: 0,
           };
@@ -288,6 +289,7 @@ pageEncoding="UTF-8" %>
             const submitForm = {
               sellId: this.boardId,
               pickupId: "",
+              groupId : ""
             };
             console.log(submitForm);
             $.ajax({

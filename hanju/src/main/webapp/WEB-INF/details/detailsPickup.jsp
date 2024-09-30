@@ -327,7 +327,8 @@ pageEncoding="UTF-8"%>
             storeId: "",
             date: new Date(),
             pickupId: "",
-            sellId: "",
+            sellId:"",
+            groupId : "",
             img: { productImage: [] },
             currentImageIndex: 0,
           };
@@ -347,7 +348,8 @@ pageEncoding="UTF-8"%>
             var self = this;
             const asdf = {
               pickupId: this.pickupId,
-              sellId: "",
+              sellId : "",
+              groupId : "",
             };
             $.ajax({
               url: "detailsPickUp.dox",

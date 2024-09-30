@@ -33,7 +33,7 @@ pageEncoding="UTF-8" %>
               <div class="pad2">{{ info.description }}</div>
               <div class="font-size">{{ info.productName }}</div>
               <div class="pad2">판매가격 :</div>
-              <div class="font-size">{{ info.price }}원</div>
+              <div class="font-size"> 원가 / 공구가 <br><del>{{info.price}}</del> / {{info.price - (info.price / 100 * info.discount)}}</div>
             </div>
           </div>
         </div>
@@ -55,15 +55,36 @@ pageEncoding="UTF-8" %>
               <button @click="increase" class="q-control font-size2">+</button>
             </div>
           </div>
+
+          <div class="line3">
+            <div class="info1">
+              <div>
+                현재/목표 <br> {{cntGroup.currentAmount}} / {{info.targetAmount}}
+              </div>
+              <div class="progressBarWrapper">
+                <div class="progressBar">
+                  <div class="progress" :style="groupSellInfo.progress"></div>
+                </div>
+              </div>
+              <div>
+                종료일 {{info.endDate}}
+              </div>
+            </div>
+            <div class="info2">
+              <div>
+                할인율 {{info.discount}}%
+              </div>
+              <div>
+                원가 / 공구가 <br>
+                <del>{{info.price}}</del> / {{info.price - (info.price / 100 * info.discount)}}
+              </div>
+            </div>
+          </div>
+
           <div class="pad font-size2">총 상품가격</div>
           <div class="font-size2">{{ sum() }}원</div>
           <div>
-            <button @click="showToastMessage" class="side-button font-size2">
-              장바구니
-            </button>
-          </div>
-          <div>
-            <button class="side-button font-size2">바로 구매하기</button>
+            <button class="side-button font-size2" @click="fnJoin">공동구매 참여하기</button>
           </div>
         </div>
         <div class="box" style="clear: both">
@@ -257,7 +278,6 @@ pageEncoding="UTF-8" %>
       </div>
 
       <!-- 토스트 메시지 요소 추가 -->
-      <div id="tost_message">장바구니에 추가되었습니다!</div>
       <div id="login_message">로그인을 해주세요!</div>
       <div id="jago_message">재고가 부족합니다. 재고 : {{ pStock }}</div>
     </div>
@@ -273,35 +293,48 @@ pageEncoding="UTF-8" %>
             cnt: 1,
             pStock: "",
             comment: [],
-            boardId: "",
+            groupId: "",
             contents: "",
             pickupId: "",
+            group: "",
+            sellId: "",
+            cntGroup: "",
             img: { productImage: [] },
             currentImageIndex: 0,
+            groupSellInfo: {
+              currentAmount: 0, // 초기값 설정
+              targetAmount: 0,  // 초기값 설정
+              progress: "width: 0%", // 초기값 설정
+            },
           };
         },
         methods: {
           fnGetList() {
             var self = this;
             const submitForm = {
-              sellId: this.boardId,
+              groupId: this.groupId,
               pickupId: "",
+              sellId: "",
             };
             console.log(submitForm);
             $.ajax({
-              url: "details.dox",
+              url: "detailsGroup.dox",
               dataType: "json",
               type: "POST",
               data: submitForm,
               success: function (data) {
-                console.log(self.info[0]);
-                self.info = data.info[0];
-                self.img = data.img;
-                console.log(self.img);
+                self.info = data.group[0];
+                self.cntGroup = data.cntGroup[0];
+                console.log(self.cntGroup);
+                self.img = data.img;;
                 self.comment = data.comment;
-                console.log(self.comment);
+                self.fnSetProgressBar();
               },
             });
+          },
+          fnSetProgressBar() {
+            const percent = Math.round((this.cntGroup.currentAmount / this.info.targetAmount) * 100);
+            this.groupSellInfo.progress = "width: " + percent + "%";
           },
           nextImage() {
             if (this.currentImageIndex < this.img.productImage.length - 1) {
@@ -332,7 +365,22 @@ pageEncoding="UTF-8" %>
             this.cnt++;
           },
           sum() {
-            return this.cnt * this.info.price;
+            return this.cnt * (this.info.price - (this.info.price / 100 * this.info.discount))
+          },
+          fnJoin() {
+            $.ajax({
+              url: "joinGroupSell.dox",
+              dataType: "json",
+              type: "POST",
+              data: {
+                groupId: this.groupId,
+                userId: this.userId
+              },
+              success: (data) => {
+                console.log(data);
+                location.href = "/market/groupSellList.do";
+              }
+            });
           },
           async showToastMessage() {
             if (this.userId == "") {
@@ -378,7 +426,8 @@ pageEncoding="UTF-8" %>
         },
         mounted() {
           this.userId = "${userId}";
-          this.boardId = "${boardId}";
+          this.groupId = "${groupId}";
+          console.log("그룹 아이디 " + this.groupId);
           this.fnGetList();
         },
         watch: {

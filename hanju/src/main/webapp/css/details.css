@@ -160,6 +160,28 @@ body, html{
     background-color: rgb(85, 139, 123); /* 활성 상태 색상 */
 }
 
+.progressBarWrapper {
+    display: inline-block;
+    width: 100%;
+    height: 20px;
+}
+.progressBar {
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.progress {
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+    background-color: rgb(85, 139, 123); 
+    border-radius: 5px;
+}
 
 /*버튼 기본 스타일링*/
 #tost_btn {

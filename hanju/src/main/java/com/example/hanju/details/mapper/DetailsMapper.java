@@ -19,6 +19,9 @@ public interface DetailsMapper {
     List<Details> selectPickUpStore(Map<String,Object> map);
     List<Details> selectPickUpProduct(Map<String,Object> map);
     List<Comment> selectComment(Map<String,Object> map);
+    List<Details> selectGroup(Map<String, Object> map);
+    List<Details> countGroup(Map<String, Object> map);
+    void insertGroup(HashMap<String, Object> map);
     Subscribe getSubscribe(Map<String, Object> map);
     List<Product> getSubscribeItem(Map<String, Object> map);
     List<ProductSubImage> getItemImage(Map<String, Object> map);
