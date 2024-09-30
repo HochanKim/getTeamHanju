@@ -349,7 +349,7 @@
             this.cnt++;
           },
           sum() {
-            return this.cnt * this.info.price;
+            return this.cnt * (this.info.price - (this.info.price / 100 * this.info.discount))
           },
           fnJoin() {
             $.ajax({
