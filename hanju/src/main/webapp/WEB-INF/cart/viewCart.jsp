@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/cartStyle.css" />
+    <link rel="stylesheet" href="/css/cart/cartStyle.css" />
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <title>cart</title>
@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div id="app">
-      <div id="container">
+      <div id="containerCart">
         <h2 class="title">장바구니</h2>
         <div class="container">
           <div id="itemContainer">
@@ -195,7 +195,6 @@ pageEncoding="UTF-8"%>
                 <div>{{ discountSum.toLocaleString() }}원</div>
               </div>
             </div>
-
             <div class="paymentBtn">
               <form action="cartPayment.do" method="post">
                 <input type="hidden" name="cartItem" :value="selectItem" />

@@ -4,8 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/payment.css" />
-    <link rel="stylesheet" href="/css/testCss.css" />
+    <link rel="stylesheet" href="/css/cart/cartStyle.css" />
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
@@ -13,59 +12,91 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div id="app">
-      <div id="container">
-        <div class="유저 정보">
-          <div class="이름">
-            <div>이름</div>
-            <div>{{ userInfo.name }}</div>
-          </div>
-          <div>
-            <div class="주소">
-              <div>배송지</div>
-              <div>{{ userInfo.address }}</div>
+      <div id="containerPayment">
+        <h2 class="title">결제</h2>
+        <div class="container">
+          <div class="itemContainer">
+            <div class="userInfo">
+              <div class="userName">
+                <div>이름</div>
+                <div>{{ userInfo.name }}</div>
+              </div>
+              <div>
+                <div class="주소">
+                  <div>배송지</div>
+                  <div>{{ userInfo.address }}</div>
+                </div>
+                <button @click="addrChange">주소 변경</button>
+              </div>
+              <div class="phone">
+                <div>연락처</div>
+                <div>{{ userInfo.phone }}</div>
+              </div>
             </div>
-            <button @click="addrChange">주소 변경</button>
+            <div class="paymentInfo">
+              <div>제품들</div>
+              <span
+                class="제품항목"
+                v-for="(item, index) in cartNameList"
+                :key="index"
+                >{{ item }}</span
+              >
+              <div class="price">
+                <div>원래가격</div>
+                <div>{{ sumPrice }}</div>
+              </div>
+              <div class="discountPrice">
+                <div>할인된 진짜 가격</div>
+                <div>{{ discountPrice }}</div>
+              </div>
+              <div class="point">
+                <div>보유 포인트</div>
+                <div>{{ userInfo.point }}</div>
+                <div>포인트 사용</div>
+                <div>
+                  <input v-model="usePoint" @input="fnPointInputCheck" />
+                </div>
+                <div>잔여 예상 포인트</div>
+                <div>{{ parseInt(userInfo.point) - parseInt(usePoint) }}</div>
+              </div>
+              <div class="최종가격">
+                <div>최종 가격</div>
+                <div>{{ discountPrice - usePoint }}</div>
+              </div>
+            </div>
           </div>
+          <div id="priceContainer">
+            <div class="priceInfo">
+              <div class="priceTitle">결제 예정 금액</div>
+              <div class="priceEtc">
+                <div class="noDiscount">
+                  <div class="priceCol">상품 금액</div>
+                  <div class="priceColl">
+                    {{ parseInt(sumPrice).toLocaleString() }} 원
+                  </div>
+                </div>
+                <div class="lastDiscountPrice">
+                  <div class="priceCol">상품 할인 금액</div>
+                  <div class="priceColl">
+                    {{ parseInt(discountPrice).toLocaleString() }} 원
+                  </div>
+                </div>
+              </div>
 
-          <div class="연락처">
-            <div>연락처</div>
-            <div>{{ userInfo.phone }}</div>
-          </div>
-        </div>
-        <div class="가격정보">
-          <div>제품들</div>
-          <span
-            class="제품항목"
-            v-for="(item, index) in cartNameList"
-            :key="index"
-            >{{ item }}</span
-          >
-          <div class="원래가격">
-            <div>원래가격</div>
-            <div>{{ sumPrice }}</div>
-          </div>
-          <div class="할인된 가격">
-            <div>할인된 진짜 가격</div>
-            <div>{{ discountPrice }}</div>
-          </div>
-          <div class="포인트">
-            <div>보유 포인트</div>
-            <div>{{ userInfo.point }}</div>
-            <div>사용 포인트</div>
-            <div>
-              <input v-model="usePoint" @input="fnPointInputCheck" />
+              <div class="lastPrice">
+                <div>
+                  {{
+                    (
+                      parseInt(discountPrice) - parseInt(usePoint)
+                    ).toLocaleString()
+                  }}원
+                </div>
+              </div>
             </div>
-            <div>잔여 예상 포인트</div>
-            <div>{{ userInfo.point - parseInt(usePoint) }}</div>
+            <div class="paymentBtn">
+              <button class="paymentButton" @click="fnPayment">결제하기</button>
+            </div>
           </div>
-          <div class="최종가격">
-            <div>최종 가격</div>
-            <div>{{ discountPrice - usePoint }}</div>
-          </div>
-        </div>
-        <div class="결제창">
-          <div>{{ discountPrice - usePoint }}원</div>
-          <button @click="fnPayment">결제하기</button>
         </div>
       </div>
     </div>
@@ -90,6 +121,9 @@ pageEncoding="UTF-8"%>
       },
       fnPointInputCheck() {
         this.usePoint = this.usePoint.replace(/[^0-9]/g, "").replace(/^0+/, "");
+        if(this.usePoint == ""){
+          this.usePoint = '0';
+        }
         const price = parseInt(this.discountPrice);
         const use = parseInt(this.usePoint, 10);
         const full = parseInt(this.userInfo.point, 10);

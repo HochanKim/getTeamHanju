@@ -1,87 +1,97 @@
 /* 전역 css 초기화 */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* 전역 css 초기화 끝 */
 
 #headerZone {
-    width: 100%;
-    height: 120px;
+  width: 100%;
+  height: 120px;
 }
 
 #header {
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    height: 120px;
-    /* background-color: rgb(85, 139, 123); */
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border-bottom: 1px solid #aaa; */
-    box-shadow: 0px 0px 5px #aaa;
-    z-index: 2000;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 120px;
+  /* background-color: rgb(85, 139, 123); */
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-bottom: 1px solid #aaa; */
+  box-shadow: 0px 0px 5px #aaa;
+  z-index: 2000;
 }
 
 #header #container {
-    width: 60%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* logo */
 
 #header #logo {
-    margin: 16px;
+  margin: 16px;
+  cursor: pointer;
 }
 
 #logo img {
-    width: 80px;
-    height: 80px;
+  width: 80px;
+  height: 80px;
+  /* width: 250px;
+  height: 250px;
+  position: absolute;
+  left: 0;
+  top: 0; */
+  transition: transform 1.5s;
+}
+#logo img:hover {
+  transform: rotate(720deg); /* 마우스를 올렸을 때 360도 회전 */
 }
 
 /* center */
 
 #header #center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .menu {
-    margin: 16px;
-    font-weight: bold;
-    /* color: white; */
+  margin: 16px;
+  font-weight: bold;
+  /* color: white; */
 }
 
 #center a {
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
 }
 
 /* right */
 
 #header #right {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #right .rightIcon {
-    width: 40px;
-    height: 40px;
-    margin: 16px;
+  width: 40px;
+  height: 40px;
+  margin: 16px;
 }
 
 #right .icons {
-    display: flex;
-    justify-content: end;
-    align-items: center;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }

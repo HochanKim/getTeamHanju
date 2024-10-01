@@ -1,11 +1,25 @@
-/* div {
-  border: 1px solid black;
-} */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(3600deg);
+  }
+}
+
 button {
   border: 0;
   cursor: pointer;
 }
-#container {
+button:hover {
+  animation-name: rotate;
+  animation-duration: 20s;
+}
+#containerCart,
+#containerPayment {
   width: 80%;
   margin: 0 auto;
   margin-bottom: 50px;
@@ -25,7 +39,7 @@ button {
 }
 #priceContainer {
   position: sticky;
-  top: 20px;
+  top: 150px;
   border: 1px solid #ddd;
   border-radius: 6px;
   display: flex;
@@ -69,7 +83,7 @@ button {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 30%;
+    height: 60px;
   }
   .priceCol {
     font-size: 17px;
@@ -207,7 +221,8 @@ button {
     font-weight: bold;
   }
   .discount {
-    color: #555;
+    color: rgb(255, 115, 0);
+    font-weight: bold;
     font-size: 15px;
   }
 }
