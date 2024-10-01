@@ -25,6 +25,32 @@ pageEncoding="UTF-8" %>
           <!-- <div class="menu">
                     <a href="">펀딩</a>
                 </div> -->
+            </div>
+            <div id="logo" @click="fnMain">
+                <img src="../../image/logo.gif"/>
+            </div>
+            <div id="right">
+                <div v-if="userStatus == 'C'" class="icons">
+                    <div class="menu" @click="fnLogout"><a>로그아웃</a></div>
+                    <img class="rightIcon" src="../../image/person_black.png" @click="fnMyPage">
+                    <img class="rightIcon" src="../../image/cart_black.png" @click="fnCart">
+                    <img class="rightIcon" src="../../image/heart_plus_black.png" @click="fnFavorite">
+                </div>
+                <div v-else-if="userStatus == 'S'" class="icons">
+                    <!-- <div @click="fnLogout">로그아웃</div> -->
+                    <div class="menu" @click="fnLogout">로그아웃</div>
+                    <div class="menu" @click="fnSellerPage">사업자 페이지</div>
+                </div>
+                <div v-else-if="userStatus == 'A'" class="icons">
+                    <div @click="fnLogout">로그아웃</div>
+                    <div @click="fnAdminPage">관리자 페이지</div>
+                    <img class="rightIcon" src="../../image/person_black.png">
+                </div>
+                <div v-else class="icons" @click="fnLogin">
+                    <div class="menu">로그인</div>
+                    <img class="rightIcon" src="../../image/person_black.png">
+                </div>
+            </div>
         </div>
         <div id="logo" @click="fnMain">
           <img src="/image/hanju_logo_g2.gif" />
