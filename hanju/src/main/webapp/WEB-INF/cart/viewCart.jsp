@@ -4,140 +4,208 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/testCss.css" />
-    <link rel="stylesheet" href="/css/cartStyle.css" />
+    <link rel="stylesheet" href="/css/cart/cartStyle.css" />
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
-    <title>장바구니</title>
+    <title>cart</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app">
-      <div id="container">
-        <div id="itemContainer">
-          <div class="empty" v-if="emptyPage">
-            장바구니에 담긴 상품이 없습니다.
-          </div>
-          <div class="normal" v-if="normal.length>0">
-            <div class="boxHead">일반구매</div>
-            <div class="itemBox" v-for="(item, index) in normal" :key="index">
-              <button class="x" @click="fnCartDelete(item.cartId)">X</button>
-              <div class="itemCheck">
-                <input
-                  type="checkbox"
-                  :value="item.cartId"
-                  v-model="selectItem"
-                />
-              </div>
-              <div class="ImageBox">
-                <img :src="item.filePath" />
-              </div>
-              <div class="infoBox">
-                <div>{{ item.productName }}</div>
-              </div>
-              <div class="countBox">
-                <div class="itemCount">
-                  <button
-                    @click="fnPickupCountChange('minus',item.cartId,item.productCount)"
-                  >
-                    -
-                  </button>
-                  <div>{{ item.productCount }}</div>
-                  <button
-                    @click="fnPickupCountChange('plus',item.cartId,item.productCount)"
-                  >
-                    +
-                  </button>
+      <div id="containerCart">
+        <h2 class="title">장바구니</h2>
+        <div class="container">
+          <div id="itemContainer">
+            <div class="empty" v-if="emptyPage">
+              장바구니에 담긴 상품이 없습니다.
+            </div>
+            <div class="flex-column pd-0 cartBox" v-if="normal.length>0">
+              <div class="boxHead">일반 구매 상품</div>
+              <div class="itemBox" v-for="(item, index) in normal" :key="index">
+                <button class="deleteBtn" @click="fnCartDelete(item.cartId)">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>close</title>
+                    <path
+                      class="close"
+                      d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                    />
+                  </svg>
+                </button>
+                <div class="itemCheck">
+                  <input
+                    type="checkbox"
+                    :value="item.cartId"
+                    v-model="selectItem"
+                  />
+                </div>
+                <div class="ImageBox">
+                  <img :src="item.filePath" />
+                </div>
+                <div class="infoBox">
+                  <div>{{ item.productName }}</div>
+                </div>
+                <div class="countBox">
+                  <div class="itemCount">
+                    <button
+                      class="countBtn minus"
+                      @click="fnPickupCountChange('minus',item.cartId,item.productCount)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>minus</title>
+                        <path d="M19,13H5V11H19V13Z" />
+                      </svg>
+                    </button>
+                    <div class="countNum">
+                      {{ item.productCount.toLocaleString() }}
+                    </div>
+                    <button
+                      class="countBtn plus"
+                      @click="fnPickupCountChange('plus',item.cartId,item.productCount)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>plus</title>
+                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="priceBox">
+                  <div :class="item.discount != 0?'price':'discountPrice'">
+                    {{ (item.price * item.productCount).toLocaleString() }}원
+                  </div>
+                  <div v-if="item.discount != 0" class="discount">
+                    {{ item.discount }}%
+                  </div>
+                  <div class="discountPrice" v-if="item.discount != 0">
+                    {{
+                      Math.floor(
+                        ((item.price *
+                          item.productCount *
+                          (1 - item.discount / 100)) /
+                          10) *
+                          10
+                      ).toLocaleString()
+                    }}원
+                  </div>
                 </div>
               </div>
-              <div class="priceBox">
-                <div class="price">{{ item.price * item.productCount }}원</div>
-                <div v-if="item.discount != 0">{{ item.discount }}%</div>
-                <div
-                  class="discount"
-                  v-if="item.discount != 0"
-                  class="discount"
-                >
-                  {{
-                    Math.floor(
-                      (item.price *
-                        item.productCount *
-                        (1 - item.discount / 100)) /
-                        10
-                    ) * 10
-                  }}원
+            </div>
+            <div class="flex-column pd-0 cartBox" v-if="pickup.length>0">
+              <div class="boxHead">픽업 구매 상품</div>
+              <div class="itemBox" v-for="(item, index) in pickup" :key="index">
+                <button class="deleteBtn" @click="fnCartDelete(item.cartId)">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>close</title>
+                    <path
+                      class="close"
+                      d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                    />
+                  </svg>
+                </button>
+                <div class="itemCheck">
+                  <input
+                    type="checkbox"
+                    :value="item.cartId"
+                    v-model="selectItem"
+                  />
+                </div>
+                <div class="ImageBox">
+                  <img :src="item.filePath" />
+                </div>
+                <div class="infoBox">
+                  <div>{{ item.productName }}</div>
+                </div>
+                <div class="countBox">
+                  <div class="itemCount">
+                    <button
+                      class="countBtn minus"
+                      @click="fnPickupCountChange('minus',item.cartId,item.productCount)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>minus</title>
+                        <path d="M19,13H5V11H19V13Z" />
+                      </svg>
+                    </button>
+                    <div class="countNum">{{ item.productCount }}</div>
+                    <button
+                      class="countBtn plus"
+                      @click="fnPickupCountChange('plus',item.cartId,item.productCount)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>plus</title>
+                        <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="priceBox">
+                  <div :class="item.discount != 0?'price':'discountPrice'">
+                    {{ (item.price * item.productCount).toLocaleString() }}원
+                  </div>
+                  <div v-if="item.discount != 0" class="discount">
+                    {{ item.discount }}%
+                  </div>
+                  <div class="discountPrice" v-if="item.discount != 0">
+                    {{
+                      (
+                        Math.floor(
+                          (item.price *
+                            item.productCount *
+                            (1 - item.discount / 100)) /
+                            10
+                        ) * 10
+                      ).toLocaleString()
+                    }}원
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="pickup" v-if="pickup.length>0">
-            <div class="boxHead">픽업구매</div>
-            <div class="itemBox" v-for="(item, index) in pickup" :key="index">
-              <button class="x" @click="fnCartDelete(item.cartId)">X</button>
-              <div class="itemCheck">
-                <input
-                  type="checkbox"
-                  :value="item.cartId"
-                  v-model="selectItem"
-                />
-              </div>
-              <div class="ImageBox">
-                <img :src="item.filePath" />
-              </div>
-              <div class="infoBox">
-                <div>{{ item.productName }}</div>
-              </div>
-              <div class="countBox">
-                <div class="itemCount">
-                  <button
-                    @click="fnPickupCountChange('minus',item.cartId,item.productCount)"
-                  >
-                    -
-                  </button>
-                  <div>{{ item.productCount }}</div>
-                  <button
-                    @click="fnPickupCountChange('plus',item.cartId,item.productCount)"
-                  >
-                    +
-                  </button>
+          <div id="priceContainer">
+            <div class="priceInfo">
+              <div class="priceTitle">결제 예정 금액</div>
+              <div class="priceEtc">
+                <div class="noDiscount">
+                  <div class="priceCol">상품 금액</div>
+                  <div class="priceColl">
+                    {{ sumPrice.toLocaleString() }} 원
+                  </div>
+                </div>
+                <div class="lastDiscountPrice">
+                  <div class="priceCol">상품 할인 금액</div>
+                  <div class="priceColl">
+                    {{ discount.toLocaleString() }} 원
+                  </div>
                 </div>
               </div>
-              <div class="priceBox">
-                <div class="price">{{ item.price * item.productCount }}원</div>
-                <div v-if="item.discount != 0">{{ item.discount }}%</div>
-                <div
-                  class="discount"
-                  v-if="item.discount != 0"
-                  class="discount"
-                >
-                  {{
-                    Math.floor(
-                      (item.price *
-                        item.productCount *
-                        (1 - item.discount / 100)) /
-                        10
-                    ) * 10
-                  }}원
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="priceContainer">
-          <div class="priceInfo">
-            <div>원가 {{ sumPrice }} 원</div>
-            <div>{{ discount }}원 할인</div>
-            <div>{{ discountSum }}원</div>
-          </div>
 
-          <div class="paymentBtn">
-            <form action="cartPayment.do" method="post">
-              <input type="hidden" name="cartItem" :value="selectItem" />
-              <button type="submit">결제하기</button>
-            </form>
+              <div class="lastPrice">
+                <div>{{ discountSum.toLocaleString() }}원</div>
+              </div>
+            </div>
+            <div class="paymentBtn">
+              <form action="cartPayment.do" method="post">
+                <input type="hidden" name="cartItem" :value="selectItem" />
+                <button type="submit" class="paymentButton">주문하기</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>
