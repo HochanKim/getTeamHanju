@@ -30,6 +30,8 @@ public class SaleModel {
     private String sellId;			// hanju_normal_sell 테이블 컬럼
     private String average;			// 평점
     private int comentCnt;			// 리뷰 개수
+    private int discount;			// hanju_normal_sell 테이블 컬럼
+    private String discountPrice;	// 할인 가격
     
     
 }

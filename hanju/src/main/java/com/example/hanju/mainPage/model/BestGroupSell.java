@@ -10,5 +10,7 @@ public class BestGroupSell {
 	private int price;
 	private int discount;
 	private String filePath;
+	private String priceComma;
+	private String discountPrice;	// 할인 가격
 	
 }
