@@ -54,14 +54,14 @@ pageEncoding="UTF-8"%>
                         <div class="infoWrapper">
                             <div class="productName">{{item.productName}}</div>
                             <div v-if="item.discount == 0">
-                                <span class="productPrice">{{item.price}}</span>
+                                <span class="productPrice">{{item.priceComma}}</span>
                                 <span class="won">원</span>
                             </div>
                             <div v-else>
-                                <span class="originPrice"><del>{{item.price}}원</del></span>
+                                <span class="originPrice"><del>{{item.priceComma}}원</del></span>
                                 <br>
-                                <span class="discount">{{item.discount}}% </span>
-                                <span class="productPrice">{{item.price - (item.price * item.discount / 100)}}</span>
+                                <span class="discount">{{item.discount}} %</span>
+                                <span class="productPrice">{{item.discountPrice}}</span>
                                 <span class="won">원</span>
                             </div>
                         </div>
