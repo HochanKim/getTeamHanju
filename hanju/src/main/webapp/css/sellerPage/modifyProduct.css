@@ -35,6 +35,12 @@
     margin: 16px;
 }
 
+#container th {
+    padding: 8px;
+    padding-left: 0;
+    text-align: left;
+}
+
 #container td {
     padding: 8px;
 }
