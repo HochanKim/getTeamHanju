@@ -16,9 +16,37 @@
         <jsp:include page="sellerSideBar.jsp"></jsp:include>
         <div id="app">
             <div id="container">
+                <h3>사업자 대시보드</h3>
+                <hr>
                 <div class="cardView">
-                    <div>등록한 제품 개수</div>
-                    <div>{{}}</div>
+                    <img src="../../image/package.png">
+                    <div class="content">
+                        <div class="title">등록한 제품 개수</div>
+                        <div class="count">
+                            {{productCount}}
+                            <span class="unit">개</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardView">
+                    <img src="../../image/package.png">
+                    <div class="content">
+                        <div class="title">게시된 일반 판매 개수</div>
+                        <div class="count">
+                            {{normalSellCount}}
+                            <span class="unit">개</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardView">
+                    <img src="../../image/package.png">
+                    <div class="content">
+                        <div class="title">게시된 공동구매 개수</div>
+                        <div class="count">
+                            {{groupSellCount}}
+                            <span class="unit">개</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,9 +63,9 @@
                 userId : "${sessionId}",
                 userStatus : "${sessionStatus}",
 
-                productCount : null,
-                normalSellCount : null,
-                groupSellCount : null
+                productCount : 0,
+                normalSellCount : 0,
+                groupSellCount : 0
             };
         },
         methods: {
