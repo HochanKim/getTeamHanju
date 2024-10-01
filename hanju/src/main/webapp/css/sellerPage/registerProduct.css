@@ -81,6 +81,12 @@
     background-color: #bca;
 }
 
+.btnWrapper {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
 #container .submitBtn {
     display: inline-block;
     width: 100px;

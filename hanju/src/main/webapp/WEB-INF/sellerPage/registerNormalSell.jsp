@@ -27,7 +27,6 @@
                                     {{item.productName}}
                                 </option>
                             </select>
-                            <!-- <input id="searchBox" type="text" placeholder="검색"> -->
                         </td>
                     </tr>
                     <tr>

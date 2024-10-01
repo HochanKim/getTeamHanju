@@ -156,7 +156,9 @@
                         <td><input type="text" v-model="material"></td>
                     </tr>
                 </table>
-                <div class="submitBtn" @click="fnSubmit">제품등록</div>
+                <div class="btnWrapper">
+                    <div class="submitBtn" @click="fnSubmit">제품등록</div>
+                </div>
             </div>
         </div>
     </div>
@@ -191,11 +193,11 @@
                 capacity : "",
                 material : "",
 
-                thumbnailUrl   : "../../image/defaultImg.png",
+                thumbnailUrl   : "../../image/photo_gray.png",
                 productImgUrls : [
-                    "../../image/defaultImg.png",
-                    "../../image/defaultImg.png",
-                    "../../image/defaultImg.png"
+                    "../../image/photo_gray.png",
+                    "../../image/photo_gray.png",
+                    "../../image/photo_gray.png"
                 ],
             };
         },

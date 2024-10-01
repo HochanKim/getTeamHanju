@@ -31,7 +31,7 @@
                         <th>썸네일</th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img v-if="thumbnailUrl == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="thumbnailUrl == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="thumbnailUrl">
                             </div>
                             <label class="imgUploadBtn">
@@ -47,15 +47,15 @@
                         </th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img v-if="productImgUrls[ 0 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="productImgUrls[ 0 ] == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="productImgUrls[ 0 ]">
                             </div>
                             <div class="imgBox">
-                                <img v-if="productImgUrls[ 1 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="productImgUrls[ 1 ] == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="productImgUrls[ 1 ]">
                             </div>
                             <div class="imgBox">
-                                <img v-if="productImgUrls[ 2 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="productImgUrls[ 2 ] == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="productImgUrls[ 2 ]">
                             </div>
                             <label class="imgUploadBtn">

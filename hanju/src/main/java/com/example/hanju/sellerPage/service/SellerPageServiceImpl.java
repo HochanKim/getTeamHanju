@@ -184,11 +184,13 @@ public class SellerPageServiceImpl implements SellerPageService {
 		int productCount    = sellerPageMapper.getProductCount(map);
 		int normalSellCount = sellerPageMapper.getNormalSellCount(map);
 		int groupSellCount  = sellerPageMapper.getGroupSellCount(map);
+		int billCount       = sellerPageMapper.getBillCount(map);
 		
 		HashMap<String, Object> resultMap = new HashMap<>();
 		resultMap.put("productCount"   , productCount   );
 		resultMap.put("normalSellCount", normalSellCount);
 		resultMap.put("groupSellCount" , groupSellCount );
+		resultMap.put("billCount"      , billCount      );
 		return resultMap;
 	}
 }

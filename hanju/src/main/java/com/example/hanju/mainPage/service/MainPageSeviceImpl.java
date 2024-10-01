@@ -56,5 +56,4 @@ public class MainPageSeviceImpl implements MainPageService {
 		return resultMap;
 	}
 	
-	
 }
