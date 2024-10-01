@@ -7,44 +7,47 @@
     <title>한주</title>
 </head>
 <body>
+    <div id="headerZone"></div>
     <div id="header">
-        <div id="Logo" @click="fnMain">
-            <img src="../../image/haju_rogo_white.png" height="80" alt="한주 로고" />
-        </div>
-        <div id="center">
-            <div class="menu">
-                <a href="../market/productList.do">전통주</a>
+        <div id="container">
+            <div id="center">
+                <div class="menu">
+                    <a href="../market/productList.do">전통주</a>
+                </div>
+                <div class="menu">
+                    <a href="../pickup/pickUpLists.do">와인</a>
+                </div>
+                <div class="menu">
+                    <a href="../market/groupSellList.do">공동구매</a>
+                </div>
+                <!-- <div class="menu">
+                    <a href="">펀딩</a>
+                </div> -->
             </div>
-            <div class="menu">
-                <a href="../pickup/pickUpLists.do">와인</a>
+            <div id="logo" @click="fnMain">
+                <img src="../../image/haju_rogo.png"/>
             </div>
-            <div class="menu">
-                <a href="../market/groupSellList.do">공동구매</a>
-            </div>
-            <div class="menu">
-                <a href="">펀딩</a>
-            </div>
-        </div>
-        <div id="right">
-            <div v-if="userStatus == 'C'" class="icons">
-                <div @click="fnLogout"><a>로그아웃</a></div>
-                <img class="rightIcon" src="../../image/person.png" @click="fnMyPage">
-                <img class="rightIcon" src="../../image/cart.png" @click="fnCart">
-                <img class="rightIcon" src="../../image/heart_plus_white.png" @click="fnFavorite">
-            </div>
-            <div v-else-if="userStatus == 'S'" class="icons" @click="fnSellerPage">
-                <div @click="fnLogout">로그아웃</div>
-                <div>사업자 페이지</div>
-                <img class="rightIcon" src="../../image/person.png">
-            </div>
-            <div v-else-if="userStatus == 'A'" class="icons">
-                <div @click="fnLogout">로그아웃</div>
-                <div @click="fnAdminPage">관리자 페이지</div>
-                <img class="rightIcon" src="../../image/person.png">
-            </div>
-            <div v-else class="icons" @click="fnLogin">
-                <div><a>로그인</a></div>
-                <img class="rightIcon" src="../../image/person.png">
+            <div id="right">
+                <div v-if="userStatus == 'C'" class="icons">
+                    <div class="menu" @click="fnLogout"><a>로그아웃</a></div>
+                    <img class="rightIcon" src="../../image/person_black.png" @click="fnMyPage">
+                    <img class="rightIcon" src="../../image/cart_black.png" @click="fnCart">
+                    <img class="rightIcon" src="../../image/heart_plus_black.png" @click="fnFavorite">
+                </div>
+                <div v-else-if="userStatus == 'S'" class="icons">
+                    <!-- <div @click="fnLogout">로그아웃</div> -->
+                    <div class="menu" @click="fnLogout">로그아웃</div>
+                    <div class="menu" @click="fnSellerPage">사업자 페이지</div>
+                </div>
+                <div v-else-if="userStatus == 'A'" class="icons">
+                    <div @click="fnLogout">로그아웃</div>
+                    <div @click="fnAdminPage">관리자 페이지</div>
+                    <img class="rightIcon" src="../../image/person_black.png">
+                </div>
+                <div v-else class="icons" @click="fnLogin">
+                    <div class="menu">로그인</div>
+                    <img class="rightIcon" src="../../image/person_black.png">
+                </div>
             </div>
         </div>
     </div>       

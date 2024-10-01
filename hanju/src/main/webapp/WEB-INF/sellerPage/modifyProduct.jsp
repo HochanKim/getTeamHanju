@@ -20,7 +20,7 @@
                 <hr>
                 <table>
                     <tr>
-                        <td>제품</td>
+                        <th>제품</th>
                         <td>
                             <select v-model="productId" @change="fnGetProductInfo">
                                 <option v-for="item in productList" :value="item.productId">{{item.productName}}</option>
@@ -28,7 +28,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>썸네일</td>
+                        <th>썸네일</th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
                                 <img v-if="thumbnailUrl == undefined" class="img" src="../../image/defaultImg.png">
@@ -41,10 +41,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <th>
                             제품 이미지<br>
                             (최대 3장)
-                        </td>
+                        </th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
                                 <img v-if="productImgUrls[ 0 ] == undefined" class="img" src="../../image/defaultImg.png">
@@ -65,7 +65,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>타입</td>
+                        <th>타입</th>
                         <td>
                             <select v-model="type">
                                 <option value="TJ">탁주</option>
@@ -80,19 +80,19 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>가격</td>
+                        <th>가격</th>
                         <td><input type="text" v-model="price"></td>
                     </tr>
                     <tr>
-                        <td>원산지</td>
+                        <th>원산지</th>
                         <td><input type="text" v-model="madeBy"></td>
                     </tr>
                     <tr>
-                        <td>도수</td>
+                        <th>도수</th>
                         <td><input type="text" v-model="alcohol"></td>
                     </tr>
                     <tr>
-                        <td>탄산</td>
+                        <th>탄산</th>
                         <td>
                             <select v-model="sparkling">
                                 <option value="0">0</option>
@@ -105,7 +105,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>단 맛</td>
+                        <th>단 맛</th>
                         <td>
                             <select v-model="sweet">
                                 <option value="0">0</option>
@@ -118,7 +118,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>신 맛</td>
+                        <th>신 맛</th>
                         <td>
                             <select v-model="sour">
                                 <option value="0">0</option>
@@ -131,7 +131,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>쓴 맛</td>
+                        <th>쓴 맛</th>
                         <td>
                             <select v-model="bitter">
                                 <option value="0">0</option>
@@ -144,7 +144,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>바디감</td>
+                        <th>바디감</th>
                         <td>
                             <select v-model="body">
                                 <option value="0">0</option>
@@ -157,15 +157,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>용량</td>
+                        <th>용량</th>
                         <td><input type="text" v-model="capacity"></td>
                     </tr>
                     <tr>
-                        <td>재고</td>
+                        <th>재고</th>
                         <td><input type="text" v-model="stock"></td>
                     </tr>
                     <tr>
-                        <td>원재료</td>
+                        <th>원재료</th>
                         <td><input type="text" v-model="material"></td>
                     </tr>
                 </table>

@@ -84,7 +84,7 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="cardViewWrapper">
                 <div class="cardViewContainer" :style="BWL_sliderStyle">
-                    <div v-for="item in bestWineList" class="cardView" @click="fnGoDetailPage(item.productId)">
+                    <div v-for="item in bestWineList" class="cardView" @click="fnGoWineDetailPage(item.productId)">
                         <img :src="item.filePath">
                         <div class="infoWrapper">
                             <div class="productName">{{item.productName}}</div>
@@ -113,7 +113,7 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="cardViewWrapper">
                 <div class="cardViewContainer" :style="BGSL_sliderStyle">
-                    <div v-for="item in bestGroupSellList" class="cardView" @click="fnGoDetailPage(item.groupSellId)">
+                    <div v-for="item in bestGroupSellList" class="cardView" @click="fnGoGroupSellDetailPage(item.groupSellId)">
                         <img :src="item.filePath">
                         <div class="infoWrapper">
                             <div class="productName">{{item.productName}}</div>
@@ -259,6 +259,12 @@ pageEncoding="UTF-8"%>
             },
             fnGoDetailPage(id) {
                 location.href = "/details/details.do?id=" + id;
+            },
+            fnGoWineDetailPage(id) {
+                location.href = "/details/detailsPickup.do?id=" + id;
+            },
+            fnGoGroupSellDetailPage(id) {
+                location.href = "/details/detailsGroup.do?id=" + id;
             },
             fnGetBestWineList() {
                 $.ajax({
