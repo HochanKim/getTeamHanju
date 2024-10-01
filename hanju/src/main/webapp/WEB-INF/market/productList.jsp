@@ -4,14 +4,10 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/mainCss.css"
-    />
-    <link
-      rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/productList/lists.css"
-    />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCss.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList/lists.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
     <title>한주</title>
@@ -57,12 +53,22 @@ pageEncoding="UTF-8"%>
                   <img :src="item.filePath" :alt="item.fileOrgName" />
                 </div>
                 <p class="productName">{{ item.productName }}</p>
-                <p class="price">\ {{ item.priceComma }}</p>
-                <span class="mini">생산지 {{ item.madeBy }}</span>
+                <p class="price">
+                  {{ item.priceComma }} <span class="mini">원</span>
+                </p>
+                <span class="mini made">생산지 {{ item.madeBy }}</span>
                 <p class="alcohol">
-                  <span class="mini title">알코올 도수</span> {{ item.alcohol }} %</p>
-                <p>
-                  평점 <span :value="item.productId">{{}}</span>
+                  <span class="material-symbols-outlined">local_bar</span>
+                  <span class="mini title">알코올 도수</span> {{ item.alcohol }} %
+                </p>
+                <p class="productGrade">
+                  <img src="../../image/star_icon.png" alt="별표" />
+                  <span class="mini grade">평점</span> 
+                  <span :value="item.productId" class="avg" v-if="item.average > 0">
+                    {{ item.average }}
+                    <span class="mini count">({{ item.comentCnt }})</span>
+                  </span>
+                  <span :value="item.productId" class="avg" v-if="item.average == 0">평점 없음</span>
                 </p>
               </div>
             </a>
@@ -87,7 +93,6 @@ pageEncoding="UTF-8"%>
         totalPages : 0,     // 페이지 첫 인덱스
         pageSize : 16,      // 한 페이지의 호출 리스트 개수
         currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호 
-        number : [],
       };
     },
     methods: {

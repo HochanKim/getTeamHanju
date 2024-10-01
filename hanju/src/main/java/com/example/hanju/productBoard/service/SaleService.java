@@ -26,6 +26,5 @@ public interface SaleService {
 	// 구독 리스트
 	Map<String, Object>	getSubscribeList();
 	
-	// 평점
-	HashMap<String, Object> getGrade(HashMap<String, Object> map);
+
 }

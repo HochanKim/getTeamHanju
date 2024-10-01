@@ -141,11 +141,5 @@ public class SaleController {
 		return new Gson().toJson(result);
 	}
 	
-	// 평점
-	@RequestMapping(value = "/market/getGrade.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String getGrade(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-		HashMap<String, Object> result = saleService.getGrade(map);
-		return new Gson().toJson(result);
-	}
+
 }

@@ -99,12 +99,5 @@ public class SaleSeviceImpl implements SaleService {
 		return resultMap;
 	}
 
-	@Override	// 평점
-	public HashMap<String, Object> getGrade(HashMap<String, Object> map) {
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		List<SaleModel> grade = saleMapper.getGrade(map);
-    	System.out.println("숫자 : "+map);
-		resultMap.put("grade", grade);
-		return resultMap;
-	}
+
 }
