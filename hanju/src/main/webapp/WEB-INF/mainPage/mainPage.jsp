@@ -5,6 +5,7 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/mainPage/mainPage.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
     <title>Document</title>
@@ -37,7 +38,7 @@ pageEncoding="UTF-8"%>
                 <img src="../../image/best.png">
                 <div>
                     <h2>베스트셀러</h2>
-                    <div style="color: #777; font-weight: bold;">최근에 가장 많이 팔린 제품들이에요!</div>
+                    <div class="comment">최근에 가장 많이 팔린 제품들이에요!</div>
                 </div>
             </div>
             <div class="leftBtn" @click="fnBNSLBtnClick('left')">
@@ -73,7 +74,7 @@ pageEncoding="UTF-8"%>
                 <img src="../../image/wine.png">
                 <div>
                     <h2>와인 픽업 베스트</h2>
-                    <div style="color: #777; font-weight: bold;">픽업의 귀찮음을 감수해도 좋을 만큼 맛있어요!</div>
+                    <div class="comment">픽업의 귀찮음을 감수해도 좋을 만큼 맛있어요!</div>
                 </div>
             </div>
             <div class="leftBtn" @click="fnBWL_BtnClick('left')">
@@ -102,7 +103,7 @@ pageEncoding="UTF-8"%>
                 <img src="../../image/group.png">
                 <div>
                     <h2>인기 공동구매</h2>
-                    <div style="color: #777; font-weight: bold;">많은 분들이 함께 구매하길 원해요!</div>
+                    <div class="comment">많은 분들이 함께 구매하길 원해요!</div>
                 </div>
             </div>
             <div class="leftBtn" @click="fnBGSL_BtnClick('left')">

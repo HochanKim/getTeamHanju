@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'NanumSquareAcr';
 }
 
 /* 전역 css 초기화 끝*/
@@ -29,6 +30,7 @@
 #container > h3 {
     font-size: 20px;
     margin: 16px;
+    font-family: 'NanumSquareAceb';
 }
 
 #container table {
@@ -83,11 +85,42 @@
     line-height: 50px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #abc;
+    background-color: #7B4BBF;
+    color: white;
 }
 
 #container .imgUploadBtn:hover {
-    background-color: #bca;
+    background-color: #361A73;
+}
+
+#container hr {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.btnWrapper {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#container .submitBtn {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #7B4BBF;
+    color: white;
+    
+    margin-right: 2px;
+    margin-bottom: 2px;
+}
+
+#container .submitBtn:hover {
+    background-color: #361A73;
 }
 
 /* ========================= */

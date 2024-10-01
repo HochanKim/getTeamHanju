@@ -4,7 +4,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/sellerPage/registerGroupSell.css" />
+    <link rel="stylesheet" href="../../css/sellerPage/modifyGroupSell.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <script src="https://unpkg.com/@vuepic/vue-datepicker@latest"></script>
@@ -59,7 +60,7 @@
                         <th>상세 설명 이미지</th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img v-if="detailImgUrl == null" class="img" src="../../image/defaultImg.png"> 
+                                <img v-if="detailImgUrl == null" class="img" src="../../image/photo_gray_big.png"> 
                                 <img v-else class="img" :src="detailImgUrl">
                             </div>
                             <label class="imgUploadBtn">
@@ -69,7 +70,10 @@
                         </td>
                     </tr>
                 </table>
-                <button @click="fnModifyGroupSell">수정하기</button>
+                <hr>
+                <div class="btnWrapper">
+                    <div class="submitBtn" @click="fnModifyGroupSell">수정하기</div>
+                </div>
             </div>
         </div>
     </div>

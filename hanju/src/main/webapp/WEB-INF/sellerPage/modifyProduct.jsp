@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/sellerPage/modifyProduct.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
@@ -169,7 +170,10 @@
                         <td><input type="text" v-model="material"></td>
                     </tr>
                 </table>
-                <div class="submitBtn" @click="fnSubmit">수정하기</div>
+                <hr>
+                <div class="btnWrapper">
+                    <div class="submitBtn" @click="fnSubmit">수정하기</div>
+                </div>
             </div>
         </div>
     </div>

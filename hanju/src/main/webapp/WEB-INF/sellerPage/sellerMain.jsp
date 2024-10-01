@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/sellerPage/sellerMain.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
