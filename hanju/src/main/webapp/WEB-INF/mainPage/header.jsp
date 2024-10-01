@@ -25,7 +25,7 @@
                 </div> -->
             </div>
             <div id="logo" @click="fnMain">
-                <img src="../../image/haju_rogo.png"/>
+                <img src="../../image/logo.gif"/>
             </div>
             <div id="right">
                 <div v-if="userStatus == 'C'" class="icons">
