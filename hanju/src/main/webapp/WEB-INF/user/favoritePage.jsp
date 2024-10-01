@@ -108,15 +108,13 @@ pageEncoding="UTF-8"%>
       fnItemDelete(productId) {
         var self = this;
 
-          var nparmap = {
-            userId: self.userId,
-            productId: productId,
-          };
+        var nparmap = {
+          userId: self.userId,
+          productId: productId
+        };
 
         if (!confirm("찜 상품을 삭제하시겠습니까?")) {
           return;
-        }else{
-          alert("삭제되었습니다.")
         }
 
         $.ajax({
@@ -126,9 +124,8 @@ pageEncoding="UTF-8"%>
             data: nparmap,
             success: function (data) {
               console.log(data);
+              alert("삭제되었습니다.")
               self.fnGetFavoriteItemList();
-              
-              
             }
           });
       },
