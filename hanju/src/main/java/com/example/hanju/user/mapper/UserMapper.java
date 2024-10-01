@@ -40,4 +40,6 @@ public interface UserMapper {
     void deleteFavoriteItem(Map<String,Object> map);
     //주문목록
 	List<OrderItem>  getOrderList(Map<String,Object> map);
+	//리뷰작성
+	void reviewWrite(HashMap<String, Object> map);
 }

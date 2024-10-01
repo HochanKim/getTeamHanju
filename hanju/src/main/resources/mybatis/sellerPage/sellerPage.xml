@@ -148,4 +148,31 @@
 		WHERE GROUP_SELL_ID = #{groupSellId}
 	</update>
 	
+	<select id="getProductCount" parameterType="hashmap" resultType="Integer">
+		SELECT  COUNT(*)
+		FROM    HANJU_PRODUCT
+		WHERE   SELLER_ID = #{userId}
+	</select>
+	
+	<select id="getNormalSellCount" parameterType="hashmap" resultType="Integer">
+		SELECT  COUNT(*)
+		FROM    HANJU_NORMAL_SELL NS
+		INNER JOIN HANJU_PRODUCT P ON NS.PRODUCT_ID = P.PRODUCT_ID
+		WHERE P.SELLER_ID = #{userId}
+	</select>
+	
+	<select id="getGroupSellCount" parameterType="hashmap" resultType="Integer">
+		SELECT  COUNT(*)
+		FROM    HANJU_GROUP_SELL GS
+		INNER JOIN HANJU_PRODUCT P ON GS.PRODUCT_ID = P.PRODUCT_ID
+		WHERE P.SELLER_ID = #{userId}
+	</select>
+	
+	<select id="getBillCount" parameterType="hashmap" resultType="Integer">
+		SELECT  COUNT(*)
+		FROM    HANJU_BILL B
+		INNER JOIN HANJU_PRODUCT P ON B.PRODUCT_ID = P.PRODUCT_ID
+		WHERE P.SELLER_ID = #{userId}
+	</select>
+	
 </mapper>

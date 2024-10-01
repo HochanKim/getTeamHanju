@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="../../css/sellerPage/sellerSideBar.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
@@ -16,6 +17,7 @@
             <div class="normalMenu">
                 <a href="sellerMain.do">사업자 홈</a>
             </div>
+            <hr>
             <div class="menu">
                 <p>제품 관리</p>
                 <span class="material-symbols-outlined">arrow_drop_down</span>

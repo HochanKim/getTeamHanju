@@ -11,5 +11,5 @@ public interface MainPageService {
 	HashMap<String, Object> getBestWineList();
 	HashMap<String, Object> getBestGroupSell();
 	HashMap<String, Object> getNewReview();
-	
+
 }
