@@ -20,7 +20,11 @@ public class CartController {
 
     @RequestMapping("cart/viewCart.do")
     public String cartMainPage(Model model) throws Exception{
-        model.addAttribute("userId",session.getAttribute("sessionId"));
+        String userId = (String)session.getAttribute("sessionId");
+        model.addAttribute("userId",userId);
+        if(userId==null){
+            return "user/requestLogin";
+        }
         return "cart/viewCart";
     }
     @RequestMapping("cart/cartPayment.do")
