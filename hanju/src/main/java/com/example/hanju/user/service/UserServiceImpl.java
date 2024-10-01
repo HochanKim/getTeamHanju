@@ -194,5 +194,22 @@ public class UserServiceImpl implements UserService{
 		return resultMap;
 	}
 
+	/* 리뷰작성 */
+	@Override
+	public HashMap<String, Object> writeReview(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		try {
+			userMapper.reviewWrite(map);
+			System.out.println(map);
+			resultMap.put("result", "success");
+			resultMap.put("message", "등록되었습니다.");
+		} catch (Exception e) {
+			// TODO: handle exception
+			resultMap.put("result", "fail");
+			resultMap.put("message", "예기치 못한 문제가 발생했습니다. \n나중에 다시 시도해주세요.");
+		}
+		return resultMap;
+	}
+
 
 }

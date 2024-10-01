@@ -33,4 +33,5 @@ public interface SellerPageMapper {
 	int getProductCount(HashMap<String, Object> map);
 	int getNormalSellCount(HashMap<String, Object> map);
 	int getGroupSellCount(HashMap<String, Object> map);
+	int getBillCount(HashMap<String, Object> map);
 }

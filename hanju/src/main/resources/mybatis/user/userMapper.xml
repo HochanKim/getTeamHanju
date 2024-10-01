@@ -88,4 +88,8 @@
 		WHERE I.FILE_STATUS = 'T' AND B.USER_ID = #{userId}
 		ORDER BY B.CDATETIME DESC
 	</select>
+	<insert id="reviewWrite" parameterType="hashmap">
+		INSERT INTO HANJU_COMMENT
+		VALUES(#{commentId},#{billId},#{content},#{grade},SYSDATE)
+	</insert>
 </mapper>

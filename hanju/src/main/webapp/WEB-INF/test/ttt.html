@@ -4,6 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      .box {
+        width: 300px; /* 원하는 너비 */
+        height: 200px; /* 원하는 높이 */
+        background: linear-gradient(
+          to bottom right,
+          rgba(200, 160, 255, 0.8),
+          rgba(255, 255, 255, 0.5)
+        );
+        border-radius: 15px; /* 모서리 둥글게 */
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5); /* 부드러운 그림자 */
+        padding: 20px; /* 내부 여백 */
+        display: flex; /* 내용 중앙 정렬을 위한 flexbox 사용 */
+        justify-content: center; /* 가로 중앙 정렬 */
+        align-items: center; /* 세로 중앙 정렬 */
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="box"></div>
+  </body>
 </html>

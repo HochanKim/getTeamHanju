@@ -73,11 +73,7 @@ public class UserController {
 		model.addAttribute("userId",session.getAttribute("sessionId"));
 		return "user/favoritePage";
 	}
-	//리뷰쓰기
-	@RequestMapping("user/reviewWrite.do")
-	public String reviewwrite(Model model) throws Exception{
-		return "user/reviewWrite";
-	}
+	
 	
 	//모든 유저 정보 리스트
 	@GetMapping(value = "user/allUserList.dox", produces = "application/json;charset=UTF-8")
@@ -159,9 +155,10 @@ public class UserController {
 		return new Gson().toJson(result);
 	}
 	//찜 목록 삭제
-	@PostMapping(value = "user/deleteFavoriteItem.dox", produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "user/deleteFavoriteItem.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String deleteFavoriteItem(Model model, @RequestBody Map<String, Object> map) throws Exception {
+	public String deleteFavoriteItem(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		System.out.println(map);
 		Map<String, Object> result = userService.deleteFavoriteItem(map);
 		return new Gson().toJson(result);
 	}
@@ -172,6 +169,15 @@ public class UserController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId",session.getAttribute("sessionId"));
 		Map<String, Object> result = userService.getOrderList(map);
+		return new Gson().toJson(result);
+	}
+	
+	//리뷰작성
+	@RequestMapping(value = "user/review.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String writeReview(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.writeReview(map);
 		return new Gson().toJson(result);
 	}
 

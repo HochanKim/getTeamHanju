@@ -92,8 +92,9 @@ ul {
     font-weight:500;
     margin-left:3px;
 }
-.made {
-    margin-left:20px;
+.madeBy {
+    margin-left:0;
+    margin-right:10px;
 }
 
 .title {

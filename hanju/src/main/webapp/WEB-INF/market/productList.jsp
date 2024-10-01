@@ -52,23 +52,41 @@ pageEncoding="UTF-8"%>
                 <div class="img-wrap">
                   <img :src="item.filePath" :alt="item.fileOrgName" />
                 </div>
-                <p class="productName">{{ item.productName }}</p>
-                <p class="price">
-                  {{ item.priceComma }} <span class="mini">원</span>
+                <p class="productName">
+                  {{ item.productName }}
                 </p>
-                <span class="mini made">생산지 {{ item.madeBy }}</span>
+                <p class="price" v-if="item.discount == 0"> <!-- 할인율 0일 경우 -->
+                  {{ item.priceComma }} 
+                  <span class="mini">원</span>
+                </p>
+                <p class="price" v-else> <!-- 할인율 존재할 경우 -->
+                  <del style="font-size:14px; font-weight: 400; margin-right:8px;">{{ item.priceComma }} 원</del>
+                  <span class="discount" style="color: rgb(255, 115, 0); font-size:16px;">{{item.discount}} % </span>
+                  <span class="productPrice">
+                    {{item.discountPrice}} <span class="mini">원</span>
+                  </span>
+                </p>
+                <p class="madeBy">
+                  <span class="mini madeBy">생산지</span> {{ item.madeBy }}
+                </p>
                 <p class="alcohol">
                   <span class="material-symbols-outlined">local_bar</span>
                   <span class="mini title">알코올 도수</span> {{ item.alcohol }} %
                 </p>
                 <p class="productGrade">
                   <img src="../../image/star_icon.png" alt="별표" />
-                  <span class="mini grade">평점</span> 
+                  <span class="mini grade">
+                    평점
+                  </span> 
                   <span :value="item.productId" class="avg" v-if="item.average > 0">
                     {{ item.average }}
-                    <span class="mini count">({{ item.comentCnt }})</span>
+                    <span class="mini count">
+                      ({{ item.comentCnt }})
+                    </span>
                   </span>
-                  <span :value="item.productId" class="avg" v-if="item.average == 0">평점 없음</span>
+                  <span :value="item.productId" class="avg" v-if="item.average == 0">
+                    평점 없음
+                  </span>
                 </p>
               </div>
             </a>

@@ -11,7 +11,7 @@
 #sideBar #sideTitle {
     width: 100%;
     font-size: 30px;
-    font-weight: bold;
+    font-family: 'NanumSquareAceb';
     margin: 16px;
 }
 
@@ -35,6 +35,10 @@
     width: 100%;
     margin: 16px;
     font-size: 16px;
+}
+
+#sideBar hr {
+    width: 100%;
 }
 
 #sideBar .menu {

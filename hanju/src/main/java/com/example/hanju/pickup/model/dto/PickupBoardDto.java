@@ -18,6 +18,8 @@ public class PickupBoardDto {
     private String priceComma; 		// 가격에 ',' 붙이기
     private String average;			// 평점
     private int comentCnt;			// 리뷰 개수
+    private int discount;			// 할인율
+    private String discountPrice;	// 할인 가격
     
     // 테이블 HANJU_CODE 컬럼명
     private String kind;	

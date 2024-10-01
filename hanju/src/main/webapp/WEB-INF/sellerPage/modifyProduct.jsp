@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/sellerPage/modifyProduct.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
@@ -31,7 +32,7 @@
                         <th>썸네일</th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img v-if="thumbnailUrl == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="thumbnailUrl == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="thumbnailUrl">
                             </div>
                             <label class="imgUploadBtn">
@@ -47,15 +48,15 @@
                         </th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img v-if="productImgUrls[ 0 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="productImgUrls[ 0 ] == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="productImgUrls[ 0 ]">
                             </div>
                             <div class="imgBox">
-                                <img v-if="productImgUrls[ 1 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="productImgUrls[ 1 ] == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="productImgUrls[ 1 ]">
                             </div>
                             <div class="imgBox">
-                                <img v-if="productImgUrls[ 2 ] == undefined" class="img" src="../../image/defaultImg.png">
+                                <img v-if="productImgUrls[ 2 ] == undefined" class="img" src="../../image/photo_gray.png">
                                 <img v-else class="img" :src="productImgUrls[ 2 ]">
                             </div>
                             <label class="imgUploadBtn">
@@ -169,7 +170,10 @@
                         <td><input type="text" v-model="material"></td>
                     </tr>
                 </table>
-                <div class="submitBtn" @click="fnSubmit">수정하기</div>
+                <hr>
+                <div class="btnWrapper">
+                    <div class="submitBtn" @click="fnSubmit">수정하기</div>
+                </div>
             </div>
         </div>
     </div>

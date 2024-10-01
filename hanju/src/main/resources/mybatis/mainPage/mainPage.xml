@@ -5,9 +5,15 @@
 <mapper namespace="com.example.hanju.mainPage.mapper.MainPageMapper">
 
 	<select id="getBestNormalSellList" resultType="com.example.hanju.mainPage.model.BestNormalSell">
-		SELECT  NS.SELL_ID, P.PRODUCT_NAME, P.PRICE, NS.DISCOUNT, I.FILE_PATH
+		SELECT  
+		    NS.SELL_ID, 
+		    P.PRODUCT_NAME, 
+		    TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
+		    NS.DISCOUNT, 
+		    I.FILE_PATH,
+		    TO_CHAR((PRICE - (PRICE * (DISCOUNT / 100))), 'FM99,999') AS DISCOUNT_PRICE
 		FROM    (
-			SELECT  PRODUCT_ID, KIND, COUNT(*) AS CNT
+		    SELECT  PRODUCT_ID, KIND, COUNT(*) AS CNT
 		    FROM    HANJU_BILL
 		    WHERE   KIND = 'N'
 		    GROUP BY PRODUCT_ID, KIND
