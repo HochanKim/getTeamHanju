@@ -80,8 +80,8 @@
             };
         },
         methods: {
-            fnClickProduct(sellId){    // 공동구매 상세 페이지 이동
-                location.href = `/details/details.do?id=\${sellId}`;
+            fnClickProduct(groupSellId){    // 공동구매 상세 페이지 이동
+                location.href = `/details/detailsGroup.do?id=\${groupSellId}`;
             },
             fnGetList(start, size) {   // 공동구매 데이터 리스트 불러오기
                 $.ajax({

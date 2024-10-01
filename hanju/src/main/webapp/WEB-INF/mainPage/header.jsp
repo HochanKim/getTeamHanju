@@ -2,9 +2,10 @@
 pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/mainPage/header.css" />
+<head>
+    <meta charset="UTF-8">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/mainPage/header.css" />
     <title>한주</title>
   </head>
   <body>

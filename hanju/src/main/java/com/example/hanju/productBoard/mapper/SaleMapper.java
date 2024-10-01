@@ -34,6 +34,5 @@ public interface SaleMapper {
 	// 구독 리스트
 	List<Subscribe> subscribeList();
 	
-	// 평점
-	List<SaleModel> getGrade(HashMap<String, Object> map);
+
 }

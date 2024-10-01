@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/sellerPage/registerNormalSell.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
     <title>첫번째 페이지</title>
@@ -27,7 +28,6 @@
                                     {{item.productName}}
                                 </option>
                             </select>
-                            <!-- <input id="searchBox" type="text" placeholder="검색"> -->
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                         </th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img v-if="productDetailImgUrl == ''" class="img" src="../../image/defaultImg.png"> 
+                                <img v-if="productDetailImgUrl == ''" class="img" src="../../image/photo_gray_big.png"> 
                                 <img v-else class="img" :src="productDetailImgUrl">
                             </div>
                             <label class="imgUploadBtn">
@@ -60,7 +60,10 @@
                         </td>
                     </tr>
                 </table>
-                <button @click="fnRegisterSell">게시하기</button>
+                <hr>
+                <div class="btnWrapper">
+                    <div class="submitBtn" @click="fnRegisterSell">게시하기</div>
+                </div>
             </div>
         </div>
     </div>
