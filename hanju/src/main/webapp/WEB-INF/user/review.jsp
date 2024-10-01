@@ -60,11 +60,11 @@
                   <div id="rating">
                     <div class="how">상품은 어떠셨나요?</div>
                     <div class="star">
-                      <input type="radio" name="star" id="r1" v-model="1">
-                      <input type="radio" name="star" id="r2" v-model="2">
-                      <input type="radio" name="star" id="r3" v-model="3">
-                      <input type="radio" name="star" id="r4" v-model="4">
-                      <input type="radio" name="star" id="r5" v-model="5">
+                      <input type="radio" name="star" id="r1" value="1" v-model="starRating">
+                      <input type="radio" name="star" id="r2" value="2" v-model="starRating">
+                      <input type="radio" name="star" id="r3" value="3" v-model="starRating">
+                      <input type="radio" name="star" id="r4" value="4" v-model="starRating">
+                      <input type="radio" name="star" id="r5" value="5" v-model="starRating">
                       <span class="star-box">
                         <label for="r1">별</label>
                         <label for="r2">별</label>
@@ -88,9 +88,11 @@
                     </div>
                     <div class="photoRegis">
                       <div class="inputPhoto">
-                        <input type="file" id="imgFile" v-model="reviewPhoto">
+                        <input type="file" id="imgFile" v-model="reviewPhoto" name="imgFile" @change="previewImage"> 
                         <span class="photoImgArea" onClick="document.querySelector('#imgFile').click();">
-                          <img src="../../image/photo.png" class="photoImg">
+                          <img src="../../image/photo.png" class="photoImg"> 
+                          <img v-if="thumbnail" :src="thumbnail" class="photoImg"> <!-- 썸네일 이미지 -->
+                          <img v-else src="../../image/photo.png" class="photoImg"> <!-- 기본 아이콘 -->
                         </span>
                       </div>
                     </div>
@@ -118,11 +120,13 @@
           return {
             orderList: [],
             modalCheck: false,
+            starRating: '0',
             selectBillId: "",
             reviewText: "",
             reviewPhoto: "",
             modalFilePath : "",
             modalProductName : "",
+            thumbnail: null // 썸네일 URL을 저장할 변수
           };
         },
         methods: {
@@ -134,7 +138,19 @@
 
             self.modalFilePath = filePath;
             self.modalProductName = productName;
+            this.thumbnail = null; // 모달 열 때 썸네일 초기화
           },
+
+          previewImage(event) {
+      const file = event.target.files[0]; // 선택된 파일 가져오기
+      if (file) {
+        const reader = new FileReader(); // FileReader 객체 생성
+        reader.onload = (e) => {
+          this.thumbnail = e.target.result; // 썸네일 URL 설정
+        };
+        reader.readAsDataURL(file); // 파일을 Data URL로 읽기
+      }
+    },
 
           fnOrder() {
             var self = this;
@@ -165,19 +181,15 @@
             }
           },
 
+          
           fnReview() {
             var self = this;
             
             var nparmap = {
               reviewText: self.reviewText,
-              reviewPhoto: self.reviewPhoto
+              reviewPhoto: self.reviewPhoto,
+              starRating: self.starRating
             };
-
-            var star = document.getElementById("star").value;
-            var i;
-            for(i=0; i<5; i++){
-              $("input:radio[id="+strArray[i] + "]").attr("checked", true);
-            }
 
             $.ajax({
               url: "user/review.dox",
