@@ -1,13 +1,20 @@
 package com.example.hanju.user.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.hanju.user.service.UserService;
 import com.google.gson.Gson;
@@ -68,10 +75,17 @@ public class UserController {
 	public String modifybefore(Model model) throws Exception{
 		return "user/modifyBefore";
 	}
+	//찜목록
 	@RequestMapping("user/favorite.do")
 	public String favoritePage(Model model) throws Exception{
 		model.addAttribute("userId",session.getAttribute("sessionId"));
 		return "user/favoritePage";
+	}
+	//구독확인
+	@RequestMapping("user/gudokCheck.do")
+	public String gudokCheck(Model model) throws Exception{
+		model.addAttribute("userId",session.getAttribute("sessionId"));
+		return "user/checkGudok";
 	}
 	
 	
@@ -178,6 +192,87 @@ public class UserController {
 	public String writeReview(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		System.out.println(map);
 		HashMap<String, Object> result = userService.writeReview(map);
+		return new Gson().toJson(result);
+	}
+	
+	//리뷰이미지 업로드
+	@RequestMapping("user/uploadProductImg.dox")
+	@ResponseBody
+    public String uploadProductImg(@RequestParam("productId") int productId,
+    							   @RequestParam("imageCode") String imageCode,
+    					 		   @RequestParam("productImg") MultipartFile productImg,
+    					 		   HttpServletRequest request,
+    					 		   HttpServletResponse response,
+    					 		   Model model) {
+		try {
+			uploadImg(productId, productImg, imageCode);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("result", "성공했습니다.");
+		return new Gson().toJson(resultMap);
+    }
+
+	
+	private void uploadImg(int commentId, MultipartFile file, String type) throws IOException {
+		
+		String path = System.getProperty("user.dir");
+        
+        String fileOrgName = file.getOriginalFilename();
+        String extName = fileOrgName.substring(fileOrgName.indexOf("."), fileOrgName.length() );
+        String saveFileName = genSaveFileName(extName);
+        
+        File targetFile = new File(path + "\\src\\main\\webapp\\upload", saveFileName);
+        file.transferTo(targetFile);
+        
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("commentId"  , commentId);
+        map.put("fileName"   , saveFileName);
+        map.put("fileOrgName", fileOrgName);
+        map.put("filePath"   , "/upload/" + saveFileName);
+        map.put("fileStatus" , type);
+        
+        userService.uploadImg(map);
+	}
+	
+	// 현재 시간을 기준으로 파일 이름 생성
+    private String genSaveFileName(String extName) {
+        String fileName = "";
+        
+        Random random = new Random();
+        int randomNum = random.nextInt(100000000);
+        
+        Calendar calendar = Calendar.getInstance();
+        fileName += calendar.get(Calendar.YEAR);
+        fileName += calendar.get(Calendar.MONTH);
+        fileName += calendar.get(Calendar.DATE);
+        fileName += calendar.get(Calendar.HOUR);
+        fileName += calendar.get(Calendar.MINUTE);
+        fileName += calendar.get(Calendar.SECOND);
+        fileName += calendar.get(Calendar.MILLISECOND);
+        fileName += randomNum;
+        fileName += extName;
+        
+        return fileName;
+    }
+    
+  //구독정보
+  	@GetMapping(value = "user/gudokCheck.dox", produces = "application/json;charset=UTF-8")
+  	@ResponseBody
+  	public String gudokList(Model model) throws Exception {
+  		Map<String, Object> map = new HashMap<>();
+  		map.put("userId",session.getAttribute("sessionId"));
+  		Map<String, Object> result = userService.gudokList(map);
+  		return new Gson().toJson(result);
+  	}
+  //구독상태수정
+  	@RequestMapping(value = "user/gudokState.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String gudokState(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		System.out.println(map);
+		HashMap<String, Object> result = userService.gudokState(map);
 		return new Gson().toJson(result);
 	}
 

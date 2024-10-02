@@ -5,9 +5,11 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/userCss/myPage.css" />
-<script src="/js/jquery.js"></script>
-<script src="/js/vue.js"></script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/vue.js"></script>
     <title>document</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app">
@@ -50,7 +52,7 @@ pageEncoding="UTF-8"%>
                     <ul>
                         <li>
                             <img src="../../image/calendar_month.png">
-                            <a href="">
+                            <a href="../user/gudokCheck.do">
                                 <strong>구독관리</strong>
                                 <p>고객님께서 신청하신 정기배송의 신청 정보 및 내역을 확인하실 수 있습니다.</p>
                             </a>
@@ -95,6 +97,7 @@ pageEncoding="UTF-8"%>
             </div>
         </div>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>
