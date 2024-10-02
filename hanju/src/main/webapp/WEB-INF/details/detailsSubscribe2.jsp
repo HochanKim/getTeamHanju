@@ -16,6 +16,7 @@
   <body>
     <div id="app">
       <div class="main-container">
+
         <div class="detail-container">
           <div class="container">
             <div class="thumb">
@@ -31,7 +32,7 @@
                   <div class="pad2">{{ info.description }}</div>
                   <div class="font-size">{{ info.productName }}</div>
                   <div class="pad2">판매가격 :</div>
-                  <div class="font-size">{{parseInt(info.price).toLocaleString()}}원</div>
+                  <div class="font-size">{{ info.price }}원</div>
                 </div>
               </div>
             </div>
@@ -240,16 +241,15 @@
               </div>
             </div>
             <div class="pad font-size2">총 상품가격</div>
-            <div class="font-size2">{{parseInt(sum()).toLocaleString()}}원</div>
+            <div class="font-size2">{{ sum() }}원</div>
             <div>
               <button @click="showToastMessage" class="side-button font-size2">
                 장바구니
               </button>
             </div>
             <div>
-              <button class="side-button font-size2" @click="fnPayment">
-                바로 구매하기
-              </button>
+              <div v-if="alreadyUser">이미 구독 중인 상품입니다.</div>
+              <button v-if="!alreadyUser" @click="fnPayment">구독 신청하기</button>
             </div>
           </div>
         </div>
