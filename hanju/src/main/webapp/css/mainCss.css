@@ -1,4 +1,7 @@
 /* 구글 폰트 */
+body {
+    font-family: 'NanumSquareAcb';
+}
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;
