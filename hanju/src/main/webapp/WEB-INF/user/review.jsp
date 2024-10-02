@@ -1,14 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+  <!DOCTYPE html>
+  <html>
+
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/userCss/review.css" />
+    <link rel="stylesheet" href="../../css/userCss/review.css">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
     <title>document</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
+
   <body>
     <div id="app">
       <div id="container">
@@ -50,12 +53,8 @@ pageEncoding="UTF-8" %>
                   <div>{{ item.cDateTime }}</div>
                 </td>
                 <td class="write">
-                  <button
-                    class="writeBtn"
-                    @click="modalOpen(item.sellId, item.filePath, item.productName)"
-                  >
-                    리뷰 작성
-                  </button>
+                  <button class="writeBtn" @click="modalOpen(item.billId, item.filePath, item.productName)">리뷰
+                    작성</button>
                 </td>
               </tr>
             </table>
@@ -135,30 +134,11 @@ pageEncoding="UTF-8" %>
                     </div>
                     <div class="photoRegis">
                       <div class="inputPhoto">
-                        <input
-                          type="file"
-                          id="imgFile"
-                          v-model="reviewPhoto"
-                          name="imgFile"
-                          @change="previewImage"
-                        />
-                        <span
-                          class="photoImgArea"
-                          onClick="document.querySelector('#imgFile').click();"
-                        >
-                          <img src="../../image/photo.png" class="photoImg" />
-                          <img
-                            v-if="thumbnail"
-                            :src="thumbnail"
-                            class="photoImg"
-                          />
-                          <!-- 썸네일 이미지 -->
-                          <img
-                            v-else
-                            src="../../image/photo.png"
-                            class="photoImg"
-                          />
-                          <!-- 기본 아이콘 -->
+                        <input type="file" id="imgFile" v-model="reviewPhoto" name="imgFile" @change="previewImage">
+                        <span class="photoImgArea" onClick="document.querySelector('#imgFile').click();">
+                          <img src="../../image/photo.png" class="photoImg">
+                          <img v-if="thumbnail" :src="thumbnail" class="photoImg"> <!-- 썸네일 이미지 -->
+                          <img v-else src="../../image/photo.png" class="photoImg"> <!-- 기본 아이콘 -->
                         </span>
                       </div>
                     </div>
@@ -176,45 +156,44 @@ pageEncoding="UTF-8" %>
         </div>
       </div>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
-
 <script>
   const app = Vue.createApp({
     data() {
       return {
+        userId: "${sessionId}",
         orderList: [],
         modalCheck: false,
-        starRating: "0",
+        starRating: '0',
         selectBillId: "",
         reviewText: "",
         reviewPhoto: "",
         modalFilePath: "",
         modalProductName: "",
         thumbnail: null, // 썸네일 URL을 저장할 변수
+        thumbnailFile : null
       };
     },
     methods: {
       modalOpen(billId, filePath, productName) {
         this.selectBillId = billId;
-        this.modalCheck = !this.modalCheck;
+        this.modalCheck = !this.modalCheck
 
         var self = this;
 
         self.modalFilePath = filePath;
         self.modalProductName = productName;
-        this.thumbnail = null; // 모달 열 때 썸네일 초기화
+        self.thumbnail = null; // 모달 열 때 썸네일 초기화
+        self.thumbnail = null;
       },
 
       previewImage(event) {
-        const file = event.target.files[0]; // 선택된 파일 가져오기
-        if (file) {
-          const reader = new FileReader(); // FileReader 객체 생성
-          reader.onload = (e) => {
-            this.thumbnail = e.target.result; // 썸네일 URL 설정
-          };
-          reader.readAsDataURL(file); // 파일을 Data URL로 읽기
-        }
+        var self = this;
+
+        self.thumbnailFile = event.target.files[0]; // 선택된 파일 가져오기
+        self.thumbnail = URL.createObjectURL(self.thumbnailFile);
       },
 
       fnOrder() {
@@ -233,38 +212,67 @@ pageEncoding="UTF-8" %>
                 self.orderList.push(item);
               }
             }
-          },
+          }
         });
       },
 
+
       fnDetailPage(productId, kind) {
-        if (kind == "P") {
+        if (kind == 'P') {
           location.href = `/details/detailsPickup.do?id=\${productId}`;
-        } else if (kind == "N") {
+        } else if (kind == 'N') {
           location.href = `/details/details.do?id=\${productId}`;
         }
       },
+
 
       fnReview() {
         var self = this;
 
         var nparmap = {
           reviewText: self.reviewText,
-          reviewPhoto: self.reviewPhoto,
-          starRating: self.starRating,
+          billId: self.selectBillId,
+          userId: self.userId,
+          starRating: self.starRating
         };
 
         $.ajax({
-          url: "review.dox",
+          url: "/user/review.dox",
           dataType: "json",
           type: "POST",
           data: nparmap,
           success: function (data) {
             console.log(data);
+            self.fnUploadImg(data.commentId, self.thumbnailFile, "R");
+            $.pageChange("review.do", {});
+
+          }
+        });
+
+      },
+      fnUploadImg(commentId, imageFile, imageCode) {
+        const formData = new FormData();
+        formData.append("productId", commentId);
+        formData.append("imageCode", imageCode);
+        formData.append("productImg", imageFile);
+
+        $.ajax({
+          url: "uploadProductImg.dox",
+          dataType: "json",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: () => {
+            alert("등록되었습니다!");
             $.pageChange("review.do", {});
           },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error('업로드 실패!', textStatus, errorThrown);
+          }
         });
       },
+
     },
     mounted() {
       this.fnOrder();

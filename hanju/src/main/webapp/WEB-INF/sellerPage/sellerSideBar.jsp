@@ -34,14 +34,6 @@
                 <div><a href="registerNormalSell.do"> - 일반 판매 등록</a></div>
                 <div><a href="modifyNormalSell.do"> - 판매글 수정</a></div>
             </div>
-            <!-- <div class="menu">
-                <p>펀딩 관리</p>
-                <span class="material-symbols-outlined">arrow_drop_down</span>
-            </div>
-            <div class="subMenu">
-                <div><a href="registerFunding.do"> - 펀딩 게시</a></div>
-                <div> - 펀딩 수정</div>
-            </div> -->
             <div class="menu">
                 <p>공동구매 관리</p>
                 <span class="material-symbols-outlined">arrow_drop_down</span>
@@ -49,6 +41,13 @@
             <div class="subMenu">
                 <div><a href="registerGroupSell.do"> - 공동구매 등록</a></div>
                 <div><a href="modifyGroupSell.do">- 공동구매 수정</a></div>
+            </div>
+            <div class="menu">
+                <p>주문 관리</p>
+                <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+            <div class="subMenu">
+                <div><a href="sellerBillPage.do"> - 주문 내역</a></div>
             </div>
         </div>
     </div>

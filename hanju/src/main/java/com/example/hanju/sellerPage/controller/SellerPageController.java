@@ -70,6 +70,10 @@ public class SellerPageController {
     public String modifyGroupSell(Model model) throws Exception {
 		return "/sellerPage/modifyGroupSell";
     }
+	@RequestMapping("/sellerPage/sellerBillPage.do")
+    public String sellerBillPage(Model model) throws Exception {
+		return "/sellerPage/sellerBillPage";
+    }
 	
 	@RequestMapping(value = "/sellerPage/getProductCodeList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -219,6 +223,28 @@ public class SellerPageController {
 		HashMap<String, Object> result = sellerPageService.getSellerMainInfo(map);
 		return new Gson().toJson(result);
 	}
+	@RequestMapping(value = "/sellerPage/getBillList.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getBillList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.getBillList(map);
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(value = "/sellerPage/shipConfirm.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String shipConfirm(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.shipConfirm(map);
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(value = "/sellerPage/deleteBill.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteBill(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+
+		HashMap<String, Object> result = sellerPageService.deleteBill(map);
+		return new Gson().toJson(result);
+	}
+	
 	
 	// =====================================================================================
 	

@@ -35,4 +35,10 @@ public interface UserService {
   Map<String,Object> getOrderList(Map<String,Object> map);
   //리뷰작성
   HashMap<String, Object> writeReview(HashMap<String, Object> map);
+  //리뷰이미지
+  HashMap<String, Object> uploadImg(HashMap<String, Object> map);
+  //구독리스트
+  Map<String, Object> gudokList(Map<String, Object> map);
+  //구독상태수정
+  HashMap<String, Object> gudokState(HashMap<String, Object> map);
 }
