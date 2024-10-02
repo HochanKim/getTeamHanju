@@ -26,10 +26,10 @@
 	</select>
 	
 	<select id="getBestWineList" resultType="com.example.hanju.mainPage.model.BestWine">
-		SELECT  
-			BEST.PRODUCT_ID, 
-			P.PRODUCT_NAME, 
-			P.PRICE, 
+		SELECT
+			BEST.PRODUCT_ID,
+			P.PRODUCT_NAME,
+			TO_CHAR(P.PRICE, 'FM99,999') AS PRICE_COMMA,
 			I.FILE_PATH
 		FROM    (
 			SELECT  PRODUCT_ID, KIND, COUNT(*) AS CNT
@@ -44,7 +44,13 @@
 	</select>
 	
 	<select id="getBestGroupSell" resultType="com.example.hanju.mainPage.model.BestGroupSell">
-		SELECT  BEST.GROUP_SELL_ID, P.PRODUCT_NAME, P.PRICE, GS.DISCOUNT, I.FILE_PATH
+		SELECT
+			BEST.GROUP_SELL_ID,
+			P.PRODUCT_NAME,
+			TO_CHAR(P.PRICE, 'FM99,999') AS PRICE_COMMA,
+			TO_CHAR((P.PRICE - (P.PRICE * (GS.DISCOUNT / 100) ) ), 'FM99,999') AS DISCOUNT_PRICE,
+			GS.DISCOUNT,
+			I.FILE_PATH
 		FROM    (
 		    SELECT  GROUP_SELL_ID, COUNT(*) AS CNT
 		    FROM    HANJU_GROUP_SELL_STAT

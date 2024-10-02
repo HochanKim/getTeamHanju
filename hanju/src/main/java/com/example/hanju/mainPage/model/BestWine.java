@@ -11,5 +11,4 @@ public class BestWine {
 	private String filePath;
 	private String priceComma;
 	private int discount;
-	private String discountPrice;	// 할인 가격
 }
