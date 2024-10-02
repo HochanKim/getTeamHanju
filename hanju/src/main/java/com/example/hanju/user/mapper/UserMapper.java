@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.user.model.Favorite;
+import com.example.hanju.user.model.GudokCheck;
 import com.example.hanju.user.model.OrderState;
 import com.example.hanju.user.model.OrderItem;
 import org.apache.ibatis.annotations.Mapper;
@@ -42,4 +43,12 @@ public interface UserMapper {
 	List<OrderItem>  getOrderList(Map<String,Object> map);
 	//리뷰작성
 	void reviewWrite(HashMap<String, Object> map);
+	//리뷰이미지
+	void registerImg(HashMap<String, Object> map);
+	//구독조회
+	List<GudokCheck> gudokCheck(Map<String,Object> map);
+	//구독상태
+	void gudokState(HashMap<String, Object> map);
+	
+	
 }

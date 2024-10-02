@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.hanju.user.model.Favorite;
+import com.example.hanju.user.model.GudokCheck;
 import com.example.hanju.user.model.OrderState;
 import com.example.hanju.user.model.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,21 +196,62 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/* 리뷰작성 */
+	@DbExceptionHandle
 	@Override
 	public HashMap<String, Object> writeReview(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		userMapper.reviewWrite(map);
+		resultMap.put("commentId", map.get("COMMENT_ID") );
+		resultMap.put("result", "success");
+		resultMap.put("message", "등록되었습니다.");
+		
+		return resultMap;
+	}
+
+	/* 리뷰이미지 */
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> uploadImg(HashMap<String, Object> map) {
+		
+		userMapper.registerImg(map);
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("result", "success");
+		resultMap.put("message", "등록되었습니다.");
+		
+		return resultMap;
+	}
+
+	/* 구독확인 */
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object> gudokList(Map<String, Object> map) {
+		Map<String,Object> result = new HashMap<>();
+		List<GudokCheck> list = userMapper.gudokCheck(map);
+		System.out.println(list);
+		result.put("list",list);
+		return result;
+	}
+	/* 구독상태수정 */
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> gudokState(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		try {
-			userMapper.reviewWrite(map);
+			userMapper.gudokState(map);
 			System.out.println(map);
 			resultMap.put("result", "success");
-			resultMap.put("message", "등록되었습니다.");
+			resultMap.put("message", "수정되었습니다.");
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			resultMap.put("result", "fail");
 			resultMap.put("message", "예기치 못한 문제가 발생했습니다. \n나중에 다시 시도해주세요.");
 		}
 		return resultMap;
 	}
+	
+	
 
 
 }
