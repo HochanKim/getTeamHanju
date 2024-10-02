@@ -8,60 +8,91 @@ pageEncoding="UTF-8"%>
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
-    <title>document</title>
+    <title>payment</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app">
       <div id="containerPayment">
         <h2 class="title">결제</h2>
         <div class="container">
-          <div class="itemContainer">
+          <div id="itemContainer">
             <div class="userInfo">
-              <div class="userName">
-                <div>이름</div>
-                <div>{{ userInfo.name }}</div>
-              </div>
-              <div>
-                <div class="주소">
-                  <div>배송지</div>
-                  <div>{{ userInfo.address }}</div>
+              <div class="boxHead"><h3>배송 정보</h3></div>
+              <div class="infoBox2">
+                <div class="userName">
+                  <div class="uNameCol">받는분</div>
+                  <div class="addrCol">{{ userInfo.name }}</div>
+                  <div class="addrBtn"></div>
                 </div>
-                <button @click="addrChange">주소 변경</button>
-              </div>
-              <div class="phone">
-                <div>연락처</div>
-                <div>{{ userInfo.phone }}</div>
+                <div class="addr">
+                  <div class="uNameCol">배송지</div>
+                  <div class="addrCol">
+                    [{{ userInfo.roadNum }}]{{ userInfo.road }}
+                    {{ userInfo.detail }}
+                  </div>
+                  <div class="addrBtn">
+                    <button class="addrButton" @click="fnSearchAddr">
+                      주소 변경
+                    </button>
+                  </div>
+                </div>
+                <div class="phone">
+                  <div class="uNameCol">연락처</div>
+                  <div class="addrCol">{{ userInfo.phone }}</div>
+                  <div class="addrBtn"></div>
+                </div>
               </div>
             </div>
             <div class="paymentInfo">
-              <div>제품들</div>
-              <span
-                class="제품항목"
-                v-for="(item, index) in cartNameList"
-                :key="index"
-                >{{ item }}</span
-              >
-              <div class="price">
-                <div>원래가격</div>
-                <div>{{ sumPrice }}</div>
+              <div class="productItem">
+                <div class="uNameCol">제품들</div>
+                <div class="pItem">
+                  <span v-for="(item, index) in cartNameList" :key="index">{{
+                    item
+                  }}</span>
+                </div>
               </div>
+            </div>
+            <div class="pricePoint">
               <div class="discountPrice">
-                <div>할인된 진짜 가격</div>
-                <div>{{ discountPrice }}</div>
+                <div class="uNameCol">총 상품 금액</div>
+                <div class="pItem">
+                  {{ parseInt(discountPrice).toLocaleString() }} 원
+                </div>
               </div>
               <div class="point">
-                <div>보유 포인트</div>
-                <div>{{ userInfo.point }}</div>
-                <div>포인트 사용</div>
-                <div>
-                  <input v-model="usePoint" @input="fnPointInputCheck" />
+                <div class="uNameCol">보유 포인트</div>
+                <div class="pItem">
+                  {{ parseInt(userInfo.point).toLocaleString() }} Point
                 </div>
-                <div>잔여 예상 포인트</div>
-                <div>{{ parseInt(userInfo.point) - parseInt(usePoint) }}</div>
               </div>
-              <div class="최종가격">
-                <div>최종 가격</div>
-                <div>{{ discountPrice - usePoint }}</div>
+              <div class="point">
+                <div class="uNameCol">포인트 사용</div>
+                <div class="pItem">
+                  <input
+                    type="text"
+                    v-model="usePoint"
+                    @input="fnPointInputCheck"
+                  />
+                </div>
+              </div>
+              <div class="point">
+                <div class="uNameCol">잔여 예상 포인트</div>
+                <div class="pItem">
+                  {{
+                    (
+                      parseInt(userInfo.point) - parseInt(usePoint)
+                    ).toLocaleString()
+                  }}
+                  Point
+                </div>
+              </div>
+              <div class="point">
+                <div class="uNameCol">최종 가격</div>
+                <div class="pItem">
+                  {{ parseInt(discountPrice - usePoint).toLocaleString() }} 원
+                </div>
               </div>
             </div>
           </div>
@@ -100,6 +131,7 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>
@@ -121,8 +153,8 @@ pageEncoding="UTF-8"%>
       },
       fnPointInputCheck() {
         this.usePoint = this.usePoint.replace(/[^0-9]/g, "").replace(/^0+/, "");
-        if(this.usePoint == ""){
-          this.usePoint = '0';
+        if (this.usePoint == "") {
+          this.usePoint = "0";
         }
         const price = parseInt(this.discountPrice);
         const use = parseInt(this.usePoint, 10);
@@ -154,14 +186,13 @@ pageEncoding="UTF-8"%>
             const user = data.userInfo;
             this.userInfo = {
               point: user.point,
-              address: {
-                roadNum: user.zipNo,
-                road: user.roadAddrPart1,
-                detail: user.addrDetail,
-              },
+              roadNum: user.zipNo,
+              road: user.roadAddrPart1,
+              detail: user.addrDetail,
               name: user.userName,
               phone: user.phone,
             };
+            console.log(this.userInfo);
           })
           .catch((error) => {
             console.log("유저정보 받아오기 오류");
@@ -226,6 +257,22 @@ pageEncoding="UTF-8"%>
         console.log("list.length : " + list.length);
         alert("결제완료");
       },
+      fnSearchAddr() {
+        var self = this;
+        var option =
+          "width = 500, height = 500, top = 100, left = 200, location = no";
+        window.open("/user/juso.do", "addr", option);
+      },
+      fnResult(roadAddrPart1, addrDetail, zipNo) {
+        var self = this;
+        self.zipNo = zipNo; //<- 위에 넣은 값
+        self.roadAddrPart1 = roadAddrPart1;
+        self.addrDetail = addrDetail;
+        // 콘솔 통해 각 변수 값 찍어보고 필요한거 가져다 쓰면 됩니다.
+        console.log(zipNo);
+        console.log(roadAddrPart1);
+        console.log(addrDetail);
+      },
     },
     mounted() {
       if ("${userId}" == "") {
@@ -235,6 +282,66 @@ pageEncoding="UTF-8"%>
       }
       this.userId = "${userId}";
       this.fnInit();
+
+      function jusoCallBack(
+        roadFullAddr,
+        roadAddrPart1,
+        addrDetail,
+        roadAddrPart2,
+        engAddr,
+        jibunAddr,
+        zipNo,
+        admCd,
+        rnMgtSn,
+        bdMgtSn,
+        detBdNmList,
+        bdNm,
+        bdKdcd,
+        siNm,
+        sggNm,
+        emdNm,
+        liNm,
+        rn,
+        udrtYn,
+        buldMnnm,
+        buldSlno,
+        mtYn,
+        lnbrMnnm,
+        lnbrSlno,
+        emdNo
+      ) {
+        if (window.vueAppInstance) {
+          window.vueAppInstance.fnResult(
+            roadFullAddr,
+            roadAddrPart1,
+            addrDetail,
+            roadAddrPart2,
+            engAddr,
+            jibunAddr,
+            zipNo,
+            admCd,
+            rnMgtSn,
+            bdMgtSn,
+            detBdNmList,
+            bdNm,
+            bdKdcd,
+            siNm,
+            sggNm,
+            emdNm,
+            liNm,
+            rn,
+            udrtYn,
+            buldMnnm,
+            buldSlno,
+            mtYn,
+            lnbrMnnm,
+            lnbrSlno,
+            emdNo
+          );
+        } else {
+          console.error("Vue app instance is not available.");
+        }
+      }
     },
   });
   app.mount("#app");
