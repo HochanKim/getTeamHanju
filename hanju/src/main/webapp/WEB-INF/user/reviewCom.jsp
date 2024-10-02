@@ -5,9 +5,11 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../../css/userCss/review.css"/>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <script src="/js/jquery.js"></script>
 <script src="/js/vue.js"></script>
     <title>document</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app">
@@ -49,6 +51,7 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>

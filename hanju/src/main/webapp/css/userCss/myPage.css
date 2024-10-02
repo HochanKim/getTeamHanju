@@ -1,6 +1,7 @@
 #container{
     margin: 0 auto;
     display: block;
+    font-family: 'NanumSquareAcr';
 }
 
 #contents{
@@ -22,6 +23,7 @@ h2{
     font-weight: 400;
     letter-spacing: 0.06em;
     margin: 10px 0 60px;
+    font-family: 'NanumSquareAcb';
 }
 
 .myOrder{
@@ -79,7 +81,7 @@ a{
 .count{
     font-weight: bold;
     font-size: 28px;
-    color: #6aafe6;
+    color: #7a1ffa;
 }
 
 
