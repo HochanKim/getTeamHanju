@@ -26,7 +26,11 @@
 	</select>
 	
 	<select id="getBestWineList" resultType="com.example.hanju.mainPage.model.BestWine">
-		SELECT  BEST.PRODUCT_ID, P.PRODUCT_NAME, P.PRICE, I.FILE_PATH
+		SELECT  
+			BEST.PRODUCT_ID, 
+			P.PRODUCT_NAME, 
+			P.PRICE, 
+			I.FILE_PATH
 		FROM    (
 			SELECT  PRODUCT_ID, KIND, COUNT(*) AS CNT
 			FROM    HANJU_BILL

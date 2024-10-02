@@ -4,6 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCss.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList/lists.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,10 +33,9 @@ pageEncoding="UTF-8"%>
       <!-- 상품 리스트 영역 -->
       <section class="productContainer">
         <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
-        <ul v-for="item in newProducts"> 
-          <li class="productList">
+          <div v-for="item in newProducts" class="productList">
             <a @click="fnDetailPage(item.productId)">
-              <div>
+              <div class="wineProduct">
                 <div class="img-wrap">
                   <img :src="item.filePath" :alt="item.fileOrgName" />
                 </div>
@@ -46,10 +46,15 @@ pageEncoding="UTF-8"%>
                 </p>
                 <p class="price" v-else> <!-- 할인율 존재할 경우 -->
                   <del style="font-size:14px; font-weight: 400; margin-right:8px;">{{ item.priceComma }} 원</del>
-                  <span class="discount" style="color: rgb(255, 115, 0); font-size:16px;">{{item.discount}} % </span>
-                  <span class="productPrice">
-                    {{item.discountPrice}} <span class="mini">원</span>
-                  </span>
+                  <p v-if="item.discount != 0">
+                    <span class="discount">{{item.discount}} % </span>
+                    <span class="price productPrice">
+                      {{item.discountPrice}} <span class="mini">원</span>
+                    </span>
+                  </p>
+                  <p v-else>
+                    <br>
+                  </p>
                 </p>
                 <p class="made">
                   <span class="mini madeBy">원산지</span> {{ item.madeBy }}
@@ -69,8 +74,7 @@ pageEncoding="UTF-8"%>
                 </p>
               </div>
             </a>
-          </li>
-        </ul>
+          </div>
       </section>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>

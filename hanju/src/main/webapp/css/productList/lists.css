@@ -13,6 +13,8 @@ p {
 
 /* 카테고리 영역 */
 .selectSection {
+    width:70%;
+    margin:0 auto;
     padding:40px 80px 10px 80px;
 }
 .productsListSelect a, .productsPartList a {
@@ -31,16 +33,24 @@ p {
 }
 .selected {
     font-weight: bold;
+    color: rgb(255, 115, 0);
 }
 
 
 /* 분류코드 리스트 */
 .kindList {
     height:20px;
-    margin:10px 0;
+    margin-bottom:10px;
+    display: flex;
+    align-items: center;
 }
 .kindList label {
-    margin-right:10px;
+    margin-right:16px;
+    display: flex;
+    align-items: center;
+}
+.traditionCodes {
+    margin-top:10px;
 }
 select {
     margin-right:10px;
@@ -50,12 +60,28 @@ select {
 .materialList {
     width:150px;
 }
+input {
+    margin-right:7px;
+}
+
+.wineSelect {
+    width:110px;
+}
 
 
 /* 상품 리스트 영역 */
 .productContainer {
-    padding:0 64px;
+    width:72%;
+    padding:0 84px;
     box-sizing: border-box;
+    margin: 0 auto 168px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.productContainer > div {
+    width:235px;
+    height:450px;
+    margin:12px;
 }
 
 ul {
@@ -68,24 +94,29 @@ ul {
 .productList {
     list-style:none;
 }
+
 .productList > a {
     text-decoration: none;
     color:#000;
 }
 .productList a > div { 
     box-sizing: border-box;
-    width:100%;
-    height:550px;
 }
 
 .productName {
-    font-size:18px;
-    font-weight: 500;
+    font-size:20px;
+    font-family: 'NanumSquareAcb';
+    margin:10px 0;
+    height:50px;
 }
 .price {
-    font-size:18px;
+    font-size:20px;
     font-weight: bold;
-    display: inline;
+}
+.discount {
+    color: rgb(255, 115, 0); 
+    font-size:16px; 
+    margin-right:5px;
 }
 .mini {
     font-size:14px;
@@ -95,6 +126,7 @@ ul {
 .madeBy {
     margin-left:0;
     margin-right:10px;
+    font-family: 'NanumSquareAcr';
 }
 
 .title {
@@ -115,16 +147,18 @@ ul {
 
 /* 이미지 */
 .img-wrap {
-    width:340px;
-    height:340px;
+    width:235px;
+    height:235px;
     overflow: hidden;
-    border-radius: 10%;
+    border-radius: 5px;
+    position: relative;
 }
 
 .img-wrap img {
     width:100%;
     height:100%;
-    border-radius: 10%;
+    position: absolute;
+    top:0;
 }
 
 img:hover {
@@ -156,19 +190,20 @@ img:hover {
 }
 
 
-/* 공동구매 페이지 */
-/* 공통 요소 */
+/* 공동구매 페이지 css */
+.groupSellTitle {
+    width:70%;
+    margin:0 auto;
+}
 .margin16 {
     margin: 16px;
 }
 
-/* 공동구매 페이지 기타 css */
 .groupSellImage {
     display: inline-block;
     width: 200px;
     height: 200px;
     margin: 16px;
-    border:1px solid #000;
 }
 
 .title {
@@ -182,7 +217,8 @@ img:hover {
 }
 
 #cardView {
-    width: 100%;
+    width: 70%;
+    margin:0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -229,6 +265,7 @@ img:hover {
 .line1 .title {
     margin: 0px;
     margin-bottom: 8px;
+    font-size:24px;
 }
 
 .area2 .line2 {
@@ -248,7 +285,7 @@ img:hover {
     display: inline-block;
     width: 80%;
     height: 100%;
-    background-color: #aaa;
+    background-color: #7b4bbf;
     border-radius: 5px;
 }
 
@@ -271,13 +308,57 @@ img:hover {
 }
 
 
+/* 구독 페이지 CSS */
+.subscribeCont {
+    width:70%;
+    margin: 0 auto;
+}
+.subscribe {
+    padding: 0 20px;
+    display: flex;
+    margin-top :40px;
+    margin-bottom : 108px;
+}
+.subscribeImg {
+    display: inline-block;
+    width:400px;
+    height:400px;
+}
+.subscribeTitle {
+    font-size:40px;
+}
+.subscribeInfo {
+    display: inline;
+    float: right;
+    margin-left: 50px;
+    box-sizing: border-box;
+    padding:20px 0;
+}
+.subscribeInfo div {
+    margin-bottom : 24px;
+}
+.subscribeReview {
+    width:120px;
+    font-weight: bold;
+    margin-left:0;
+    margin-top:30px;
+}
+.subscribeReview:hover {
+    transition: 0.3s;
+    background-color: #7b4bbf;
+    font-weight: bold;
+    color:#fff;
+}
+
+
 /* 페이징 */
 #pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom:40px;
+    height:40px;
+    margin:40px 0;
 }
 
 #pagination .pageBtn, button, .pagination button:disabled {
@@ -285,7 +366,7 @@ img:hover {
     cursor: pointer;
     width: 50px;
     height: 50px;
-    background-color: #aaa;
+    background-color: #eee;
     text-align: center;
     line-height: 50px;
     margin: 8px;
@@ -300,8 +381,9 @@ button {
 
 #pagination button:hover, #pagination button.active {
     transition: 0.5s;
-    background-color: rgb(85, 139, 123);
+    background-color: #7b4bbf;
     font-weight: bold;
+    color:#fff;
 }
 
 .pagination button:disabled {
@@ -311,7 +393,3 @@ button {
     border: 1px solid #dee2e6;
 }
 
-.pagination button:not(.active):not(:disabled):hover {
-    background-color: #0056b3;
-    color: white;
-}
