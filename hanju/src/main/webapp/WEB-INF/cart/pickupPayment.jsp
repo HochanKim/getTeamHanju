@@ -13,61 +13,76 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div id="app">
-      <div id="container">
-        <div class="유저 정보">
-          <div class="이름">
-            <div>이름</div>
-            <div>{{ userInfo.name }}</div>
-          </div>
-          <div>
-            <div class="주소">
-              <div>배송지</div>
-              <div>{{ userInfo.address }}</div>
+      <div id="containerPayment">
+        <h2 class="title">결제</h2>
+        <div class="container">
+          <div class="itemContainer">
+            <div class="userInfo">
+              <div class="boxHead"><h3>배송 정보</h3></div>
+              <div class="infoBox2">
+                <div class="userName">
+                  <div class="uNameCol">받는분</div>
+                  <div class="addrCol">{{ userInfo.name }}</div>
+                  <div class="addrBtn"></div>
+                </div>
+                <div class="addr">
+                  <div class="uNameCol">배송지</div>
+                  <div class="addrCol">
+                    [{{ userInfo.roadNum }}]{{ userInfo.road }}
+                    {{ userInfo.detail }}
+                  </div>
+                  <div class="addrBtn">
+                    <button class="addrButton" @click="addrChange">
+                      주소 변경
+                    </button>
+                  </div>
+                </div>
+                <div class="phone">
+                  <div class="uNameCol">연락처</div>
+                  <div class="addrCol">{{ userInfo.phone }}</div>
+                  <div class="addrBtn"></div>
+                </div>
+              </div>
             </div>
-            <button @click="addrChange">주소 변경</button>
-          </div>
-          <div class="연락처">
-            <div>연락처</div>
-            <div>{{ userInfo.phone }}</div>
-          </div>
-        </div>
-        <div class="가격정보">
-          <div class="제품 이름">
-            <div>제품이름</div>
-            <div>{{ info.productName }}</div>
-            <div>수량</div>
-            <div>{{ cnt }}</div>
-          </div>
-          <div class="원래가격">
-            <div>원래가격</div>
-            <div>{{ sumPrice }}</div>
-          </div>
-          <div class="할인율">
-            <div>할인율</div>
-            <div>{{ dis }}%</div>
-          </div>
-          <div class="할인된 가격">
-            <div>할인된 진짜 가격</div>
-            <div>{{ discountPrice }}</div>
-          </div>
-          <div class="포인트">
-            <div>보유 포인트</div>
-            <div>{{ userInfo.point }}</div>
-            <div>사용 포인트</div>
-            <div>
-              <input v-model="usePoint" @input="fnPointInputCheck" />
+            <div class="paymentInfo">
+              <div class="제품 이름">
+                <div>제품이름</div>
+                <div>{{ info.productName }}</div>
+                <div>수량</div>
+                <div>{{ cnt }}</div>
+              </div>
+              <div class="원래가격">
+                <div>원래가격</div>
+                <div>{{ sumPrice }}</div>
+              </div>
+              <div class="할인율">
+                <div>할인율</div>
+                <div>{{ dis }}%</div>
+              </div>
+              <div class="할인된 가격">
+                <div>할인된 진짜 가격</div>
+                <div>{{ discountPrice }}</div>
+              </div>
+              <div class="포인트">
+                <div>보유 포인트</div>
+                <div>{{ userInfo.point }}</div>
+                <div>사용 포인트</div>
+                <div>
+                  <input v-model="usePoint" @input="fnPointInputCheck" />
+                </div>
+                <div>잔여 예상 포인트</div>
+                <div>{{ userInfo.point - parseInt(usePoint) }}</div>
+              </div>
+              <div class="최종가격">
+                <div>최종 가격</div>
+                <div>{{ discountPrice - usePoint }}</div>
+              </div>
             </div>
-            <div>잔여 예상 포인트</div>
-            <div>{{ userInfo.point - parseInt(usePoint) }}</div>
           </div>
-          <div class="최종가격">
-            <div>최종 가격</div>
-            <div>{{ discountPrice - usePoint }}</div>
+          <div class="결제창">
+            <div>{{ discountPrice - usePoint }}원</div>
+            <button @click="fnPayment">결제하기</button>
           </div>
-        </div>
-        <div class="결제창">
-          <div>{{ discountPrice - usePoint }}원</div>
-          <button @click="fnPayment">결제하기</button>
         </div>
       </div>
     </div>
@@ -150,11 +165,9 @@ pageEncoding="UTF-8"%>
         const user = res.data.userInfo;
         this.userInfo = {
           point: user.point,
-          address: {
-            roadNum: user.zipNo,
-            road: user.roadAddrPart1,
-            detail: user.addrDetail,
-          },
+          roadNum: user.zipNo,
+          road: user.roadAddrPart1,
+          detail: user.addrDetail,
           name: user.userName,
           phone: user.phone,
         };

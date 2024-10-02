@@ -100,9 +100,4 @@ public class CartApiController {
         Map<String, Object> result = cartService.directPayment(map);
         return new Gson().toJson(result);
     }
-
-
-
-
-
 }
