@@ -45,11 +45,10 @@ public class SaleController {
 	public String best(Model model) throws Exception {
 		return "market/bestSeller";
 	}
-	
-	
-	@RequestMapping("productBoard/subscribeBoard.do")
+	// subscribe/subscribeBoard.jsp 연동
+	@RequestMapping("subscribe/subscribeBoard.do")
 	public String subscribeBoard(Model model) throws Exception {
-		return "productBoard/subscribeBoard";
+		return "subscribe/subscribeBoard";
 	}
 	
 	// @ResponseBody
@@ -126,7 +125,7 @@ public class SaleController {
 	
 	
 	// 구독 리스트
-	@GetMapping(value = "productBoard/getSubscribeList.dox", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "subscribe/getSubscribeList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getSubscribeList(Model model) throws Exception {
 		Map<String, Object> result = saleService.getSubscribeList();

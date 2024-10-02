@@ -1,0 +1,151 @@
+#container{
+    margin: 0 auto;
+    font-family: 'NanumSquareAcr';
+}
+
+#contents{
+    max-width: 1150px;
+    padding: 0 80px;
+    margin: 0 auto;
+}
+
+
+.tit{
+    transform: translate(0, 0);
+    opacity: 1.0;
+    min-height: 30px;
+    margin: 10px 0 60px;
+    text-align: center;
+}
+
+h2{
+    color: #222;
+    font-size: 33px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    font-family: 'NanumSquareAcb';
+}
+
+
+.tableContents{
+
+}
+
+table{
+    border-top: 1px solid #e3e3e3;
+    position: relative;
+    margin: 10px 0 0;
+    border: 1px solid #e3e3e3;
+    line-height: 1.5;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+th{
+    padding: 11px 0 10px;
+    border-left: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    color: #222;
+    vertical-align: middle;
+    font-weight: 600px;
+    background: #fafafa;
+}
+
+tr{
+    text-align: center;
+    border: 1px solid #e3e3e3;
+    line-height: 1.5;
+}
+
+td {
+    padding-left: 0;
+    padding-right: 0;
+    border-left: 0;
+    padding: 8px 10px 7px;
+    border: 1px solid #e3e3e3;
+    color: #222;
+    vertical-align: middle;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+a{
+    cursor: pointer;
+}
+
+.reviewArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reviewArea2 {
+    display: flex;
+    align-items: center;
+}
+
+img{
+    float: left;
+    position: relative;
+    width: 85px;
+    height: 85px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+span{
+    display: inline-block;
+    width: 66%;
+    vertical-align: middle;
+}
+
+.productName{
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    
+}
+
+.productInfo{
+    padding: 25px 10px;
+  }
+
+.thum{
+    position: relative;
+    float: left;
+    width: 85px;
+    height: 85px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+.insideImg{
+    width: 85px;
+    height: 85px;
+    border: 0;
+    vertical-align: top;
+  }
+
+.wrtie{
+    border-top: 2px solid #ddd;
+    list-style: none;
+  }
+
+
+
+.subBtn{
+    width: 100px;
+    margin-top: 10px;
+    padding: 10px 13px;
+    background-color: #7B4BBF;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    border: 0px;
+  }
+
+
+
+

@@ -21,5 +21,6 @@ public class GroupSellModel {
 	private String filePath;		// hanju_imamge 테이블 컬럼
     private String fileOrgName;		// hanju_imamge 테이블 컬럼
     private String sellId;			// hanju_normal_sell 테이블 컬럼
-    
+    private String priceComma; 		// 가격에 ',' 붙이기
+    private String discountPrice;	// 할인 가격
 }
