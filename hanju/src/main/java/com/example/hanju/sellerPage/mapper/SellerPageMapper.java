@@ -10,6 +10,7 @@ import com.example.hanju.main.model.Product;
 import com.example.hanju.main.model.ProductImage;
 import com.example.hanju.sellerPage.model.GroupSell;
 import com.example.hanju.sellerPage.model.NormalSell;
+import com.example.hanju.sellerPage.model.SellerBill;
 
 @Mapper
 public interface SellerPageMapper {
@@ -34,4 +35,8 @@ public interface SellerPageMapper {
 	int getNormalSellCount(HashMap<String, Object> map);
 	int getGroupSellCount(HashMap<String, Object> map);
 	int getBillCount(HashMap<String, Object> map);
+	List<SellerBill> getBillList(HashMap<String, Object> map);
+	void shipConfirm(HashMap<String, Object> map);
+	void deleteBill(HashMap<String, Object> map);
+	
 }

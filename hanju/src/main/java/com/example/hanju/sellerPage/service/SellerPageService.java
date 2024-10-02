@@ -20,5 +20,8 @@ public interface SellerPageService {
 	HashMap<String, Object> getGroupSellList(HashMap<String, Object> map);
 	HashMap<String, Object> modifyGroupSell(HashMap<String, Object> map);
 	HashMap<String, Object> getSellerMainInfo(HashMap<String, Object> map);
+	HashMap<String, Object> getBillList(HashMap<String, Object> map);
+	HashMap<String, Object> shipConfirm(HashMap<String, Object> map);
+	HashMap<String, Object> deleteBill(HashMap<String, Object> map);
 	
 }
