@@ -43,6 +43,13 @@ pageEncoding="UTF-8"%>
             </tr>
             </table>
           </div>
+          <div class="pagination">
+            <button v-if="currentPage > 1">이전</button>
+            <button v-for="page in totalPages" :class="{active: page == currentPage}">
+                {{ page }}
+            </button>
+            <button v-if="currentPage < totalPages">다음</button>
+        </div>
         </div>
       </div>
     </div>
@@ -55,6 +62,9 @@ pageEncoding="UTF-8"%>
       return {
         userId: "",
         favoriteList: [],
+        currentPage: 1,      
+        pageSize: 5,        
+        totalPages: 2 
       };
     },
     methods: {

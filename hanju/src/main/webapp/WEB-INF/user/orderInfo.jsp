@@ -55,6 +55,13 @@ pageEncoding="UTF-8"%>
             </td>
             </tr>
           </table>
+          <div class="pagination">
+            <button v-if="currentPage > 1">이전</button>
+            <button v-for="page in totalPages" :class="{active: page == currentPage}">
+                {{ page }}
+            </button>
+            <button v-if="currentPage < totalPages">다음</button>
+        </div>
         </div>
       </div>
     </div>
@@ -66,6 +73,9 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         orderList:[],
+        currentPage: 1,      
+        pageSize: 5,        
+        totalPages: 2 
       };
     },
     methods: {
