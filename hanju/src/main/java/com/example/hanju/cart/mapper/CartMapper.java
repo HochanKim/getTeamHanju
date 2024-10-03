@@ -28,4 +28,8 @@ public interface CartMapper {
     void addCartBill(Map<String,Object> map);
     void subPayment(Map<String,Object> map);
     void directPayment(Map<String,Object> map);
+    void changeAddr(Map<String,Object> map);
+    void directPickupPayment(Map<String,Object> map);
+    void directPickupBill(Map<String,Object> map);
+
 }
