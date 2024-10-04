@@ -115,7 +115,7 @@ pageEncoding="UTF-8"%>
       return {
         products: [],
         totalPages : 0,     // 페이지 첫 인덱스
-        pageSize : 16,      // 한 페이지의 호출 리스트 개수
+        pageSize : 10,      // 한 페이지의 호출 리스트 개수
         currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호 
       };
     },
@@ -123,7 +123,7 @@ pageEncoding="UTF-8"%>
         fnList(start, size) {
             var self = this;
             var paramap = {
-              start : start, 
+              start : start,
               size : size
             };
             $.ajax({

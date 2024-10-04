@@ -106,12 +106,14 @@ a{
 .myPage strong{
     font-size: 28px;
     font-weight: 500;
+    margin: 20px 0px;
 }
 
 p{
     font-size: 15px;
     line-height: 1.6;
     text-decoration: none;
+    margin-top: 10px;
 }
 
 img{
@@ -119,5 +121,4 @@ img{
     width: 65px;
     height: 60px;
     margin: 0 auto;
-    /* padding: 0 0 10px; */
 }

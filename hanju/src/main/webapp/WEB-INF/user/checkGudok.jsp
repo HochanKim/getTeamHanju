@@ -50,13 +50,12 @@ pageEncoding="UTF-8"%>
                     </tr>
                 </table>
             </div>
-            <div class="pagination">
-              <button v-if="currentPage > 1">이전</button>
-              <button v-for="page in totalPages" :class="{active: page == currentPage}">
-                  {{ page }}
-              </button>
-              <button v-if="currentPage < totalPages">다음</button>
-          </div>
+            <!-- 페이징 버튼 -->
+        <div id="pagination">
+          <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+          <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+          <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+        </div>
             </div>
           </div>
     </div>
@@ -69,21 +68,25 @@ pageEncoding="UTF-8"%>
       return {
         userId: "${sessionId}",
         subscribeList : [],
-        currentPage: 1,      
-        pageSize: 5,        
-        totalPages: 2
+        totalPages : 0,     // 페이지 첫 인덱스
+        pageSize : 10,      // 한 페이지의 호출 리스트 개수
+        currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호 
       };
     },
     methods: {
        
-        fngudok() {
+        fngudok(start, size) {
           var self = this;
+          var paramap = {
+            start : start, 
+            size : size
+          };
 
           $.ajax({
             url: "gudokCheck.dox",
             dataType: "json",
-            type: "GET",
-
+            type: "POST",
+            data : paramap,
             success: function (data) {
                 console.log(data);
                 console.log(data.list);
@@ -109,11 +112,35 @@ pageEncoding="UTF-8"%>
         },
         fnDetailPage(id){
             location.href="/details/subscribe.do?id="+id
-        }
+        },
+        
+        fnGetTotalGu() {     // 페이징 메소드
+          $.ajax({	
+            url:"getTotalGudok.dox",
+            dataType:"json",	
+            type : "POST", 
+            data : { userId : this.userId },
+            success : (data) => {
+              console.log(data);
+            }
+          });
+        },
+        fnClickPage(index){    // 페이징 숫자 버튼
+            if (index < 0) return;
+            if (index > this.totalPages) return;
+
+            this.currentPage = index;
+
+            var start = (this.currentPage - 1) * this.pageSize;
+            var size  = this.pageSize;
+            this.fngudok(start, size);
+        },
     },
 
     mounted() {
-        this.fngudok();
+      var self = this;
+      //self.fngudok(0, this.pageSize);
+      self.fnGetTotalGu();
     },
   });
   app.mount("#app");

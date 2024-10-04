@@ -153,13 +153,12 @@
               </div>
             </div>
           </div>
-          <div class="pagination">
-            <button v-if="currentPage > 1">이전</button>
-            <button v-for="page in totalPages" :class="{active: page == currentPage}">
-                {{ page }}
-            </button>
-            <button v-if="currentPage < totalPages">다음</button>
-        </div>
+             <!-- 페이징 버튼 -->
+             <div id="pagination">
+              <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+              <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+              <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+            </div>
         </div>
       </div>
     </div>
@@ -181,9 +180,9 @@
         modalProductName: "",
         thumbnail: null, // 썸네일 URL을 저장할 변수
         thumbnailFile : null,
-        currentPage: 1,      
-        pageSize: 5,        
-        totalPages: 2 
+        totalPages : 0,     // 페이지 첫 인덱스
+        pageSize : 10,      // 한 페이지의 호출 리스트 개수
+        currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호 
       };
     },
     methods: {
@@ -205,8 +204,12 @@
         self.thumbnail = URL.createObjectURL(self.thumbnailFile);
       },
 
-      fnOrder() {
+      fnOrder(start, size) {
         var self = this;
+        var paramap = {
+          start : start, 
+          size : size
+        };
 
         $.ajax({
           url: "getOrderList.dox",
