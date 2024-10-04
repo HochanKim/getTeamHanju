@@ -33,6 +33,30 @@
     font-family: 'NanumSquareAceb';
 }
 
+#container .basicInput {
+    padding: 6px 8px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    font-size: 18px;
+    color: black;
+    background-color: white;
+    transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+#container .basicInput:focus {
+    border-color: #7b4bbf;
+    box-shadow: 0 0 0 3px #7b4bbf2c;
+    outline: none;
+}
+#container .longInput {
+    width: 100%;
+}
+#container .shortInput {
+    width: 50%;
+}
+#container .veryShortInput {
+    width: 25%;
+}
+
 #container table {
     width: 100%;
     margin-top: 16px;
@@ -41,6 +65,10 @@
 
 #container th {
     width: 130px;
+    padding: 8px;
+}
+
+#container td {
     padding: 8px;
 }
 
@@ -115,7 +143,7 @@
     background-color: #7B4BBF;
     color: white;
 
-    margin-right: 2px;
+    margin-right: 10px;
     margin-bottom: 2px;
 }
 
