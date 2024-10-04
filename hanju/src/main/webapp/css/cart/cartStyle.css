@@ -9,7 +9,9 @@
     transform: rotate(3600deg);
   }
 }
-
+body {
+  font-family: "NanumSquareAcr", sans-serif;
+}
 button {
   border: 0;
   cursor: pointer;
@@ -83,7 +85,7 @@ dialog {
   margin: 0 auto;
   box-sizing: border-box;
   justify-content: space-between;
-  height: 700px;
+  /* height: 700px; */
 }
 #itemContainer {
   display: flex;
@@ -244,7 +246,6 @@ dialog {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: NotoSansKR, Malgun Gothic, arial, sans-serif;
     width: 30px;
     height: 30px;
     font-size: 20px;
@@ -288,7 +289,9 @@ form {
   width: 90%;
   height: 60px;
 }
-
+.subSub {
+  display: flex;
+}
 .deleteBtn {
   width: 30px;
   height: 30px;
@@ -307,7 +310,6 @@ form {
   font-size: 18px;
   color: #fff;
   border-radius: 4px;
-  font-family: NotoSansKR, Malgun Gothic, arial, sans-serif;
 }
 
 .boxHead {
@@ -315,7 +317,7 @@ form {
   font-size: 18px;
   font-weight: 700;
   line-height: 50px;
-  padding-left: 30px;
+  padding-left: 0px;
 }
 h2 {
   padding: 0;
@@ -414,7 +416,6 @@ input[type="text"] {
   border: 2px solid #333; /* 기본 테두리 색상 */
   border-radius: 8px; /* 둥근 모서리 */
   font-size: 18px; /* 폰트 크기 */
-  font-family: "Noto Sans", sans-serif; /* 폰트 변경 */
   color: black; /* 글자 색상 */
   background-color: white; /* 배경 색상 */
   transition: border-color 0.3s ease, box-shadow 0.2s ease; /* 부드러운 전환 효과 */

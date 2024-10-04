@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <title>payment</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
@@ -367,6 +368,7 @@ pageEncoding="UTF-8"%>
         console.log("보내준 cartIdList : " + list);
         console.log("list.length : " + list.length);
         alert("결제완료");
+        location.href = "/user/orderInfo.do";
       },
     },
     mounted() {

@@ -4,21 +4,28 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/css/mainCss.css" />
+    <link rel="stylesheet" href="/css/cart/cartStyle.css" />
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link
+      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app">
       <div id="containerPayment">
         <h2 class="title">결제</h2>
         <div class="container">
-          <div class="itemContainer">
+          <div id="itemContainer">
             <div class="userInfo">
-              <div class="boxHead"><h3>배송 정보</h3></div>
+              <div class="boxHead">
+                <h3 style="margin-left: 0">배송 정보</h3>
+              </div>
               <div class="infoBox2">
                 <div class="userName">
                   <div class="uNameCol">받는분</div>
@@ -32,7 +39,7 @@ pageEncoding="UTF-8"%>
                     {{ userInfo.detail }}
                   </div>
                   <div class="addrBtn">
-                    <button class="addrButton" @click="addrChange">
+                    <button class="addrButton" @click="addrChangeBtn">
                       주소 변경
                     </button>
                   </div>
@@ -45,23 +52,40 @@ pageEncoding="UTF-8"%>
               </div>
             </div>
             <div class="subsInfo">
-              <div class="구독 정보">
-                <div>구독 상품 정보</div>
-                <div class="imgBox">
-                  <img :src="subImg" />
+              <h3 style="margin-bottom: 10px">구독 상품 정보</h3>
+              <div class="subSub">
+                <div class="imgBox" style="margin-right: 10px">
+                  <img style="width: 150px; height: 150px" :src="subImg" />
                 </div>
                 <div>
-                  {{ subItem.title }}
+                  <h3 style="margin-bottom: 20px">
+                    {{ subItem.title }}
+                  </h3>
+                  <div>{{ discountPrice }} / 월</div>
+                  <div>배송 도착일 : 매주 {{ subItem.arriveDate }}</div>
                 </div>
-                <div>{{ discountPrice }} / 월</div>
-                <div>배송 도착일 : 매주 {{ subItem.arriveDate }}</div>
               </div>
             </div>
           </div>
-          <div class="결제창">
-            <div>구독 결제 정보</div>
-            <div>정기 결제 금액 {{ discountPrice }}원/월</div>
-            <button @click="fnPayment">결제하기</button>
+          <div id="priceContainer">
+            <div class="priceInfo">
+              <div class="priceTitle">결제 예정 금액</div>
+              <div class="priceEtc">
+                <div class="noDiscount">
+                  <div class="priceCol">상품 금액</div>
+                  <div class="priceColl">
+                    {{ parseInt(discountPrice).toLocaleString() }} 원
+                  </div>
+                </div>
+              </div>
+
+              <div class="lastPrice">
+                <div>{{ parseInt(discountPrice).toLocaleString() }}원</div>
+              </div>
+            </div>
+            <div class="paymentBtn">
+              <button class="paymentButton" @click="fnPayment">결제하기</button>
+            </div>
           </div>
         </div>
       </div>
@@ -118,7 +142,6 @@ pageEncoding="UTF-8"%>
         subId: "",
         userId: "",
         userInfo: {},
-        usePoint: 0,
         discountPrice: 0,
         subImg: "",
         subItem: {},
@@ -201,6 +224,12 @@ pageEncoding="UTF-8"%>
         }
         this.discountPrice =
           (res.data.subItem.price * (100 - res.data.subItem.discount)) / 100;
+        console.log("서브아이템");
+        console.log(this.subItem);
+        console.log("디스카운트프라이스");
+        console.log(this.discountPrice);
+        console.log("데이터");
+        console.log(res.data);
       },
       fnPayment() {
         const itemName = this.subItem.title;

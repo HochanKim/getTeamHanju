@@ -113,4 +113,10 @@ public class CartApiController {
         Map<String, Object> result = cartService.directPickupPayment(map);
         return new Gson().toJson(result);
     }
+    @GetMapping("cart/getDis.dox")
+    @ResponseBody
+    public String getDis(Model model, @RequestParam Map<String, Object> map) throws Exception {
+        Map<String, Object> result = cartService.getDis(map);
+        return new Gson().toJson(result);
+    }
 }

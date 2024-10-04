@@ -9,6 +9,10 @@ pageEncoding="UTF-8"%>
     <script src="/js/vue.js"></script>
     <title>cart</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
+    <link
+      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app">
@@ -19,8 +23,13 @@ pageEncoding="UTF-8"%>
             <div class="empty" v-if="emptyPage">
               장바구니에 담긴 상품이 없습니다.
             </div>
-            <div class="flex-column pd-0 cartBox" v-if="normal.length>0">
-              <div class="boxHead">일반 구매 상품</div>
+            <div
+              class="flex-column pd-0 cartBox"
+              v-if="normal.length>0 && !emptyPage"
+            >
+              <div class="boxHead" style="padding-left: 50px">
+                일반 구매 상품
+              </div>
               <div class="itemBox" v-for="(item, index) in normal" :key="index">
                 <button class="deleteBtn" @click="fnCartDelete(item.cartId)">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -96,8 +105,13 @@ pageEncoding="UTF-8"%>
                 </div>
               </div>
             </div>
-            <div class="flex-column pd-0 cartBox" v-if="pickup.length>0">
-              <div class="boxHead">픽업 구매 상품</div>
+            <div
+              class="flex-column pd-0 cartBox"
+              v-if="pickup.length>0 && !emptyPage"
+            >
+              <div class="boxHead" style="padding-left: 50px">
+                픽업 구매 상품
+              </div>
               <div class="itemBox" v-for="(item, index) in pickup" :key="index">
                 <button class="deleteBtn" @click="fnCartDelete(item.cartId)">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -233,4 +233,11 @@ public class CartServiceImpl implements CartService {
         result.put("status","success");
         return result;
     }
+
+    public Map<String, Object> getDis(Map<String, Object> map){
+        Map<String,Object> result = new HashMap<>();
+        System.out.println(map);
+        result.put("dis",cartMapper.getDis(map));
+        return result;
+    }
 }
