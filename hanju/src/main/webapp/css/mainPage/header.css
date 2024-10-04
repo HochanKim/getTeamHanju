@@ -50,8 +50,9 @@
 /* center */
 
 #header #center {
+  width: 40%;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
 }
 
@@ -71,8 +72,9 @@
 /* right */
 
 #header #right {
+  width: 40%;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
 }
 
