@@ -37,7 +37,13 @@ body, html {
     display: flex;
     flex-direction: row;
     align-items: center; /* Center items vertically */
-    margin: 10px 0; /* Space between rows */
+    margin: 15px 0; /* Space between rows */
+}
+.row2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Center items vertically */
+    margin: 14px 0; /* Space between rows */
 }
 
 .box {

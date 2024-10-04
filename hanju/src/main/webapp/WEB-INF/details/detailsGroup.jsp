@@ -31,7 +31,7 @@
                   <div class="pad2">{{ info.description }}</div>
                   <div class="font-size">{{ info.productName }}</div>
                   <div class="pad2">판매가격 :</div>
-                  <div class="font-size"> 원가 / 공구가 <br><del>{{parseInt(info.price).toLocaleString()}}</del> / {{parseInt(info.price - (info.price / 100 * info.discount)).toLocaleString()}}</div>
+                  <div class="font-size2"> 원가 / 공구가 <br><del>{{parseInt(info.price).toLocaleString()}}</del> / {{parseInt(info.price - (info.price / 100 * info.discount)).toLocaleString()}}</div>
                   
                 </div>
               </div>
@@ -279,7 +279,7 @@
 
         </div>
       </div>
-
+      <jsp:include page="../mainPage/footer.jsp" flush="false" />
       <!-- 토스트 메시지 요소 추가 -->
       <div id="login_message">로그인을 해주세요!</div>
       <div id="jago_message">재고가 부족합니다. 재고 : {{ pStock }}</div>
@@ -371,6 +371,18 @@
             return this.cnt * (this.info.price - (this.info.price / 100 * this.info.discount))
           },
           fnJoin() {
+            if (this.userId == "") {
+              const tostMessage = document.getElementById("login_message");
+              tostMessage.classList.add("active"); // 토스트 메시지 표시
+              setTimeout(() => {
+                tostMessage.classList.remove("active"); // 1초 후에 숨김
+              }, 2000);
+              return;
+            }
+            const isAdult = confirm("공동구매 참여하시겠습니까?");
+            if(isAdult==false){
+              return;
+            }
             $.ajax({
               url: "joinGroupSell.dox",
               dataType: "json",
