@@ -31,32 +31,70 @@
                   <div class="pad2">{{ info.description }}</div>
                   <div class="font-size">{{ info.productName }}</div>
                   <div class="pad2">판매가격 :</div>
-                  <div class="font-size">{{parseInt(info.price).toLocaleString()}}원</div>
+                  <div v-if="info.discount ==0">
+                    <div class="font-size2">{{parseInt(info.price).toLocaleString()}}원</div>
+                  </div>
+                  <div v-else> 
+                  <div class="font-size2"> 원가 / 할인가 <br><del>{{parseInt(info.price).toLocaleString()}}</del> /
+                    {{parseInt(info.price - (info.price / 100 * info.discount)).toLocaleString()}}</div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="box-container">
               <div class="box" style="clear: both">
-                <div class="row">
-                  <div class="title">주종</div>
-                  <div class="box-content">{{ info.codeName }}</div>
-                </div>
-                <div class="row">
-                  <div class="title">도수</div>
-                  <div class="box-content">{{ info.alcohol }}%</div>
-                </div>
-                <div class="row">
-                  <div class="title">용량</div>
-                  <div class="box-content">{{ info.capacity }}ml</div>
-                </div>
-                <div class="row">
-                  <div class="title">생산지</div>
-                  <div class="box-content">{{ info.madeBy }}</div>
-                </div>
-                <div class="row">
-                  <div class="title">주재료</div>
-                  <div class="box-content">{{ info.material }}</div>
-                </div>
+                <table>
+                  <tr>
+                    <td>
+                      <div class="row2">
+                        <div class="title">주종</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="box-content">{{ info.codeName }}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="row2">
+                        <div class="title">도수</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="box-content">{{ info.alcohol }}%</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="row2">
+                        <div class="title">용량</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="box-content">{{ info.capacity }}ml</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="row2">
+                        <div class="title">생산지</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="box-content">{{ info.madeBy }}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="row2">
+                        <div class="title">주재료</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="box-content">{{ info.material }}</div>
+                    </td>
+                  </tr>
+                </table>
               </div>
 
               <div class="box2">
@@ -254,7 +292,7 @@
           </div>
         </div>
       </div>
-
+      <jsp:include page="../mainPage/footer.jsp" flush="false" />
       <!-- 토스트 메시지 요소 추가 -->
       <div id="tost_message">장바구니에 추가되었습니다!</div>
       <div id="login_message">로그인을 해주세요!</div>
@@ -333,7 +371,14 @@
             this.cnt++;
           },
           sum() {
-            return this.cnt * this.info.price;
+            var priceSum; 
+            if(this.info.discount == 0){
+              priceSum = this.info.price * this.cnt;
+            }
+            else{
+              priceSum = (this.info.price - (this.info.price / 100 * this.info.discount))*this.cnt;
+            }
+            return priceSum;
           },
           async showToastMessage() {
             if (this.userId == "") {

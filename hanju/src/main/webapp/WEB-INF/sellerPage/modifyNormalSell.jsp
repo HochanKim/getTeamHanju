@@ -23,7 +23,7 @@
                     <tr>
                         <th>판매글</th>
                         <td>
-                            <select v-model="sellIndex" @change="fnSetNormalSellInfo">
+                            <select class="basicInput longInput" v-model="sellIndex" @change="fnSetNormalSellInfo">
                                 <option v-for="(item, index) in normalSellList" :value="index">
                                     {{item.productName}}
                                 </option>
@@ -33,7 +33,7 @@
                     <tr>
                         <th>할인율</th>
                         <td>
-                            <select v-model="discount">
+                            <select class="basicInput veryShortInput" v-model="discount">
                                 <option v-for="i in 100" :value="i-1">{{ i-1 }}%</option>
                             </select>
                         </td>
@@ -41,7 +41,7 @@
                     <tr>
                         <th>제품 설명</th>
                         <td>
-                            <textarea v-model="description" class="description"></textarea>
+                            <textarea class="basicInput longInput" v-model="description" class="description"></textarea>
                         </td>
                     </tr>
                     <tr>

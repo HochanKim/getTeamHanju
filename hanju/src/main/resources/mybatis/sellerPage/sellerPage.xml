@@ -28,7 +28,8 @@
 			#{stock},
 			#{capacity},
 			#{material},
-			SYSDATE
+			SYSDATE,
+			null
 		)
 	</insert>
 	

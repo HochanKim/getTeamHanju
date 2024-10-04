@@ -80,6 +80,7 @@
   width: 40px;
   height: 40px;
   margin: 16px;
+  cursor: pointer;
 }
 
 #right .icons {

@@ -30,7 +30,7 @@
           </div>
         </div>
         <div id="logo" @click="fnMain">
-          <img src="../../image/logo.gif" />
+          <img src="../../image/logo2.gif" />
         </div>
         <div id="right">
           <div v-if="userStatus == 'C'" class="icons">

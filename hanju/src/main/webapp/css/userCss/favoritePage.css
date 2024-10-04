@@ -76,7 +76,7 @@ td{
 img{
     width: auto !important;
     max-width: 85px;
-    height: auto !important;
+    /* height: auto !important; */
     max-height: 85px;
     border: 0;
     vertical-align: top;

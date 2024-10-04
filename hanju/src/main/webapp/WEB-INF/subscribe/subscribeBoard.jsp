@@ -52,7 +52,7 @@ pageEncoding="UTF-8"%>
         console.log(res.data);
       },
       fnDetail(id) {
-        location.href = "/details/subscribe.do?id=" + id;
+        location.href = `/details/subscribe.do?id=\${id}`;
       },
     },
     mounted() {

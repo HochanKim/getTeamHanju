@@ -29,8 +29,12 @@ public class CartController {
     }
     @RequestMapping("cart/cartPayment.do")
     public String cartPayment(Model model, @RequestParam("cartItem") List<Integer> map) throws Exception{
-        model.addAttribute("userId",session.getAttribute("sessionId"));
+        String userId = (String)session.getAttribute("sessionId");
+        model.addAttribute("userId",userId);
         model.addAttribute("cartItem",new Gson().toJson(map));
+        if(userId==null){
+            return "user/requestLogin";
+        }
         return "cart/cartPayment";
     }
     @RequestMapping("cart/directPayment.do")
@@ -38,11 +42,15 @@ public class CartController {
                                 @RequestParam("dis") String dis,
                                 @RequestParam("cnt") String cnt,
                                 @RequestParam("kind") String kind) throws Exception{
-        model.addAttribute("userId",session.getAttribute("sessionId"));
+        String userId = (String)session.getAttribute("sessionId");
+        model.addAttribute("userId",userId);
         model.addAttribute("id",id);
         model.addAttribute("cnt",cnt);
         model.addAttribute("kind",kind);
         model.addAttribute("dis",dis);
+        if(userId==null){
+            return "user/requestLogin";
+        }
         return "cart/directPayment";
     }
     @RequestMapping("cart/pickupPayment.do")
@@ -50,17 +58,25 @@ public class CartController {
                                 @RequestParam("sId") String sId,
                                 @RequestParam("cnt") String cnt,
                                 @RequestParam("date") String date) throws Exception{
-        model.addAttribute("userId",session.getAttribute("sessionId"));
+        String userId = (String)session.getAttribute("sessionId");
+        model.addAttribute("userId",userId);
         model.addAttribute("pId",pId);
         model.addAttribute("cnt",cnt);
         model.addAttribute("date",date);
         model.addAttribute("sId",sId);
+        if(userId==null){
+            return "user/requestLogin";
+        }
         return "cart/pickupPayment";
     }
     @RequestMapping("cart/subPayment.do")
     public String subPayment(Model model, @RequestParam("subId") String subId) throws Exception{
-        model.addAttribute("userId",session.getAttribute("sessionId"));
+        String userId = (String)session.getAttribute("sessionId");
+        model.addAttribute("userId",userId);
         model.addAttribute("subId",subId);
+        if(userId==null){
+            return "user/requestLogin";
+        }
         return "cart/subPayment";
     }
 
