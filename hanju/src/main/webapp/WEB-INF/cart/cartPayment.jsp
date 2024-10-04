@@ -8,6 +8,7 @@ pageEncoding="UTF-8"%>
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>payment</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
@@ -32,7 +33,7 @@ pageEncoding="UTF-8"%>
                     {{ userInfo.detail }}
                   </div>
                   <div class="addrBtn">
-                    <button class="addrButton" @click="fnSearchAddr">
+                    <button class="addrButton" @click="addrChangeBtn">
                       주소 변경
                     </button>
                   </div>
@@ -46,7 +47,7 @@ pageEncoding="UTF-8"%>
             </div>
             <div class="paymentInfo">
               <div class="productItem">
-                <div class="uNameCol">제품들</div>
+                <div class="uNameCol">제품</div>
                 <div class="pItem">
                   <span v-for="(item, index) in cartNameList" :key="index">{{
                     item
@@ -106,10 +107,21 @@ pageEncoding="UTF-8"%>
                     {{ parseInt(sumPrice).toLocaleString() }} 원
                   </div>
                 </div>
-                <div class="lastDiscountPrice">
-                  <div class="priceCol">상품 할인 금액</div>
+                <div class="noDiscount">
+                  <div class="priceCol">할인 금액</div>
                   <div class="priceColl">
-                    {{ parseInt(discountPrice).toLocaleString() }} 원
+                    {{
+                      (
+                        parseInt(sumPrice) - parseInt(discountPrice)
+                      ).toLocaleString()
+                    }}
+                    원
+                  </div>
+                </div>
+                <div class="lastDiscountPrice">
+                  <div class="priceCol">사용 포인트</div>
+                  <div class="priceColl">
+                    {{ parseInt(usePoint).toLocaleString() }} 원
                   </div>
                 </div>
               </div>
@@ -130,6 +142,48 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
+      <dialog ref="dialog">
+        <h3>주소 변경</h3>
+        <div class="zipDiv">
+          <input
+            class="zipNoInput"
+            style="font-size: 14px"
+            type="text"
+            disabled
+            v-model="changeAddr.first"
+            :placeholder="userInfo.roadNum"
+          />
+          <div style="display: flex">
+            <button class="zipBtn" @click="addrChange">우편 번호 찾기</button>
+          </div>
+        </div>
+        <div class="zipDiv">
+          <input
+            style="font-size: 14px"
+            class="roadInput"
+            type="text"
+            v-model="changeAddr.second"
+            disabled
+            :placeholder="userInfo.road"
+          />
+          <input
+            style="font-size: 14px"
+            class="kkdi"
+            type="text"
+            v-model="changeAddr.third"
+            placeholder="상세 주소 입력"
+          />
+        </div>
+        <div class="diBtn">
+          <button @click="fnDbChange">주소 변경</button>
+          <button
+            style="background-color: rgb(255, 105, 105)"
+            @click="closeDialog"
+          >
+            변경 취소
+          </button>
+        </div>
+      </dialog>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
@@ -144,12 +198,69 @@ pageEncoding="UTF-8"%>
         usePoint: "0",
         cartNameList: [],
         userId: "",
+        changeAddr:{
+          first:"",
+          second:"",
+          third:"",
+        }
       };
     },
     methods: {
+      addrChangeBtn(){
+        this.$refs.dialog.showModal();
+      },
+      closeDialog(){
+        this.$refs.dialog.close();
+      },
+      fnDbChange(){
+        if(this.changeAddr.first==""){
+          alert("주소를 검색해주세요.");
+          return;
+        }
+        if(this.changeAddr.third==""){
+          alert("상세주소를 입력해 주세요.");
+          return;
+        }
+        const url = "changeAddr.dox"
+        axios.post(url,this.changeAddr).then(()=>{
+          this.fnInit();
+          this.changeAddr.first="";
+          this.changeAddr.second="";
+          this.changeAddr.third="";
+          this.$refs.dialog.close();
+        })
+      },
       addrChange() {
-        console.log(this.userId);
-        console.log(this.userInfo.address);
+        new daum.Postcode({
+          oncomplete: (data) => {
+            let roadNum = ""
+            let addr = "";
+            let extraAddr = "";
+            if (data.userSelectedType === "R") {
+              addr = data.roadAddress;
+            } else {
+              addr = data.jibunAddress;
+            }
+            if (data.userSelectedType === "R") {
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr +=
+                  extraAddr !== ""
+                    ? ", " + data.buildingName
+                    : data.buildingName;
+              }
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+            }
+            roadNum = data.zonecode;
+            addrFull = addr+extraAddr;
+            this.changeAddr.first = roadNum;
+            this.changeAddr.second = addrFull;
+          },
+        }).open();
       },
       fnPointInputCheck() {
         this.usePoint = this.usePoint.replace(/[^0-9]/g, "").replace(/^0+/, "");
@@ -257,22 +368,6 @@ pageEncoding="UTF-8"%>
         console.log("list.length : " + list.length);
         alert("결제완료");
       },
-      fnSearchAddr() {
-        var self = this;
-        var option =
-          "width = 500, height = 500, top = 100, left = 200, location = no";
-        window.open("/user/juso.do", "addr", option);
-      },
-      fnResult(roadAddrPart1, addrDetail, zipNo) {
-        var self = this;
-        self.zipNo = zipNo; //<- 위에 넣은 값
-        self.roadAddrPart1 = roadAddrPart1;
-        self.addrDetail = addrDetail;
-        // 콘솔 통해 각 변수 값 찍어보고 필요한거 가져다 쓰면 됩니다.
-        console.log(zipNo);
-        console.log(roadAddrPart1);
-        console.log(addrDetail);
-      },
     },
     mounted() {
       if ("${userId}" == "") {
@@ -282,66 +377,6 @@ pageEncoding="UTF-8"%>
       }
       this.userId = "${userId}";
       this.fnInit();
-
-      function jusoCallBack(
-        roadFullAddr,
-        roadAddrPart1,
-        addrDetail,
-        roadAddrPart2,
-        engAddr,
-        jibunAddr,
-        zipNo,
-        admCd,
-        rnMgtSn,
-        bdMgtSn,
-        detBdNmList,
-        bdNm,
-        bdKdcd,
-        siNm,
-        sggNm,
-        emdNm,
-        liNm,
-        rn,
-        udrtYn,
-        buldMnnm,
-        buldSlno,
-        mtYn,
-        lnbrMnnm,
-        lnbrSlno,
-        emdNo
-      ) {
-        if (window.vueAppInstance) {
-          window.vueAppInstance.fnResult(
-            roadFullAddr,
-            roadAddrPart1,
-            addrDetail,
-            roadAddrPart2,
-            engAddr,
-            jibunAddr,
-            zipNo,
-            admCd,
-            rnMgtSn,
-            bdMgtSn,
-            detBdNmList,
-            bdNm,
-            bdKdcd,
-            siNm,
-            sggNm,
-            emdNm,
-            liNm,
-            rn,
-            udrtYn,
-            buldMnnm,
-            buldSlno,
-            mtYn,
-            lnbrMnnm,
-            lnbrSlno,
-            emdNo
-          );
-        } else {
-          console.error("Vue app instance is not available.");
-        }
-      }
     },
   });
   app.mount("#app");

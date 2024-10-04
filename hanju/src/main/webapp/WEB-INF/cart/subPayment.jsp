@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
     <title>document</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app">
@@ -64,7 +65,50 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
+      <dialog ref="dialog">
+        <h3>주소 변경</h3>
+        <div class="zipDiv">
+          <input
+            class="zipNoInput"
+            style="font-size: 14px"
+            type="text"
+            disabled
+            v-model="changeAddr.first"
+            :placeholder="userInfo.roadNum"
+          />
+          <div style="display: flex">
+            <button class="zipBtn" @click="addrChange">우편 번호 찾기</button>
+          </div>
+        </div>
+        <div class="zipDiv">
+          <input
+            style="font-size: 14px"
+            class="roadInput"
+            type="text"
+            v-model="changeAddr.second"
+            disabled
+            :placeholder="userInfo.road"
+          />
+          <input
+            style="font-size: 14px"
+            class="kkdi"
+            type="text"
+            v-model="changeAddr.third"
+            placeholder="상세 주소 입력"
+          />
+        </div>
+        <div class="diBtn">
+          <button @click="fnDbChange">주소 변경</button>
+          <button
+            style="background-color: rgb(255, 105, 105)"
+            @click="closeDialog"
+          >
+            변경 취소
+          </button>
+        </div>
+      </dialog>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>
@@ -79,10 +123,70 @@ pageEncoding="UTF-8"%>
         subImg: "",
         subItem: {},
         itemList: [],
+        changeAddr: {
+          first: "",
+          second: "",
+          third: "",
+        },
       };
     },
     methods: {
-      fnAddrChange() {},
+      addrChangeBtn() {
+        this.$refs.dialog.showModal();
+      },
+      closeDialog() {
+        this.$refs.dialog.close();
+      },
+      fnDbChange() {
+        if (this.changeAddr.first == "") {
+          alert("주소를 검색해주세요.");
+          return;
+        }
+        if (this.changeAddr.third == "") {
+          alert("상세주소를 입력해 주세요.");
+          return;
+        }
+        const url = "changeAddr.dox";
+        axios.post(url, this.changeAddr).then(() => {
+          this.fnInit();
+          this.changeAddr.first = "";
+          this.changeAddr.second = "";
+          this.changeAddr.third = "";
+          this.$refs.dialog.close();
+        });
+      },
+      addrChange() {
+        new daum.Postcode({
+          oncomplete: (data) => {
+            let roadNum = "";
+            let addr = "";
+            let extraAddr = "";
+            if (data.userSelectedType === "R") {
+              addr = data.roadAddress;
+            } else {
+              addr = data.jibunAddress;
+            }
+            if (data.userSelectedType === "R") {
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr +=
+                  extraAddr !== ""
+                    ? ", " + data.buildingName
+                    : data.buildingName;
+              }
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+            }
+            roadNum = data.zonecode;
+            addrFull = addr + extraAddr;
+            this.changeAddr.first = roadNum;
+            this.changeAddr.second = addrFull;
+          },
+        }).open();
+      },
       async fnSubInfo() {
         const url = "/details/getSubscribeItem.dox";
         const res = await axios(url, { params: { subId: this.subId } });

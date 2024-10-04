@@ -205,7 +205,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Map<String,Object> selectItem(Map<String,Object> map) {
         Map<String,Object> result = new HashMap<>();
-        result.put("item",mainMapper.selectProduct(map));
+            result.put("item",mainMapper.selectProduct(map));
         return result;
     }
 
@@ -217,5 +217,20 @@ public class CartServiceImpl implements CartService {
         result.put("status","success");
         return result;
     }
-
+    @Override
+    public Map<String, Object> directPickupPayment(Map<String, Object> map) {
+        Map<String,Object> result = new HashMap<>();
+        System.out.println(map);
+        cartMapper.directPickupPayment(map);
+        cartMapper.directPickupBill(map);
+        userMapper.pointChange(map);
+        result.put("status","success");
+        return result;
+    }
+    public Map<String,Object> changeAddr(Map<String,Object> map){
+        Map<String,Object> result = new HashMap<>();
+        cartMapper.changeAddr(map);
+        result.put("status","success");
+        return result;
+    }
 }
