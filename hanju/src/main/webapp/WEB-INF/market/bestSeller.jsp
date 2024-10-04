@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/vue.js"></script>
-    <title>한주</title>
+    <title>한주 일반구매</title>
   </head>
   <body>
     <jsp:include page="../mainPage/header.jsp"></jsp:include>

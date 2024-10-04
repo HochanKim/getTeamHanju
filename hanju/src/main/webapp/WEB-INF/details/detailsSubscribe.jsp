@@ -26,7 +26,7 @@
                     <div class="pad2">{{ subInfo.cDateTime }}, {{subInfo.arriveDate}} 배송</div>
                     <div class="font-size">{{ subInfo.title }}</div>
                     <div class="pad2">원가 / 판매가격</div>
-                    <div class="font-size2">  <del>{{parseInt(subInfo.price).toLocaleString()}}</del> / {{parseInt(subInfo.price - (subInfo.price / 100 * subInfo.discount)).toLocaleString()}}원</div>
+                    <div class="font-size2">  <del style="color:#999;">{{parseInt(subInfo.price).toLocaleString()}}</del> / {{parseInt(subInfo.price - (subInfo.price / 100 * subInfo.discount)).toLocaleString()}}원</div>
                   </div>
                 </div>
               </div>

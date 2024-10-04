@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/css/testCss.css" />
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
-    <title>document</title>
+    <title>한주 와인픽업</title>
   </head>
   <body>
     <div id="app">

@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
     <script src="/js/vue.js"></script>
-    <title>Document</title>
+    <title>한주 (HANJU)</title>
 </head>
 <body>
     <jsp:include page="header.jsp" flush="false" />
