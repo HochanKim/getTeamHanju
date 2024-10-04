@@ -15,20 +15,18 @@ pageEncoding="UTF-8"%>
     <div id="app">
         <div id="imageSlider">
             <div class="sliderLeftBtn" @click="fnSlideBtnClick('left')">
-                <img src="../../image/before.png">
+                <img src="../../image/before_white.png">
             </div>
             <div class="sliderRightBtn" @click="fnSlideBtnClick('right')">
-                <img src="../../image/next.png">
+                <img src="../../image/next_white.png">
             </div>
             <div class="pageIndexer">{{currPage}} / {{totalPage}}</div>
             <div class="imgContainer" :style="sliderStyle">
-                <img src="../../image/6.png">
+                <img src="../../image/4.png">
                 <img src="../../image/1.png">
                 <img src="../../image/2.png">
                 <img src="../../image/3.png">
                 <img src="../../image/4.png">
-                <img src="../../image/5.png">
-                <img src="../../image/6.png">
                 <img src="../../image/1.png">
             </div>
         </div>
@@ -42,10 +40,10 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             <div class="leftBtn" @click="fnBNSLBtnClick('left')">
-                <img src="../../image/before.png">
+                <img src="../../image/before_white.png">
             </div>
             <div class="rightBtn" @click="fnBNSLBtnClick('right')">
-                <img src="../../image/next.png">
+                <img src="../../image/next_white.png">
             </div>
             <div class="cardViewWrapper">
                 <div class="cardViewContainer" :style="BNSL_sliderStyle">
@@ -78,10 +76,10 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             <div class="leftBtn" @click="fnBWL_BtnClick('left')">
-                <img src="../../image/before.png">
+                <img src="../../image/before_white.png">
             </div>
             <div class="rightBtn" @click="fnBWL_BtnClick('right')">
-                <img src="../../image/next.png">
+                <img src="../../image/next_white.png">
             </div>
             <div class="cardViewWrapper">
                 <div class="cardViewContainer" :style="BWL_sliderStyle">
@@ -90,7 +88,7 @@ pageEncoding="UTF-8"%>
                         <div class="infoWrapper">
                             <div class="productName">{{item.productName}}</div>
                             <div>
-                                <span class="productPrice">{{item.price}}</span>
+                                <span class="productPrice">{{item.priceComma}}</span>
                                 <span class="won">원</span>
                             </div>
                         </div>
@@ -107,10 +105,10 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             <div class="leftBtn" @click="fnBGSL_BtnClick('left')">
-                <img src="../../image/before.png">
+                <img src="../../image/before_white.png">
             </div>
             <div class="rightBtn" @click="fnBGSL_BtnClick('right')">
-                <img src="../../image/next.png">
+                <img src="../../image/next_white.png">
             </div>
             <div class="cardViewWrapper">
                 <div class="cardViewContainer" :style="BGSL_sliderStyle">
@@ -119,14 +117,14 @@ pageEncoding="UTF-8"%>
                         <div class="infoWrapper">
                             <div class="productName">{{item.productName}}</div>
                             <div v-if="item.discount == 0">
-                                <span class="productPrice">{{item.price}}</span>
+                                <span class="productPrice">{{item.priceComma}}</span>
                                 <span class="won">원</span>
                             </div>
                             <div v-else>
-                                <span class="originPrice"><del>{{item.price}}원</del></span>
+                                <span class="originPrice"><del>{{item.priceComma}}원</del></span>
                                 <br>
                                 <span class="discount">{{item.discount}}% </span>
-                                <span class="productPrice">{{item.price - (item.price * item.discount / 100)}}</span>
+                                <span class="productPrice">{{item.discountPrice}}</span>
                                 <span class="won">원</span>
                             </div>
                         </div>
@@ -143,10 +141,10 @@ pageEncoding="UTF-8"%>
                 </div>
             </div>
             <div class="reviewLeftBtn" @click="fnNRL_BtnClick('left')">
-                <img src="../../image/before.png">
+                <img src="../../image/before_white.png">
             </div>
             <div class="reviewRightBtn" @click="fnNRL_BtnClick('right')">
-                <img src="../../image/next.png">
+                <img src="../../image/next_white.png">
             </div>
             <div class="NRL_cardViewWrapper">
                 <div class="NRL_cardViewContainer" :style="NRL_sliderStyle">
@@ -177,7 +175,7 @@ pageEncoding="UTF-8"%>
             return {
                 moveTime : 500,
                 currPage : 1,
-                totalPage : 6,
+                totalPage : 4,
                 sliderStyle : "",
 
                 bestNormalSellList : [],

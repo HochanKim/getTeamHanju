@@ -2,6 +2,7 @@
     width: 100%;
     min-width: 1020px;
     font-family: 'NanumSquareAcr';
+    color: #222;
 }
 
 #contents{
@@ -60,8 +61,8 @@ table{
 
 th{
     padding: 13px 0 12px;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 600px;
     letter-spacing: 0.1em;
     border-left: 0;
     border-bottom: 1px solid #e7e7e7;
@@ -94,6 +95,7 @@ a{
 .reviewArea2 {
     display: flex;
     align-items: center;
+    padding-left: 10px;
 }
 
 img{
@@ -119,7 +121,8 @@ span{
 }
 
 .writeBtn{
-    width: 80px;
+    width: 90px;
+    height: 45px;
     line-height: 28px;
     border: 1px solid #dadde0;
     border-radius: 4px;
@@ -216,6 +219,7 @@ button{
 
 .txtArea{
     padding-right: 20px;
+    overflow: hidden; /* 내용이 넘치지 않도록 */
 }
 
 .txt{
@@ -395,4 +399,43 @@ input[type="file"]{
 
 .star_test #star1:checked .star_img label:nth-of-type(1) {
     background-image: url(../../image/star.png);
+}
+
+.pagination {
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.pagination button {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #007bff;
+    padding: 8px 12px;
+    margin: 0 2px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.pagination button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    cursor: default;
+}
+
+.pagination button:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    border: 1px solid #dee2e6;
+}
+
+.pagination button:not(.active):not(:disabled):hover {
+    background-color: #0056b3;
+    color: white;
 }

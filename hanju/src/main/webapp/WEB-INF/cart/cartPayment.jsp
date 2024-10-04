@@ -8,60 +8,92 @@ pageEncoding="UTF-8"%>
     <script src="/js/axios.min.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
-    <title>document</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <title>payment</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app">
       <div id="containerPayment">
         <h2 class="title">결제</h2>
         <div class="container">
-          <div class="itemContainer">
+          <div id="itemContainer">
             <div class="userInfo">
-              <div class="userName">
-                <div>이름</div>
-                <div>{{ userInfo.name }}</div>
-              </div>
-              <div>
-                <div class="주소">
-                  <div>배송지</div>
-                  <div>{{ userInfo.address }}</div>
+              <div class="boxHead"><h3>배송 정보</h3></div>
+              <div class="infoBox2">
+                <div class="userName">
+                  <div class="uNameCol">받는분</div>
+                  <div class="addrCol">{{ userInfo.name }}</div>
+                  <div class="addrBtn"></div>
                 </div>
-                <button @click="addrChange">주소 변경</button>
-              </div>
-              <div class="phone">
-                <div>연락처</div>
-                <div>{{ userInfo.phone }}</div>
+                <div class="addr">
+                  <div class="uNameCol">배송지</div>
+                  <div class="addrCol">
+                    [{{ userInfo.roadNum }}]{{ userInfo.road }}
+                    {{ userInfo.detail }}
+                  </div>
+                  <div class="addrBtn">
+                    <button class="addrButton" @click="addrChangeBtn">
+                      주소 변경
+                    </button>
+                  </div>
+                </div>
+                <div class="phone">
+                  <div class="uNameCol">연락처</div>
+                  <div class="addrCol">{{ userInfo.phone }}</div>
+                  <div class="addrBtn"></div>
+                </div>
               </div>
             </div>
             <div class="paymentInfo">
-              <div>제품들</div>
-              <span
-                class="제품항목"
-                v-for="(item, index) in cartNameList"
-                :key="index"
-                >{{ item }}</span
-              >
-              <div class="price">
-                <div>원래가격</div>
-                <div>{{ sumPrice }}</div>
+              <div class="productItem">
+                <div class="uNameCol">제품</div>
+                <div class="pItem">
+                  <span v-for="(item, index) in cartNameList" :key="index">{{
+                    item
+                  }}</span>
+                </div>
               </div>
+            </div>
+            <div class="pricePoint">
               <div class="discountPrice">
-                <div>할인된 진짜 가격</div>
-                <div>{{ discountPrice }}</div>
+                <div class="uNameCol">총 상품 금액</div>
+                <div class="pItem">
+                  {{ parseInt(discountPrice).toLocaleString() }} 원
+                </div>
               </div>
               <div class="point">
-                <div>보유 포인트</div>
-                <div>{{ userInfo.point }}</div>
-                <div>포인트 사용</div>
-                <div>
-                  <input v-model="usePoint" @input="fnPointInputCheck" />
+                <div class="uNameCol">보유 포인트</div>
+                <div class="pItem">
+                  {{ parseInt(userInfo.point).toLocaleString() }} Point
                 </div>
-                <div>잔여 예상 포인트</div>
-                <div>{{ parseInt(userInfo.point) - parseInt(usePoint) }}</div>
               </div>
-              <div class="최종가격">
-                <div>최종 가격</div>
-                <div>{{ discountPrice - usePoint }}</div>
+              <div class="point">
+                <div class="uNameCol">포인트 사용</div>
+                <div class="pItem">
+                  <input
+                    type="text"
+                    v-model="usePoint"
+                    @input="fnPointInputCheck"
+                  />
+                </div>
+              </div>
+              <div class="point">
+                <div class="uNameCol">잔여 예상 포인트</div>
+                <div class="pItem">
+                  {{
+                    (
+                      parseInt(userInfo.point) - parseInt(usePoint)
+                    ).toLocaleString()
+                  }}
+                  Point
+                </div>
+              </div>
+              <div class="point">
+                <div class="uNameCol">최종 가격</div>
+                <div class="pItem">
+                  {{ parseInt(discountPrice - usePoint).toLocaleString() }} 원
+                </div>
               </div>
             </div>
           </div>
@@ -75,10 +107,21 @@ pageEncoding="UTF-8"%>
                     {{ parseInt(sumPrice).toLocaleString() }} 원
                   </div>
                 </div>
-                <div class="lastDiscountPrice">
-                  <div class="priceCol">상품 할인 금액</div>
+                <div class="noDiscount">
+                  <div class="priceCol">할인 금액</div>
                   <div class="priceColl">
-                    {{ parseInt(discountPrice).toLocaleString() }} 원
+                    {{
+                      (
+                        parseInt(sumPrice) - parseInt(discountPrice)
+                      ).toLocaleString()
+                    }}
+                    원
+                  </div>
+                </div>
+                <div class="lastDiscountPrice">
+                  <div class="priceCol">사용 포인트</div>
+                  <div class="priceColl">
+                    {{ parseInt(usePoint).toLocaleString() }} 원
                   </div>
                 </div>
               </div>
@@ -99,7 +142,50 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
+      <dialog ref="dialog">
+        <h3>주소 변경</h3>
+        <div class="zipDiv">
+          <input
+            class="zipNoInput"
+            style="font-size: 14px"
+            type="text"
+            disabled
+            v-model="changeAddr.first"
+            :placeholder="userInfo.roadNum"
+          />
+          <div style="display: flex">
+            <button class="zipBtn" @click="addrChange">우편 번호 찾기</button>
+          </div>
+        </div>
+        <div class="zipDiv">
+          <input
+            style="font-size: 14px"
+            class="roadInput"
+            type="text"
+            v-model="changeAddr.second"
+            disabled
+            :placeholder="userInfo.road"
+          />
+          <input
+            style="font-size: 14px"
+            class="kkdi"
+            type="text"
+            v-model="changeAddr.third"
+            placeholder="상세 주소 입력"
+          />
+        </div>
+        <div class="diBtn">
+          <button @click="fnDbChange">주소 변경</button>
+          <button
+            style="background-color: rgb(255, 105, 105)"
+            @click="closeDialog"
+          >
+            변경 취소
+          </button>
+        </div>
+      </dialog>
     </div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>
@@ -112,17 +198,74 @@ pageEncoding="UTF-8"%>
         usePoint: "0",
         cartNameList: [],
         userId: "",
+        changeAddr:{
+          first:"",
+          second:"",
+          third:"",
+        }
       };
     },
     methods: {
+      addrChangeBtn(){
+        this.$refs.dialog.showModal();
+      },
+      closeDialog(){
+        this.$refs.dialog.close();
+      },
+      fnDbChange(){
+        if(this.changeAddr.first==""){
+          alert("주소를 검색해주세요.");
+          return;
+        }
+        if(this.changeAddr.third==""){
+          alert("상세주소를 입력해 주세요.");
+          return;
+        }
+        const url = "changeAddr.dox"
+        axios.post(url,this.changeAddr).then(()=>{
+          this.fnInit();
+          this.changeAddr.first="";
+          this.changeAddr.second="";
+          this.changeAddr.third="";
+          this.$refs.dialog.close();
+        })
+      },
       addrChange() {
-        console.log(this.userId);
-        console.log(this.userInfo.address);
+        new daum.Postcode({
+          oncomplete: (data) => {
+            let roadNum = ""
+            let addr = "";
+            let extraAddr = "";
+            if (data.userSelectedType === "R") {
+              addr = data.roadAddress;
+            } else {
+              addr = data.jibunAddress;
+            }
+            if (data.userSelectedType === "R") {
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr +=
+                  extraAddr !== ""
+                    ? ", " + data.buildingName
+                    : data.buildingName;
+              }
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+            }
+            roadNum = data.zonecode;
+            addrFull = addr+extraAddr;
+            this.changeAddr.first = roadNum;
+            this.changeAddr.second = addrFull;
+          },
+        }).open();
       },
       fnPointInputCheck() {
         this.usePoint = this.usePoint.replace(/[^0-9]/g, "").replace(/^0+/, "");
-        if(this.usePoint == ""){
-          this.usePoint = '0';
+        if (this.usePoint == "") {
+          this.usePoint = "0";
         }
         const price = parseInt(this.discountPrice);
         const use = parseInt(this.usePoint, 10);
@@ -154,14 +297,13 @@ pageEncoding="UTF-8"%>
             const user = data.userInfo;
             this.userInfo = {
               point: user.point,
-              address: {
-                roadNum: user.zipNo,
-                road: user.roadAddrPart1,
-                detail: user.addrDetail,
-              },
+              roadNum: user.zipNo,
+              road: user.roadAddrPart1,
+              detail: user.addrDetail,
               name: user.userName,
               phone: user.phone,
             };
+            console.log(this.userInfo);
           })
           .catch((error) => {
             console.log("유저정보 받아오기 오류");

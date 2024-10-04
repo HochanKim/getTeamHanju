@@ -90,7 +90,6 @@ public class CartApiController {
     @GetMapping("cart/productInfo.dox")
     @ResponseBody
     public String productInfo(Model model, @RequestParam Map<String, Object> map) throws Exception {
-        System.out.println("주목" +map);
         Map<String, Object> result = cartService.selectItem(map);
         return new Gson().toJson(result);
     }
@@ -100,9 +99,18 @@ public class CartApiController {
         Map<String, Object> result = cartService.directPayment(map);
         return new Gson().toJson(result);
     }
-
-
-
-
-
+    @PostMapping("cart/changeAddr.dox")
+    @ResponseBody
+    public String changeAddr(Model model, @RequestBody Map<String, Object> map) throws Exception {
+        map.put("userId",session.getAttribute("sessionId"));
+        Map<String, Object> result = cartService.changeAddr(map);
+        return new Gson().toJson(result);
+    }
+    @PostMapping("cart/directPickupPayment.dox")
+    @ResponseBody
+    public String directPickupPayment(Model model, @RequestBody Map<String, Object> map) throws Exception {
+        map.put("userId",session.getAttribute("sessionId"));
+        Map<String, Object> result = cartService.directPickupPayment(map);
+        return new Gson().toJson(result);
+    }
 }

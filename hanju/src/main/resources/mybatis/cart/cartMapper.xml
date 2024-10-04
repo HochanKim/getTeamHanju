@@ -136,8 +136,23 @@
         INTO HANJU_BILL (BILL_ID,PRODUCT_ID,PRODUCT_COUNT,USER_ID,CDATETIME,STATUS,KIND)
         VALUES (BILL_SEQ.NEXTVAL,#{productId},#{count},#{userId},sysdate,'B',#{kind})
     </insert>
-
-
-
+    <update id="changeAddr" parameterType="hashmap">
+        UPDATE HANJU_USER
+        SET ZIPNO = #{first}, ROADADDRPART1 = #{second}, ADDRDETAIL = #{third}
+        WHERE USER_ID = #{userId}
+    </update>
+    <insert id="directPickupPayment" parameterType="hashmap" useGeneratedKeys="true" keyProperty="billId">
+        <selectKey keyProperty="billId" resultType="int" order="BEFORE">
+            SELECT BILL_SEQ.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT
+        INTO HANJU_BILL (BILL_ID,PRODUCT_ID,PRODUCT_COUNT,USER_ID,CDATETIME,STATUS,KIND)
+        VALUES (#{billId},#{productId},#{count},#{userId},sysdate,'B',#{kind})
+    </insert>
+    <insert id="directPickupBill" parameterType="hashmap">
+        INSERT
+        INTO HANJU_PICKUP_BILL (BILL_ID,STORE_ID,PICKUP_DATE,PICKUP_STATUS)
+        VALUES (#{billId},#{sId},#{date},'B')
+    </insert>
 
 </mapper>

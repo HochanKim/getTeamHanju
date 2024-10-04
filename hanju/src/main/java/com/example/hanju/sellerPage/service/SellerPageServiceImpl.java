@@ -13,6 +13,7 @@ import com.example.hanju.main.model.ProductImage;
 import com.example.hanju.sellerPage.mapper.SellerPageMapper;
 import com.example.hanju.sellerPage.model.GroupSell;
 import com.example.hanju.sellerPage.model.NormalSell;
+import com.example.hanju.sellerPage.model.SellerBill;
 
 @Service
 public class SellerPageServiceImpl implements SellerPageService {
@@ -193,4 +194,34 @@ public class SellerPageServiceImpl implements SellerPageService {
 		resultMap.put("billCount"      , billCount      );
 		return resultMap;
 	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> getBillList(HashMap<String, Object> map) {
+		List<SellerBill> list = sellerPageMapper.getBillList(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("list", list);
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> shipConfirm(HashMap<String, Object> map) {
+		sellerPageMapper.shipConfirm(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "수정되었습니다!");
+		return resultMap;
+	}
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> deleteBill(HashMap<String, Object> map) {
+		sellerPageMapper.deleteBill(map);
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		resultMap.put("message", "삭제되었습니다!");
+		return resultMap;
+	}
+	
+	
+	
 }

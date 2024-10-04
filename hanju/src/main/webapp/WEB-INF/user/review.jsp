@@ -37,14 +37,20 @@
               <tr v-for="item in orderList">
                 <td class="product">
                   <div class="reviewArea">
-                    <a @click="fnDetailPage(item.sellId,item.kind)" class="thum"><img :src="item.filePath"></a>
+                    <a @click="fnDetailPage(item.sellId,item.kind)" class="thum"
+                      ><img :src="item.filePath"
+                    /></a>
                     <span class="reviewArea2">
-                      <a @click="fnDetailPage(item.sellId,item.kind)" class="productName">{{item.productName}}</a>
+                      <a
+                        @click="fnDetailPage(item.sellId,item.kind)"
+                        class="productName"
+                        >{{ item.productName }}</a
+                      >
                     </span>
                   </div>
                 </td>
                 <td class="cDateTime">
-                  <div>{{item.cDateTime}}</div>
+                  <div>{{ item.cDateTime }}</div>
                 </td>
                 <td class="write">
                   <button class="writeBtn" @click="modalOpen(item.billId, item.filePath, item.productName)">리뷰
@@ -56,20 +62,52 @@
               <div class="modal-container">
                 <h1>리뷰작성</h1>
                 <div class="productInfo">
-                  <p class="thum"><img :src="modalFilePath" class="insideImg"></p>
+                  <p class="thum">
+                    <img :src="modalFilePath" class="insideImg" />
+                  </p>
                   <span>
-                    <p class="productName">{{modalProductName}}</p>
+                    <p class="productName">{{ modalProductName }}</p>
                   </span>
                 </div>
                 <div class="write">
                   <div id="rating">
                     <div class="how">상품은 어떠셨나요?</div>
                     <div class="star">
-                      <input type="radio" name="star" id="r1" value="1" v-model="starRating">
-                      <input type="radio" name="star" id="r2" value="2" v-model="starRating">
-                      <input type="radio" name="star" id="r3" value="3" v-model="starRating">
-                      <input type="radio" name="star" id="r4" value="4" v-model="starRating">
-                      <input type="radio" name="star" id="r5" value="5" v-model="starRating">
+                      <input
+                        type="radio"
+                        name="star"
+                        id="r1"
+                        value="1"
+                        v-model="starRating"
+                      />
+                      <input
+                        type="radio"
+                        name="star"
+                        id="r2"
+                        value="2"
+                        v-model="starRating"
+                      />
+                      <input
+                        type="radio"
+                        name="star"
+                        id="r3"
+                        value="3"
+                        v-model="starRating"
+                      />
+                      <input
+                        type="radio"
+                        name="star"
+                        id="r4"
+                        value="4"
+                        v-model="starRating"
+                      />
+                      <input
+                        type="radio"
+                        name="star"
+                        id="r5"
+                        value="5"
+                        v-model="starRating"
+                      />
                       <span class="star-box">
                         <label for="r1">별</label>
                         <label for="r2">별</label>
@@ -84,7 +122,10 @@
                   </div>
                   <div class="txtArea">
                     <div class="txtInner">
-                      <textarea placeholder="리뷰를 작성해 보세요" v-model="reviewText"></textarea>
+                      <textarea
+                        placeholder="리뷰를 작성해 보세요"
+                        v-model="reviewText"
+                      ></textarea>
                     </div>
                   </div>
                   <div id="photo">
@@ -104,141 +145,147 @@
                   </div>
                   <div class="modal-btn">
                     <button class="modalClose" @click="modalOpen">닫기</button>
-                    <button class="reviewRegis" @click="fnReview">리뷰 등록 하기</button>
+                    <button class="reviewRegis" @click="fnReview">
+                      리뷰 등록 하기
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="pagination">
+            <button v-if="currentPage > 1">이전</button>
+            <button v-for="page in totalPages" :class="{active: page == currentPage}">
+                {{ page }}
+            </button>
+            <button v-if="currentPage < totalPages">다음</button>
+        </div>
         </div>
       </div>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
+</html>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        userId: "${sessionId}",
+        orderList: [],
+        modalCheck: false,
+        starRating: '0',
+        selectBillId: "",
+        reviewText: "",
+        reviewPhoto: "",
+        modalFilePath: "",
+        modalProductName: "",
+        thumbnail: null, // 썸네일 URL을 저장할 변수
+        thumbnailFile : null,
+        currentPage: 1,      
+        pageSize: 5,        
+        totalPages: 2 
+      };
+    },
+    methods: {
+      modalOpen(billId, filePath, productName) {
+        this.selectBillId = billId;
+        this.modalCheck = !this.modalCheck
 
-  </html>
+        var self = this;
 
-
-
-
-  <script>
-    const app = Vue.createApp({
-      data() {
-        return {
-          userId: "${sessionId}",
-          orderList: [],
-          modalCheck: false,
-          starRating: '0',
-          selectBillId: "",
-          reviewText: "",
-          reviewPhoto: "",
-          modalFilePath: "",
-          modalProductName: "",
-          thumbnail: null, // 썸네일 URL을 저장할 변수
-          thumbnailFile : null
-        };
+        self.modalFilePath = filePath;
+        self.modalProductName = productName;
+        self.thumbnail = null; // 모달 열 때 썸네일 초기화
+        self.thumbnail = null;
       },
-      methods: {
-        modalOpen(billId, filePath, productName) {
-          this.selectBillId = billId;
-          this.modalCheck = !this.modalCheck
 
-          var self = this;
+      previewImage(event) {
+        var self = this;
+        self.thumbnailFile = event.target.files[0]; // 선택된 파일 가져오기
+        self.thumbnail = URL.createObjectURL(self.thumbnailFile);
+      },
 
-          self.modalFilePath = filePath;
-          self.modalProductName = productName;
-          self.thumbnail = null; // 모달 열 때 썸네일 초기화
-          self.thumbnail = null;
-        },
+      fnOrder() {
+        var self = this;
 
-        previewImage(event) {
-          var self = this;
-          
-          self.thumbnailFile = event.target.files[0]; // 선택된 파일 가져오기
-          self.thumbnail = URL.createObjectURL(self.thumbnailFile);
-        },
+        $.ajax({
+          url: "getOrderList.dox",
+          dataType: "json",
+          type: "GET",
 
-        fnOrder() {
-          var self = this;
-
-          $.ajax({
-            url: "getOrderList.dox",
-            dataType: "json",
-            type: "GET",
-
-            success: function (data) {
-              console.log(data);
-              console.log(self.orderList);
-              for (var item of data.orderList) {
-                if (item.isComment == "N") {
-                  self.orderList.push(item);
-                }
+          success: function (data) {
+            console.log(data);
+            console.log(self.orderList);
+            for (var item of data.orderList) {
+              if (item.isComment == "N") {
+                self.orderList.push(item);
               }
             }
-          });
-        },
-
-
-        fnDetailPage(productId, kind) {
-          if (kind == 'P') {
-            location.href = `/details/detailsPickup.do?id=\${productId}`;
-          } else if (kind == 'N') {
-            location.href = `/details/details.do?id=\${productId}`;
           }
-        },
+        });
+      },
 
 
-        fnReview() {
-          var self = this;
+      fnDetailPage(productId, kind) {
+        if (kind == 'P') {
+          location.href = `/details/detailsPickup.do?id=\${productId}`;
+        } else if (kind == 'N') {
+          location.href = `/details/details.do?id=\${productId}`;
+        }
+      },
 
-          var nparmap = {
-            reviewText: self.reviewText,
-            billId: self.selectBillId,
-            userId: self.userId,
-            starRating: self.starRating
-          };
 
-          $.ajax({
-            url: "/user/review.dox",
-            dataType: "json",
-            type: "POST",
-            data: nparmap,
-            success: function (data) {
-              console.log(data);
-              self.fnUploadImg(data.commentId, self.thumbnailFile, "R");
-              $.pageChange("review.do", {});
+      fnReview() {
+        var self = this;
 
-            }
-          });
+        var nparmap = {
+          reviewText: self.reviewText,
+          billId: self.selectBillId,
+          userId: self.userId,
+          starRating: self.starRating
+        };
 
-        },
-        fnUploadImg(commentId, imageFile, imageCode) {
-          const formData = new FormData();
-          formData.append("productId", commentId);
-          formData.append("imageCode", imageCode);
-          formData.append("productImg", imageFile);
+        $.ajax({
+          url: "/user/review.dox",
+          dataType: "json",
+          type: "POST",
+          data: nparmap,
+          success: function (data) {
+            console.log(data);
+            self.fnUploadImg(data.commentId, self.thumbnailFile, "R");
+            $.pageChange("review.do", {});
 
-          $.ajax({
-            url: "uploadProductImg.dox",
-            dataType: "json",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: () => {
-              alert("등록되었습니다!");
-              $.pageChange("review.do", {});
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-              console.error('업로드 실패!', textStatus, errorThrown);
-            }
-          });
-        },
+          }
+        });
 
       },
-      mounted() {
-        this.fnOrder();
+      fnUploadImg(commentId, imageFile, imageCode) {
+        const formData = new FormData();
+        formData.append("productId", commentId);
+        formData.append("imageCode", imageCode);
+        formData.append("productImg", imageFile);
+
+        $.ajax({
+          url: "uploadProductImg.dox",
+          dataType: "json",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: () => {
+            alert("등록되었습니다!");
+            $.pageChange("review.do", {});
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error('업로드 실패!', textStatus, errorThrown);
+          }
+        });
       },
-    });
-    app.mount("#app");
-  </script>
+
+    },
+    mounted() {
+      this.fnOrder();
+    },
+  });
+  app.mount("#app");
+</script>

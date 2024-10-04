@@ -132,6 +132,9 @@ input[type=text], input[type=password]{
     width: 30px;
     margin: 0 4px 0 0;
 }
+button{
+    cursor: pointer;
+}
 
 .joinComBtn{
     margin: 35px 0 0 0;
@@ -147,12 +150,14 @@ input[type=text], input[type=password]{
     padding: 18px 18px;
     display: inline-block;
     box-sizing: border-box;
-    border: 1px solid #d5d5d5;
+    border: 1px solid #7B4BBF;
     border-radius: 2px;
     line-height: 18px;
     color: #222;
     background-color:  #fff;
     cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 #ComBtn{
@@ -163,12 +168,13 @@ input[type=text], input[type=password]{
     padding: 18px 18px;
     display: inline-block;
     box-sizing: border-box;
-    border: 1px solid #222;
-    border-radius: 2px;
     line-height: 18px;
-    color: #fff;
-    background-color: #222;
-    cursor: pointer;
+    border-radius: 5px;
+    background-color: #7B4BBF;
+    color: white;
+    font-size: 15px;
+    border: 0px;
+
 }
 
 #DelBtn{
@@ -176,10 +182,11 @@ input[type=text], input[type=password]{
     right: 0;
     padding: 13px 16px;
     display: inline-block;
-    border: 1px solid #ddd;
+    border: 1px solid  #7B4BBF;
     line-height: 18px;
-    font-size: 13px;
     background: #fff;
+    font-size: 15px;
+    border-radius: 5px;
 }
 
 .msg{

@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainPage/header.css" />
+    <script src="../js/jquery.js"></script>
+    <!-- <script src="../js/vue.js"></script> -->
     <title>한주</title>
   </head>
 
@@ -22,6 +24,9 @@
           </div>
           <div class="menu">
             <a href="../market/groupSellList.do">공동구매</a>
+          </div>
+          <div class="menu">
+            <a href="../details/subscribe.do?id=96">구독</a>
           </div>
         </div>
         <div id="logo" @click="fnMain">
