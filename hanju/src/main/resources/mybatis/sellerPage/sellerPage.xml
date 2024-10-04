@@ -172,7 +172,36 @@
 		SELECT  COUNT(*)
 		FROM    HANJU_BILL B
 		INNER JOIN HANJU_PRODUCT P ON B.PRODUCT_ID = P.PRODUCT_ID
-		WHERE P.SELLER_ID = #{userId}
+		WHERE P.SELLER_ID = #{userId} AND B.KIND = 'N' AND B.STATUS = 'B'
 	</select>
+	
+	<select id="getBillList" parameterType="hashmap" resultType="com.example.hanju.sellerPage.model.SellerBill">
+		SELECT
+		    B.BILL_ID,
+		    P.PRODUCT_NAME,
+		    B.PRODUCT_COUNT,
+		    B.CDATETIME,
+		    U.USER_NAME,
+		    U.PHONE,
+		    U.ZIPNO || ' ' || U.ROADADDRPART1 || ' ' || U.ADDRDETAIL AS ADDRESS,
+		    I.FILE_PATH
+		FROM    HANJU_BILL B
+		INNER JOIN HANJU_PRODUCT P ON B.PRODUCT_ID = P.PRODUCT_ID
+		INNER JOIN HANJU_IMAGE I ON B.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
+		INNER JOIN HANJU_USER U ON B.USER_ID = U.USER_ID AND B.STATUS = 'B'
+		WHERE P.SELLER_ID = #{userId} AND B.KIND = 'N'
+		ORDER BY B.CDATETIME ASC
+	</select>
+	
+	<update id="shipConfirm" parameterType="hashmap">
+		UPDATE  HANJU_BILL
+		SET     STATUS = 'S'
+		WHERE   BILL_ID = #{billId}
+	</update>
+	
+	<delete id="deleteBill" parameterType="hashmap">
+		DELETE FROM HANJU_BILL
+		WHERE BILL_ID = #{billId}
+	</delete>
 	
 </mapper>

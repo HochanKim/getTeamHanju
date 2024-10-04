@@ -59,27 +59,27 @@ pageEncoding="UTF-8"%>
       };
     },
     methods: {
-      fnLogin(){
-				var self = this;
-				var nparmap = {
-					userId : self.userId,
-					password :  self.password	
-				};
-				$.ajax({
-					url:"login.dox", 
-					dataType:"json",	
-					type : "POST", 
-					data : nparmap,
-					success : function(data) {  
-						console.log(data);
-						if(data.code == 200){
-							location.href="/";
-						}else{
-							alert(data.message);
-						}
-					}
-				});
-			},
+      fnLogin() {
+        var self = this;
+        var nparmap = {
+          userId: self.userId,
+          password: self.password,
+        };
+        $.ajax({
+          url: "login.dox",
+          dataType: "json",
+          type: "POST",
+          data: nparmap,
+          success: function (data) {
+            console.log(data);
+            if (data.code == 200) {
+              location.href = "/mainPage/mainPage.do";
+            } else {
+              alert(data.message);
+            }
+          },
+        });
+      },
     },
     mounted() {},
   });

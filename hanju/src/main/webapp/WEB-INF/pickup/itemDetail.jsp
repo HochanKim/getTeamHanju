@@ -4,6 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/testCss.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/axios.min.js"></script>

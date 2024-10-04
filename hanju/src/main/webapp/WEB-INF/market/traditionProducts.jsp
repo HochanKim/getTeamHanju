@@ -4,6 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCss.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList/lists.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -41,7 +42,7 @@ pageEncoding="UTF-8"%>
                 </a>
             </div>
             <!-- 선택 코드 리스트 영역 1 -->
-            <div class="kindList">
+            <div class="kindList traditionCodes">
               <label v-for="item in codeList">
                 <input type="checkbox" v-model="selectCodes" :value="item.code" @change="fnList">
                 {{item.codeName}}
@@ -116,10 +117,15 @@ pageEncoding="UTF-8"%>
                 </p>
                 <p class="price" v-else> <!-- 할인율 존재할 경우 -->
                   <del style="font-size:14px; font-weight: 400; margin-right:8px;">{{ item.priceComma }} 원</del>
-                  <span class="discount" style="color: rgb(255, 115, 0); font-size:16px;">{{item.discount}} % </span>
-                  <span class="productPrice">
-                    {{item.discountPrice}} <span class="mini">원</span>
-                  </span>
+                  <p v-if="item.discount != 0">
+                    <span class="discount">{{item.discount}} % </span>
+                    <span class="price productPrice">
+                      {{item.discountPrice}} <span class="mini">원</span>
+                    </span>
+                  </p>
+                  <p v-else>
+                    <br>
+                  </p>
                 </p>
                 <p class="madeBy">
                   <span class="mini madeBy">생산지</span> {{ item.madeBy }}

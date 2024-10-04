@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainCss.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList/lists.css" />
     <script src="../../js/jquery.js"></script>
@@ -16,11 +17,11 @@
     <div id="app">
         <div id="main">
             <div id="container">
-                <h1 class="margin16">공동구매</h1>
-                <div class="margin16">
-                    함께 구입하면 더 저렴하게 마실 수 있어요!
+                <div class="groupSellTitle">
+                    <h1 class="margin16">공동구매</h1>
+                    <div class="margin16">함께 구입하면 더 저렴하게 마실 수 있어요!</div>
+                    <hr>
                 </div>
-                <hr>
                 <!-- 공동구매 데이터 목록 (카드형) -->
                 <div id="cardView">
                     <div v-for="item in groupSellList" class="card" @click="fnClickProduct(item.groupSellId)">
@@ -45,11 +46,14 @@
                             </div>
                             <div class="line4">
                                 <div>
-                                    할인율 {{item.discount}}%
+                                    할인율<span style="color: red; margin-left:10px;">{{item.discount}} %</span>
                                 </div>
                                 <div class="cell2">
                                     <div>
-                                        원가 / 공구가 <del>{{item.price}}</del> / {{item.price - (item.price / 100 * item.discount)}}
+                                        <span style="margin-right:10px;">
+                                            원가 / 공구가
+                                        </span> 
+                                        <del style="color:#999;">{{item.priceComma}}</del> / {{item.discountPrice}}
                                     </div>
                                 </div>
                             </div>
