@@ -23,7 +23,7 @@
                     <tr>
                         <th>제품</th>
                         <td>
-                            <select v-model="productId">
+                            <select class="basicInput longInput" v-model="productId">
                                 <option v-for="item in productList" :value="item.productId">
                                     {{item.productName}}
                                 </option>
@@ -33,7 +33,7 @@
                     <tr>
                         <th>할인율</th>
                         <td>
-                            <select v-model="discount">
+                            <select class="basicInput veryShortInput" v-model="discount">
                                 <option v-for="i in 100" :value="i-1">{{ i-1 }}%</option>
                             </select>
                         </td>
@@ -41,7 +41,7 @@
                     <tr>
                         <th>제품 설명</th>
                         <td>
-                            <textarea v-model="description" class="description"></textarea>
+                            <textarea class="basicInput longInput" v-model="description" class="description"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -114,7 +114,8 @@
                     },
 					success : (data) => {
 						console.log(data);
-                        this.fnUploadProductImg(data.sellId, this.productDetailImg, "D");
+                        // 원래 sellId여야 하는데 productId로 들어감
+                        this.fnUploadProductImg(this.productId, this.productDetailImg, "D");
 					}
 				});
             },

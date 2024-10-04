@@ -23,7 +23,7 @@
                     <tr>
                         <th>제품명</th>
                         <td>
-                            <input type="text" v-model="productName">
+                            <input class="basicInput longInput" type="text" v-model="productName">
                         </td>
                     </tr>
                     <tr>
@@ -62,27 +62,27 @@
                     <tr>
                         <th>타입</th>
                         <td>
-                            <select v-model="type">
+                            <select class="basicInput shortInput" v-model="type">
                                 <option v-for="item in productCodeList" :value="item.code">{{item.codeName}}</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th>가격</th>
-                        <td><input type="text" v-model="price"></td>
+                        <td><input class="basicInput shortInput" type="text" v-model="price"> 원</td>
                     </tr>
                     <tr>
                         <th>원산지</th>
-                        <td><input type="text" v-model="madeBy"></td>
+                        <td><input class="basicInput longInput" type="text" v-model="madeBy"></td>
                     </tr>
                     <tr>
                         <th>도수</th>
-                        <td><input type="text" v-model="alcohol"></td>
+                        <td><input class="basicInput shortInput" type="text" v-model="alcohol"> 도</td>
                     </tr>
                     <tr>
                         <th>탄산</th>
                         <td>
-                            <select v-model="sparkling">
+                            <select class="basicInput veryShortInput" v-model="sparkling">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -95,7 +95,7 @@
                     <tr>
                         <th>단 맛</th>
                         <td>
-                            <select v-model="sweet">
+                            <select class="basicInput veryShortInput" v-model="sweet">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -108,7 +108,7 @@
                     <tr>
                         <th>신 맛</th>
                         <td>
-                            <select v-model="sour">
+                            <select class="basicInput veryShortInput" v-model="sour">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -121,7 +121,7 @@
                     <tr>
                         <th>쓴 맛</th>
                         <td>
-                            <select v-model="bitter">
+                            <select class="basicInput veryShortInput" v-model="bitter">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -134,7 +134,7 @@
                     <tr>
                         <th>바디감</th>
                         <td>
-                            <select v-model="body">
+                            <select class="basicInput veryShortInput" v-model="body">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -146,15 +146,15 @@
                     </tr>
                     <tr>
                         <th>용량</th>
-                        <td><input type="text" v-model="capacity"></td>
+                        <td><input class="basicInput shortInput" type="text" v-model="capacity"> ml</td>
                     </tr>
                     <tr>
                         <th>재고</th>
-                        <td><input type="text" v-model="stock"></td>
+                        <td><input class="basicInput shortInput" type="text" v-model="stock"> 개</td>
                     </tr>
                     <tr>
                         <th>원재료</th>
-                        <td><input type="text" v-model="material"></td>
+                        <td><input class="basicInput longInput" type="text" v-model="material"></td>
                     </tr>
                 </table>
                 <hr>
