@@ -257,19 +257,12 @@ public class UserController {
         
         return fileName;
     }
-    
   //구독정보
     @RequestMapping(value = "user/gudokCheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
   	@ResponseBody
   	public String gudokList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
   		map.put("userId",session.getAttribute("sessionId"));
   		Map<String, Object> result = userService.gudokList(map);
-  		return new Gson().toJson(result);
-  	}
-    @RequestMapping(value = "user/getTotalGudok.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-  	@ResponseBody
-  	public String getTotalGudok(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-  		Map<String, Object> result = userService.(map);
   		return new Gson().toJson(result);
   	}
   //구독상태수정
@@ -280,5 +273,4 @@ public class UserController {
 		HashMap<String, Object> result = userService.gudokState(map);
 		return new Gson().toJson(result);
 	}
-
 }

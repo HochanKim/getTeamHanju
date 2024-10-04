@@ -31,5 +31,6 @@ public interface CartMapper {
     void changeAddr(Map<String,Object> map);
     void directPickupPayment(Map<String,Object> map);
     void directPickupBill(Map<String,Object> map);
+    int getDis(Map<String,Object> map);
 
 }
