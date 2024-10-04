@@ -10,6 +10,11 @@ pageEncoding="UTF-8"%>
     <script src="/js/payment.js"></script>
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link
+      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app">
@@ -288,6 +293,14 @@ pageEncoding="UTF-8"%>
         const res = await axios.get(url, {
           params: { itemId: this.id },
         });
+        const res2 = await axios.get("getDis.dox", {
+          params: {
+            pId: this.id,
+            sId: this.sId,
+          },
+        });
+        this.dis = res2.data.dis;
+        console.log(this.dis);
         const item = res.data.item;
         this.info = item;
         this.sumPrice = item.price * this.cnt;
@@ -297,9 +310,15 @@ pageEncoding="UTF-8"%>
         const itemName = this.info.productName;
         const usePoint = parseInt(this.usePoint, 10);
         const realPrice = this.discountPrice - usePoint;
-        // requestPay(this.info.productName + `(\${this.cnt})`, realPrice, () => {
-        this.fnSuccessPayment();
-        // });
+        if (realPrice == 0) {
+          if (confirm("포인트로 결제하시겠습니까?")) {
+            this.fnSuccessPayment();
+          }
+          return;
+        }
+        requestPay(this.info.productName + `(\${this.cnt})`, realPrice, () => {
+          this.fnSuccessPayment();
+        });
       },
       async fnSuccessPayment() {
         const url = "directPickupPayment.dox";

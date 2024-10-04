@@ -10,6 +10,11 @@ pageEncoding="UTF-8"%>
     <script src="/js/payment.js"></script>
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link
+      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app">
@@ -18,7 +23,9 @@ pageEncoding="UTF-8"%>
         <div class="container">
           <div id="itemContainer">
             <div class="userInfo">
-              <div class="boxHead"><h3>배송 정보</h3></div>
+              <div class="boxHead">
+                <h3 style="margin-left: 0">배송 정보</h3>
+              </div>
               <div class="infoBox2">
                 <div class="userName">
                   <div class="uNameCol">받는분</div>
@@ -293,6 +300,12 @@ pageEncoding="UTF-8"%>
         const itemName = this.info.productName;
         const usePoint = parseInt(this.usePoint, 10);
         const realPrice = this.discountPrice - usePoint;
+        if (realPrice == 0) {
+          if (confirm("포인트로 결제하시겠습니까?")) {
+            this.fnSuccessPayment();
+          }
+          return;
+        }
         requestPay(this.info.productName + `(\${this.cnt})`, realPrice, () => {
           this.fnSuccessPayment();
         });
