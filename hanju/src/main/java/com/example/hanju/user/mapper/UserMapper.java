@@ -41,6 +41,8 @@ public interface UserMapper {
     void deleteFavoriteItem(Map<String,Object> map);
     //주문목록
 	List<OrderItem>  getOrderList(Map<String,Object> map);
+	//리뷰페이지
+	List<OrderState> reviewPage(Map<String, Object> map);
 	//리뷰작성
 	void reviewWrite(HashMap<String, Object> map);
 	//리뷰이미지
@@ -50,6 +52,6 @@ public interface UserMapper {
 	//구독상태
 	void gudokState(HashMap<String, Object> map);
 	//구독개수
-	List<OrderState> gudokCount(HashMap<String, Object> map);
+	List<GudokCheck> gudokCount(Map<String, Object> map);
 	
 }

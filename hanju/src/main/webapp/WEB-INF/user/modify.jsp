@@ -260,9 +260,23 @@
             birthday : birthday
            
           };
+
           if(self.validate() == false){
                 return;
-              }
+          }
+
+          if(self.fnNewPwdCheck() == false){
+          alert("비밀번호를 확인해주세요.");
+          return;
+          }
+
+          if(self.fnNewPwdCheck2() == false){
+          alert("비밀번호를 확인해주세요.");
+          return;
+          }
+
+          
+              
           $.ajax({
             url: "modify.dox",
             dataType: "json",

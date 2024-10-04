@@ -33,6 +33,8 @@ public interface UserService {
   Map<String, Object> deleteFavoriteItem(Map<String,Object> map);
   //주문조회
   Map<String,Object> getOrderList(Map<String,Object> map);
+  //리뷰페이지
+  Map<String,Object> reviewList(Map<String,Object> map);
   //리뷰작성
   HashMap<String, Object> writeReview(HashMap<String, Object> map);
   //리뷰이미지

@@ -45,8 +45,10 @@ pageEncoding="UTF-8"%>
                     <div>{{item.productCount}}</div>
                 </td>
                 <td class="price">
-                  <div>{{parseInt(item.price).toLocaleString()}}원</div>
-                 
+                   <div>{{parseInt(item.price - (item.price / 100 * item.discount)).toLocaleString()}}원</div>
+                    <div>
+                       
+                    </div>
               </td>
               <td class="state">
                 <div v-if="item.status == 'B'">결제완료</div>

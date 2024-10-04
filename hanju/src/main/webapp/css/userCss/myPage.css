@@ -84,6 +84,11 @@ a{
     color: #7a1ffa;
 }
 
+.countPoint{
+    font-weight: bold;
+    font-size: 28px;
+    color: #7a1ffa;
+}
 
 .myPage{
     margin: 40px 0 0;

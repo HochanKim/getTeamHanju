@@ -26,9 +26,10 @@ pageEncoding="UTF-8"%>
                         <ul class="orderState">
                             <li>
                                 <strong>포인트</strong>
-                                <a href="" class="count">
-                                    <span>{{point}}</span>
-                                </a>
+                                <div class="countPoint">
+                                    <span>{{parseInt(point).toLocaleString()}}</span>
+                                    
+                                </div>
                             </li>
                             <li>
                                 <strong>배송준비중</strong>
@@ -81,67 +82,9 @@ pageEncoding="UTF-8"%>
                                 <p>고객님께서 주문하신 상품의  주문내역을 확인하실 수 있습니다.</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="../user/favorite.do">
-                                <img src="../../image/heart_plus.png">
-                                <strong>관심상품</strong>
-                                <p>찜하신 상품의 목록을 보여드립니다.</p>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
-          </div>
-          <div class="myPage">
-            <ul>
-              <li>
-                <img src="../../image/calendar_month.png" />
-                <a href="../user/gudokCheck.do">
-                  <strong>구독관리</strong>
-                  <p>
-                    고객님께서 신청하신 정기배송의 신청 정보 및 내역을 확인하실
-                    수 있습니다.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <img src="../../image/review.png" />
-                <a href="../user/review.do">
-                  <strong>리뷰</strong>
-                  <p>리뷰 작성시 포인트 적립을 해드립니다.</p>
-                </a>
-              </li>
-              <li>
-                <img src="../../image/profile.png" />
-                <a href="../user/modifyBefore.do">
-                  <strong>회원정보</strong>
-                  <p>회원이신 고객님의 개인정보를 관리하는 공간입니다.</p>
-                </a>
-              </li>
-              <li>
-                <img src="../../image/orderList.png" />
-                <a href="../user/orderInfo.do">
-                  <strong>주문내역 조회</strong>
-                  <p>
-                    고객님께서 주문하신 상품의 주문내역을 확인하실 수 있습니다.
-                  </p>
-                </a>
-              </li>
-              <li>
-                <img src="../../image/heart_plus.png" />
-                <a href="../user/favorite.do">
-                  <strong>관심상품</strong>
-                  <p>찜하신 상품의 목록을 보여드립니다.</p>
-                </a>
-              </li>
-              <li>
-                <img src="../../image/board.png" />
-                <a href="">
-                  <strong>게시물 관리</strong>
-                  <p>고객님께서 작성하신 게시물을 관리하는 공간입니다.</p>
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
