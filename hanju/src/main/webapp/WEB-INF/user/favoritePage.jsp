@@ -35,7 +35,7 @@ pageEncoding="UTF-8"%>
                   </span>
                 </div>
               </td>
-              <td class="price"><strong>{{item.price}}</strong></td>
+              <td class="price"><strong>{{parseInt(item.price).toLocaleString()}}원</strong></td>
               <td class="state">
                 <p>{{ item.type == "T" ? "일반 구매 상품" : "픽업 구매 상품" }}</p>
                 <button @click="fnItemDelete(item.productId)">삭제</button>

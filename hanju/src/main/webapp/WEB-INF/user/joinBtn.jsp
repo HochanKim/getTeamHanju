@@ -47,7 +47,7 @@ pageEncoding="UTF-8"%>
           var self = this;
 
         $.ajax({
-          url: "user/joinbtn.do",
+          url: "user/joinBtn.do",
           dataType: "json",
           type: "POST",
           data: {},
@@ -61,7 +61,7 @@ pageEncoding="UTF-8"%>
         var self = this;
 
         $.ajax({
-          url: "user/joinbtn.do",
+          url: "user/joinBtn.do",
           dataType: "json",
           type: "POST",
           data: {},

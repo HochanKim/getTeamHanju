@@ -5,6 +5,7 @@
 }
 
 #contents{
+    margin: 0 auto;
     max-width: 1150px;
     padding: 0 80px;
 }
@@ -130,6 +131,7 @@ button{
     font-weight: 700;
     border: 0px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .pagination {
@@ -140,7 +142,7 @@ button{
 .pagination button {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
-    color: #007bff;
+    color: #361A73;
     padding: 8px 12px;
     margin: 0 2px;
     cursor: pointer;
@@ -149,12 +151,12 @@ button{
 }
 
 .pagination button:hover {
-    background-color: #007bff;
+    background-color: #361A73;
     color: white;
 }
 
 .pagination button.active {
-    background-color: #007bff;
+    background-color:#361A73;
     color: white;
     cursor: default;
 }
@@ -167,6 +169,6 @@ button{
 }
 
 .pagination button:not(.active):not(:disabled):hover {
-    background-color: #0056b3;
+    background-color: #7B4BBF;
     color: white;
 }

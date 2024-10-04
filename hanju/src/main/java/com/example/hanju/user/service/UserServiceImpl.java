@@ -229,7 +229,7 @@ public class UserServiceImpl implements UserService{
 		Map<String,Object> result = new HashMap<>();
 		List<GudokCheck> list = userMapper.gudokCheck(map);
 		System.out.println(list);
-		result.put("list",list);
+		result.put("list", list);
 		return result;
 	}
 	/* 구독상태수정 */
@@ -250,6 +250,16 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
+	@DbExceptionHandle
+	@Override
+	public Map<String, Object> gudokCnt(Map<String, Object> map) {
+		Map<String,Object> result = new HashMap<>();
+		List<GudokCheck> list = userMapper.gudokCheck(map);
+		System.out.println(list);
+		result.put("list", list);
+		return result;
+	}
+	
 	
 	
 

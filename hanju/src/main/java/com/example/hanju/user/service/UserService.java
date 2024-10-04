@@ -41,4 +41,6 @@ public interface UserService {
   Map<String, Object> gudokList(Map<String, Object> map);
   //구독상태수정
   HashMap<String, Object> gudokState(HashMap<String, Object> map);
+  //구독개수
+  Map<String,Object> gudokCnt(Map<String,Object> map);
 }

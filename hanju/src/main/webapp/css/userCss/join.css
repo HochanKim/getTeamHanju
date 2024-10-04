@@ -6,6 +6,7 @@
 .joincontent{
     max-width: 1150px;
     padding: 0 80px;
+    margin: 0 auto;
 }
 
 h2{
@@ -224,8 +225,8 @@ li{
     padding: 18px 18px;
     display: inline-block;
     box-sizing: border-box;
-    border: 1px solid #d5d5d5;
-    border-radius: 2px;
+    border: 1px solid #7B4BBF;
+    border-radius: 5px;
     line-height: 18px;
     color: #222;
     background-color:  #fff;
@@ -240,11 +241,13 @@ li{
     padding: 18px 18px;
     display: inline-block;
     box-sizing: border-box;
-    border: 1px solid #222;
-    border-radius: 2px;
     line-height: 18px;
-    color: #fff;
-    background-color: #222;
+    border-radius: 5px;
+    background-color: #7B4BBF;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    border: 0px;
     cursor: pointer;
 }
 

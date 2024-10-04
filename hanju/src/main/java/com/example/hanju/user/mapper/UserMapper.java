@@ -49,6 +49,7 @@ public interface UserMapper {
 	List<GudokCheck> gudokCheck(Map<String,Object> map);
 	//구독상태
 	void gudokState(HashMap<String, Object> map);
-	
+	//구독개수
+	List<OrderState> gudokCount(HashMap<String, Object> map);
 	
 }
