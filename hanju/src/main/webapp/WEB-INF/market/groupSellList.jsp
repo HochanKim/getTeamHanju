@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productList/lists.css" />
     <script src="../../js/jquery.js"></script>
     <script src="../../js/vue.js"></script>
-    <title>한주</title>
+    <title>한주 공동구매</title>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="line4">
                                 <div>
-                                    할인율<span style="color: red; margin-left:10px;">{{item.discount}} %</span>
+                                    할인율<span style="color: rgb(255, 115, 0); margin-left:10px;">{{item.discount}} %</span>
                                 </div>
                                 <div class="cell2">
                                     <div>
