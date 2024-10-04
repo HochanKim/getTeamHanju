@@ -154,5 +154,11 @@
         INTO HANJU_PICKUP_BILL (BILL_ID,STORE_ID,PICKUP_DATE,PICKUP_STATUS)
         VALUES (#{billId},#{sId},#{date},'B')
     </insert>
+    <select id="getDis" parameterType="hashmap" resultType="int">
+        SELECT DISCOUNT
+        FROM HANJU_PICKUP_STOCK
+        WHERE STORE_ID = #{sId} AND PRODUCT_ID = #{pId}
+    </select>
+
 
 </mapper>

@@ -30,7 +30,8 @@
                         <th>썸네일</th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img class="img" :src="thumbnailUrl">
+                                <img v-if="thumbnailUrl != null" class="img" :src="thumbnailUrl">
+                                <img v-else class="img" src="../../image/photo_gray.png">
                             </div>
                             <label class="imgUploadBtn">
                                 등록하기
@@ -45,13 +46,16 @@
                         </th>
                         <td class="imageUploaderLine">
                             <div class="imgBox">
-                                <img class="img" :src="productImgUrls[ 0 ]">
+                                <img v-if="productImgUrls[ 0 ] != null" class="img" :src="productImgUrls[ 0 ]">
+                                <img v-else class="img" src="../../image/photo_gray.png">
                             </div>
                             <div class="imgBox">
-                                <img class="img" :src="productImgUrls[ 1 ]">
+                                <img v-if="productImgUrls[ 1 ] != null" class="img" :src="productImgUrls[ 1 ]">
+                                <img v-else class="img" src="../../image/photo_gray.png">
                             </div>
                             <div class="imgBox">
-                                <img class="img" :src="productImgUrls[ 2 ]">
+                                <img v-if="productImgUrls[ 2 ] != null" class="img" :src="productImgUrls[ 2 ]">
+                                <img v-else class="img" src="../../image/photo_gray.png">
                             </div>
                             <label class="imgUploadBtn">
                                 등록하기
@@ -178,29 +182,25 @@
 
                 productCodeList : [],
 
-                productId : "",
-                productName : "",
-                thumbnail : "",
+                productId : null,
+                productName : null,
+                thumbnail : null,
                 productImgs : [],
-                type : "",
-                price : "",
-                madeBy : "",
-                alcohol : "",
-                sparkling : "",
-                sweet : "",
-                sour : "",
-                bitter : "",
-                body : "",
-                stock : "",
-                capacity : "",
-                material : "",
+                type : null,
+                price : null,
+                madeBy : null,
+                alcohol : null,
+                sparkling : null,
+                sweet : null,
+                sour : null,
+                bitter : null,
+                body : null,
+                stock : null,
+                capacity : null,
+                material : null,
 
-                thumbnailUrl   : "../../image/photo_gray.png",
-                productImgUrls : [
-                    "../../image/photo_gray.png",
-                    "../../image/photo_gray.png",
-                    "../../image/photo_gray.png"
-                ],
+                thumbnailUrl   : null,
+                productImgUrls : [ null, null, null ],
             };
         },
         methods: {
@@ -251,6 +251,7 @@
                         for (var i = 0; i < this.productImgs.length; i++) {
                             if (i == this.productImgs.length - 1) {
                                 this.fnUploadProductImg(this.productImgs[ i ], "P", true);
+                                break;
                             }
                             this.fnUploadProductImg(this.productImgs[ i ], "P", false); 
                         }
@@ -271,7 +272,10 @@
                     processData : false,
                     contentType : false,
 					success : () => {
-                        if (isLast) alert("등록되었습니다!");
+                        if (isLast) {
+                            alert("등록되었습니다!");
+                            this.fnInit();
+                        }
 					},
                     error : function(jqXHR, textStatus, errorThrown) {
                         console.error('업로드 실패!', textStatus, errorThrown);
@@ -300,30 +304,6 @@
 
                 return isEmpty;
             },
-            fnReset() {
-                this.productName = "";
-                this.thumbnail = "";
-                this.productImgs = [];
-                this.type = "";
-                this.price = "";
-                this.madeBy = "";
-                this.alcohol = "";
-                this.sparkling = "";
-                this.sweet = "";
-                this.sour = "";
-                this.bitter = "";
-                this.body = "";
-                this.stock = "";
-                this.capacity = "";
-                this.material = "";
-
-                this.thumbnailUrl = "../../image/defaultImg.png";
-                this.productImgUrls = [
-                    "../../image/defaultImg.png",
-                    "../../image/defaultImg.png",
-                    "../../image/defaultImg.png"
-                ];
-            },
             fnGetProductCode() {
                 $.ajax({
 					url:"getProductCodeList.dox",
@@ -335,6 +315,27 @@
                         this.productCodeList = data.list;
 					}
 				});
+            },
+            fnInit() {
+                this.productId = null;
+                this.productName = null;
+                this.thumbnail = null;
+                this.productImgs = [];
+                this.type = null;
+                this.price = null;
+                this.madeBy = null;
+                this.alcohol = null;
+                this.sparkling = null;
+                this.sweet = null;
+                this.sour = null;
+                this.bitter = null;
+                this.body = null;
+                this.stock = null;
+                this.capacity = null;
+                this.material = null;
+
+                this.thumbnailUrl   = null;
+                this.productImgUrls = [ null, null, null ];
             }
         },
         mounted() {

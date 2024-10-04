@@ -16,5 +16,7 @@ public interface CartService {
     Map<String,Object> directPayment(Map<String,Object> map);
     Map<String,Object> changeAddr(Map<String,Object> map);
     Map<String, Object> directPickupPayment(Map<String, Object> map);
+    Map<String, Object> getDis(Map<String, Object> map);
+
 
 }
