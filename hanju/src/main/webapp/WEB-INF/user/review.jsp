@@ -153,6 +153,13 @@
               </div>
             </div>
           </div>
+          <div class="pagination">
+            <button v-if="currentPage > 1">이전</button>
+            <button v-for="page in totalPages" :class="{active: page == currentPage}">
+                {{ page }}
+            </button>
+            <button v-if="currentPage < totalPages">다음</button>
+        </div>
         </div>
       </div>
     </div>
@@ -173,7 +180,10 @@
         modalFilePath: "",
         modalProductName: "",
         thumbnail: null, // 썸네일 URL을 저장할 변수
-        thumbnailFile : null
+        thumbnailFile : null,
+        currentPage: 1,      
+        pageSize: 5,        
+        totalPages: 2 
       };
     },
     methods: {
@@ -191,7 +201,6 @@
 
       previewImage(event) {
         var self = this;
-
         self.thumbnailFile = event.target.files[0]; // 선택된 파일 가져오기
         self.thumbnail = URL.createObjectURL(self.thumbnailFile);
       },

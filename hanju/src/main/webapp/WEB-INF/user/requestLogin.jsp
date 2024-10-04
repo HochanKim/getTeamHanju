@@ -5,9 +5,11 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <title>document</title>
+    <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
   <body>
     <div id="app"></div>
+    <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
 </html>
 <script>

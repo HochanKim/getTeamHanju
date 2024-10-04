@@ -3,6 +3,7 @@
     min-width: 1024px;
     margin: 0 auto;
     padding-bottom: 80px;
+    font-family: 'NanumSquareAcr';
 }
 
 #contents{
@@ -57,10 +58,15 @@ button{
 }
 
 .backBtn{
+    border-radius: 4px;
     background-color: #fff;
+    border-color: #7B4BBF;
 }
 
 .comBtn{
-    background-color: #333;
-    color: #fff;
+    border-radius: 4px;
+    background-color: #7B4BBF;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
 }
