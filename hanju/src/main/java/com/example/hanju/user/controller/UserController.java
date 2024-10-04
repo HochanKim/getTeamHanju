@@ -266,12 +266,7 @@ public class UserController {
   		Map<String, Object> result = userService.gudokList(map);
   		return new Gson().toJson(result);
   	}
-    @RequestMapping(value = "user/getTotalGudok.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-  	@ResponseBody
-  	public String getTotalGudok(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-  		Map<String, Object> result = userService.(map);
-  		return new Gson().toJson(result);
-  	}
+    
   //구독상태수정
   	@RequestMapping(value = "user/gudokState.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody

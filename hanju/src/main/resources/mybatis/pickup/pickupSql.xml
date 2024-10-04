@@ -67,7 +67,7 @@
         <!-- 당도 -->
         <if test="sweet != ''">
             <choose>
-                <when test="sweet == 1">AND (SWEET = 1 OR SWEET = 2)</when>
+                <when test="sweet == 1">AND (SWEET = 0 OR SWEET = 1 OR SWEET = 2)</when>
                 <when test="sweet == 2">AND (SWEET = 3)</when>
                 <when test="sweet == 3">AND (SWEET = 4 OR SWEET = 5)</when>
             </choose>
@@ -76,7 +76,7 @@
         <!-- 산미 -->
         <if test="sour != ''">
             <choose>
-                <when test="sour == 1">AND (SOUR = 1 OR SOUR = 2)</when>
+                <when test="sour == 1">AND (SOUR = 0 OR SOUR = 1 OR SOUR = 2)</when>
                 <when test="sour == 2">AND (SOUR = 3)</when>
                 <when test="sour == 3">AND (SOUR = 4 OR SOUR = 5)</when>
             </choose>
@@ -93,7 +93,7 @@
         <!-- 바디감 -->
         <if test="body != ''">
             <choose>
-                <when test="body == 1">AND (BODY = 1 OR BODY = 2)</when>
+                <when test="body == 1">AND (BODY = 0 OR BODY = 1 OR BODY = 2)</when>
                 <when test="body == 2">AND (BODY = 3)</when>
                 <when test="body == 3">AND (BODY = 4 OR BODY = 5)</when>
             </choose>
