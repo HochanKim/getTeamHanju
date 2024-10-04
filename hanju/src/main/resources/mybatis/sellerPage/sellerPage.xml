@@ -7,7 +7,7 @@
 	<select id="getProductCodeList" parameterType="hashmap" resultType="com.example.hanju.main.model.Code">
 		SELECT	*
 		FROM	HANJU_CODE
-		WHERE	KIND = 'PRODUCT_CODE'
+		WHERE	KIND = 'PRODUCT_CODE' AND PARENT_CODE IS NOT NULL
 	</select>
 
 	<insert id="registerProduct" parameterType="hashmap" useGeneratedKeys="true" keyProperty="PRODUCT_ID" keyColumn="PRODUCT_ID">
@@ -191,7 +191,7 @@
 		INNER JOIN HANJU_IMAGE I ON B.PRODUCT_ID = I.FK_ID AND I.FILE_STATUS = 'T'
 		INNER JOIN HANJU_USER U ON B.USER_ID = U.USER_ID AND B.STATUS = 'B'
 		WHERE P.SELLER_ID = #{userId} AND B.KIND = 'N'
-		ORDER BY B.CDATETIME ASC
+		ORDER BY B.CDATETIME DESC
 	</select>
 	
 	<update id="shipConfirm" parameterType="hashmap">

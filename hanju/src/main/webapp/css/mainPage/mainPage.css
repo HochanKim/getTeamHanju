@@ -21,7 +21,7 @@
 /* ========================= */
 
 #app #imageSlider {
-    width: 90%;
+    width: 100%;
     position: relative;
     
     overflow: hidden;
@@ -91,7 +91,7 @@
 
 #app #bestNormalSell {
     position: relative;
-    width: 52%;
+    width: 56%;
     height: 500px;
     margin-top: 100px;
 }
@@ -230,7 +230,7 @@
 
 #app #bestWine {
     position: relative;
-    width: 52%;
+    width: 56%;
     height: 500px;
 }
 
@@ -238,7 +238,7 @@
 
 #app #bestGroupSell {
     position: relative;
-    width: 52%;
+    width: 56%;
     height: 500px;
 }
 
