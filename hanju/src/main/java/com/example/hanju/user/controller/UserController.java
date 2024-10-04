@@ -185,6 +185,15 @@ public class UserController {
 		Map<String, Object> result = userService.getOrderList(map);
 		return new Gson().toJson(result);
 	}
+	//리뷰페이지
+		@GetMapping(value = "user/reviewPage.dox", produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String reviewPage(Model model) throws Exception {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userId",session.getAttribute("sessionId"));
+			Map<String, Object> result = userService.reviewList(map);
+			return new Gson().toJson(result);
+		}
 	
 	//리뷰작성
 	@RequestMapping(value = "user/review.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -234,6 +243,8 @@ public class UserController {
         map.put("filePath"   , "/upload/" + saveFileName);
         map.put("fileStatus" , type);
         
+        System.out.println(map);
+        
         userService.uploadImg(map);
 	}
 	
@@ -263,6 +274,12 @@ public class UserController {
   	public String gudokList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
   		map.put("userId",session.getAttribute("sessionId"));
   		Map<String, Object> result = userService.gudokList(map);
+  		return new Gson().toJson(result);
+  	}
+    @RequestMapping(value = "user/getTotalGudok.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+  	@ResponseBody
+  	public String getTotalGudok(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+  		Map<String, Object> result = userService.gudokCnt(map);
   		return new Gson().toJson(result);
   	}
   //구독상태수정

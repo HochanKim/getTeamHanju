@@ -212,14 +212,13 @@
         };
 
         $.ajax({
-          url: "getOrderList.dox",
+          url: "reviewPage.dox",
           dataType: "json",
           type: "GET",
 
           success: function (data) {
             console.log(data);
-            console.log(self.orderList);
-            for (var item of data.orderList) {
+            for (var item of data.list) {
               if (item.isComment == "N") {
                 self.orderList.push(item);
               }

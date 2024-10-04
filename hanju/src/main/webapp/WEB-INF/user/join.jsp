@@ -603,6 +603,18 @@ pageEncoding="UTF-8" %>
         console.log(roadAddrPart1);
         console.log(addrDetail);
       },
+
+      fnEmailValCheck(){
+        var self = this;
+
+        var emailPattern= /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        console.log(self.email);
+        if(!emailPattern.test(self.email)) {
+          return false;
+          
+        }
+      },
+
       fnEmail() {
         var self = this;
 
@@ -683,6 +695,33 @@ pageEncoding="UTF-8" %>
         if (self.validate() == false) {
           return;
         }
+
+        if(self.fnPwdCheck() == false){
+          alert("비밀번호를 확인해주세요.");
+          return;
+        }
+
+        if(self.fnPwdCheck2() == false){
+          alert("비밀번호를 확인해주세요.");
+          return;
+        }
+
+        if(self.fnIdCheck() == false){
+          alert("아이디를 확인해주세요.");
+          return;
+        }
+
+        if(self.fnEmail() == false){
+          alert("이메일을 확인해주세요.");
+          return;
+        }
+
+        if(self.fnEmailValCheck() == false){
+          alert("이메일을 확인해주세요.");
+          return;
+        }
+
+      
 
         $.ajax({
           url: "join.dox",

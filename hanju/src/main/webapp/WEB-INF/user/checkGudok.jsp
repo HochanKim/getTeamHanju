@@ -77,7 +77,7 @@ pageEncoding="UTF-8"%>
        
         fngudok(start, size) {
           var self = this;
-          var paramap = {
+          var nparmap = {
             start : start, 
             size : size
           };
@@ -86,7 +86,7 @@ pageEncoding="UTF-8"%>
             url: "gudokCheck.dox",
             dataType: "json",
             type: "POST",
-            data : paramap,
+            data : nparmap,
             success: function (data) {
                 console.log(data);
                 console.log(data.list);
@@ -97,14 +97,14 @@ pageEncoding="UTF-8"%>
         fnCancle(subscribeId){
             
             var self = this;
-            var asdf = {
+            var nparmap = {
                 subscribeId : subscribeId
             }
             $.ajax({
             url: "gudokState.dox",
             dataType: "json",
             type: "POST",
-            data: asdf,
+            data: nparmap,
             success: function (data) {
                 self.fngudok();
             }
@@ -115,13 +115,16 @@ pageEncoding="UTF-8"%>
         },
         
         fnGetTotalGu() {     // 페이징 메소드
+          
           $.ajax({	
             url:"getTotalGudok.dox",
             dataType:"json",	
             type : "POST", 
-            data : { userId : this.userId },
+            data : {},
             success : (data) => {
               console.log(data);
+              var totalGudok = data.number;
+              this.totalPages = Math.ceil(totalGudok / this.pageSize);
             }
           });
         },
@@ -139,7 +142,7 @@ pageEncoding="UTF-8"%>
 
     mounted() {
       var self = this;
-      //self.fngudok(0, this.pageSize);
+      self.fngudok(self.totalPages, self.pageSize);
       self.fnGetTotalGu();
     },
   });

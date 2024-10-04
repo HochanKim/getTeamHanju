@@ -75,7 +75,7 @@
 		WHERE USER_ID = #{userId} AND PRODUCT_ID = #{productId}
 	</delete>
 	<select id="getOrderList" parameterType="hashmap" resultType="OrderItem">
-		SELECT B.BILL_ID,P.PRODUCT_ID,N.SELL_ID,P.PRICE,C.CODE_NAME,C.PARENT_CODE,I.FILE_PATH,B.STATUS,TO_CHAR(B.CDATETIME, 'YYYY-MM-DD') AS CDATETIME,B.PRODUCT_COUNT,B.KIND,P.PRODUCT_NAME,R.CONTENT,
+		SELECT B.BILL_ID,P.PRODUCT_ID,N.SELL_ID,P.PRICE,N.DISCOUNT,C.CODE_NAME,C.PARENT_CODE,I.FILE_PATH,B.STATUS,TO_CHAR(B.CDATETIME, 'YYYY-MM-DD') AS CDATETIME,B.PRODUCT_COUNT,B.KIND,P.PRODUCT_NAME,R.CONTENT,
 	      CASE WHEN R.COMMENT_ID IS NULL THEN 'N'
 	      ELSE 'Y'
 	      END AS ISCOMMENT
@@ -88,14 +88,27 @@
 	      WHERE I.FILE_STATUS = 'T' AND B.USER_ID = #{userId} AND C.KIND = 'PRODUCT_CODE'
 	      ORDER BY B.CDATETIME DESC
 	</select>
+	<select id="reviewPage" parameterType="hashmap" resultType="OrderItem">
+		SELECT B.BILL_ID,P.PRODUCT_ID,N.SELL_ID,P.PRICE,N.DISCOUNT,C.CODE_NAME,C.PARENT_CODE,I.FILE_PATH,B.STATUS,TO_CHAR(B.CDATETIME, 'YYYY-MM-DD') AS CDATETIME,B.PRODUCT_COUNT,B.KIND,P.PRODUCT_NAME,R.CONTENT,
+	      CASE WHEN R.COMMENT_ID IS NULL THEN 'N'
+	      ELSE 'Y'
+	      END AS ISCOMMENT
+	      FROM HANJU_BILL B
+	      INNER JOIN HANJU_PRODUCT P ON B.PRODUCT_ID = P.PRODUCT_ID
+	      INNER JOIN HANJU_NORMAL_SELL N ON B.PRODUCT_ID = N.PRODUCT_ID
+	      INNER JOIN HANJU_IMAGE I ON I. FK_ID = B.PRODUCT_ID
+	      INNER JOIN HANJU_CODE C ON P.TYPE = C.CODE
+	      LEFT JOIN HANJU_COMMENT R ON R.BILL_ID = B.BILL_ID
+	      WHERE I.FILE_STATUS = 'T' AND B.USER_ID = #{userId} AND C.KIND = 'PRODUCT_CODE' AND B.STATUS = 'C'
+	      ORDER BY B.CDATETIME DESC
+	</select>
 	<insert id="reviewWrite" parameterType="hashmap" useGeneratedKeys="true" keyProperty="COMMENT_ID" keyColumn="COMMENT_ID">
 		INSERT INTO HANJU_COMMENT
 		VALUES (main_seq.nextVal,#{billId},#{userId},#{reviewText},#{starRating},SYSDATE,null)
 	</insert>
-	
-	<insert id="registerImg" parameterType="hashmap" useGeneratedKeys="true" keyProperty="COMMENT_ID" keyColumn="COMMENT_ID">
+	<insert id="registerImg" parameterType="hashmap" >
 		INSERT INTO HANJU_IMAGE
-		VALUES (image_seq.nextVal, #{productId}, #{fileName}, #{fileOrgName}, #{filePath}, #{fileStatus})
+		VALUES (image_seq.nextVal, #{commentId}, #{fileName}, #{fileOrgName}, #{filePath}, #{fileStatus})
 	</insert>
 	<select id="gudokCheck" parameterType="hashmap" resultType="GudokCheck">
 		SELECT HS.SUBSCRIBE_ID, TO_CHAR(HSS.SUB_DATE, 'YYYY-MM-DD') AS SUB_DATE, NEXT_SUB, TITLE, ARRIVE_DATE, FILE_PATH

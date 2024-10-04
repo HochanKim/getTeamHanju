@@ -16,6 +16,7 @@ public class OrderItem {
     private String productName;
     private String isComment;
     private String price;
+    private int discount;
     private String sellId;
     private String content;
 
