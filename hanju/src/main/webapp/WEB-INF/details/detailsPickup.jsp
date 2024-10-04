@@ -356,6 +356,24 @@
         },
         methods: {
           fnPayment() {
+            if (this.userId == "") {
+              const tostMessage = document.getElementById("login_message");
+              tostMessage.classList.add("active");
+              setTimeout(() => {
+                tostMessage.classList.remove("active");
+              }, 2000);
+              return;
+            }
+            if (this.storeId == "" || this.pickUpDate == "") {
+              // alert("매장과 날짜를 선택해주세요.");
+              const tostMessage = document.getElementById("select_message");
+              tostMessage.classList.add("active");
+              setTimeout(() => {
+                tostMessage.classList.remove("active");
+              }, 2000);
+              console.log('storeId:', this.storeId, 'pickUpDate:', this.fnChangeDBFormat(this.pickUpDate));
+              return;
+            }
             const pId = this.info.productId;
             const sId = this.storeId;
             const date = this.fnChangeDBFormat(this.pickUpDate);
