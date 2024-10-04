@@ -1,5 +1,6 @@
 .joinBody{
     margin: 0 auto;
+    font-family: 'NanumSquareAcr';
 }
 
 .joincontent{
@@ -13,6 +14,7 @@ h2{
     text-align: center;
     font-size: 33px;
     font-weight: 400;
+    font-family: 'NanumSquareAcb';
 }
 
 h3{
