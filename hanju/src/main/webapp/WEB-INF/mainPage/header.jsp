@@ -26,7 +26,7 @@
             <a href="../market/groupSellList.do">공동구매</a>
           </div>
           <div class="menu">
-            <a href="../details/subscribe.do?id=96">구독</a>
+            <a href="../details/subscribe.do?id=85">구독</a>
           </div>
         </div>
         <div id="logo" @click="fnMain">
