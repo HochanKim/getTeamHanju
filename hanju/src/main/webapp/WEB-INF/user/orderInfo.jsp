@@ -58,12 +58,11 @@ pageEncoding="UTF-8"%>
             </td>
             </tr>
           </table>
-          <div class="pagination">
-            <button v-if="currentPage > 1">이전</button>
-            <button v-for="page in totalPages" :class="{active: page == currentPage}">
-                {{ page }}
-            </button>
-            <button v-if="currentPage < totalPages">다음</button>
+           <!-- 페이징 버튼 -->
+        <div id="pagination">
+          <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+          <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+          <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
         </div>
         </div>
       </div>
@@ -76,15 +75,16 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         orderList:[],
-        currentPage: 1,      
-        pageSize: 5,        
-        totalPages: 2 
+        totalPages : 2,     // 페이지 첫 인덱스
+        pageSize : 10,      // 한 페이지의 호출 리스트 개수
+        currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호  
       };
     },
     methods: {
-      fnOrder(){
+      fnOrder(currentPage, pageSize){
         var self = this;
-				
+			
+
 				$.ajax({
 					url:"getOrderList.dox", 
 					dataType:"json",	
@@ -104,10 +104,37 @@ pageEncoding="UTF-8"%>
       }else if(kind == 'N'){
           location.href = `/details/details.do?id=\${productId}`;
         }
-      }
+      },
+
+      fnGetTotalOrder() {     // 페이징 메소드
+          
+          $.ajax({	
+            url:"getTotalOrder.dox",
+            dataType:"json",	
+            type : "POST", 
+            data : {},
+            success : (data) => {
+              console.log(data);
+              var totalOrder = data.number || 0;
+              this.totalPages = (Math.ceil(totalOrder / this.pageSize), 1);
+            }
+          });
+        },
+        fnClickPage(index){    // 페이징 숫자 버튼
+            if (index < 0) return;
+            if (index > this.totalPages) return;
+
+            this.currentPage = index;
+
+            var currentPage = (this.currentPage - 1) * this.pageSize;
+            var pageSize  = this.pageSize;
+            this.fnOrder(start, size);
+        },
     },
     mounted() {
-      this.fnOrder();
+      var self = this;
+      self.fnOrder(self.totalPages, self.pageSize);
+      self.fnGetTotalOrder();
     },
   });
   app.mount("#app");

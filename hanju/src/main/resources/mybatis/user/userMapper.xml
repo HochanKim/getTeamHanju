@@ -88,6 +88,11 @@
 	      WHERE I.FILE_STATUS = 'T' AND B.USER_ID = #{userId} AND C.KIND = 'PRODUCT_CODE'
 	      ORDER BY B.CDATETIME DESC
 	</select>
+	<select id="orderCount" parameterType="hashmap" resultType="OrderItem">	
+		SELECT COUNT(*) 
+		FROM HANJU_BILL
+		WHERE USER_ID = #{userId} 
+	</select>
 	<select id="reviewPage" parameterType="hashmap" resultType="OrderItem">
 		SELECT B.BILL_ID,P.PRODUCT_ID,N.SELL_ID,P.PRICE,N.DISCOUNT,C.CODE_NAME,C.PARENT_CODE,I.FILE_PATH,B.STATUS,TO_CHAR(B.CDATETIME, 'YYYY-MM-DD') AS CDATETIME,B.PRODUCT_COUNT,B.KIND,P.PRODUCT_NAME,R.CONTENT,
 	      CASE WHEN R.COMMENT_ID IS NULL THEN 'N'
@@ -101,6 +106,11 @@
 	      LEFT JOIN HANJU_COMMENT R ON R.BILL_ID = B.BILL_ID
 	      WHERE I.FILE_STATUS = 'T' AND B.USER_ID = #{userId} AND C.KIND = 'PRODUCT_CODE' AND B.STATUS = 'C'
 	      ORDER BY B.CDATETIME DESC
+	</select>
+	<select id="reviewCount" parameterType="hashmap" resultType="OrderItem">	
+		SELECT COUNT(*) 
+	    FROM HANJU_COMMENT
+		WHERE USER_ID = #{userId} 
 	</select>
 	<insert id="reviewWrite" parameterType="hashmap" useGeneratedKeys="true" keyProperty="COMMENT_ID" keyColumn="COMMENT_ID">
 		INSERT INTO HANJU_COMMENT
@@ -119,10 +129,9 @@
 		OFFSET #{start} ROWS FETCH FIRST #{size} ROWS ONLY
 	</select>
 	<select id="gudokCount" parameterType="hashmap" resultType="GudokCheck">	
-		SELECT SUBSCRIBE_ID, COUNT(*) AS CNT
+		SELECT COUNT(*) 
 		FROM HANJU_SUBSCRIBE_STATUS
 		WHERE USER_ID = #{userId} 
-		GROUP BY SUBSCRIBE_ID
 	</select>
 	<update id="gudokState" parameterType="hashmap">
 		UPDATE HANJU_SUBSCRIBE_STATUS

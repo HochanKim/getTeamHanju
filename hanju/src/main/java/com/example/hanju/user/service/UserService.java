@@ -33,8 +33,12 @@ public interface UserService {
   Map<String, Object> deleteFavoriteItem(Map<String,Object> map);
   //주문조회
   Map<String,Object> getOrderList(Map<String,Object> map);
+  //주문개수
+  HashMap<String, Object> orderCnt();
   //리뷰페이지
   Map<String,Object> reviewList(Map<String,Object> map);
+  //리뷰개수
+  HashMap<String, Object> reviewCnt();
   //리뷰작성
   HashMap<String, Object> writeReview(HashMap<String, Object> map);
   //리뷰이미지
@@ -44,5 +48,5 @@ public interface UserService {
   //구독상태수정
   HashMap<String, Object> gudokState(HashMap<String, Object> map);
   //구독개수
-  Map<String,Object> gudokCnt(Map<String,Object> map);
+  HashMap<String, Object> gudokCnt();
 }
