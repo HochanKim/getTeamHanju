@@ -42,8 +42,8 @@ pageEncoding="UTF-8"%>
           <option value="1">:: 10도 미만 ::</option>
           <option value="2">:: 10도 이상 ::</option>
         </select>
-        <select v-model="sweet" @change="PickUpList" class="wineSelect">
-          <option value="">-- 단맛 --</option>
+        <select v-model="bitter" @change="PickUpList" class="wineSelect">
+          <option value="">-- 쓴맛 --</option>
           <option value="1">:: 약함 ::</option>
           <option value="2">:: 중간 ::</option>
           <option value="3">:: 강함 ::</option>
@@ -138,14 +138,14 @@ pageEncoding="UTF-8"%>
         MadeByList : [],
         codeList : [],
         selectCodes : [],
-        alcohol : "",     // 알콜 도수
-        sweet : "",       // 당도
-        sour : "",        // 산미
-        sparkling : "",   // 탄산 유무
-        body : "",        // 바디감
-        capacity : "",    // 용량
-        material : "",    // 품종
-        madeBy : ""       // 원산지
+        alcohol : "",     	// 알콜 도수
+        bitter : "",       	// 쓴맛
+        sour : "",        	// 산미
+        sparkling : "",   	// 탄산 유무
+        body : "",        	// 바디감
+        capacity : "",    	// 용량
+        material : "",    	// 품종
+        madeBy : ""       	// 원산지
       };
     },
     methods: {
@@ -170,7 +170,7 @@ pageEncoding="UTF-8"%>
             paramap = {
               selectCodes : fCode,
               alcohol : self.alcohol,
-              sweet : self.sweet,
+              bitter : self.bitter,
               sour : self.sour,
               sparkling : self.sparkling,
               body : self.body,
@@ -181,7 +181,7 @@ pageEncoding="UTF-8"%>
           } else {
             paramap = {
               alcohol : self.alcohol,
-              sweet : self.sweet,
+              bitter : self.bitter,
               sour : self.sour,
               sparkling : self.sparkling,
               body : self.body,
