@@ -39,8 +39,10 @@
                     <div class="font-size2">{{parseInt(info.price).toLocaleString()}}원</div>
                   </div>
                   <div v-else> 
-                  <div class="font-size2"> 원가 / 할인가 <br><del>{{parseInt(info.price).toLocaleString()}}</del> /
-                    {{parseInt(info.price - (info.price / 100 * info.discount)).toLocaleString()}}</div>
+                  <div class="font-size2"> 원가 / 할인가 <br>
+					<p style="margin-top:10px;"><del>{{parseInt(info.price).toLocaleString()}}</del> /
+                    {{parseInt(info.price - (info.price / 100 * info.discount)).toLocaleString()}}</p>
+					</div>
                   </div>
                 </div>
               </div>

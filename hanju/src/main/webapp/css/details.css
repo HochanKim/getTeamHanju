@@ -4,6 +4,10 @@ body, html {
     background-color: #ffffff; /* Light background for contrast */
 }
 
+del {
+	color:#999;
+}
+
 .thumb-img {
     width: 100%; /* Responsive image */
     height : 100%;
@@ -155,6 +159,7 @@ body, html {
     color: white;
     background-color: #7b4bbf;
     transition: background-color 0.3s; /* Transition for hover effect */
+	cursor: pointer;
 }
 
 .side-button:hover {

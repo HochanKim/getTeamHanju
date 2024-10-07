@@ -40,22 +40,21 @@ pageEncoding="UTF-8"%>
                   <img :src="item.filePath" :alt="item.fileOrgName" />
                 </div>
                 <p class="productName">{{ item.productName }}</p>
-                <p class="price" v-if="item.discount == 0"> <!-- 할인율 0일 경우 -->
-                  {{ item.priceComma }} 
-                  <span class="mini">원</span>
-                </p>
-                <p class="price" v-else> <!-- 할인율 존재할 경우 -->
-                  <del style="font-size:14px; font-weight: 400; margin-right:8px;">{{ item.priceComma }} 원</del>
-                  <p v-if="item.discount != 0">
-                    <span class="discount">{{item.discount}} % </span>
-                    <span class="price productPrice">
-                      {{item.discountPrice}} <span class="mini">원</span>
-                    </span>
+                <div class="priceSection">
+                  <p class="price" v-if="item.discount == 0" style="font-size:28px;"> <!-- 할인율 0일 경우 -->
+                      {{ item.priceComma }} 
+                    <span class="mini">원</span>
                   </p>
-                  <p v-else>
-                    <br>
+                  <p class="price" v-else> <!-- 할인율 존재할 경우 -->
+                    <del style="font-size:14px; font-weight: 400; margin-right:8px;">{{ item.priceComma }} 원</del>
+                    <p v-if="item.discount != 0">
+                      <span class="discount">{{item.discount}} % </span>
+                        <span class="price productPrice">
+                          {{item.discountPrice}} <span class="mini">원</span>
+                        </span>
+                    </p>
                   </p>
-                </p>
+                </div>
                 <p class="made">
                   <span class="mini madeBy">원산지</span> {{ item.madeBy }}
                 </p>

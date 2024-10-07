@@ -264,7 +264,7 @@
                 </div>
                 <br>
                 <div>
-                  원가 / 공구가 <br>
+                  <p style="margin-bottom:10px;">원가 / 공구가</p> <br>
                   <del>{{parseInt(info.price).toLocaleString()}}</del> / {{parseInt(info.price - (info.price / 100 * info.discount)).toLocaleString()}}
                 </div>
               </div>
