@@ -9,7 +9,7 @@
 <body>
     <!-- 푸터 -->
     <div id="footer">
-        <div id="container">
+        <div id="footerContainer">
             <div class="companyName">HANJU</div>
             <div class="phone">대표전화 : (032)123-0348 / FAX : (032)123-0354</div>
             <div class="phoneDetail">평일 10:00 - 18:00, 주말 휴무</div>
