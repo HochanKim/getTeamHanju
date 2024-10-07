@@ -1,5 +1,6 @@
 package com.example.hanju.cart.mapper;
 
+import com.example.hanju.cart.model.dto.CartNameDto;
 import com.example.hanju.cart.model.entity.CartEntity;
 import com.example.hanju.cart.model.dto.CartCheckDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,7 +24,7 @@ public interface CartMapper {
     List<CartCheckDto> pickupCartCheck(Map<String, Object> map);
     List<CartCheckDto> cartCheck(Map<String, Object> map);
     int updateCart(Map<String, Object> map);
-    List<String> getCartName(Map<String,Object> map);
+    List<CartNameDto> getCartName(Map<String,Object> map);
     void addBill(CartEntity cart);
     void addCartBill(Map<String,Object> map);
     void subPayment(Map<String,Object> map);

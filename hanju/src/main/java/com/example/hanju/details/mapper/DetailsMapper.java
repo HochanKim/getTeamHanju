@@ -26,4 +26,7 @@ public interface DetailsMapper {
     List<Product> getSubscribeItem(Map<String, Object> map);
     List<ProductSubImage> getItemImage(Map<String, Object> map);
     int userSubCheck(Map<String, Object> map);
+    int getFavorite(Map<String, Object> map);
+    void deleteFavorite(Map<String,Object> map);
+    void addFavorite(Map<String,Object> map);
 }

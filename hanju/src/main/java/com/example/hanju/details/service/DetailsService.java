@@ -19,4 +19,8 @@ public interface DetailsService {
     HashMap<String,Object> addGroup(HashMap<String,Object> map);
     Map<String,Object> getSubscribeItem(Map<String,Object> map);
     Map<String,Object> userSubCheck(Map<String,Object> map);
+    Map<String,Object> getFavorite(Map<String,Object> map);
+    void deleteFavorite(Map<String,Object> map);
+    void addFavorite(Map<String, Object> map);
+
 }

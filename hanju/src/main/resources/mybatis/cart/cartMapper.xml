@@ -104,8 +104,8 @@
             #{id}
         </foreach>
     </select>
-    <select id="getCartName" parameterType="hashmap" resultType="String">
-        SELECT P.PRODUCT_NAME
+    <select id="getCartName" parameterType="hashmap" resultType="CartNameDto">
+        SELECT P.PRODUCT_NAME , C.PRODUCT_COUNT COUNT
         FROM HANJU_CART C
         INNER JOIN HANJU_PRODUCT P ON C.PRODUCT_ID = P.PRODUCT_ID
         WHERE CART_ID IN

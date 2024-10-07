@@ -1,404 +1,422 @@
-body, html {
-    margin: 0;
-    font-family: 'NanumSquareAcr', sans-serif;
-    background-color: #ffffff; /* Light background for contrast */
+body,
+html {
+  margin: 0;
+  font-family: "NanumSquareAcr", sans-serif;
+  background-color: #ffffff; /* Light background for contrast */
 }
-
+svg {
+  fill: red;
+}
+svg:hover {
+  fill: rgb(238, 87, 87);
+}
+.favor {
+  height: 40px;
+  width: 40px;
+}
 .thumb-img {
-    width: 100%; /* Responsive image */
-    height : 100%;
-    max-width: 300px; /* Maintain maximum size */
+  width: 100%; /* Responsive image */
+  height: 100%;
+  max-width: 300px; /* Maintain maximum size */
 }
 
 .thumb {
-    margin-top: 100px;
-    display: flex;
-    margin: auto;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  margin-top: 100px;
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .font-size {
-    font-size: 30px;
-    font-family: 'NanumSquareAceb', sans-serif;
-    color: #333; /* Dark text for better readability */
+  font-size: 30px;
+  font-family: "NanumSquareAceb", sans-serif;
+  color: #333; /* Dark text for better readability */
 }
 
 .font-size2 {
-    font-size: 20px;
-    font-family: 'NanumSquareAceb', sans-serif;
-    color: #333; /* Slightly lighter text */
+  font-size: 20px;
+  font-family: "NanumSquareAceb", sans-serif;
+  color: #333; /* Slightly lighter text */
 }
 
 .detail-img {
-    width: 100%; /* Responsive detail image */
-    max-width: 800px; /* Maintain maximum size */
+  width: 100%; /* Responsive detail image */
+  max-width: 800px; /* Maintain maximum size */
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    align-items: center; /* Center items vertically */
-    margin: 15px 0; /* Space between rows */
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center items vertically */
+  margin: 15px 0; /* Space between rows */
 }
 .row2 {
-    display: flex;
-    flex-direction: row;
-    align-items: center; /* Center items vertically */
-    margin: 14px 0; /* Space between rows */
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center items vertically */
+  margin: 14px 0; /* Space between rows */
 }
 
 .box {
-    display: inline-block;
-    background-color: #ffffff; /* White background for boxes */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border-radius: 10px; /* Rounded corners */
-    padding: 15px; /* Padding for content spacing */
-    margin-right: 10px;
-    margin-top: 30px;
-    width: 44%; /* Fixed width for uniformity */
-    transition: transform 0.2s; /* Transition for hover effect */
+  display: inline-block;
+  background-color: #ffffff; /* White background for boxes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px; /* Padding for content spacing */
+  margin-right: 10px;
+  margin-top: 30px;
+  width: 44%; /* Fixed width for uniformity */
+  transition: transform 0.2s; /* Transition for hover effect */
 }
 
 .box2 {
-    float: right;
-    background-color: #fff; /* White background for boxes */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border-radius: 10px; /* Rounded corners */
-    padding: 15px; /* Padding for content spacing */
-    margin-right: 30px;
-    margin-top: 30px;
-    width: 44%; /* Fixed width for uniformity */
-    transition: transform 0.2s; /* Transition for hover effect */
+  float: right;
+  background-color: #fff; /* White background for boxes */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  padding: 15px; /* Padding for content spacing */
+  margin-right: 30px;
+  margin-top: 30px;
+  width: 44%; /* Fixed width for uniformity */
+  transition: transform 0.2s; /* Transition for hover effect */
 }
 
-.detail-container{
-    width: 67%;
+.detail-container {
+  width: 67%;
 }
 
-.box-container{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-bottom: 10px;
-    
-    
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.box:hover , .box2:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
+.box:hover,
+.box2:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
 }
 
 .title {
-    font-weight: bold;
-    margin-bottom: 5px; /* Space below title */
+  font-weight: bold;
+  margin-bottom: 5px; /* Space below title */
 }
-.main-container{
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    width: 70%;
+.main-container {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  width: 70%;
 }
 .box-content {
-    max-width: 100%;
-    margin-left: 15px;
-    margin-bottom: 5px;
+  max-width: 100%;
+  margin-left: 15px;
+  margin-bottom: 5px;
 }
 
 .main-page {
-    width: 100%;
+  width: 100%;
 }
 
 .side-bar {
-    width: 30%;
-    height: auto;
-    position: sticky;
-    top: 150px;
-    text-align: center;
-    border-radius: 10px;
-    background-color: #fff;
-    border: 3px solid #eee;
-    width: 300px;
-    padding: 30px 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-    transition: box-shadow 0.3s; 
+  width: 30%;
+  height: auto;
+  position: sticky;
+  top: 150px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 3px solid #eee;
+  width: 300px;
+  padding: 30px 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
 }
 .side-bar:hover {
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강화 */
 }
 .container {
-    max-width: 1000px;
-    margin: auto;
+  max-width: 1000px;
+  margin: auto;
 }
 
 .img-chart img {
-    max-width: 180px; 
-    height: auto;    
-    object-fit: cover;
+  max-width: 180px;
+  height: auto;
+  object-fit: cover;
 }
 
 .img-grade div img {
-    width: 50px; 
-    height: auto;    
-    object-fit: cover;
+  width: 50px;
+  height: auto;
+  object-fit: cover;
 }
 
 .thumb-content {
-    margin-left: 50px;
+  margin-left: 50px;
 }
 
 .side-button {
-    width: 100%;
-    height: 45px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    background-color: #7b4bbf;
-    transition: background-color 0.3s; /* Transition for hover effect */
+  width: 100%;
+  height: 45px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: #7b4bbf;
+  transition: background-color 0.3s; /* Transition for hover effect */
 }
 
 .side-button:hover {
-    background-color: #190730; /* Darker shade on hover */
+  background-color: #190730; /* Darker shade on hover */
 }
 
 .q-control {
-    border: none;
-    color: white;
-    background: #7b4bbf;
-    width: 90px;
-    height: 45px;
-    border-radius: 5px; 
-    transition: background-color 0.3s;
+  border: none;
+  color: white;
+  background: #7b4bbf;
+  width: 90px;
+  height: 45px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .q-control:hover {
-    background: #2a0c50; /* Darker shade on hover */
+  background: #2a0c50; /* Darker shade on hover */
 }
 
 .input-box {
-    width: 100px;
-    height: 50px;
-    text-align: center;
-    border: none;
-    border-radius: 5px; /* Rounded corners for input */
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  border: none;
+  border-radius: 5px; /* Rounded corners for input */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
 }
 
 .pad {
-    padding: 30px 0px;
-    font-size: 20px;
-    font-family: 'NanumSquareAceb', sans-serif;
+  padding: 30px 0px;
+  font-size: 20px;
+  font-family: "NanumSquareAceb", sans-serif;
 }
 
 .pad2 {
-    padding: 20px 0px;
+  padding: 20px 0px;
 }
 
 .review-name {
-    margin-left: 10px;
-    float: left;
+  margin-left: 10px;
+  float: left;
 }
 
 .review {
-    margin-right: 10px;
-    float: left;
+  margin-right: 10px;
+  float: left;
 }
 
 .review-box {
-    background-color: #2f1b56;
-    border-radius: 5px;
-    width: 800px;
-    color: #fff;
-    padding: 10px; /* Add padding for content */
+  background-color: #2f1b56;
+  border-radius: 5px;
+  width: 800px;
+  color: #fff;
+  padding: 10px; /* Add padding for content */
 }
 
 .review-box2 {
-    width: 800px;
-    margin-bottom: 10px;
-    padding: 10px; /* Add padding for content */
+  width: 800px;
+  margin-bottom: 10px;
+  padding: 10px; /* Add padding for content */
 }
 
 .review-img {
-    width: 100px;
-    border-radius: 5px; /* Rounded corners for review images */
+  width: 100px;
+  border-radius: 5px; /* Rounded corners for review images */
 }
 
 .review-box4 {
-    margin: 10px;
+  margin: 10px;
 }
 
 /* 이미지 슬라이더 */
 .image-container {
-    position: relative;
-    display: inline-block;
-    width:300px;
-    height:300px;
+  position: relative;
+  display: inline-block;
+  width: 300px;
+  height: 300px;
 }
 
 .dots {
-    position: absolute;
-    bottom: 10px; 
-    left: 50%;
-    transform: translateX(-50%); 
-    display: flex; 
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
 }
 
 .dot {
-    display: inline-block;
-    width: 12px; /* Slightly larger dots */
-    height: 12px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background-color: gray; 
-    cursor: pointer;
-    transition: background-color 0.3s; /* Transition effect */
+  display: inline-block;
+  width: 12px; /* Slightly larger dots */
+  height: 12px;
+  margin: 0 5px;
+  border-radius: 50%;
+  background-color: gray;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Transition effect */
 }
 
 .dot.active {
-    background-color: #2f1b56;
+  background-color: #2f1b56;
 }
 
 .progressBarWrapper {
-    display: inline-block;
-    width: 100%;
-    height: 20px;
-    
+  display: inline-block;
+  width: 100%;
+  height: 20px;
 }
 
 .progressBar {
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    border-radius: 5px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 .progress {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    background-color: #7b4bbf;
-    border-radius: 5px;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: #7b4bbf;
+  border-radius: 5px;
 }
 
 /*버튼 기본 스타일링*/
 #tost_btn {
-    display: block;
-    margin: 40px auto;
-    padding: 10px 20px;
-    background-color: #2f1b56;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.2s;
+  display: block;
+  margin: 40px auto;
+  padding: 10px 20px;
+  background-color: #2f1b56;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 #tost_btn:hover {
-    box-shadow: 3px 4px 11px 0px #00000040;
+  box-shadow: 3px 4px 11px 0px #00000040;
 }
 
 /*토스트 메시지*/
-#tost_message, #login_message, #jago_message, #select_message{
-    opacity: 0;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    padding: 10px 50px;
-    background: rgba(0, 0, 0, 0.70);
-    border-radius: 100px;
-    color: #fff;
-    box-shadow: 3px 4px 11px 0px #00000040;
-    transition: all 0.5s;
+#tost_message,
+#login_message,
+#jago_message,
+#select_message,
+#defav,
+#addfav {
+  opacity: 0;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 10px 50px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 100px;
+  color: #fff;
+  box-shadow: 3px 4px 11px 0px #00000040;
+  transition: all 0.5s;
 }
 
 /*토스트 메시지 활성화 되었을 때*/
-#tost_message.active, #login_message.active, #jago_message.active, #select_message.active{
-    opacity: 100%;
-    bottom: 50px;
-    display: block; 
+#tost_message.active,
+#login_message.active,
+#jago_message.active,
+#select_message.active,
+#defav.active,
+#addfav.active {
+  opacity: 100%;
+  bottom: 50px;
+  display: block;
 }
 
 /* 모달버튼 css */
 /* dimmed */
 .modal-wrap {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
 /* modal or popup */
 .modal-container {
-    background-color: white; /* 모달 배경색 */
-    border-radius: 8px; /* 모서리 둥글게 */
-    padding: 20px;
-    width: 400px; /* 모달 너비 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-    animation: fadeIn 0.3s; /* 모달 등장 애니메이션 */
+  background-color: white; /* 모달 배경색 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  padding: 20px;
+  width: 400px; /* 모달 너비 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  animation: fadeIn 0.3s; /* 모달 등장 애니메이션 */
 }
 
 .modal-container h4 {
-    margin: 0 0 20px; /* 제목 하단 마진 */
-    font-size: 1.5em; /* 제목 크기 */
-    text-align: center; /* 중앙 정렬 */
+  margin: 0 0 20px; /* 제목 하단 마진 */
+  font-size: 1.5em; /* 제목 크기 */
+  text-align: center; /* 중앙 정렬 */
 }
 
 .modal-container ul {
-    list-style: none; /* 기본 리스트 스타일 제거 */
-    padding: 0; /* 기본 패딩 제거 */
+  list-style: none; /* 기본 리스트 스타일 제거 */
+  padding: 0; /* 기본 패딩 제거 */
 }
 
 .modal-container li {
-    display: flex;
-    justify-content: space-between; /* 리스트 항목 정렬 */
-    align-items: center;
-    padding: 10px 0; /* 리스트 항목 패딩 */
+  display: flex;
+  justify-content: space-between; /* 리스트 항목 정렬 */
+  align-items: center;
+  padding: 10px 0; /* 리스트 항목 패딩 */
 }
 
 .modal-button {
-    background-color: #311964; /* 버튼 배경색 */
-    color: white; /* 버튼 텍스트 색상 */
-    border: none; /* 기본 테두리 제거 */
-    border-radius: 5px; /* 버튼 모서리 둥글게 */
-    padding: 10px 15px; /* 버튼 패딩 */
-    cursor: pointer; /* 커서 변경 */
-    transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
+  background-color: #311964; /* 버튼 배경색 */
+  color: white; /* 버튼 텍스트 색상 */
+  border: none; /* 기본 테두리 제거 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 */
+  padding: 10px 15px; /* 버튼 패딩 */
+  cursor: pointer; /* 커서 변경 */
+  transition: background-color 0.3s; /* 배경색 변경 애니메이션 */
 }
 
 .modal-button:hover {
-    background-color: #2f1b56; /* 버튼 호버 시 색상 변경 */
+  background-color: #2f1b56; /* 버튼 호버 시 색상 변경 */
 }
 
 .modal-btn {
-    margin-top: 20px; /* 버튼과 다른 요소 간 간격 */
-    text-align: center; /* 중앙 정렬 */
+  margin-top: 20px; /* 버튼과 다른 요소 간 간격 */
+  text-align: center; /* 중앙 정렬 */
 }
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 /* Hide scrollbar */
 html {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 html::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+  display: none; /* Chrome, Safari, Opera*/
 }

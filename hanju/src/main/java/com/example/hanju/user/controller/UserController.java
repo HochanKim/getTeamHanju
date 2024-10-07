@@ -88,7 +88,6 @@ public class UserController {
 		return "user/checkGudok";
 	}
 	
-	
 	//모든 유저 정보 리스트
 	@GetMapping(value = "user/allUserList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
