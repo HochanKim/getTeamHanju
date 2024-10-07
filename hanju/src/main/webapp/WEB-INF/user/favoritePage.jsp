@@ -93,8 +93,8 @@ pageEncoding="UTF-8"%>
         console.log(productId);
       
         if(!sellId){
-        location.href = `/details/detailsPickup.do?id=\${productId}`;
-      }else {
+          location.href = `/details/detailsPickup.do?id=\${productId}`;
+        }else {
           location.href = `/details/details.do?id=\${sellId}`;
         }
       },
@@ -119,7 +119,7 @@ pageEncoding="UTF-8"%>
             success: function (data) {
               console.log(data);
               alert("삭제되었습니다.")
-              self.fnGetFavoriteItemList();
+              self.fnGetFavoriteItemList(0, self.pageSize);
             }
           });
       },
@@ -160,7 +160,7 @@ pageEncoding="UTF-8"%>
       }
       this.userId = "${userId}";
       this.fnGetFavoriteItemList(this.totalPages, this.pageSize);
-      this.fnGetTotalfavorite();
+      this.fnGetTotalfavorite(0, this.pageSize);
     },
   });
   app.mount("#app");
