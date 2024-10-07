@@ -64,12 +64,12 @@
             </choose>
         </if>
         
-        <!-- 당도 -->
-        <if test="sweet != ''">
+        <!-- 쓴맛 -->
+        <if test="bitter != ''">
             <choose>
-                <when test="sweet == 1">AND (SWEET = 0 OR SWEET = 1 OR SWEET = 2)</when>
-                <when test="sweet == 2">AND (SWEET = 3)</when>
-                <when test="sweet == 3">AND (SWEET = 4 OR SWEET = 5)</when>
+                <when test="bitter == 1">AND (BITTER = 0 OR BITTER = 1 OR BITTER = 2)</when>
+                <when test="bitter == 2">AND (BITTER = 3)</when>
+                <when test="bitter == 3">AND (BITTER = 4 OR BITTER = 5)</when>
             </choose>
         </if>
 
