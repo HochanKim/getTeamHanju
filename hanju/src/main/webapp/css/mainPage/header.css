@@ -28,7 +28,7 @@
     font-family: 'NanumSquareAcb';
 }
 
-#header #container {
+#header #headerContainer {
   width: 60%;
   display: flex;
   justify-content: space-between;

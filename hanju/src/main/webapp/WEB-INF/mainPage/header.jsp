@@ -14,7 +14,7 @@
   <body>
     <div id="headerZone"></div>
     <div id="header">
-      <div id="container">
+      <div id="headerContainer">
         <div id="center">
           <div class="menu">
             <a href="../market/productList.do">전통주</a>
