@@ -98,7 +98,7 @@
 	<select id="orderCount" parameterType="hashmap" resultType="Integer">	
 		SELECT COUNT(*) 
 		FROM HANJU_BILL
-		WHERE USER_ID = #{userId} 
+		WHERE USER_ID = #{userId} AND KIND = 'N'
 	</select>
 	<select id="reviewPage" parameterType="hashmap" resultType="OrderItem">
 		SELECT B.BILL_ID,P.PRODUCT_ID,N.SELL_ID,P.PRICE,N.DISCOUNT,C.CODE_NAME,C.PARENT_CODE,I.FILE_PATH,B.STATUS,TO_CHAR(B.CDATETIME, 'YYYY-MM-DD') AS CDATETIME,B.PRODUCT_COUNT,B.KIND,P.PRODUCT_NAME,R.CONTENT,
