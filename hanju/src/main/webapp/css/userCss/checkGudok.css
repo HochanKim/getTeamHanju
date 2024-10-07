@@ -1,6 +1,7 @@
 #container{
     margin: 0 auto;
     font-family: 'NanumSquareAcr';
+    height: calc(100vh - 372px);
 }
 
 #contents{
@@ -14,7 +15,7 @@
     transform: translate(0, 0);
     opacity: 1.0;
     min-height: 30px;
-    margin: 10px 0 60px;
+    margin: 30px 0 60px;
     text-align: center;
 }
 
@@ -132,7 +133,7 @@ span{
 
 .subBtn{
     width: 90px;
-    height: 45px;
+    height: 40px;
     margin-top: 10px;
     padding: 10px 13px;
     background-color: #7B4BBF;
@@ -142,7 +143,7 @@ span{
     font-weight: 700;
     border: 0px;
     cursor: pointer;
-    line-height: 28px;
+    line-height: 20px;
   }
 
  /* 페이징 */

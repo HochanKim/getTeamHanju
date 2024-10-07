@@ -10,6 +10,11 @@ pageEncoding="UTF-8"%>
     <script src="/js/vue.js"></script>
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
+    <style>
+      #container {
+        height: calc(100vh - 372px);
+      }
+    </style>
   </head>
   <body>
     <div id="app">
@@ -49,13 +54,13 @@ pageEncoding="UTF-8"%>
                         </td>
                     </tr>
                 </table>
-            </div>
-            <!-- 페이징 버튼 -->
-            <div id="pagination">
-              <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
-              <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
-              <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
-            </div>
+              </div>
+              <!-- 페이징 버튼 -->
+              <div id="pagination">
+                <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+                <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+                <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+              </div>
             </div>
           </div>
     </div>
