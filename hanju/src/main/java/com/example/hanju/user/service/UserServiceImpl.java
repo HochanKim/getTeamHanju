@@ -260,16 +260,33 @@ public class UserServiceImpl implements UserService{
 		}
 		return resultMap;
 	}
+	//구독한개수
 	@DbExceptionHandle
 	@Override
-	public Map<String, Object> gudokCnt(Map<String, Object> map) {
-		Map<String,Object> result = new HashMap<>();
-		List<GudokCheck> list = userMapper.gudokCount(map);
-		System.out.println(list);
-		result.put("list",list);
-		return result;
+	public HashMap<String, Object> gudokCnt() {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int getCnt = userMapper.gudokCount();
+		resultMap.put("number", getCnt);
+		return resultMap;
 	}
-	
+	//주문개수
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> orderCnt() {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int getCnt = userMapper.orderCount();
+		resultMap.put("number", getCnt);
+		return resultMap;
+	}
+	//리뷰개수
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> reviewCnt() {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int getCnt = userMapper.revuewCount();
+		resultMap.put("number", getCnt);
+		return resultMap;
+	}
 	
 	
 

@@ -51,11 +51,11 @@ pageEncoding="UTF-8"%>
                 </table>
             </div>
             <!-- 페이징 버튼 -->
-        <div id="pagination">
-          <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
-          <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
-          <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
-        </div>
+            <div id="pagination">
+              <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+              <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+              <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+            </div>
             </div>
           </div>
     </div>
@@ -123,8 +123,8 @@ pageEncoding="UTF-8"%>
             data : {},
             success : (data) => {
               console.log(data);
-              var totalGudok = data.number;
-              this.totalPages = Math.ceil(totalGudok / this.pageSize);
+              var totalGudok = data.number || 0;
+              this.totalPages = (Math.ceil(totalGudok / this.pageSize), 1);
             }
           });
         },

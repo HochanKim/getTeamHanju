@@ -49,6 +49,12 @@ pageEncoding="UTF-8"%>
                         </tr>
                     </table>
                 </div>
+            <!-- 페이징 버튼 -->
+            <div id="pagination">
+              <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+              <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+              <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+            </div>
             </div>
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>
@@ -59,11 +65,18 @@ pageEncoding="UTF-8"%>
     data() {
       return {
         orderList:[],
+        totalPages : 0,     // 페이지 첫 인덱스
+        pageSize : 10,      // 한 페이지의 호출 리스트 개수
+        currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호
       };
     },
     methods: {
-        fnOrder(){
+        fnOrder(start, size){
             var self = this;
+            var nparmap = {
+              start : start, 
+              size : size
+          };
 				
 			$.ajax({
 				url:"getOrderList.dox", 
@@ -88,10 +101,37 @@ pageEncoding="UTF-8"%>
       }else if(kind == 'N'){
           location.href = `/details/details.do?id=\${productId}`;
         }
-      }
+      },
+
+      fnGetTotalReview() {     // 페이징 메소드
+          
+          $.ajax({	
+            url:"getTotalReview.dox",
+            dataType:"json",	
+            type : "POST", 
+            data : {},
+            success : (data) => {
+              console.log(data);
+              var totalReview = data.number || 0;
+              this.totalPages = (Math.ceil(totalReview / this.pageSize), 1);
+            }
+          });
+        },
+        fnClickPage(index){    // 페이징 숫자 버튼
+            if (index < 0) return;
+            if (index > this.totalPages) return;
+
+            this.currentPage = index;
+
+            var start = (this.currentPage - 1) * this.pageSize;
+            var size  = this.pageSize;
+            this.fnOrder(start, size);
+        },
     },
     mounted() {
-        this.fnOrder();
+      var self = this;
+      self.fnOrder(self.totalPages, self.pageSize);
+      self.fnGetTotalReview();
     },
   });
   app.mount("#app");

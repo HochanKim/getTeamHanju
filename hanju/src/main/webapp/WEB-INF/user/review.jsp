@@ -153,12 +153,12 @@
               </div>
             </div>
           </div>
-             <!-- 페이징 버튼 -->
-             <div id="pagination">
-              <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
-              <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
-              <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
-            </div>
+        <!-- 페이징 버튼 -->
+          <div id="pagination">
+            <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+            <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+            <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+          </div>
         </div>
       </div>
     </div>
@@ -284,9 +284,36 @@
         });
       },
 
+      fnGetTotalGu() {     // 페이징 메소드
+          
+          $.ajax({	
+            url:"getTotalReview.dox",
+            dataType:"json",	
+            type : "POST", 
+            data : {},
+            success : (data) => {
+              console.log(data);
+              var totalGudok = data.number || 0;
+              this.totalPages = (Math.ceil(totalGudok / this.pageSize), 1);
+            }
+          });
+        },
+        fnClickPage(index){    // 페이징 숫자 버튼
+            if (index < 0) return;
+            if (index > this.totalPages) return;
+
+            this.currentPage = index;
+
+            var start = (this.currentPage - 1) * this.pageSize;
+            var size  = this.pageSize;
+            this.fngudok(start, size);
+        },
+
     },
     mounted() {
-      this.fnOrder();
+      var self = this;
+      this.fnOrder(self.totalPages, self.pageSize);
+      self.fnGetTotalGu();
     },
   });
   app.mount("#app");
