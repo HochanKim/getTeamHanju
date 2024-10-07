@@ -54,6 +54,7 @@ p {
 }
 select {
     margin-right:10px;
+	margin-bottom: 10px;
     width:120px;
     text-align: center;
 }
@@ -80,7 +81,7 @@ input {
 }
 .productContainer > div {
     width:235px;
-    height:450px;
+    height:480px;
     margin:12px;
 }
 
@@ -103,11 +104,17 @@ ul {
     box-sizing: border-box;
 }
 
+    /* 상품명 */
 .productName {
     font-size:20px;
     font-family: 'NanumSquareAcb';
     margin:10px 0;
     height:50px;
+}
+
+    /* 상품가격 */
+.priceSection {
+    height:55px;
 }
 .price {
     font-size:20px;
@@ -123,6 +130,7 @@ ul {
     font-weight:500;
     margin-left:3px;
 }
+    /* 기타 상품정보 */
 .madeBy {
     margin-left:0;
     margin-right:10px;

@@ -44,8 +44,8 @@
             <div class="menu" @click="fnSellerPage">사업자 페이지</div>
           </div>
           <div v-else-if="userStatus == 'A'" class="icons">
-            <div @click="fnLogout">로그아웃</div>
-            <div @click="fnAdminPage">관리자 페이지</div>
+            <div class="menu" @click="fnLogout">로그아웃</div>
+            <div class="menu" @click="fnAdminPage">관리자 페이지</div>
             <img class="rightIcon" src="../../image/person_black.png">
           </div>
           <div v-else class="icons" @click="fnLogin">
