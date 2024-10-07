@@ -64,6 +64,7 @@ pageEncoding="UTF-8"%>
   const app = Vue.createApp({
     data() {
       return {
+        userId: "${sessionId}",
         orderList:[],
         totalPages : 0,     // 페이지 첫 인덱스
         pageSize : 10,      // 한 페이지의 호출 리스트 개수
@@ -104,16 +105,18 @@ pageEncoding="UTF-8"%>
       },
 
       fnGetTotalReview() {     // 페이징 메소드
-          
+        var nparmap = {
+          userId:self.userId
+        };
           $.ajax({	
             url:"getTotalReview.dox",
             dataType:"json",	
             type : "POST", 
-            data : {},
+            data : nparmap,
             success : (data) => {
               console.log(data);
               var totalReview = data.number || 0;
-              this.totalPages = (Math.ceil(totalReview / this.pageSize), 1);
+              this.totalPages = Math.ceil(totalReview / this.pageSize);
             }
           });
         },

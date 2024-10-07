@@ -179,8 +179,7 @@ public class UserController {
 	//주문정보
 	@GetMapping(value = "user/getOrderList.dox", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String getOrderList(Model model) throws Exception {
-		Map<String, Object> map = new HashMap<>();
+	public String getOrderList(Model model, @RequestParam Map<String, Object> map) throws Exception {
 		map.put("userId",session.getAttribute("sessionId"));
 		Map<String, Object> result = userService.getOrderList(map);
 		return new Gson().toJson(result);
@@ -188,8 +187,7 @@ public class UserController {
 	//리뷰페이지
 		@GetMapping(value = "user/reviewPage.dox", produces = "application/json;charset=UTF-8")
 		@ResponseBody
-		public String reviewPage(Model model) throws Exception {
-			Map<String, Object> map = new HashMap<>();
+		public String reviewPage(Model model, @RequestParam Map<String, Object> map) throws Exception {
 			map.put("userId",session.getAttribute("sessionId"));
 			Map<String, Object> result = userService.reviewList(map);
 			return new Gson().toJson(result);
@@ -198,7 +196,7 @@ public class UserController {
     @RequestMapping(value = "user/getTotalReview.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
   	@ResponseBody
   	public String getTotalReview(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-  		Map<String, Object> result = userService.reviewCnt();
+  		Map<String, Object> result = userService.reviewCnt(map);
   		return new Gson().toJson(result);
   	}
 	
@@ -287,14 +285,21 @@ public class UserController {
     @RequestMapping(value = "user/getTotalGudok.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
   	@ResponseBody
   	public String getTotalGudok(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-  		Map<String, Object> result = userService.gudokCnt();
+  		Map<String, Object> result = userService.gudokCnt(map);
   		return new Gson().toJson(result);
   	}
     //주문페이징
     @RequestMapping(value = "user/getTotalOrder.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
   	@ResponseBody
   	public String getTotalOrder(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
-  		Map<String, Object> result = userService.orderCnt();
+  		Map<String, Object> result = userService.orderCnt(map);
+  		return new Gson().toJson(result);
+  	}
+    //찜페이징
+    @RequestMapping(value = "user/getTotalFavorite.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+  	@ResponseBody
+  	public String getTotalFavorite(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+  		Map<String, Object> result = userService.favoriteCnt(map);
   		return new Gson().toJson(result);
   	}
   //구독상태수정

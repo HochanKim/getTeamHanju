@@ -215,7 +215,7 @@
           url: "reviewPage.dox",
           dataType: "json",
           type: "GET",
-
+          data: paramap,
           success: function (data) {
             console.log(data);
             for (var item of data.list) {
@@ -284,17 +284,19 @@
         });
       },
 
-      fnGetTotalGu() {     // 페이징 메소드
-          
+      fnGetTotalReview() {     // 페이징 메소드
+        var nparmap = {
+          userId:self.userId
+        };
           $.ajax({	
             url:"getTotalReview.dox",
             dataType:"json",	
             type : "POST", 
-            data : {},
+            data : nparmap,
             success : (data) => {
               console.log(data);
-              var totalGudok = data.number || 0;
-              this.totalPages = (Math.ceil(totalGudok / this.pageSize), 1);
+              var totalReview = data.number || 0;
+              this.totalPages = Math.ceil(totalReview / this.pageSize);
             }
           });
         },
@@ -306,14 +308,14 @@
 
             var start = (this.currentPage - 1) * this.pageSize;
             var size  = this.pageSize;
-            this.fngudok(start, size);
+            this.fnOrder(start, size);
         },
 
     },
     mounted() {
       var self = this;
       this.fnOrder(self.totalPages, self.pageSize);
-      self.fnGetTotalGu();
+      self.fnGetTotalReview();
     },
   });
   app.mount("#app");

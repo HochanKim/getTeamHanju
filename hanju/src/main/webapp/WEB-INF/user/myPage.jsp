@@ -82,6 +82,13 @@ pageEncoding="UTF-8"%>
                                 <p>고객님께서 주문하신 상품의  주문내역을 확인하실 수 있습니다.</p>
                             </a>
                         </li>
+                        <li>
+                          <img src="../../image/heart_plus.png">
+                          <a href="../user/favorite.do">
+                              <strong>관심상품</strong>
+                              <p>찜하신 상품의 목록을 보여드립니다.</p>
+                          </a>
+                      </li>
                     </ul>
                 </div>
             </div>

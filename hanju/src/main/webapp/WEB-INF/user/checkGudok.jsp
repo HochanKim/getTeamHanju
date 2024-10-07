@@ -88,14 +88,14 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data : nparmap,
             success: function (data) {
-                console.log(data);
-                console.log(data.list);
-                self.subscribeList = data.list;
+              console.log("구독리스트");
+              console.log(data);
+              console.log(data.list);
+              self.subscribeList = data.list;
             }
           });
         },
-        fnCancle(subscribeId){
-            
+        fnCancle(subscribeId){ 
             var self = this;
             var nparmap = {
                 subscribeId : subscribeId
@@ -106,7 +106,8 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: nparmap,
             success: function (data) {
-                self.fngudok();
+              console.log("구독취소")
+              self.fngudok();
             }
           });
         },
@@ -115,16 +116,19 @@ pageEncoding="UTF-8"%>
         },
         
         fnGetTotalGu() {     // 페이징 메소드
-          
+          var nparmap = {
+            userId:self.userId
+          };
           $.ajax({	
             url:"getTotalGudok.dox",
             dataType:"json",	
             type : "POST", 
-            data : {},
+            data : nparmap,
             success : (data) => {
+              console.log("구독페이징");
               console.log(data);
               var totalGudok = data.number || 0;
-              this.totalPages = (Math.ceil(totalGudok / this.pageSize), 1);
+              this.totalPages = Math.ceil(totalGudok / this.pageSize);
             }
           });
         },

@@ -263,27 +263,36 @@ public class UserServiceImpl implements UserService{
 	//구독한개수
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> gudokCnt() {
+	public HashMap<String, Object> gudokCnt(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int getCnt = userMapper.gudokCount();
+		int getCnt = userMapper.gudokCount(map);
 		resultMap.put("number", getCnt);
 		return resultMap;
 	}
 	//주문개수
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> orderCnt() {
+	public HashMap<String, Object> orderCnt(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int getCnt = userMapper.orderCount();
+		int getCnt = userMapper.orderCount(map);
 		resultMap.put("number", getCnt);
 		return resultMap;
 	}
 	//리뷰개수
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> reviewCnt() {
+	public HashMap<String, Object> reviewCnt(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int getCnt = userMapper.revuewCount();
+		int getCnt = userMapper.revuewCount(map);
+		resultMap.put("number", getCnt);
+		return resultMap;
+	}
+	//찜개수
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> favoriteCnt(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int getCnt = userMapper.favoriteCount(map);
 		resultMap.put("number", getCnt);
 		return resultMap;
 	}
