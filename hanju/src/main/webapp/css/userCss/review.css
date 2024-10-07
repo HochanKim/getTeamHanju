@@ -363,12 +363,14 @@ input[type="radio"]{
     margin-right: 5px;
     border-radius: 5px;
     line-height: 50px;
+    font-size: 16px;
     border: 1px solid #7B4BBF;
     text-align: center;
 }
 
 .reviewRegis{
     background-color:#7B4BBF;
+    border: 1px solid #7B4BBF;
     color: #fff;
     border-color: #999;
     margin-left: 5px;
