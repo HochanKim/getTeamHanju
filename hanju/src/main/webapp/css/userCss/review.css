@@ -3,7 +3,7 @@
     min-width: 1020px;
     font-family: 'NanumSquareAcr';
     color: #222;
-    height: calc(100vh - 372px);
+    min-height: calc(100vh - 372px);
 }
 
 #contents{
@@ -363,12 +363,12 @@ input[type="radio"]{
     margin-right: 5px;
     border-radius: 5px;
     line-height: 50px;
-    border: 1px solid black;
+    border: 1px solid #7B4BBF;
     text-align: center;
 }
 
 .reviewRegis{
-    background-color: #999;
+    background-color:#7B4BBF;
     color: #fff;
     border-color: #999;
     margin-left: 5px;
@@ -377,7 +377,6 @@ input[type="radio"]{
     height: 50px;
     border-radius: 5px;
     line-height: 50px;
-    border: 1px solid #999;
     font-size: 16px;
     text-align: center;
 }

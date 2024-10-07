@@ -3,6 +3,7 @@
     min-width: 1020px;
     font-family: 'NanumSquareAcr';
     color: #222;
+    min-height: calc(100vh - 372px);
 }
 
 #contents{
