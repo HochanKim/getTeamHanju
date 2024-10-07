@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../../css/userCss/review.css"/>
+    <link rel="stylesheet" href="../../css/userCss/reviewCom.css"/>
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <script src="/js/jquery.js"></script>
 <script src="/js/vue.js"></script>
@@ -80,18 +80,19 @@ pageEncoding="UTF-8"%>
           };
 				
 			$.ajax({
-				url:"getOrderList.dox", 
+				url:"reviewPage.dox", 
 				dataType:"json",	
 				type : "GET", 
 				data : nparmap,
 				success : function(data) {  
 					console.log(data);
-          console.log(self.orderList);
-          for(var item of data.orderList){
+          const list=[];
+          for(var item of data.list){
             if(item.isComment == 'Y'){
-            self.orderList.push(item);
+            list.push(item);
              }
           }
+          self.orderList = list;
 					}
 				});
         },
