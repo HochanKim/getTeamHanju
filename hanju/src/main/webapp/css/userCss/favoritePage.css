@@ -2,7 +2,6 @@
     margin: 0 auto;
     padding: 0;
     font-family: 'NanumSquareAcr';
-    height: calc(100vh - 372px);
 }
 
 #contents{
@@ -123,7 +122,8 @@ strong{
 .delBtn{
     min-width: 75px;
     width: auto;
-    height: 32px;
+    height: 40px;
+    line-height: 40px;
     padding: 0 5px;
     border-radius: 5px;
     background-color: #7B4BBF;
@@ -145,7 +145,7 @@ strong{
     margin:40px 0;
 }
 
-#pagination .pageBtn, .pagination button:disabled {
+#pagination .pageBtn, button, .pagination button:disabled {
     display: inline-block;
     cursor: pointer;
     width: 50px;
@@ -156,9 +156,8 @@ strong{
     margin: 8px;
     border-radius: 5px;
     box-shadow: 1px 1px 3px #999;
-    font-size:14px; 
+    font-size:14px;
 }
-
 button {
     border:none;
     font-size:18px;
@@ -169,13 +168,6 @@ button {
     background-color: #7b4bbf;
     font-weight: bold;
     color:#fff;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    margin: 8px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px #999;
 }
 
 .pagination button:disabled {
@@ -184,4 +176,5 @@ button {
     cursor: not-allowed;
     border: 1px solid #dee2e6;
 }
+
 

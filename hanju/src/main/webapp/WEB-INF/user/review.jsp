@@ -217,12 +217,13 @@
           data: paramap,
           success: function (data) {
             console.log(data);
-            console.log("목록");
+            const list=[];
             for (var item of data.list) {
               if (item.isComment == "N") {
-                self.orderList.push(item);
+                list.push(item);
               }
             }
+            self.orderList = list;
           }
         });
       },

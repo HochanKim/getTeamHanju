@@ -3,7 +3,6 @@
     min-width: 1020px;
     font-family: 'NanumSquareAcr';
     color: #222;
-    height: calc(100vh - 372px);
 }
 
 #contents{
@@ -125,6 +124,7 @@ span{
     width: 90px;
     height: 45px;
     line-height: 28px;
+    border: 1px solid #dadde0;
     border-radius: 4px;
     background-color: #7B4BBF;
     color: white;
@@ -195,14 +195,14 @@ span{
     margin-bottom: 40px;
   }
 
-/* button{
+button{
     width: 170px;
     height: 50px;
     border-radius: 5px;
     line-height: 50px;
     border: 1px solid #999;
     cursor: pointer;
-  } */
+  }
 
 #rating{
     width: 100%;
