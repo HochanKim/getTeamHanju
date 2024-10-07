@@ -1,7 +1,8 @@
 .joinBody{
     margin: 0 auto;
     font-family: 'NanumSquareAcr';
-    height: calc(100vh - 372px);
+    min-height: calc(100vh - 372px);
+    margin-bottom: 30px;
 }
 
 .joincontent{
