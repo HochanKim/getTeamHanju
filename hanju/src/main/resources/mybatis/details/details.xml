@@ -113,6 +113,20 @@
 		FROM HANJU_SUBSCRIBE_STATUS
 		WHERE USER_ID = #{userId} AND SUBSCRIBE_ID = #{subId}
 	</select>
-
+	<select id="getFavorite" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*)
+		FROM HANJU_FAVORITE
+		WHERE USER_ID = #{userId} AND PRODUCT_ID = #{id}
+	</select>
+	<delete id="deleteFavorite" parameterType="hashmap">
+		DELETE
+		FROM HANJU_FAVORITE
+		WHERE USER_ID = #{userId} AND PRODUCT_ID = #{id}
+	</delete>
+	<insert id="addFavorite" parameterType="hashmap">
+		INSERT
+		INTO HANJU_FAVORITE(USER_ID,PRODUCT_ID,CDATETIME)
+		VALUES (#{userId},#{id},sysdate)
+	</insert>
 
 </mapper>

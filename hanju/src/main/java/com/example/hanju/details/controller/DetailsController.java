@@ -97,4 +97,29 @@ public String detailGroup(Model model,@RequestParam String id) throws Exception{
 		HashMap<String, Object> result = detailsService.addGroup(map);
 		return new Gson().toJson(result);
 	}
+	@RequestMapping(value = "details/getFavorite.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String getFavorite(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		map.put("userId",session.getAttribute("sessionId"));
+		Map<String, Object> result = detailsService.getFavorite(map);
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(value = "details/deleteFavorite.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deleteFavorite(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		Map<String,Object> result = new HashMap<>();
+		result.put("status","ok");
+		map.put("userId",session.getAttribute("sessionId"));
+		detailsService.deleteFavorite(map);
+		return new Gson().toJson(result);
+	}
+	@RequestMapping(value = "details/addFavorite.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String addFavorite(Model model, @RequestParam Map<String, Object> map) throws Exception {
+		Map<String,Object> result = new HashMap<>();
+		result.put("status","ok");
+		map.put("userId",session.getAttribute("sessionId"));
+		detailsService.addFavorite(map);
+		return new Gson().toJson(result);
+	}
 }
