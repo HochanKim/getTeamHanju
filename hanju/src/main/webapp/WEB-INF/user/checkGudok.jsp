@@ -10,6 +10,11 @@ pageEncoding="UTF-8"%>
     <script src="/js/vue.js"></script>
     <title>document</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
+    <style>
+      #container {
+        height: calc(100vh - 372px);
+      }
+    </style>
   </head>
   <body>
     <div id="app">
@@ -49,13 +54,13 @@ pageEncoding="UTF-8"%>
                         </td>
                     </tr>
                 </table>
-            </div>
-            <!-- 페이징 버튼 -->
-            <div id="pagination">
-              <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
-              <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
-              <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
-            </div>
+              </div>
+              <!-- 페이징 버튼 -->
+              <div id="pagination">
+                <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+                <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+                <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
+              </div>
             </div>
           </div>
     </div>
@@ -88,14 +93,14 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data : nparmap,
             success: function (data) {
-                console.log(data);
-                console.log(data.list);
-                self.subscribeList = data.list;
+              console.log("구독리스트");
+              console.log(data);
+              console.log(data.list);
+              self.subscribeList = data.list;
             }
           });
         },
-        fnCancle(subscribeId){
-            
+        fnCancle(subscribeId){ 
             var self = this;
             var nparmap = {
                 subscribeId : subscribeId
@@ -106,7 +111,7 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: nparmap,
             success: function (data) {
-                self.fngudok();
+              self.fngudok();
             }
           });
         },
@@ -115,16 +120,20 @@ pageEncoding="UTF-8"%>
         },
         
         fnGetTotalGu() {     // 페이징 메소드
-          
+          var self = this;
+          var nparmap = {
+            userId:self.userId
+          };
           $.ajax({	
             url:"getTotalGudok.dox",
             dataType:"json",	
             type : "POST", 
-            data : {},
+            data : nparmap,
             success : (data) => {
+              console.log("구독페이징");
               console.log(data);
               var totalGudok = data.number || 0;
-              this.totalPages = (Math.ceil(totalGudok / this.pageSize), 1);
+              this.totalPages = Math.ceil(totalGudok / this.pageSize);
             }
           });
         },

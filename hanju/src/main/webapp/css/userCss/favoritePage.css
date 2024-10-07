@@ -2,6 +2,7 @@
     margin: 0 auto;
     padding: 0;
     font-family: 'NanumSquareAcr';
+    height: calc(100vh - 372px);
 }
 
 #contents{
@@ -14,7 +15,7 @@
     transform: translate(0, 0);
     opacity: 1.0;
     min-height: 30px;
-    margin: 10px 0 60px;
+    margin: 30px 0 60px;
     text-align: center;
 }
 
@@ -119,7 +120,7 @@ strong{
     border-top: 1px solid #e6e6e6;
 }
 
-button{
+.delBtn{
     min-width: 75px;
     width: auto;
     height: 32px;
@@ -134,31 +135,47 @@ button{
     cursor: pointer;
 }
 
-.pagination {
+/* 페이징 */
+#pagination {
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
+    width: 100%;
+    height:40px;
+    margin:40px 0;
 }
-.pagination button {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    color: #361A73;
-    padding: 8px 12px;
-    margin: 0 2px;
+
+#pagination .pageBtn, .pagination button:disabled {
+    display: inline-block;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    text-align: center;
+    line-height: 50px;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #999;
+    font-size:14px; 
 }
 
-.pagination button:hover {
-    background-color: #361A73;
-    color: white;
+button {
+    border:none;
+    font-size:18px;
 }
 
-.pagination button.active {
-    background-color:#361A73;
-    color: white;
-    cursor: default;
+#pagination button:hover, #pagination button.active {
+    transition: 0.5s;
+    background-color: #7b4bbf;
+    font-weight: bold;
+    color:#fff;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #999;
 }
 
 .pagination button:disabled {
@@ -168,7 +185,3 @@ button{
     border: 1px solid #dee2e6;
 }
 
-.pagination button:not(.active):not(:disabled):hover {
-    background-color: #7B4BBF;
-    color: white;
-}

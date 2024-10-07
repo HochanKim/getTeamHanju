@@ -38,17 +38,16 @@ pageEncoding="UTF-8"%>
               <td class="price"><strong>{{parseInt(item.price).toLocaleString()}}원</strong></td>
               <td class="state">
                 <p>{{ item.type == "T" ? "일반 구매 상품" : "픽업 구매 상품" }}</p>
-                <button @click="fnItemDelete(item.productId)">삭제</button>
+                <button class="delBtn" @click="fnItemDelete(item.productId)">삭제</button>
               </td>
             </tr>
             </table>
           </div>
-          <div class="pagination">
-            <button v-if="currentPage > 1">이전</button>
-            <button v-for="page in totalPages" :class="{active: page == currentPage}">
-                {{ page }}
-            </button>
-            <button v-if="currentPage < totalPages">다음</button>
+          <!-- 페이징 버튼 -->
+          <div id="pagination">
+            <div class="pageBtn" @click="fnClickPage(currentPage-1)">이전</div>
+            <button v-for="index in totalPages" :class="{active: index == currentPage}" @click="fnClickPage(index)">{{ index }}</button>
+            <div class="pageBtn" @click="fnClickPage(currentPage+1)">다음</div>
         </div>
         </div>
       </div>
@@ -62,17 +61,19 @@ pageEncoding="UTF-8"%>
       return {
         userId: "",
         favoriteList: [],
-        currentPage: 1,      
-        pageSize: 5,        
-        totalPages: 2 
+        totalPages : 0,     // 페이지 첫 인덱스
+        pageSize : 10,      // 한 페이지의 호출 리스트 개수
+        currentPage : 1,     // 페이지 첫 호출시 시작 페이지 번호  
       };
     },
     methods: {
-      fnGetFavoriteItemList() {
+      fnGetFavoriteItemList(start, size) {
         var self = this;
 
           var nparmap = {
-            userId: self.userId
+            userId: self.userId,
+            start : start, 
+            size : size
           };
         
           $.ajax({
@@ -96,26 +97,6 @@ pageEncoding="UTF-8"%>
       }else {
           location.href = `/details/details.do?id=\${sellId}`;
         }
-      },
-
-      fnGetFavoriteItemList() {
-        var self = this;
-
-          var nparmap = {
-            userId: self.userId
-          };
-        
-          $.ajax({
-            url: "getFavoriteItemList.dox",
-            dataType: "json",
-            type: "GET",
-            data: nparmap,
-            success: function (data) {
-              console.log(data);
-              self.favoriteList = data.list;
-              
-            }
-          });
       },
 
       fnItemDelete(productId) {
@@ -142,6 +123,34 @@ pageEncoding="UTF-8"%>
             }
           });
       },
+
+      fnGetTotalfavorite() {     // 페이징 메소드
+        var self = this;
+        var nparmap = {
+          userId:self.userId
+        };
+          $.ajax({	
+            url:"getTotalFavorite.dox",
+            dataType:"json",	
+            type : "POST", 
+            data : nparmap,
+            success : (data) => {
+              console.log(data);
+              var totalFavorite = data.number || 0;
+              this.totalPages = Math.ceil(totalFavorite / this.pageSize);
+            }
+          });
+        },
+        fnClickPage(index){    // 페이징 숫자 버튼
+            if (index < 0) return;
+            if (index > this.totalPages) return;
+
+            this.currentPage = index;
+
+            var start = (this.currentPage - 1) * this.pageSize;
+            var size  = this.pageSize;
+            this.fnGetFavoriteItemList(start, size);
+        },
     },
     mounted() {
       if ("${userId}" == "") {
@@ -150,7 +159,8 @@ pageEncoding="UTF-8"%>
         return;
       }
       this.userId = "${userId}";
-      this.fnGetFavoriteItemList();
+      this.fnGetFavoriteItemList(this.totalPages, this.pageSize);
+      this.fnGetTotalfavorite();
     },
   });
   app.mount("#app");

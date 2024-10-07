@@ -42,11 +42,11 @@ public interface UserMapper {
     //주문목록
 	List<OrderItem>  getOrderList(Map<String,Object> map);
 	//주문개수
-	int orderCount();
+	int orderCount(HashMap<String, Object> map);
 	//리뷰페이지
 	List<OrderState> reviewPage(Map<String, Object> map);
 	//주문개수
-	int revuewCount();
+	int reviewCount(HashMap<String, Object> map);
 	//리뷰작성
 	void reviewWrite(HashMap<String, Object> map);
 	//리뷰이미지
@@ -56,6 +56,9 @@ public interface UserMapper {
 	//구독상태
 	void gudokState(HashMap<String, Object> map);
 	//구독개수
-	int gudokCount();
+	int gudokCount(HashMap<String, Object> map);
+	//찜개수
+	int favoriteCount(HashMap<String, Object> map);
+	
 	
 }

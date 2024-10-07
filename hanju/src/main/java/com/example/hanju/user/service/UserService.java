@@ -23,22 +23,22 @@ public interface UserService {
 	Map<String, Object> allUserList();
   //회원조회
   HashMap<String, Object> userList(HashMap<String, Object> map);
-
   //유저 한명 정보
   Map<String, Object> getUserInfo(HashMap<String, Object> map);
-
   //찜목록 리스트 불러오기
   Map<String, Object> getFavoriteItemList(Map<String, Object> map);
   //찜목록 삭제
   Map<String, Object> deleteFavoriteItem(Map<String,Object> map);
+  //찜개수
+  HashMap<String, Object> favoriteCnt(HashMap<String, Object> map);
   //주문조회
   Map<String,Object> getOrderList(Map<String,Object> map);
   //주문개수
-  HashMap<String, Object> orderCnt();
+  HashMap<String, Object> orderCnt(HashMap<String, Object> map);
   //리뷰페이지
   Map<String,Object> reviewList(Map<String,Object> map);
   //리뷰개수
-  HashMap<String, Object> reviewCnt();
+  HashMap<String, Object> reviewCnt(HashMap<String, Object> map);
   //리뷰작성
   HashMap<String, Object> writeReview(HashMap<String, Object> map);
   //리뷰이미지
@@ -48,5 +48,5 @@ public interface UserService {
   //구독상태수정
   HashMap<String, Object> gudokState(HashMap<String, Object> map);
   //구독개수
-  HashMap<String, Object> gudokCnt();
+  HashMap<String, Object> gudokCnt(HashMap<String, Object> map);
 }

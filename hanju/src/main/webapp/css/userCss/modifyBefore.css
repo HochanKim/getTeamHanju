@@ -2,8 +2,8 @@
     max-width: 1060px;
     min-width: 1024px;
     margin: 0 auto;
-    padding-bottom: 80px;
     font-family: 'NanumSquareAcr';
+    height: calc(100vh - 372px);
 }
 
 #contents{

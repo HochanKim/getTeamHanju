@@ -3,6 +3,7 @@
     min-width: 1020px;
     font-family: 'NanumSquareAcr';
     color: #222;
+    height: calc(100vh - 372px);
 }
 
 #contents{
@@ -22,7 +23,7 @@
     transform: translate(0, 0);
     opacity: 1.0;
     min-height: 30px;
-    margin: 10px 0 60px;
+    margin: 30px 0 60px;
     text-align: center;
 }
 

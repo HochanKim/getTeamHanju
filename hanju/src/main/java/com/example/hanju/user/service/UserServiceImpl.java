@@ -121,7 +121,8 @@ public class UserServiceImpl implements UserService{
 		result.put("status","success");
 		return result;
 	}
-
+	//주문목록
+	@DbExceptionHandle
 	@Override
 	public Map<String, Object> getOrderList(Map<String, Object> map) {
 		Map<String,Object> result = new HashMap<>();
@@ -246,6 +247,8 @@ public class UserServiceImpl implements UserService{
 	@DbExceptionHandle
 	@Override
 	public HashMap<String, Object> gudokState(HashMap<String, Object> map) {
+		System.out.println(map + "서비스");
+		System.out.println(map);
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		try {
 			userMapper.gudokState(map);
@@ -263,27 +266,37 @@ public class UserServiceImpl implements UserService{
 	//구독한개수
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> gudokCnt() {
+	public HashMap<String, Object> gudokCnt(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int getCnt = userMapper.gudokCount();
+		System.out.println(map);
+		int getCnt = userMapper.gudokCount(map);
 		resultMap.put("number", getCnt);
 		return resultMap;
 	}
 	//주문개수
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> orderCnt() {
+	public HashMap<String, Object> orderCnt(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int getCnt = userMapper.orderCount();
+		int getCnt = userMapper.orderCount(map);
 		resultMap.put("number", getCnt);
 		return resultMap;
 	}
 	//리뷰개수
 	@DbExceptionHandle
 	@Override
-	public HashMap<String, Object> reviewCnt() {
+	public HashMap<String, Object> reviewCnt(HashMap<String, Object> map) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int getCnt = userMapper.revuewCount();
+		int getCnt = userMapper.reviewCount(map);
+		resultMap.put("number", getCnt);
+		return resultMap;
+	}
+	//찜개수
+	@DbExceptionHandle
+	@Override
+	public HashMap<String, Object> favoriteCnt(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int getCnt = userMapper.favoriteCount(map);
 		resultMap.put("number", getCnt);
 		return resultMap;
 	}
