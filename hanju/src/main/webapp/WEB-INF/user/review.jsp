@@ -210,7 +210,6 @@
           start : start, 
           size : size
         };
-
         $.ajax({
           url: "reviewPage.dox",
           dataType: "json",
@@ -218,6 +217,7 @@
           data: paramap,
           success: function (data) {
             console.log(data);
+            console.log("목록");
             for (var item of data.list) {
               if (item.isComment == "N") {
                 self.orderList.push(item);
@@ -285,6 +285,7 @@
       },
 
       fnGetTotalReview() {     // 페이징 메소드
+        var self = this;
         var nparmap = {
           userId:self.userId
         };
@@ -295,6 +296,7 @@
             data : nparmap,
             success : (data) => {
               console.log(data);
+              console.log("페이징");
               var totalReview = data.number || 0;
               this.totalPages = Math.ceil(totalReview / this.pageSize);
             }

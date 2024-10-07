@@ -83,15 +83,15 @@ pageEncoding="UTF-8"%>
 				url:"getOrderList.dox", 
 				dataType:"json",	
 				type : "GET", 
-				
+				data : nparmap,
 				success : function(data) {  
 					console.log(data);
-                    console.log(self.orderList);
-                    for(var item of data.orderList){
-                        if(item.isComment == 'Y'){
-                            self.orderList.push(item);
-                        }
-                    }
+          console.log(self.orderList);
+          for(var item of data.orderList){
+            if(item.isComment == 'Y'){
+            self.orderList.push(item);
+             }
+          }
 					}
 				});
         },
@@ -105,6 +105,7 @@ pageEncoding="UTF-8"%>
       },
 
       fnGetTotalReview() {     // 페이징 메소드
+        var self = this;
         var nparmap = {
           userId:self.userId
         };
@@ -114,6 +115,7 @@ pageEncoding="UTF-8"%>
             type : "POST", 
             data : nparmap,
             success : (data) => {
+              console.log("페이징");
               console.log(data);
               var totalReview = data.number || 0;
               this.totalPages = Math.ceil(totalReview / this.pageSize);

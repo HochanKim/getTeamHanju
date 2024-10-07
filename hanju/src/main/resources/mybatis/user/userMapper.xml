@@ -144,6 +144,6 @@
 	<update id="gudokState" parameterType="hashmap">
 		UPDATE HANJU_SUBSCRIBE_STATUS
 		SET NEXT_SUB = 'N'
-		WHERE SUBSCRIBE_ID = #{subscribeId}
+		WHERE SUBSCRIBE_ID = #{subscribeId} AND USER_ID = #{userId}
 	</update>
 </mapper>

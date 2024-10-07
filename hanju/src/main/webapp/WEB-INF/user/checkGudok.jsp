@@ -106,7 +106,6 @@ pageEncoding="UTF-8"%>
             type: "POST",
             data: nparmap,
             success: function (data) {
-              console.log("구독취소")
               self.fngudok();
             }
           });
@@ -116,6 +115,7 @@ pageEncoding="UTF-8"%>
         },
         
         fnGetTotalGu() {     // 페이징 메소드
+          var self = this;
           var nparmap = {
             userId:self.userId
           };

@@ -46,7 +46,7 @@ public interface UserMapper {
 	//리뷰페이지
 	List<OrderState> reviewPage(Map<String, Object> map);
 	//주문개수
-	int revuewCount(HashMap<String, Object> map);
+	int reviewCount(HashMap<String, Object> map);
 	//리뷰작성
 	void reviewWrite(HashMap<String, Object> map);
 	//리뷰이미지
@@ -57,7 +57,7 @@ public interface UserMapper {
 	void gudokState(HashMap<String, Object> map);
 	//구독개수
 	int gudokCount(HashMap<String, Object> map);
-	//주문개수
+	//찜개수
 	int favoriteCount(HashMap<String, Object> map);
 	
 	

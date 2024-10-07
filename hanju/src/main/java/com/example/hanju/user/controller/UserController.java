@@ -285,6 +285,8 @@ public class UserController {
     @RequestMapping(value = "user/getTotalGudok.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
   	@ResponseBody
   	public String getTotalGudok(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+    	System.out.println("들어왔다!");
+    	System.out.println(map);
   		Map<String, Object> result = userService.gudokCnt(map);
   		return new Gson().toJson(result);
   	}
@@ -306,6 +308,7 @@ public class UserController {
   	@RequestMapping(value = "user/gudokState.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String gudokState(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+  		System.out.println(map + "컨트롤");
 		System.out.println(map);
 		HashMap<String, Object> result = userService.gudokState(map);
 		return new Gson().toJson(result);

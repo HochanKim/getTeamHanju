@@ -106,7 +106,7 @@ span{
     margin:40px 0;
 }
 
-#pagination .pageBtn, .pagination button:disabled {
+#pagination .pageBtn, button,.pagination button:disabled {
     display: inline-block;
     cursor: pointer;
     width: 50px;
