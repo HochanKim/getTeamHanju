@@ -11,12 +11,12 @@
     font-family: 'NanumSquareAcr';
 }
 
-#footer #container {
+#footer #footerContainer {
     width: 50%;
     height: 100%;
 }
 
-#container .companyName {
+#footerContainer .companyName {
     font-size: 20px;
     font-weight: bold;
     margin-top: 16px;
@@ -24,32 +24,32 @@
     font-family: 'NanumSquareAceb';
 }
 
-#container .phone {
+#footerContainer .phone {
     font-size: 12px;
     font-weight: bold;
     margin-top: 16px;
 }
 
-#container .phoneDetail {
+#footerContainer .phoneDetail {
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 16px;
 }
 
-#container .reader {
+#footerContainer .reader {
     font-size: 12px;
     font-weight: bold;
     color: #555;
 }
 
-#container .address {
+#footerContainer .address {
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 16px;
     color: #555;
 }
 
-#container .copyright {
+#footerContainer .copyright {
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 50px;

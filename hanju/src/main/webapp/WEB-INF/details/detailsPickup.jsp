@@ -464,6 +464,10 @@ pageEncoding="UTF-8" %>
             this.currentImageIndex = index;
           },
           inputNumber(event) {
+            this.cnt = +this.cnt.replace(/[^0-9]/g, "").replace(/^0+/, 1);
+            if (this.cnt == "") {
+              this.cnt = 1;
+            }
             this.number = event.target.value;
           },
           decrease() {
@@ -484,7 +488,7 @@ pageEncoding="UTF-8" %>
             console.log(date.showPicker);
           },
           pickUpStoreSelect(storeId) {
-            console.log(storeId);
+            console.log(storeId); 
             this.storeId = storeId;
             this.modalOpen();
           },

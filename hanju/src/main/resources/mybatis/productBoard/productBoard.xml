@@ -143,11 +143,11 @@
 	                <when test="material == 3">AND MATERIAL = '고구마'</when>
 	                <when test="material == 4">AND MATERIAL = '유자'</when>
 	                <when test="material == 5">AND (MATERIAL LIKE '%딸기%' OR MATERIAL = '복분자' OR MATERIAL LIKE '%베리%')</when>
-	                <when test="material == 6">AND MATERIAL = '무화과'</when>
+	                <when test="material == 6">AND MATERIAL = '포도'</when>
 	                <when test="material == 7">AND MATERIAL = '레몬'</when>
 	                <when test="material == 8">AND MATERIAL = '복숭아'</when>
 	                <when test="material == 9">AND MATERIAL = '단호박'</when>
-	                <when test="material == 10">AND MATERIAL NOT LIKE '%베리%' AND MATERIAL NOT IN ('사과', '배', '고구마', '유자', '딸기', '복분자', '무화과', '레몬', '복숭아', '단호박')</when>
+	                <when test="material == 10">AND MATERIAL NOT LIKE '%베리%' AND MATERIAL NOT IN ('사과', '배', '고구마', '유자', '딸기', '복분자', '포도', '레몬', '복숭아', '단호박')</when>
 	            </choose>
 	        </if>
 	        
