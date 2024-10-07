@@ -2,6 +2,7 @@ package com.example.hanju.cart.service;
 
 import com.example.hanju.annotations.DbExceptionHandle;
 import com.example.hanju.cart.mapper.CartMapper;
+import com.example.hanju.cart.model.dto.CartNameDto;
 import com.example.hanju.cart.model.entity.CartEntity;
 import com.example.hanju.cart.model.dto.CartCheckDto;
 import com.example.hanju.main.mapper.MainMapper;
@@ -102,13 +103,11 @@ public class CartServiceImpl implements CartService {
         String kind = (String) map.get("kind");
         boolean isKindP = kind.equals("P");
         List<CartCheckDto> checkResult;
-        System.out.println(isKindP);
         if (isKindP) {
             checkResult = cartMapper.pickupCartCheck(map);
         } else {
             checkResult = cartMapper.cartCheck(map);
         }
-        System.out.println(checkResult);
         if (checkResult.isEmpty()) {
             int resultRow;
             if (isKindP) {
@@ -130,6 +129,7 @@ public class CartServiceImpl implements CartService {
             oldCount = checkResult.get(0).getProductCount();
             newCount = (int) map.get("productCount");
             sumCount = oldCount + newCount;
+            System.out.println(sumCount);
             if (stock < sumCount) {
                 int pStock = stock - oldCount;
                 result.put("status", "outOfStock");
@@ -165,7 +165,7 @@ public class CartServiceImpl implements CartService {
     public Map<String, Object> getCartName(List<String> list) {
         Map<String, Object> result = new HashMap<>();
         result.put("nameList", list);
-        List<String> nameList = cartMapper.getCartName(result);
+        List<CartNameDto> nameList = cartMapper.getCartName(result);
         result.put("nameList", nameList);
         return result;
     }

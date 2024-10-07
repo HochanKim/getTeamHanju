@@ -224,12 +224,6 @@ pageEncoding="UTF-8"%>
         }
         this.discountPrice =
           (res.data.subItem.price * (100 - res.data.subItem.discount)) / 100;
-        console.log("서브아이템");
-        console.log(this.subItem);
-        console.log("디스카운트프라이스");
-        console.log(this.discountPrice);
-        console.log("데이터");
-        console.log(res.data);
       },
       fnPayment() {
         const itemName = this.subItem.title;
@@ -250,7 +244,7 @@ pageEncoding="UTF-8"%>
           .post(url, submitForm)
           .then(({ data }) => {
             alert("구독 신청이 완료 되었습니다.");
-            location.href = "/";
+            location.href = "/user/gudokCheck.do";
           })
           .catch((error) => {
             alert("뭔가 잘못됨.");

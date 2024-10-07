@@ -9,7 +9,10 @@ pageEncoding="UTF-8"%>
     <script src="/js/vue.js"></script>
     <script src="/js/payment.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+    <link
+      href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css"
+      rel="stylesheet"
+    />
     <title>payment</title>
     <jsp:include page="../mainPage/header.jsp" flush="false" />
   </head>
@@ -50,9 +53,9 @@ pageEncoding="UTF-8"%>
               <div class="productItem">
                 <div class="uNameCol">제품</div>
                 <div class="pItem">
-                  <span v-for="(item, index) in cartNameList" :key="index">{{
-                    item
-                  }}</span>
+                  <span v-for="(item, index) in cartNameList" :key="index"
+                    >{{ item.productName }}({{ item.count }})</span
+                  >
                 </div>
               </div>
             </div>
@@ -324,6 +327,7 @@ pageEncoding="UTF-8"%>
         const nameUrl = "getCartName.dox";
         axios.post(nameUrl, itemList).then(({ data }) => {
           this.cartNameList = data.nameList;
+          console.log(this.cartNameList);
         });
       },
       fnPayment() {
@@ -364,10 +368,7 @@ pageEncoding="UTF-8"%>
         console.log(submitForm);
         const url = "cartPayment.dox";
         const res = await axios.post(url, submitForm);
-        console.log(res.data);
-        console.log("보내준 cartIdList : " + list);
-        console.log("list.length : " + list.length);
-        alert("결제완료");
+        alert("결제가 완료 되었습니다.");
         location.href = "/user/orderInfo.do";
       },
     },
