@@ -488,7 +488,7 @@ pageEncoding="UTF-8" %>
             console.log(date.showPicker);
           },
           pickUpStoreSelect(storeId) {
-            console.log(storeId);
+            console.log(storeId); 
             this.storeId = storeId;
             this.modalOpen();
           },
