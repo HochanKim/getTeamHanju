@@ -1,17 +1,17 @@
-# 한주 프로젝트
+# 한 주 프로젝트
 
-## 사이트 소개
+## 💡 사이트 소개
 
 ![한주 메인](https://github.com/user-attachments/assets/0dc64c61-e5d0-43e1-a808-c1b5865b7f15)
 
 * 한 주는 종합 주류 판매 사이트입니다.
 * 한 사이트에서 전통주 판매, 와인 픽업, 공동구매, 술 구독을 모두 이용하실 수 있습니다.
 
-## 시연 영상
+## 🎞 시연 영상
 
 * https://youtu.be/8pIpsjtTjCA
 
-## 차별점
+## 💎 차별점
 
 * 사용자 측면
   * 술과 관련된 다양한 구매 방식을 한 사이트에서 이용 가능
@@ -19,7 +19,7 @@
 * 판매자 측면
   * 하나의 제품을 여러 방식으로 판매 가능
 
-## 주요 기능
+## ⚙ 주요 기능
 
 * 다양한 방식의 주류 구입
 * 주류 조건별 검색
@@ -27,38 +27,43 @@
 * 다양한 방식의 주문을 일괄 결제
 * 제품을 여러 방식으로 게시
 
-## 팀원 소개 및 역할
+## 👨‍👨‍👦‍👦 팀원 소개 및 역할
 
-* 장병철
-  * 메인 페이지, 헤더, 푸터, 사업자 페이지 제작
+### 🧑 장병철
+  * 메인 페이지, 사업자 페이지 제작
   * 팀장 업무 (일정 관리, 회의 진행, 프로젝트 방향 결정, git 관리 등)
-* 김호찬
+  * git 프로필 : [https://github.com/cleanMirror](https://github.com/cleanMirror)
+### 👦 김호찬
   * 일반 판매, 와인 픽업, 공동구매, 구독의 리스트 페이지 제작
   * 주류 조건별 검색 기능 구현
-* 이혜인
+  * git 프로필 : [https://github.com/HochanKim](https://github.com/HochanKim)
+### 👩 이혜인
   * 회원가입, 로그인, 마이페이지 제작
   * 페이지 컨셉 디자인
-* 정은지
+  * git 프로필 : [https://github.com/dgl1111](https://github.com/dgl1111)
+### 👩‍🦰 정은지
   * 일반 판매, 와인 픽업, 공동구매, 구독의 상세보기 페이지 제작
   * 주류 정보 시각화 기능 구현
   * 페이지 컨셉 디자인
-* 하현수
+  * git 프로필 : [https://github.com/ycs-202007071](https://github.com/ycs-202007071)
+### 🧒 하현수
   * 장바구니, 결제 페이지 제작, 결제 api 연동 및 구현
+  * git 프로필 : [https://github.com/nihilism011](https://github.com/nihilism011)
 
-## DB 설계
+## 🥃 DB 설계
 
 ![DB 설계](https://github.com/user-attachments/assets/4b3a0d24-7416-4c41-9263-95f73d6d9f23)
 
 * DB 설계는 공유 스프레드시트를 통해서 팀원들과 함께 제작했습니다.
 
-## 디자인 설계 - 스토리 보드
+## 🎨 디자인 설계 - 스토리 보드
 
 ![스토리 보드](https://github.com/user-attachments/assets/43918fdc-53b6-48bb-89b9-830be8f0dec0)
 
 * 페이지의 디자인 설계는 스토리 보드를 제작하여 진행했습니다.
 
 
-## 기능 및 화면 구성
+## 🖼 기능 및 화면 구성
 
 ![한주 메인](https://github.com/user-attachments/assets/25dd4c54-2727-4e55-8c86-e94fdc3aa4d1)
 
@@ -95,14 +100,14 @@
 * 사업자는 제품을 등록하고 같은 제품을 여러 방식으로 판매할 수 있습니다.
 * 또한, 주문 내역을 확인하고 배송처리할 수 있습니다.
 
-## 개발 기간
+## 📆 개발 기간
 
 * 9월 2일 ~ 9월 13일 프로젝트 설계
   * 사이트 주제 선정, DB설계, 스토리보드
 * 9월 19일 ~ 9월 30일 기능 구현
 * 10월 1일 ~ 10월 4일 디자인 및 테스트
 
-## 사용 언어
+## ⌨ 사용 언어
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
