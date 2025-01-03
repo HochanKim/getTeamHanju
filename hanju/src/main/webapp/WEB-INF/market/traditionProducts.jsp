@@ -15,6 +15,9 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <jsp:include page="../mainPage/header.jsp"></jsp:include>
+    <!--
+        인텔리제이 커밋 테스트용 주석
+    -->
     <div id="app">
         <section class="selectSection">
             <!-- 카테고리 버튼 클릭 (1) -->
