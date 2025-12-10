@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact name="OutPutDirectory">
+    <output-path>$PROJECT_DIR$/hanju/src/main/webapp/WEB-INF</output-path>
+    <root id="root" />
+  </artifact>
+</component>

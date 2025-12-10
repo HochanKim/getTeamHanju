@@ -101,6 +101,7 @@ pageEncoding="UTF-8"%>
               <option v-for="item in madeByList" :value="item.madeBy">:: {{item.madeBy}} ::</option>
             </select>
         </section>
+
         <!-- 상품 리스트 영역 -->
         <section class="productContainer">
         <!-- 상품 리스트 : 해당 리스트를 클릭시, '상세페이지'로 이동 -->
@@ -158,6 +159,7 @@ pageEncoding="UTF-8"%>
           </li>
         </ul>
         </section>
+
     </div>
     <jsp:include page="../mainPage/footer.jsp"></jsp:include>
   </body>
