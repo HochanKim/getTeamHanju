@@ -18,7 +18,6 @@ pageEncoding="UTF-8"%>
     <div id="app">
       <section class="selectSection">
         <!-- 카테고리 버튼 클릭 (1) -->
-        <!-- 카테고리 버튼 클릭 (1) -->
         <div class="productsListSelect">
           <a href="productList.do">
               <span>전체상품</span>
