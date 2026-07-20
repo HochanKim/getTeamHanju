@@ -11,6 +11,7 @@ pageEncoding="UTF-8"%>
     <title>한주 (HANJU)</title>
 </head>
 <body>
+<!-- 한주 메인 페이지 -->
     <jsp:include page="header.jsp" flush="false" />
     <div id="app">
         <div id="imageSlider">
