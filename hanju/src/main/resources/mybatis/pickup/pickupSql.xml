@@ -12,7 +12,7 @@
 	
 	<!-- 와인 픽업 리스트 -->
 	<select id="getPickUpList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
-		SELECT 
+		SELECT DISTINCT
 			P.PRODUCT_NAME, 
 			TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
 			MADE_BY, 
@@ -48,6 +48,7 @@
 		    GROUP BY PRODUCT_ID
 		) D ON P.PRODUCT_ID = D.PRODUCT_ID
 		WHERE I.FILE_STATUS = 'T' AND C.PARENT_CODE = 'W'
+
 		<!-- P.TYPE이 codeList에 있을 경우 -->
         <if test="codeList != null">
             AND P.TYPE IN 
@@ -144,6 +145,7 @@
 		FROM HANJU_CODE C1
 		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
 		WHERE C1.KIND = 'PRODUCT_CODE' AND C2.CODE IN ('WW', 'RW')
+		GROUP BY C1.KIND, C2.CODE_NAME, C2.CODE
 	</select>
 	
 	<!-- 신상품 목록 -->

@@ -45,7 +45,7 @@
 	
 	<!-- 전체상품 > 전통주 -->
 	<select id="getTradAlcohol" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-	    SELECT 
+	    SELECT DISTINCT
 	    	PRODUCT_NAME, 
 			TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
 			MADE_BY, 
@@ -165,6 +165,7 @@
 		FROM HANJU_CODE C1
 		INNER JOIN HANJU_CODE C2 ON C1.CODE = C2.PARENT_CODE
 		WHERE C1.KIND = 'IMAGE_STATUS' AND NOT C2.CODE = 'G'
+		GROUP BY C1.KIND, C2.CODE_NAME, C2.CODE
 	</select>
 	
 	<!-- 전통주 생산지 리스트 -->
@@ -180,7 +181,7 @@
 
 	<!-- 전체상품 > 선물세트 -->
 	<select id="getGiftSet" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT 
+		SELECT DISTINCT
 			PRODUCT_NAME, 
 			TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
 			MADE_BY, 
@@ -219,7 +220,7 @@
 	
 	<!-- 신상품 목록 -->
 	<select id="newProducts" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT 
+		SELECT DISTINCT
 			PRODUCT_NAME, 
 			TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
 			MADE_BY, 
@@ -291,7 +292,7 @@
 	
 	<!-- 베스트 셀러 -->
 	<select id="getBestSellerProducts" parameterType="hashmap" resultType="com.example.hanju.productBoard.model.entity.SaleModel">
-		SELECT  
+		SELECT DISTINCT
 			NS.SELL_ID, 
 			P.PRODUCT_NAME, 
 			TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
