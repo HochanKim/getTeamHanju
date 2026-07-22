@@ -150,7 +150,7 @@
 	
 	<!-- 신상품 목록 -->
 	<select id="getNewPickUpWineList" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
-		SELECT 
+		SELECT DISTINCT
 			P.PRODUCT_NAME, 
 			TO_CHAR(PRICE, 'FM99,999') AS PRICE_COMMA, 
 			MADE_BY, 
@@ -191,7 +191,7 @@
 	
 	<!-- 베스트 셀러 -->
 	<select id="getBestSellerWine" parameterType="hashmap" resultType="com.example.hanju.pickup.model.dto.PickupBoardDto">
-		SELECT 
+		SELECT DISTINCT
 			P.PRODUCT_NAME, 
 			P.PRICE, 
 			I.FILE_PATH, 

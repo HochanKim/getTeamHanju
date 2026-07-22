@@ -26,5 +26,5 @@ public interface PickupService {
     HashMap<String,Object> getMadeByList(HashMap<String,Object> map);
     
     // 베스트 셀러
-	HashMap<String, Object> getBestSellerWine(HashMap<String, Object> map);
+	  HashMap<String, Object> getBestSellerWine(HashMap<String, Object> map);
 }	
