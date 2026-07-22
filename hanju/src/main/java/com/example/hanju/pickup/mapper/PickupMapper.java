@@ -26,5 +26,5 @@ public interface PickupMapper {
     List<PickupBoardDto> getMadeByList(HashMap<String,Object> map);
 
     // 베스트 셀러
-	List<PickupBoardDto> getBestSellerWine(HashMap<String, Object> map);
+	  List<PickupBoardDto> getBestSellerWine(HashMap<String, Object> map);
 }

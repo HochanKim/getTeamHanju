@@ -148,6 +148,7 @@ pageEncoding="UTF-8"%>
             data : {},
             success : (data) => {
               var totalGroupSell = data.number;
+              console.log("전체 데이터 수 : ", totalGroupSell);
               this.totalPages = Math.ceil(totalGroupSell / this.pageSize);
             }
           });
